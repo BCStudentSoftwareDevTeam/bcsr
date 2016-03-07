@@ -51,38 +51,93 @@ def get_classes (db):
 mainDB.create_tables(get_classes('mainDB'))
 
 # Adding dummy data
-users = Users(  firstName = "Scott",
+
+courses = courses(  CID     = 1,
+                    cprefix = "BIO",
+                    cnumber = "101",
+                    section = "A1",
+                    PID     = 1
+                  ).save()
+                  
+currentSEID = currentSEID( SEID = 201512 
+                         ).save()
+                         
+divisions = divisions(  DID = 1,
+                        name = "division1"
+                     ).save()
+                     
+division_chair = division_chair(  DCID = 1,
+                                  DID  = 1,
+                                  UID  = 1,
+                               ).save()
+                               
+division_to_program = division_to_program(  DPID = 1,
+                                            DID  = 1,
+                                            PID  = 1
+                                         ).save()
+programs = programs(  PID   = 1,
+                      name  = "Biology"
+                   ).save()
+                   
+program_chair = program_chair(  PCID = 1,
+                                PID  = 1,
+                                UID  = 2,
+                             ).save()
+                             
+role = role(  RID           = 1,
+              access_level  = "Full_Access",
+              access_name   = "Administrator"
+           ).save()
+
+role = role(  RID           = 2,
+              access_level  = "Program_Access",
+              access_name   = "Program Chair"
+           ).save()
+           
+role = role(  RID           = 3,
+              access_level  = "Division_Access",
+              access_name   = "Division Chair"
+           ).save()
+
+role = role(  RID           = 4,
+              access_level  = "Prof_Access",
+              access_name   = "Professor"
+           ).save()
+           
+semester = semester(  SEID  = 201512,
+                      year  = 2016,
+                      term  = "Spring"
+                   ).save()
+            
+syllabus_course_semester = syllabus_course_semester( XID  = 1,
+                                                     SID  = NULL,
+                                                     CID  = 1,
+                                                     SEID = 201512
+                                                   ).save()
+                        
+uscs =  uscs( QID = 1,
+              XID = 1,
+              UID = 1
+             ).save()
+                      
+users = users(  UID       = 1,
+                firstname = "Scott",
                 lastName  = "Heggen",
                 username  = "heggens",
-                age       = 33,
-                program   = "1"
+                email     = "heggens@berea.edu"
              ).save()
 
-users = Users(  firstName = "Matt",
+users = users(  UID       = 2,
+                firstName = "Matt",
                 lastName  = "Jadud",
                 username  = "jadudm",
-                age       = 39,
-                program   = "2"
+                email     = "jadudm@berea.edu"
              ).save()           
              
-prog = Programs ( programName = "Computer and Information Science",
-                  abbreviation = "CSC"
-                ).save()
-
-prog = Programs ( programName = "Technology and Applied Design",
-                  abbreviation = "TAD"
-                ).save()
-
-course =  Courses ( courseName = "Software Design and Implementation",
-                    coursePrefix = "CSC",
-                    courseNumber = 226,
-                    pid = 1,
-                    instructor = 1
-                  ).save()
-
-course =  Courses ( courseName = "Electricity and Electronics",
-                    coursePrefix = "TAD",
-                    courseNumber = 265,
-                    pid = 2,
-                    instructor = 2
-                  ).save()
+user_role = user_role(  RID = 1,
+                        UID = 1,
+                     ).save()
+                    
+user_role = user_role(  RID = 3,
+                        UID = 2
+                     ).save()
