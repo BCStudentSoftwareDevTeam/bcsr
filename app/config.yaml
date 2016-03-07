@@ -1,27 +1,38 @@
 
 # The log file location   
 log:
-filename: "urcpp.log"
+filename: "bcsr.log"
 
 # All the databases used by the system
 databases:
-  dev: "data/db.sqlite"
+  dev: "data/bcsr.sqlite"
   stage: ""
   prod: ""
 
 # For every table in the database, add an item here
 models:
   mainDB:
-    - Programs
-    - Users
-    - Courses
+    - courses
+    - currentSEID
+    - divisions
+    - division_chair
+    - division_to_program
+    - programs
+    - program_chair
+    - role
+    - semester
+    - syllabus
+    - syllabus_course_semester
+    - uscs
+    - users
+    - user_role
 # this makes the navigation bar
 mainMenu:
-  - title: "Home"
-    link: "/"
-  - title: "Program Display"
-    link: "readPrograms"
-  - title: "Course Display"
-    link: "readCourses"
-  - title: "Relational Table"
-    link: "aRelationalTable"
+  #- title: "Home"
+  #  link: "/"
+  #- title: "Program Display"
+  #  link: "readPrograms"
+  #- title: "Course Display"
+  #  link: "readCourses"
+  #- title: "Relational Table"
+  #  link: "aRelationalTable"
