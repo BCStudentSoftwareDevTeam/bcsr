@@ -28,8 +28,8 @@ models:
     - user_role
 # this makes the navigation bar
 mainMenu:
-  #- title: "Home"
-  #  link: "/"
+  - title: "Home"
+    link: "/"
   #- title: "Program Display"
   #  link: "readPrograms"
   #- title: "Course Display"
