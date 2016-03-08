@@ -30,9 +30,5 @@ models:
 mainMenu:
   - title: "Home"
     link: "/"
-  #- title: "Program Display"
-  #  link: "readPrograms"
-  #- title: "Course Display"
-  #  link: "readCourses"
-  #- title: "Relational Table"
-  #  link: "aRelationalTable"
+  - title: "Courses"
+    link: "courses"
