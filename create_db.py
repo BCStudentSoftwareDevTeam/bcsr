@@ -52,92 +52,77 @@ mainDB.create_tables(get_classes('mainDB'))
 
 # Adding dummy data
 
-courses = courses(  CID     = 1,
-                    cprefix = "BIO",
+courses = Courses(  cprefix = "BIO",
                     cnumber = "101",
                     section = "A1",
                     PID     = 1
                   ).save()
                   
-currentSEID = currentSEID( SEID = 201512 
+currentSEID = CurrentSEID( SEID = 201512 
                          ).save()
                          
-divisions = divisions(  DID = 1,
-                        name = "division1"
+divisions = Divisions( name = "division1"
                      ).save()
                      
-division_chair = division_chair(  DCID = 1,
-                                  DID  = 1,
+division_chair = Division_chair(  DID  = 1,
                                   UID  = 1,
                                ).save()
                                
-division_to_program = division_to_program(  DPID = 1,
-                                            DID  = 1,
+division_to_program = Division_to_program(  DID  = 1,
                                             PID  = 1
                                          ).save()
-programs = programs(  PID   = 1,
-                      name  = "Biology"
+programs = Programs(  name  = "Biology"
                    ).save()
                    
-program_chair = program_chair(  PCID = 1,
-                                PID  = 1,
+program_chair = Program_chair(  PID  = 1,
                                 UID  = 2,
                              ).save()
                              
-role = role(  RID           = 1,
-              access_level  = "Full_Access",
+role = Role(  access_level  = "Full_Access",
               access_name   = "Administrator"
            ).save()
 
-role = role(  RID           = 2,
-              access_level  = "Program_Access",
+role = Role(  access_level  = "Program_Access",
               access_name   = "Program Chair"
            ).save()
            
-role = role(  RID           = 3,
-              access_level  = "Division_Access",
+role = Role(  access_level  = "Division_Access",
               access_name   = "Division Chair"
            ).save()
 
-role = role(  RID           = 4,
-              access_level  = "Prof_Access",
+role = Role(  access_level  = "Prof_Access",
               access_name   = "Professor"
            ).save()
            
-semester = semester(  SEID  = 201512,
-                      year  = 2016,
+semester = Semester(  year  = 2016,
                       term  = "Spring"
                    ).save()
             
-syllabus_course_semester = syllabus_course_semester( XID  = 1,
-                                                     SID  = NULL,
+syllabus_course_semester = Syllabus_course_semester( SID  = 1,
                                                      CID  = 1,
-                                                     SEID = 201512
+                                                     SEID = 1
                                                    ).save()
                         
-uscs =  uscs( QID = 1,
-              XID = 1,
+uscs =  Uscs( XID = 1,
               UID = 1
              ).save()
                       
-users = users(  UID       = 1,
-                firstname = "Scott",
-                lastName  = "Heggen",
+users = Users(  firstname = "Scott",
+                lastname  = "Heggen",
                 username  = "heggens",
                 email     = "heggens@berea.edu"
              ).save()
 
-users = users(  UID       = 2,
-                firstName = "Matt",
-                lastName  = "Jadud",
+users = Users(  firstname = "Matt",
+                lastname  = "Jadud",
                 username  = "jadudm",
                 email     = "jadudm@berea.edu"
              ).save()           
              
-user_role = user_role(  RID = 1,
+user_role = User_role(  RID = 1,
                         UID = 1,
                      ).save()
                     
-user_role = user_role(  RID = 3,
+user_role = User_role(  RID = 3,
                         UID = 2
                      ).save()

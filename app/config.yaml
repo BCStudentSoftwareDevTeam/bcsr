@@ -12,20 +12,20 @@ databases:
 # For every table in the database, add an item here
 models:
   mainDB:
-    - courses
-    - currentSEID
-    - divisions
-    - division_chair
-    - division_to_program
-    - programs
-    - program_chair
-    - role
-    - semester
-    - syllabus
-    - syllabus_course_semester
-    - uscs
-    - users
-    - user_role
+    - Courses
+    - CurrentSEID
+    - Divisions
+    - Division_chair
+    - Division_to_program
+    - Programs
+    - Program_chair
+    - Role
+    - Semester
+    - Syllabus
+    - Syllabus_course_semester
+    - Uscs
+    - Users
+    - User_role
 # this makes the navigation bar
 mainMenu:
   - title: "Home"
