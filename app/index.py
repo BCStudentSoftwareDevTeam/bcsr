@@ -5,5 +5,5 @@ def start():
     #TODO: FIND OUT HOW TO CATCH THE USERNAME FROM THE LOGIN PROCESS
     #TODO: NEED TO FIGURE OUT HOW TO HANDLE SESSION VARIABLES IN FLASK
     #TODO: THEN WE NEED TO STORE THE PROPER SESSION VARIABLES HERE
-    return render_template("start.html",
+    return render_template("index.html",
                             cfg = cfg)
