@@ -13,6 +13,7 @@ from app import allImports
 #import your new python files here. It is not a part of the module until it is imported
 print("Starting application") 
 from app import index
+from app import courses
 #from app import readPrograms
 #from app import editPrograms
 #from app import deletePrograms
