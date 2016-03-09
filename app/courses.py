@@ -1,5 +1,6 @@
 from allImports import *
-from app import getUserData
+from app.getUserData import getUID
+from app.getUserData import getRID
 
 
 @app.route("/courses", methods = ["GET"])
