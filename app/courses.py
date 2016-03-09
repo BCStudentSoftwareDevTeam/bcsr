@@ -1,14 +1,17 @@
 from allImports import *
-from app.getUserData import getUID
-from app.getUserData import getRID
+from app.users import get_user
 
 
 @app.route("/courses", methods = ["GET"])
 
 def courses():
     '''This function will render the correct template based off of the user's role'''
-    un = "heggens"
-    UID = getUID(un)
-    RID = getRID(un)
+    user_name   = 'heggens'
+    print user_name
+    #user_info   = get_user(user_name)
+    user_info   = Users.select().get()
+    #print user_info.userName
+    print str(user_info)
     return render_template("courses.html",
-                            cfg = cfg)
+                            user_info = user_info,
+                            cfg       = cfg)

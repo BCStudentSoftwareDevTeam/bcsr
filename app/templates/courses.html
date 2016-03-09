@@ -1,5 +1,8 @@
 {% extends "base.html" %} 
-{% set currentPage = "index" %}
+{% set currentPage = "courses" %}
+
 {% block body %}
-<p>Cody Is Amazing</p>
+<p>Hello, {{user_info.userName}}</p>
+
+<p>Your Level of Access is {{user_info.RID.name}}</p>
 {% endblock %}
