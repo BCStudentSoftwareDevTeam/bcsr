@@ -86,5 +86,5 @@ class DivisionChair (dbModel):
   
 class Uscs (dbModel): #Uscs stands for UserSyllabusCourseSemester
   QID           = PrimaryKeyField()
-  XID           = ForeignKeyField(Syllabus_course_semester)
+  XID           = ForeignKeyField(SyllCourseSemester)
   UID           = ForeignKeyField(Users)

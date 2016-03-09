@@ -52,8 +52,8 @@ mainDB.create_tables(get_classes('mainDB'))
 
 # When adding dummy data the varialbes should be in Mixed case and should be the name of the class
 
-courses = Courses(  cprefix = "BIO",
-                    cnumber = "101",
+courses = Courses(  prefix = "BIO",
+                    number = "101",
                     section = "A1",
                     PID     = 1
                   ).save()
@@ -94,7 +94,7 @@ semester = Semester(  year  = 2016,
                       term  = "Spring"
                    ).save()
             
-syllCourseSemester = SyllCouseSemester( SID  = 1,
+syllCourseSemester = SyllCourseSemester( SID  = 1,
                                                      CID  = 1,
                                                      SEID = 1
                                                    ).save()
@@ -103,16 +103,16 @@ uscs =  Uscs( XID = 1,
               UID = 1
              ).save()
                       
-users = Users(  firstname = "Scott",
-                lastname  = "Heggen",
-                username  = "heggens",
+users = Users(  firstName = "Scott",
+                lastName  = "Heggen",
+                userName  = "heggens",
                 email     = "heggens@berea.edu",
                 RID       = 1
              ).save()
 
-users = Users(  firstname = "Matt",
-                lastname  = "Jadud",
-                username  = "jadudm",
+users = Users(  firstName = "Matt",
+                lastName  = "Jadud",
+                userName  = "jadudm",
                 email     = "jadudm@berea.edu",
                 RID       = 2
              ).save()           
