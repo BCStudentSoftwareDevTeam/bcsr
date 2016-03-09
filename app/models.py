@@ -14,6 +14,12 @@ class dbModel (Model):
 
 # When adding new tables to the DB, add a new class here (also add 
 # to the config.yaml file)
+###########################CLASSES#############################
+#Class Names        -> Camel Case                                         Ex. SyllCourseSemester
+#Primary Keys       -> All Caps                                           Ex. SID
+#ForeignKeyField    -> All Caps and Named After Key being related to      Ex. RID
+#Variables in Class -> Mixed Case                                         Ex. firstName
+
 
 ######## CLASSES WITH NO FOREIGN KEY FIELD ########
 class Syllabus (dbModel):
@@ -27,8 +33,7 @@ class Semester (dbModel):
 
 class Role (dbModel):
   RID           = PrimaryKeyField()
-  access_level  = CharField()
-  access_name   = CharField()
+  name          = CharField()
   
 class Programs (dbModel):
   PID           = PrimaryKeyField()
@@ -38,53 +43,48 @@ class Divisions (dbModel):
   DID           = PrimaryKeyField()
   name          = CharField()
   
-class Users (dbModel):
-  UID           = PrimaryKeyField()
-  firstname     = CharField()
-  lastname      = CharField()
-  username      = CharField()
-  email         = CharField()
-
-
 
 ######## CLASSES WITH FOREIGN KEY FIELDS ########
-class Division_to_program (dbModel):
+class Users (dbModel):
+  UID           = PrimaryKeyField()
+  firstName     = CharField()
+  lastName      = CharField()
+  userName      = CharField()
+  email         = CharField()
+  RID           = ForeignKeyField(Role)
+
+class DivisionToProgram (dbModel):
   DPID          = PrimaryKeyField()
   DID           = ForeignKeyField(Divisions)
   PID           = ForeignKeyField(Programs)
   
 class Courses (dbModel):
   CID           = PrimaryKeyField()
-  cprefix       = CharField()
-  cnumber       = CharField()
+  prefix        = CharField()
+  number        = CharField()
   PID           = ForeignKeyField(Programs)  
 
-class CurrentSEID (dbModel):
+class CurrentSemester (dbModel):
   CSEID         = PrimaryKeyField()
   SEID          = ForeignKeyField(Semester)
   
-class Syllabus_course_semester (dbModel):
+class SyllCourseSemester (dbModel):
   XID           = PrimaryKeyField()
   SID           = ForeignKeyField(Syllabus)
   CID           = ForeignKeyField(Courses)
   SEID          = ForeignKeyField(Semester)
   
-class Program_chair (dbModel):
+class ProgramChair (dbModel):
   PCID          = PrimaryKeyField()
   PID           = ForeignKeyField(Programs)
   UID           = ForeignKeyField(Users)
-
-class User_role (dbModel):
-  URID          = PrimaryKeyField()
-  RID           = ForeignKeyField(Role)
-  UID           = ForeignKeyField(Users)
   
-class Division_chair (dbModel):
+class DivisionChair (dbModel):
   DCID          = PrimaryKeyField()
   DID           = ForeignKeyField(Divisions)
   UID           = ForeignKeyField(Users)
   
-class Uscs (dbModel):
+class Uscs (dbModel): #Uscs stands for UserSyllabusCourseSemester
   QID           = PrimaryKeyField()
   XID           = ForeignKeyField(Syllabus_course_semester)
   UID           = ForeignKeyField(Users)

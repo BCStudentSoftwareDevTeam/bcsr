@@ -50,7 +50,7 @@ def get_classes (db):
   
 mainDB.create_tables(get_classes('mainDB'))
 
-# Adding dummy data
+# When adding dummy data the varialbes should be in Mixed case and should be the name of the class
 
 courses = Courses(  cprefix = "BIO",
                     cnumber = "101",
@@ -58,47 +58,43 @@ courses = Courses(  cprefix = "BIO",
                     PID     = 1
                   ).save()
                   
-currentSEID = CurrentSEID( SEID = 201512 
-                         ).save()
+currentSemester = CurrentSemester( SEID = 1 
+                                  ).save()
                          
 divisions = Divisions( name = "division1"
                      ).save()
                      
-division_chair = Division_chair(  DID  = 1,
-                                  UID  = 1,
-                               ).save()
+divisionChair = DivisionChair(  DID  = 1,
+                                UID  = 1,
+                              ).save()
                                
-division_to_program = Division_to_program(  DID  = 1,
-                                            PID  = 1
-                                         ).save()
+divisionToProgram = DivisionToProgram(  DID  = 1,
+                                        PID  = 1
+                                      ).save()
 programs = Programs(  name  = "Biology"
                    ).save()
                    
-program_chair = Program_chair(  PID  = 1,
-                                UID  = 2,
+programChair = ProgramChair(  PID  = 1,
+                              UID  = 2,
                              ).save()
                              
-role = Role(  access_level  = "Full_Access",
-              access_name   = "Administrator"
+role = Role(  name   = "Administrator"
            ).save()
 
-role = Role(  access_level  = "Program_Access",
-              access_name   = "Program Chair"
+role = Role(  name   = "Program Chair"
            ).save()
            
-role = Role(  access_level  = "Division_Access",
-              access_name   = "Division Chair"
+role = Role(  name   = "Division Chair"
            ).save()
 
-role = Role(  access_level  = "Prof_Access",
-              access_name   = "Professor"
+role = Role(  name   = "Professor"
            ).save()
            
 semester = Semester(  year  = 2016,
                       term  = "Spring"
                    ).save()
             
-syllabus_course_semester = Syllabus_course_semester( SID  = 1,
+syllCourseSemester = SyllCouseSemester( SID  = 1,
                                                      CID  = 1,
                                                      SEID = 1
                                                    ).save()
@@ -110,19 +106,14 @@ uscs =  Uscs( XID = 1,
 users = Users(  firstname = "Scott",
                 lastname  = "Heggen",
                 username  = "heggens",
-                email     = "heggens@berea.edu"
+                email     = "heggens@berea.edu",
+                RID       = 1
              ).save()
 
 users = Users(  firstname = "Matt",
                 lastname  = "Jadud",
                 username  = "jadudm",
-                email     = "jadudm@berea.edu"
+                email     = "jadudm@berea.edu",
+                RID       = 2
              ).save()           
              
-user_role = User_role(  RID = 1,
-                        UID = 1,
-                     ).save()
-                    
-user_role = User_role(  RID = 3,
-                        UID = 2
-                     ).save()
