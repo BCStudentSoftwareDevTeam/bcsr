@@ -68,8 +68,8 @@ class CurrentSemester (dbModel):
   CSEID         = PrimaryKeyField()
   SEID          = ForeignKeyField(Semester)
   
-class SyllCourseSemester (dbModel):
-  XID           = PrimaryKeyField()
+class SyllabusCourseSemester (dbModel):
+  SCSID         = PrimaryKeyField()
   SID           = ForeignKeyField(Syllabus)
   CID           = ForeignKeyField(Courses)
   SEID          = ForeignKeyField(Semester)
@@ -84,7 +84,7 @@ class DivisionChair (dbModel):
   DID           = ForeignKeyField(Divisions)
   UID           = ForeignKeyField(Users)
   
-class Uscs (dbModel): #Uscs stands for UserSyllabusCourseSemester
+class UsersToSCS (dbModel): #SCS stands for SyllabusCourseSemester
   QID           = PrimaryKeyField()
-  XID           = ForeignKeyField(SyllCourseSemester)
+  SCSID         = ForeignKeyField(SyllabusCourseSemester)
   UID           = ForeignKeyField(Users)

@@ -94,13 +94,13 @@ semester = Semester(  year  = 2016,
                       term  = "Spring"
                    ).save()
             
-syllCourseSemester = SyllCourseSemester( SID  = 1,
+syllabusCourseSemester = SyllabusCourseSemester(     SID  = 1,
                                                      CID  = 1,
                                                      SEID = 1
                                                    ).save()
                         
-uscs =  Uscs( XID = 1,
-              UID = 1
+UsersToSCS =  UsersToSCS( SCSID = 1,
+              UID   = 1
              ).save()
                       
 users = Users(  firstName = "Scott",
