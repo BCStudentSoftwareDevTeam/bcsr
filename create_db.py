@@ -71,6 +71,7 @@ divisionChair = DivisionChair(  DID  = 1,
 divisionToProgram = DivisionToProgram(  DID  = 1,
                                         PID  = 1
                                       ).save()
+                                      
 programs = Programs(  name  = "Biology"
                    ).save()
                    
@@ -117,3 +118,5 @@ users = Users(  firstName = "Matt",
                 RID       = 2
              ).save()           
              
+syllabus = Syllabus( location = "this/is/a/fake/filepath"
+                    ).save()
