@@ -12,6 +12,6 @@ fi
 
 . venv/bin/activate
 
-sudo pip install Flask
-sudo pip install peewee
-sudo pip install pyyaml
+sudo pip install Flask  --upgrade
+sudo pip install peewee --upgrade
+sudo pip install pyyaml --upgrade
