@@ -62,6 +62,7 @@ class Courses (dbModel):
   CID           = PrimaryKeyField()
   prefix        = CharField()
   number        = CharField()
+  section       = CharField()
   PID           = ForeignKeyField(Programs)  
 
 class CurrentSemester (dbModel):
