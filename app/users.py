@@ -1,12 +1,12 @@
 from allImports import *
 
-def getUID( un, users=Users ):
-    UserId = users.query.filter_by(username=un).first()
-    return UserId.UID
-    #return 0
+def get_user( user_name ):
+    user        = (Users
+                        .select()
+                        .where(
+                                Users.userName == user_name
+                   )).get()
+    return user
 
-def getRID( un ):
-    #uid     = getUID( un )
-    #role    = User_role.query.filter_by(UID = uid)
-    #return role.RID
-    return 1
+
+
