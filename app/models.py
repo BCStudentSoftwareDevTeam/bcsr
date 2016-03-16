@@ -15,77 +15,45 @@ class dbModel (Model):
 # When adding new tables to the DB, add a new class here (also add 
 # to the config.yaml file)
 ###########################CLASSES#############################
-#Class Names        -> Camel Case                                         Ex. SyllCourseSemester
-#Primary Keys       -> All Caps                                           Ex. SID
-#ForeignKeyField    -> All Caps and Named After Key being related to      Ex. RID
-#Variables in Class -> Mixed Case                                         Ex. firstName
+#Class Names        -> Camel Case                                         Ex. Semester
+#Primary Keys       -> All Caps                                           Ex. SEID
+#ForeignKeyField    -> All Caps and Named After Key being related to      Ex. Divisions.DID = Programs.DID
+#Variables in Class -> Mixed Case                                         Ex. filePath
 
 
 ######## CLASSES WITH NO FOREIGN KEY FIELD ########
-class Syllabus (dbModel):
-  SID           = PrimaryKeyField()
-  location      = CharField()
-  
-class Semester (dbModel):
+class Semesters (dbModel):
   SEID          = PrimaryKeyField()
   year          = IntegerField()
   term          = CharField()
-
-class Role (dbModel):
-  RID           = PrimaryKeyField()
-  name          = CharField()
-  
-class Programs (dbModel):
-  PID           = PrimaryKeyField()
-  name          = CharField()
-  
+  current       = BooleanField(default = False)
+ 
 class Divisions (dbModel):
   DID           = PrimaryKeyField()
   name          = CharField()
   
 
 ######## CLASSES WITH FOREIGN KEY FIELDS ########
+class Programs (dbModel):
+  PID           = PrimaryKeyField()
+  name          = CharField()
+  DID           = ForeignKeyField(Divisions)
+  
 class Users (dbModel):
   UID           = PrimaryKeyField()
   firstName     = CharField()
   lastName      = CharField()
-  userName      = CharField()
+  userName      = CharField(unique=Truecur)
   email         = CharField()
-  RID           = ForeignKeyField(Role)
-
-class DivisionToProgram (dbModel):
-  DPID          = PrimaryKeyField()
-  DID           = ForeignKeyField(Divisions)
-  PID           = ForeignKeyField(Programs)
+  Admin         = BooleanField(default = False)
+  PID           = ForeignKeyField(Programs,  null = True)
+  DID           = ForeignKeyField(Divisions, null = True)
   
 class Courses (dbModel):
   CID           = PrimaryKeyField()
   prefix        = CharField()
   number        = CharField()
   section       = CharField()
-  PID           = ForeignKeyField(Programs)  
-
-class CurrentSemester (dbModel):
-  CSEID         = PrimaryKeyField()
-  SEID          = ForeignKeyField(Semester)
-  
-class SyllabusCourseSemester (dbModel):
-  SCSID         = PrimaryKeyField()
-  SID           = ForeignKeyField(Syllabus)
-  CID           = ForeignKeyField(Courses)
-  SEID          = ForeignKeyField(Semester)
-  
-class ProgramChair (dbModel):
-  PCID          = PrimaryKeyField()
   PID           = ForeignKeyField(Programs)
-  UID           = ForeignKeyField(Users)
-  
-class DivisionChair (dbModel):
-  DCID          = PrimaryKeyField()
-  DID           = ForeignKeyField(Divisions)
-  UID           = ForeignKeyField(Users)
-  
-class UsersToSCS (dbModel): #SCS stands for SyllabusCourseSemester
-  QID           = PrimaryKeyField()
-  SCSID         = ForeignKeyField(SyllabusCourseSemester)
-  UID           = ForeignKeyField(Users)
+  SEID          = ForeignKeyField(Semester)
+  filePath      = textField(null = True)
