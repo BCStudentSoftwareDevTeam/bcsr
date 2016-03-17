@@ -4,6 +4,7 @@ import os
 # Create a database
 from app.loadConfig import *
 
+
 cfg       = load_config('app/config.yaml')
 mainDB    = SqliteDatabase(cfg['databases']['dev'])
 
@@ -11,13 +12,14 @@ mainDB    = SqliteDatabase(cfg['databases']['dev'])
 class dbModel (Model):
   class Meta: 
     database = mainDB
+    
 
 # When adding new tables to the DB, add a new class here (also add 
 # to the config.yaml file)
 ###########################CLASSES#############################
 #Class Names        -> Camel Case                                         Ex. Semester
 #Primary Keys       -> All Caps                                           Ex. SEID
-#ForeignKeyField    -> All Caps and Named After Key being related to      Ex. Divisions.DID = Programs.DID
+#ForeignKeyField    -> Same Name as Key being related to                  Ex. Divisions.DID = Programs.DID
 #Variables in Class -> Mixed Case                                         Ex. filePath
 
 
@@ -32,7 +34,6 @@ class Divisions (dbModel):
   DID           = PrimaryKeyField()
   name          = CharField()
   
-
 ######## CLASSES WITH FOREIGN KEY FIELDS ########
 class Programs (dbModel):
   PID           = PrimaryKeyField()
@@ -43,9 +44,9 @@ class Users (dbModel):
   UID           = PrimaryKeyField()
   firstName     = CharField()
   lastName      = CharField()
-  userName      = CharField(unique=Truecur)
+  userName      = CharField()
   email         = CharField()
-  Admin         = BooleanField(default = False)
+  admin         = BooleanField(default = False)
   PID           = ForeignKeyField(Programs,  null = True)
   DID           = ForeignKeyField(Divisions, null = True)
   
@@ -55,5 +56,10 @@ class Courses (dbModel):
   number        = CharField()
   section       = CharField()
   PID           = ForeignKeyField(Programs)
-  SEID          = ForeignKeyField(Semester)
-  filePath      = textField(null = True)
+  SEID          = ForeignKeyField(Semesters)
+  filePath      = TextField(null = True)
+  
+class UsersCourses (dbModel):
+  UCID          = PrimaryKeyField()
+  userName      = ForeignKeyField(Users, to_field = "userName")
+  CID           = ForeignKeyField(Courses)

@@ -52,71 +52,45 @@ mainDB.create_tables(get_classes('mainDB'))
 
 # When adding dummy data the varialbes should be in Mixed case and should be the name of the class
 
-courses = Courses(  prefix = "BIO",
-                    number = "101",
-                    section = "A1",
-                    PID     = 1
-                  ).save()
-                  
-currentSemester = CurrentSemester( SEID = 1 
-                                  ).save()
-                         
-divisions = Divisions( name = "division1"
+semesters = Semesters(  SEID      = 201512,
+                        year      = 2016,
+                        term      = "Spring",
+                        current   = True
+                      ).save()
+                      
+divisions = Divisions(  name      = "Division 1"
+                      ).save()
+                      
+programs  = Programs(   name      = "Computer Science",
+                        DID       = 1
                      ).save()
                      
-divisionChair = DivisionChair(  DID  = 1,
-                                UID  = 1,
-                              ).save()
-                               
-divisionToProgram = DivisionToProgram(  DID  = 1,
-                                        PID  = 1
-                                      ).save()
-                                      
-programs = Programs(  name  = "Biology"
-                   ).save()
-                   
-programChair = ProgramChair(  PID  = 1,
-                              UID  = 2,
-                             ).save()
-                             
-role = Role(  name   = "Administrator"
-           ).save()
+users     = Users(      firstName = "Scott",
+                        lastName  = "Heggen",
+                        userName  = "heggens",
+                        email     = "heggens@berea.edu",
+                        admin     = True
+                  ).save()
 
-role = Role(  name   = "Program Chair"
-           ).save()
-           
-role = Role(  name   = "Division Chair"
-           ).save()
-
-role = Role(  name   = "Professor"
-           ).save()
-           
-semester = Semester(  year  = 2016,
-                      term  = "Spring"
-                   ).save()
-            
-syllabusCourseSemester = SyllabusCourseSemester(     SID  = 1,
-                                                     CID  = 1,
-                                                     SEID = 1
-                                                   ).save()
-                        
-UsersToSCS =  UsersToSCS( SCSID = 1,
-              UID   = 1
-             ).save()
-                      
-users = Users(  firstName = "Scott",
-                lastName  = "Heggen",
-                userName  = "heggens",
-                email     = "heggens@berea.edu",
-                RID       = 1
-             ).save()
-
-users = Users(  firstName = "Matt",
-                lastName  = "Jadud",
-                userName  = "jadudm",
-                email     = "jadudm@berea.edu",
-                RID       = 2
-             ).save()           
+users     = Users(      firstName = "Matt",
+                        lastName  = "Jadud",
+                        userName  = "jadudm",
+                        email     = "jadudm@berea.edu",
+                        PID       = 1
+                  ).save()  
              
-syllabus = Syllabus( location = "this/is/a/fake/filepath"
-                    ).save()
+courses   = Courses(  prefix = "BIO",
+                      number = "101",
+                      section = "A1",
+                      PID     = 1,
+                      SEID    = 201512
+                  ).save()
+
+userscourses  = UsersCourses ( userName = 'heggens',
+                               CID      = 1
+                              ).save()
+
+  
+             
+
+                  
