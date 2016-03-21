@@ -15,12 +15,12 @@ def check_user_level(user_name):
                   .select()
                   .where(
                             Users.userName == user_name
-                        ))
+                        ).get())
     try:
         if user.admin:
             return 'admin'
-        else:
-            return 'failed'
+        if user.PID != None:
+            return 'program_chair'
     except:
-        pass
+        return "error"
                         
