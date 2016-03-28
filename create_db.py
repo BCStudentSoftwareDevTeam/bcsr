@@ -85,7 +85,21 @@ users     = Users(      firstName = "Scott",
                         email     = "heggens@berea.edu",
                         admin     = True
                   ).save()
-                       
+            
+users     = Users(      firstName = "Jan",
+                        lastName  = "Pearce",
+                        userName  = "pearcej",
+                        email     = "pearcej@berea.edu",
+                        DID       = 2
+                  ).save()
+                        
+users     = Users(      firstName = "Mario",
+                        lastName  = "Nakazawa",
+                        userName  = "nakazawam",
+                        PID       = 1,
+                        email     = "nakazawam@berea.edu"
+                  ).save()
+                  
 users     = Users(      firstName = "Matt",
                         lastName  = "Jadud",
                         userName  = "jadudm",
