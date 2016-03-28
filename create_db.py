@@ -51,40 +51,69 @@ def get_classes (db):
 mainDB.create_tables(get_classes('mainDB'))
 
 # When adding dummy data the varialbes should be in Mixed case and should be the name of the class
-
+###########
+#SEMESTERS#
+###########
 semesters = Semesters(  year      = 2016,
                         term      = "Spring",
                         current   = True
                       ).save()
-                      
+###########
+#DIVISIONS#
+###########            
 divisions = Divisions(  name      = "Division 1"
                       ).save()
-                      
+
+divisions = Divisions(  name      = "Division 2"
+                      ).save()
+##########
+#PROGRAMS#
+##########
 programs  = Programs(   name      = "Computer Science",
-                        DID       = 1
+                        DID       = 2
                      ).save()
                      
+programs  = Programs(   name      = "Biology",
+                        DID       = 1
+                    ).save()
+#######
+#USERS#
+#######
 users     = Users(      firstName = "Scott",
                         lastName  = "Heggen",
                         userName  = "heggens",
                         email     = "heggens@berea.edu",
                         admin     = True
                   ).save()
-
+                       
 users     = Users(      firstName = "Matt",
                         lastName  = "Jadud",
                         userName  = "jadudm",
                         email     = "jadudm@berea.edu",
-                        PID       = 1
                   ).save()  
-             
-courses   = Courses(  prefix = "BIO",
-                      number = "101",
+#########                  
+#COURSES#  
+#########             
+courses   = Courses(  prefix  = "BIO",
+                      number  = "101",
                       section = "A1",
+                      PID     = 2,
+                      SEID    = 1
+                  ).save()
+                  
+courses   = Courses(  prefix  = "CSC",
+                      number  = "415",
+                      section = "SH",
                       PID     = 1,
                       SEID    = 1
                   ).save()
-
+##############
+#USERSCOURSES#
+##############
 userscourses  = UsersCourses ( userName = 'heggens',
                                CID      = 1
+                              ).save()
+                              
+userscourses  = UsersCourses ( userName = 'heggens',
+                               CID      = 2
                               ).save()
