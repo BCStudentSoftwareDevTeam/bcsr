@@ -1,9 +1,76 @@
 {% extends "base.html" %} 
 {% set currentPage = "courses" %}
-
 {% block body %}
-<!-- 
-<p>Hello, {{user_info.userName}}</p>
--->
-<p>Hello</p>
+
+{% if my_courses_key != None %}
+<!-- The My Courses Table View -->
+  <h2>My Courses</h2>
+  {% include "tableHeader.html" %}
+    {% for course in my_courses %}
+      <tr>
+        <td>
+          {{course.userName.firstName}}
+        </td>
+        <td>
+          {{course.CID.prefix}}
+        </td>
+        <td>
+          {{course.CID.number}}
+        </td>
+        <td>
+          {{course.CID.section}}
+        </td>
+        <td>
+          {{course.CID.SEID.year}}
+        </td>
+        <td>
+          {{course.CID.SEID.term}}
+        </t>
+        <td>
+          needButton
+        </td>
+      </tr>
+    {%endfor %}
+  {% include "tableFooter.html" %}
+{% endif %}
+
+{% if admin_key != None %}
+  <!-- The Admin Table view -->
+  {%for division in divisions_to_programs %}
+    <h2>{{ division.name }}</h2>
+    {% for program in divisions_to_programs[division] %}
+      <div style = "margin-left:25px;">
+        <h3>{{ program.name }}</h3>
+        {% include "tableHeader.html" %}
+          {% for program_course in programs_to_courses[program] %}
+            <tr>
+              <td>
+                {{program_course.userName.firstName}}
+              </td>
+              <td>
+                {{program_course.CID.prefix}}
+              </td>
+              <td>
+                {{program_course.CID.number}}
+              </td>
+              <td>
+                {{program_course.CID.section}}
+              </td>
+              <td>
+                {{program_course.CID.SEID.year}}
+              </td>
+              <td>
+                {{program_course.CID.SEID.term}}
+              </t>
+              <td>
+                needButton
+              </td>
+            </tr>
+          {%endfor %}
+        {% include "tableFooter.html" %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
 {% endblock %}

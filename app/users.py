@@ -19,8 +19,12 @@ def check_user_level(user_name):
     try:
         if user.admin:
             return 'admin'
-        if user.PID != None:
-            return 'program_chair'
+        elif user.PID is not None:
+            return 'program'
+        elif user.DID is not None:
+            return 'division'
+        else:
+            return 'faculty'
     except:
         return "error"
                         
