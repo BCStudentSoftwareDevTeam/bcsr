@@ -26,7 +26,7 @@ def courses():
         programs              = (Programs
                                         .select()
                                         .where(
-                                                Programs.DID == Programs.DID
+                                                Programs.DID == division.DID
                                               ))
         divisions_to_programs[division] = programs
         for program in programs:
