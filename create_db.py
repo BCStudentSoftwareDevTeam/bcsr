@@ -52,8 +52,7 @@ mainDB.create_tables(get_classes('mainDB'))
 
 # When adding dummy data the varialbes should be in Mixed case and should be the name of the class
 
-semesters = Semesters(  SEID      = 201512,
-                        year      = 2016,
+semesters = Semesters(  year      = 2016,
                         term      = "Spring",
                         current   = True
                       ).save()
@@ -83,14 +82,9 @@ courses   = Courses(  prefix = "BIO",
                       number = "101",
                       section = "A1",
                       PID     = 1,
-                      SEID    = 201512
+                      SEID    = 1
                   ).save()
 
 userscourses  = UsersCourses ( userName = 'heggens',
                                CID      = 1
                               ).save()
-
-  
-             
-
-                  

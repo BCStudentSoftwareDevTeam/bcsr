@@ -44,7 +44,7 @@ class Users (dbModel):
   UID           = PrimaryKeyField()
   firstName     = CharField()
   lastName      = CharField()
-  userName      = CharField(unique=True)
+  userName      = CharField()
   email         = CharField()
   admin         = BooleanField(default = False)
   PID           = ForeignKeyField(Programs,  null = True)
@@ -61,5 +61,5 @@ class Courses (dbModel):
   
 class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()
-  userName      = ForeignKeyField(Users, to_field="userName")
+  userName      = ForeignKeyField(Users, to_field = "userName")
   CID           = ForeignKeyField(Courses)
