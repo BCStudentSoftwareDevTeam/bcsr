@@ -23,4 +23,14 @@ mainMenu:
   - title: "Home"
     link: "/"
   - title: "Courses"
-    link: "courses"
+    link: "/courses"
+    
+fileOperations:
+  - allowedExtension:
+      pdf: "pdf"
+      doc: "doc"
+      docx: "docx"
+  - dataPaths:
+      uploads: "/data/uploads"
+      zips: "/data/zips"
+      temp: "/data/tmp"
