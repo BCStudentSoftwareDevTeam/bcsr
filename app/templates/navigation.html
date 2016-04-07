@@ -3,7 +3,7 @@
   <div class="container">
     <ul class="nav navbar-nav"> 
     {% for menuItem in cfg['mainMenu'] %}
-      <li class="active">
+      <li {% if menuItem['title'] == currentPage %} class="active" {% endif %}>
         <a href="{{menuItem['link']}}">{{menuItem['title']}}</a>
       </li>
     {% endfor %} 

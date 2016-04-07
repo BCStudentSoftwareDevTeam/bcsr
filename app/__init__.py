@@ -14,9 +14,3 @@ from app import allImports
 print("Starting application") 
 from app import index
 from app import courses
-#from app import readPrograms
-#from app import editPrograms
-#from app import deletePrograms
-#from app import RelationalExample
-#from app import readCourses
-#from app import start
