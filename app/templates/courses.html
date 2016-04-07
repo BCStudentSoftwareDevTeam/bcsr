@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% set currentPage = "courses" %}
+{% set currentPage = "Courses" %}
 {% block body %}
 
 {% if my_courses_key != None %}
@@ -7,65 +7,21 @@
   <h2>My Courses</h2>
   {% include "tableHeader.html" %}
     {% for course in my_courses %}
-      <tr>
-        <td>
-          {{course.userName.firstName}}
-        </td>
-        <td>
-          {{course.CID.prefix}}
-        </td>
-        <td>
-          {{course.CID.number}}
-        </td>
-        <td>
-          {{course.CID.section}}
-        </td>
-        <td>
-          {{course.CID.SEID.year}}
-        </td>
-        <td>
-          {{course.CID.SEID.term}}
-        </t>
-        <td>
-          needButton
-        </td>
-      </tr>
-    {%endfor %}
+      {% include "tableRows.html" %}  
+    {% endfor %}
   {% include "tableFooter.html" %}
 {% endif %}
 
 {% if admin_key != None %}
-  <!-- The Admin Table view -->
+  <!-- The Admin Table View -->
   {%for division in divisions_to_programs %}
-    <h2>{{ division.name }}</h2>
+    <h2>{{ division }}</h2>
     {% for program in divisions_to_programs[division] %}
       <div style = "margin-left:25px;">
-        <h3>{{ program.name }}</h3>
+        <h3>{{ program.name}}</h3>
         {% include "tableHeader.html" %}
-          {% for program_course in programs_to_courses[program] %}
-            <tr>
-              <td>
-                {{program_course.userName.firstName}}
-              </td>
-              <td>
-                {{program_course.CID.prefix}}
-              </td>
-              <td>
-                {{program_course.CID.number}}
-              </td>
-              <td>
-                {{program_course.CID.section}}
-              </td>
-              <td>
-                {{program_course.CID.SEID.year}}
-              </td>
-              <td>
-                {{program_course.CID.SEID.term}}
-              </t>
-              <td>
-                needButton
-              </td>
-            </tr>
+          {% for course in programs_to_courses[program.name] %}
+            {% include "tableRows.html" %}
           {%endfor %}
         {% include "tableFooter.html" %}
       </div>
@@ -73,4 +29,28 @@
   {% endfor %}
 {% endif %}
 
+{% if division_key != None %}
+  <!-- The Division Table View -->
+  <h2>{{division_key}}</h2>
+  {% for program in divisions_to_programs[division_key] %}
+    <div style = "margin-left:25px;">
+      <h3>{{ program.name }}</h3>
+      {% include "tableHeader.html" %}
+        {% for course in programs_to_courses[program.name] %}
+          {% include "tableRows.html" %}
+        {% endfor %}
+      {% include "tableFooter.html" %}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% if program_key != None %}
+  <!-- The Program Table View -->
+  <h2>{{ program_key }}</h2>
+    {% include "tableHeader.html" %}
+      {% for course in programs_to_courses[program_key] %}
+        {% include "tableRows.html" %}
+      {% endfor %}
+    {% include "tableFooter.html" %}
+{% endif %}
 {% endblock %}

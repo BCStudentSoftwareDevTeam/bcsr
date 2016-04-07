@@ -6,7 +6,7 @@ def get_user(user_name):
                   .select()
                   .where(
                             Users.userName == user_name
-                        ))
+                        )).get()
     return user
     
 def check_user_level(user_name):
