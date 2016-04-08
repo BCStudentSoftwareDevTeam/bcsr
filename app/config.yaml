@@ -26,11 +26,14 @@ mainMenu:
     link: "/courses"
     
 fileOperations:
-  - allowedExtension:
+  allowedExtension:
       pdf: "pdf"
       doc: "doc"
       docx: "docx"
-  - dataPaths:
-      uploads: "/data/uploads"
-      zips: "/data/zips"
-      temp: "/data/tmp"
+  allowedSize:
+      size: 8000000
+  dataPaths:
+      uploads: "app/static/files/uploads"
+      zips: "app/static/files/zips"
+      temp: "app/static/files/tmp"
+  
