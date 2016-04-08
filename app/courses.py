@@ -7,6 +7,14 @@ import os
 @app.route("/courses/<post_CID>", methods = ["GET", "POST"])
 def courses(post_CID):
     '''This function will render the correct template based off of the user's role'''
+    ERROR = 0
+    #TYPE OF ERROR VALUES AND MEANINGS THAT COULD OCCUR ON THIS PAGE
+    #ERROR = 0 NO ERROR OCCURED
+    #ERROR = 1 COULD NOT AUTHENTICATE USER
+    #ERROR = 2 INCORRECT FILE EXTENSTION
+    #ERROR = 3 FILE SIZE IS TOO LARGE
+    #ERROR = 4 AN ERROR OCCURED WHILE UPLOADING A FILE
+    
     #WE WILL TO INTEGRATE LDAP AND GRAB THE INFORMATION FROM THAT
     user_name                 = 'heggens'   #Admin Access
     #user_name                 = 'pearcej'   #Division Chair Access
@@ -29,8 +37,7 @@ def courses(post_CID):
                                         .order_by(+Divisions.DID)
                                         .where(
                                                 Divisions.DID == Divisions.DID
-                                              )
-)
+                                              ))
     for division in divisions:
         programs              = (Programs
                                         .select()
@@ -97,53 +104,50 @@ def courses(post_CID):
         pass
         break;
       if case(): #THE DEFAULT IS TO ERROR OUT IF THE USERLEVEL IS NOT ONE OF THESE
-        message        = "There was an error during the authentication process."
-        return render_template("error.html",
-                                cfg     = cfg,
-                                message = message
-                              )
+        ERROR = 1
+        
+        
       ###################################################
       #THE CODE BELOW HANDLES ALL OF THE FILE MANAGEMENT#
       ###################################################
-      #TODO: ALLOWED_EXTENTIONS AND AND UPLOAD FOLDER ARE NOW LOCATED INSIDE OF THE CONFIG.YAML FOLDER 
-      #TODO: FIX THE CODE BELOW TO REFLECT THE CHANGES
-      if request.method     == "POST":
-        #TODO: CHECK TO SEE IF THEY ARE AN AUTHORIZED USER
-        app.logger.info("{0} attempting to upload file.".format(user_name))
-        #RETRIEVE THE COURSE INFORMATION FROM THE post_CID
-        course_info         = (Courses
-                                    .select()
-                                    .join(Programs)
-                                    .where(
-                                            Courses.CID == post_CID,
-                                            Courses.PID == Programs.PID
-                                          )).get()
-        #SET THE FILE PATH FOR THE UPLOAD FOLDER
-        UPLOAD_FOLDER       = #MOVED TO THE YAML
-        #THE REST OF THE PATH INFOMATION --> str(Courses.SEID) + "/" + str(Courses.PID.DID.name) + "/" + str(Courses.prefix) + "/"
-        UPLOAD_FOLDER       = UPLOAD_FOLDER.replace(" ", "") #MAKE SURE THAT THE FILE PATH DOES NOT CONTAIN ANY WHITE SPACES
-        #CHECK TO SEE IF THE FILE IS PART OF OUR ALLOWED_EXTENTIONS
-        ALLOWED_EXTENTIONS  = 
-        def allowed_file(filename):
-          return '.' in filename and \
-            filename.rsplit('.',1)[1] in ALLOWED_EXTENTIONS
-        #TODO: CHECK THE FILE SIZE
-        #START HANDLING THE FILE    
-        file                = request.files['file']
-        if file and allowed_file(file.filename):
-          filename = 'CID' + str(Courses.CID) + '-' + str(Courses.prefix) +  '-' + str(Courses.number) + '-' + str(Courses.PID.DID.name) + '-' + user_name + "." + str(os.path.splitext(filename))[1]
-          file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename)
-          #RENAME THE FILE TO OUR FILE NAMEING SYSTEM
-        
-    
-        
-      
-        
-        
-        
-        
-        
-        
+    if request.method     == "POST":
+      app.logger.info("{0} attempting to upload file.".format(user_name))
+      #TODO: CHECK TO SEE IF THEY ARE AN AUTHORIZED USER
+      file = request.files['file']
+      file_extension = os.path.splitext(file.filename)[1][1:]
+      if cfg['fileOperations']['allowedExtension'].get(file_extension) is not None:
+        temp_file_path = os.path.join(cfg['fileOperations']['dataPaths']['temp'] , 'tempCID' + str(post_CID))
+        file.save(temp_file_path) #SAVE THE FILE TO A TEMP FOLDER TO VIEW THE FILE SIZE
+        file_size = os.stat(temp_file_path).st_size
+        if file_size < cfg['fileOperations']['allowedSize']['size']:
+          pass
+        else:
+          ERROR = 3
+      else: 
+        ERROR = 2
+      #START HANDLING THE FILE
+      if ERROR == 0:
+        try:
+          #RETRIEVE THE COURSE INFORMATION FROM THE post_CID
+          course_info         = (Courses
+                                      .select()
+                                      .join(Programs)
+                                      .join(Divisions)
+                                      .where(
+                                              Courses.CID  == post_CID,
+                                              Courses.PID  == Programs.PID,
+                                              Programs.DID == Divisions.DID
+                                            )).get()
+          #SET THE FILE PATH FOR THE UPLOAD FOLDER
+          upload_file_path       = cfg.fileOperations.dataPaths.uploads
+          course_file_path       = str(Courses.SEID) + "/" + str(Courses.PID.DID.name) + "/" + str(Courses.prefix) + "/"
+          new_file_name          = 'CID' + str(Courses.CID) + '-' + str(Courses.prefix) +  '-' + str(Courses.number) + '-' + str(Courses.PID.DID.name) + '-' + user_name + "." + str(os.path.splitext(file.filename))[1]
+          complete_path          = upload_file_path + course_file_path + new_file_name.replace(" ", "")  
+          file.save(complete_path)
+        except:
+          sys.exc_info()[0]
+          ERROR = 4
+          
     return render_template("courses.html",
                             cfg                     = cfg,
                             divisions_to_programs   = divisions_to_programs,
