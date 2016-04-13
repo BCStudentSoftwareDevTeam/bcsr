@@ -19,8 +19,7 @@
   </t>
   <td>
     {% if course.CID.filePath == None %}
-        <!-- Need to put in drop down menus -->
-        <!--<a href = "/uploads/{{course.CID.CID}}" class = "btn btn-warning" style = "width:100%;" >Upload</a> -->
+        
         <form class="dropzone" id="drop" action = "/courses/{{course.CID.CID}}"> 
                <div class="box">
                    
@@ -31,3 +30,7 @@
     {% endif %}
   </td>
 </tr>
+
+<script>
+  var filetypes = {{ filetypes }}
+</script>
