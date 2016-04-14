@@ -33,7 +33,7 @@ fileOperations:
   allowedSize:
       size: 8000000
   dataPaths:
-      uploads: "app/static/files/uploads"
-      zips: "app/static/files/zips"
-      temp: "app/static/files/tmp"
+      uploads: "static/files/uploads"
+      zips: "static/files/zips"
+      temp: "static/files/tmp"
   

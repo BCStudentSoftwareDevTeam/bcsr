@@ -19,18 +19,14 @@
   </t>
   <td>
     {% if course.CID.filePath == None %}
-        
         <form class="dropzone" id="drop" action = "/courses/{{course.CID.CID}}"> 
                <div class="box">
                    
                </div>
         </form>
     {% else %}
-      <a href = "#" class = "btn btn-success" style = "width:100%;">Download</a>
+      <a href = "/courses/{{course.CID.CID}}/download" class = "btn btn-success" style = "width:100%;">Download</a>
     {% endif %}
   </td>
 </tr>
 
-<script>
-  var filetypes = {{ filetypes }}
-</script>

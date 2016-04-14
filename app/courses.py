@@ -2,6 +2,8 @@ from allImports import *
 from app.users  import *
 from app.switch import switch
 import os
+import sys
+from flask import send_file
 
 @app.route("/courses/", defaults={'post_CID': 0}, methods = ["GET", "POST"])
 @app.route("/courses/<post_CID>", methods = ["GET", "POST"])
@@ -101,11 +103,9 @@ def courses(post_CID):
       if case('faculty'):
         pass
         break;
-      if case(): #THE DEFAULT IS TO ERROR OUT IF THE USERLEVEL IS NOT ONE OF THESE
+      if case(): 
         ERROR = 1
-      ###############################################
-      #THE CODE BELOW HANDLES ALL OF THE FILE UPLOAD#
-      ###############################################
+    #POST OPERATIONS
     if request.method     == "POST":
       app.logger.info("{0} attempting to upload file.".format(user_name))
       file = request.files['file']
@@ -123,7 +123,7 @@ def courses(post_CID):
                                             )).get()
 
           #SET THE FILE PATH FOR THE UPLOAD FOLDER
-          upload_file_path       = cfg['fileOperations']['dataPaths']['uploads']
+          upload_file_path       = 'app/' + cfg['fileOperations']['dataPaths']['uploads'] #We need the app in the front in order to mkdir
           course_file_path       = (    "/" 
                                       +  str(course_info.SEID.SEID) 
                                       + "/" 
@@ -133,8 +133,15 @@ def courses(post_CID):
                                       + "/"
                                     ).replace(" ","")
           directory_paths = upload_file_path+course_file_path
+          print directory_paths
           if not os.path.exists(directory_paths):
-            os.makedirs(directory_paths)
+            try:
+              os.makedirs(directory_paths)
+            except OSError as e:
+              print e.errno
+              print 'error'
+              pass
+          print 'here'
           
           new_file_name          = (    'CID' 
                                       + str(course_info.CID) 
@@ -153,22 +160,56 @@ def courses(post_CID):
           complete_path          = (   directory_paths
                                       + new_file_name
                                     ).replace(" ", "")
+                                    
+          
           file.save(complete_path)
+          
+          database_path = course_file_path+new_file_name
+          print database_path
+          update_course = Courses.update(filePath=database_path).where(Courses.CID==post_CID)
+          update_course.execute()
         except:
-         
-          sys.exc_info()[0]
           ERROR = 2
-          
-        update_course = Courses.update(filePath=complete_path).where(Courses.CID==post_CID)
-        update_course.execute()
-          
-    return render_template("courses.html",
-                            cfg                     = cfg,
-                            divisions_to_programs   = divisions_to_programs,
-                            programs_to_courses     = programs_to_courses,
-                            my_courses              = my_courses,
-                            my_courses_key          = my_courses_key,
-                            program_key             = program_key,
-                            division_key            = division_key,
-                            admin_key               = admin_key
+    if ERROR == 0:      
+      return render_template("courses.html",
+                              cfg                     = cfg,
+                              divisions_to_programs   = divisions_to_programs,
+                              programs_to_courses     = programs_to_courses,
+                              my_courses              = my_courses,
+                              my_courses_key          = my_courses_key,
+                              program_key             = program_key,
+                              division_key            = division_key,
+                              admin_key               = admin_key
+                              )
+    else:  
+      if ERROR == 1: 
+        message = "An error occured during the authentication process"
+      elif ERROR == 2:
+        message = "An error occured during the upload process."
+        
+      return render_template("error.html",
+                              cfg                   = cfg,
+                              message               = message
                             )
+@app.route("/courses/<post_CID>/download", methods = ["POST","GET"])
+def download(post_CID):
+  try:
+    filename = str(cfg['fileOperations']['dataPaths']['uploads']) + "/1/Division1/BIO/"+"CID1-BIO-101-Division1-heggens.docx"
+    return send_file(filename, as_attachment=True)
+    # course_path = (Courses
+    #                 .select(Courses.filePath)
+    #                 .where(
+    #                         Courses.CID == post_CID
+    #                       )
+    #               ).get()
+    
+    # file_path = cfg['fileOperations']['dataPaths']['uploads'] + str(course_path)
+    # return send_from_directory(cfg['fileOperations']['dataPaths']['uploads'], str(course_path))
+  except exception,e:
+    app.logger.info("{0} attempting to upload file.".format(str(e)))
+    message = "An error occured during the download process."
+    return render_template("error.html",
+                              cfg                   = cfg,
+                              message               = message
+                            )
+  
