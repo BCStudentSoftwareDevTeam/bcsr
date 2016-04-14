@@ -58,6 +58,7 @@ class Courses (dbModel):
   PID           = ForeignKeyField(Programs)
   SEID          = ForeignKeyField(Semesters)
   filePath      = TextField(null = True)
+  lastModified  = TextField(null = True)
   
 class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()

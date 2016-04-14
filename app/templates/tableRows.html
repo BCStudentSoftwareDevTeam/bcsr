@@ -25,7 +25,15 @@
                </div>
         </form>
     {% else %}
-      <a href = "/courses/{{course.CID.CID}}/download" class = "btn btn-success" style = "width:100%;">Download</a>
+      <a href = "/courses/{{course.CID.CID}}/download" class = "btn btn-success" style = "width:48%;">Download</a>
+      <a href = "/courses/{{course.CID.CID}}/delete"   class = "btn btn-danger"  style = "width:48%">Delete</a>
+    {% endif %}
+  </td>
+  <td>
+    {% if course.CID.lastModified == None %}
+      <p>Course has not yet been modified.</p>
+    {% else %}
+      <p>{{course.CID.lastModified}}</p>
     {% endif %}
   </td>
 </tr>
