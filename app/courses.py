@@ -10,11 +10,6 @@ from flask import send_file
 def courses(post_CID):
     '''This function will render the correct template based off of the user's role'''
     ERROR = 0
-    #TYPE OF ERROR VALUES AND MEANINGS THAT COULD OCCUR ON THIS PAGE
-    #ERROR = 0 NO ERROR OCCURED
-    #ERROR = 1 COULD NOT AUTHENTICATE USER
-    #ERROR = 2 AN ERROR OCCURED WHILE UPLOADING A FILE
-    
     #WE WILL TO INTEGRATE LDAP AND GRAB THE INFORMATION FROM THAT
     user_name                 = 'heggens'   #Admin Access
     #user_name                 = 'pearcej'   #Division Chair Access
@@ -139,9 +134,8 @@ def courses(post_CID):
               os.makedirs(directory_paths)
             except OSError as e:
               print e.errno
-              print 'error'
               pass
-          print 'here'
+          
           
           new_file_name          = (    'CID' 
                                       + str(course_info.CID) 
@@ -155,7 +149,7 @@ def courses(post_CID):
                                       + user_name 
                                       + "." 
                                       + str(file.filename.split(".").pop())
-                                    )
+                                    ).replace(" ","")
                                     
           complete_path          = (   directory_paths
                                       + new_file_name
@@ -194,18 +188,16 @@ def courses(post_CID):
 @app.route("/courses/<post_CID>/download", methods = ["POST","GET"])
 def download(post_CID):
   try:
-    filename = str(cfg['fileOperations']['dataPaths']['uploads']) + "/1/Division1/BIO/"+"CID1-BIO-101-Division1-heggens.docx"
-    return send_file(filename, as_attachment=True)
-    # course_path = (Courses
-    #                 .select(Courses.filePath)
-    #                 .where(
-    #                         Courses.CID == post_CID
-    #                       )
-    #               ).get()
-    
-    # file_path = cfg['fileOperations']['dataPaths']['uploads'] + str(course_path)
-    # return send_from_directory(cfg['fileOperations']['dataPaths']['uploads'], str(course_path))
-  except exception,e:
+    course_path = (Courses
+                    .select(Courses.filePath)
+                    .where(
+                            Courses.CID == post_CID
+                          )
+                  ).get()
+    file_path = str(cfg['fileOperations']['dataPaths']['uploads']) + str(course_path.filePath)
+    return send_file(file_path, as_attachment=True)
+  
+  except Exception,e:
     app.logger.info("{0} attempting to upload file.".format(str(e)))
     message = "An error occured during the download process."
     return render_template("error.html",
