@@ -1,0 +1,45 @@
+<tr>
+  <td>
+    {{course.userName.firstName}}
+  </td>
+  <td>
+    {{course.CID.prefix}}
+  </td>
+  <td>
+    {{course.CID.number}}
+  </td>
+  <td>
+    {{course.CID.section}}
+  </td>
+  <td>
+    {{course.CID.SEID.year}}
+  </td>
+  <td>
+    {{course.CID.SEID.term}}
+  </t>
+  <td>
+    {% if course.CID.filePath == None %}
+        <form class="dropzone" id="drop" action = "/courses/{{course.CID.CID}}"> 
+               <div class="box">
+                   
+               </div>
+        </form>
+    {% else %}
+      <!-- Buttons -->
+      <!--<button id="{{course.CID.CID}}" class="btn btn-danger" onclick="delete_syllabus(this.id)">Delete</button>-->
+      <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/courses/{{course.CID.CID}}/delete">
+        <input id="form_btn" class="btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Submit">
+      </form>
+      <a href = "/courses/{{course.CID.CID}}/download" class = "btn btn-success">Download</a>
+    {% endif %}
+      
+  </td>
+  <td>
+    {% if course.CID.lastModified == None %}
+      <p>Course has not yet been modified.</p>
+    {% else %}
+      <p>{{course.CID.lastModified}}</p>
+    {% endif %}
+  </td>
+</tr>
+
