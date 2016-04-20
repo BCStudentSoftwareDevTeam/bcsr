@@ -1,9 +1,9 @@
 from allImports import *
 from app.users  import *
 from app.switch import switch
+from flask import send_file
 import os
 import datetime
-from flask import send_file
 
 @app.route("/courses/", defaults={'post_CID': 0}, methods = ["GET", "POST"])
 @app.route("/courses/<post_CID>", methods = ["GET", "POST"])
@@ -160,12 +160,9 @@ def courses(post_CID):
           database_path = course_file_path+new_file_name
           update_course_path = Courses.update(filePath=database_path).where(Courses.CID==post_CID)
           update_course_path.execute()
-          
-          now = datetime.datetime.now()
-          time_stamp = now.strftime("%Y-%m-%d %H:%M")
-          print time_stamp
+          get_time = datetime.datetime.now()
+          time_stamp = get_time.strftime("%Y-%m-%d %H:%M")
           last_modified_message = "Uploaded By {} On {}".format(user_name,str(time_stamp))
-          print last_modified_message
           update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==post_CID)
           update_last_modified.execute()
         except:
@@ -206,6 +203,29 @@ def download(post_CID):
   except Exception,e:
     app.logger.info("{0} attempting to upload file.".format(str(e)))
     message = "An error occured during the download process."
+    return render_template("error.html",
+                              cfg                   = cfg,
+                              message               = message
+                            )
+
+@app.route("/courses/<post_CID>/delete", methods = ["POST"])
+def delete(post_CID):
+  print "It did something!"
+  try:
+    course_path = (Courses
+                    .select(Courses.filePath)
+                    .where(
+                            Courses.CID == post_CID
+                          )
+                  ).get()
+                  
+    # os.remove(os.path.join(str(cfg['fileOperations']['dataPaths']['uploads']),str(course_path.filePath)))
+    # delete_filePath = Courses.update(filePath=None).where(Courses.CID==post_CID)
+    # delete_filePath.execute()
+    return redirect('/courses/',code=302)
+  except Exception,e:
+    app.logger.info("{0} attempting to upload file.".format(str(e)))
+    message = "An error occured during the delere process of the file."
     return render_template("error.html",
                               cfg                   = cfg,
                               message               = message

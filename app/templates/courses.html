@@ -5,11 +5,11 @@
 {% if my_courses_key != None %}
 <!-- The My Courses Table View -->
   <h2>My Courses</h2>
-  {% include "tableHeader.html" %}
+  {% include "snips/coursesHeader.html" %}
     {% for course in my_courses %}
-      {% include "tableRows.html" %}  
+      {% include "snips/coursesRows.html" %}  
     {% endfor %}
-  {% include "tableFooter.html" %}
+  {% include "snips/coursesFooter.html" %} 
 {% endif %}
 
 {% if admin_key != None %}
@@ -19,11 +19,11 @@
     {% for program in divisions_to_programs[division] %}
       <div style = "margin-left:25px;">
         <h3>{{ program.name}}</h3>
-        {% include "tableHeader.html" %}
+        {% include "snips/coursesHeader.html" %}
           {% for course in programs_to_courses[program.name] %}
-            {% include "tableRows.html" %}
-          {%endfor %}
-        {% include "tableFooter.html" %}
+            {% include "snips/coursesRows.html" %} 
+          {% endfor %} {# Thanks Matt #}
+        {% include "snips/coursesFooter.html" %}
       </div>
     {% endfor %}
   {% endfor %}
@@ -35,11 +35,11 @@
   {% for program in divisions_to_programs[division_key] %}
     <div style = "margin-left:25px;">
       <h3>{{ program.name }}</h3>
-      {% include "tableHeader.html" %}
+      {% include "snips/coursesHeader.html" %}
         {% for course in programs_to_courses[program.name] %}
-          {% include "tableRows.html" %}
+          {% include "snips/coursesRows.html" %} 
         {% endfor %}
-      {% include "tableFooter.html" %}
+      {% include "snips/coursesFooter.html" %}
     </div>
   {% endfor %}
 {% endif %}
@@ -47,12 +47,12 @@
 {% if program_key != None %}
   <!-- The Program Table View -->
   <h2>{{ program_key }}</h2>
-    {% include "tableHeader.html" %}
-      {% for course in programs_to_courses[program_key] %}
-        {% include "tableRows.html" %}
-      {% endfor %}
-    {% include "tableFooter.html" %}
+  {% include "snips/coursesHeader.html" %}
+    {% for course in programs_to_courses[program_key] %}
+      {% include "snips/coursesRows.html" %} 
+    {% endfor %}
+  {% include "snips/coursesFooter.html" %} 
 {% endif %}
 
-<script src ="/static/js/local/courses.js" type = "text/javascript"></script>
+
 {% endblock %}
