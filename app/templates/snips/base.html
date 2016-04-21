@@ -38,17 +38,12 @@
 
   </head>
   <body>
-      {% include "navigation.html" %}
+      {% include "snips/navigation.html" %}
 
     <div class="container">
       {# All content should get rendered in here #}
       {% block body %} {% endblock %}  
     </div>
-    <!--
-    <script type = "text/javascript"
-            src  = "/static/js/local/{{currentPage}}.js"> 
-    </script>
-    -->
   </body>
 
 </html>

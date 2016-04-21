@@ -26,9 +26,8 @@
         </form>
     {% else %}
       <!-- Buttons -->
-      <!--<button id="{{course.CID.CID}}" class="btn btn-danger" onclick="delete_syllabus(this.id)">Delete</button>-->
       <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/courses/{{course.CID.CID}}/delete">
-        <input id="form_btn" class="btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Submit">
+        <input id="form_btn" class="btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
       </form>
       <a href = "/courses/{{course.CID.CID}}/download" class = "btn btn-success">Download</a>
     {% endif %}
