@@ -24,6 +24,8 @@ mainMenu:
     link: "/"
   - title: "Courses"
     link: "/courses"
+  - title: "Syllabi Archive"
+    link: "/archive"
     
 fileOperations:
   allowedExtension:

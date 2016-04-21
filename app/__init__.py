@@ -14,3 +14,4 @@ from app import allImports
 print("Starting application") 
 from app import index
 from app import courses
+from app import archive
