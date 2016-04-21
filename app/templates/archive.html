@@ -1,5 +1,31 @@
 {% extends "snips/base.html" %} 
 {% set currentPage = "Home" %}
 {% block body %}
-<p> Hello World! </p>
+<div id="wrapper" class> 
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="/archive">
+                    Pick A Semester
+                </a>
+                {% for semester in semesters %}
+                    <li>
+                        <a href="/archive/{{semester.SEID}}">{{semester.term}} {{semester.year}}</a>
+                    </li>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        {% if SEID == None %}
+            <div id="SEID-None">
+                <p>Please Pick A Semester To Begin</p>
+            </div>
+        {% else %}
+            <p> We collected an SEID</p>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
