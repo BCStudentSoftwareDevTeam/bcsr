@@ -210,7 +210,7 @@ def download(post_CID):
 
 @app.route("/courses/<post_CID>/delete", methods = ["POST"])
 def delete(post_CID):
-  print "It did something!"
+  user_name = "heggens"
   try:
     course_path = (Courses
                     .select(Courses.filePath)
@@ -218,14 +218,20 @@ def delete(post_CID):
                             Courses.CID == post_CID
                           )
                   ).get()
-                  
-    # os.remove(os.path.join(str(cfg['fileOperations']['dataPaths']['uploads']),str(course_path.filePath)))
-    # delete_filePath = Courses.update(filePath=None).where(Courses.CID==post_CID)
-    # delete_filePath.execute()
+    file_path = 'app/'+str(cfg['fileOperations']['dataPaths']['uploads']) + str(course_path.filePath)
+    os.remove(file_path)
+    delete_filePath = Courses.update(filePath=None).where(Courses.CID==post_CID)
+    delete_filePath.execute()
+    #RECORD THE CHANGE
+    get_time = datetime.datetime.now()
+    time_stamp = get_time.strftime("%Y-%m-%d %H:%M")
+    last_modified_message = "Deleted By {} On {}".format(user_name,str(time_stamp))
+    update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==post_CID)
+    update_last_modified.execute()
     return redirect('/courses/',code=302)
   except Exception,e:
-    app.logger.info("{0} attempting to upload file.".format(str(e)))
-    message = "An error occured during the delere process of the file."
+    app.logger.info("{0} attempting to delete a syllabus.".format(str(e)))
+    message = "An error occured during the delete process of the file."
     return render_template("error.html",
                               cfg                   = cfg,
                               message               = message
