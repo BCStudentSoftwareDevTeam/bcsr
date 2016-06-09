@@ -5,9 +5,10 @@ from flask import send_file
 import os
 import datetime
 
-@app.route("/courses/", defaults={'post_CID': 0}, methods = ["GET", "POST"])
-@app.route("/courses/<post_CID>", methods = ["GET", "POST"])
-def courses(post_CID):
+@app.route("/courses/", defaults={'post_CID': 0}, methods = ["GET", "POST"]) #SET A DEFAULT APP ROUTE
+@app.route("/courses/<post_CID>", methods = ["GET", "POST"])                 #COLLECT THE POST CID 
+@app.route("/courses/archive/<post_SEID>", methods = ["GET", "POST"])        #COLLECT THE POST SEID
+def courses(post_CID, post_SEID = None):
     '''This function will render the correct template based off of the user's role'''
     ERROR = 0
     #WE WILL TO INTEGRATE LDAP AND GRAB THE INFORMATION FROM THAT
@@ -100,7 +101,9 @@ def courses(post_CID):
         break;
       if case(): 
         ERROR = 1
-    #POST OPERATIONS
+    #################    
+    #POST OPERATIONS#
+    #################
     if request.method     == "POST":
       app.logger.info("{0} attempting to upload file.".format(user_name))
       file = request.files['file']
@@ -128,14 +131,13 @@ def courses(post_CID):
                                       + "/"
                                     ).replace(" ","")
           directory_paths = upload_file_path+course_file_path
+          #CHECK TO SEE IF THE PATH EXSIST IF NOT CREATE IT
           if not os.path.exists(directory_paths):
             try:
               os.makedirs(directory_paths)
             except OSError as e:
               print e.errno
               pass
-          
-          
           new_file_name          = (    'CID' 
                                       + str(course_info.CID) 
                                       + '-' 
@@ -154,9 +156,7 @@ def courses(post_CID):
                                       + new_file_name
                                     ).replace(" ", "")
                                     
-          
           file.save(complete_path)
-          
           database_path = course_file_path+new_file_name
           update_course_path = Courses.update(filePath=database_path).where(Courses.CID==post_CID)
           update_course_path.execute()
@@ -207,7 +207,6 @@ def download(post_CID):
                               cfg                   = cfg,
                               message               = message
                             )
-
 @app.route("/courses/<post_CID>/delete", methods = ["POST"])
 def delete(post_CID):
   user_name = "heggens"
@@ -229,6 +228,7 @@ def delete(post_CID):
     update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==post_CID)
     update_last_modified.execute()
     return redirect('/courses/',code=302)
+    
   except Exception,e:
     app.logger.info("{0} attempting to delete a syllabus.".format(str(e)))
     message = "An error occured during the delete process of the file."
