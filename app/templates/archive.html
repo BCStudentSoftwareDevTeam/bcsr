@@ -1,33 +1,34 @@
 {% extends "snips/base.html" %} 
 {% set currentPage = "Home" %}
 {% block body %}
-<div id="wrapper" class> 
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="/archive">
-                    Pick A Semester
-                </a>
-                {% for semester in semesters %}
-                    <li>
-                        <a href="/archive/{{semester.SEID}}">{{semester.term}} {{semester.year}}</a>
-                    </li>
-                {% endfor %}
-            </li>
-        </ul>
-    </div>
-</div>
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        {% if SEID == None %}
-            <div id="SEID-None">
-                <p>Please Pick A Semester To Begin</p>
+    <div id="wrapper"> 
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="/archive">
+                        Pick A Semester
+                    </a>
+                    {% for semester in semesters %}
+                        <li>
+                            <a href="/archive/{{semester.SEID}}">{{semester.term}} {{semester.year}}</a>
+                        </li>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                {% if SEID == None %}
+                    <div class="jumbotron" id="SEID-None">
+                        <h1>Syllabi Archive</h1>
+                        <p>Please pick a semeter to begin.</p>
+                    </div>
+                {% else %} <!-- SEMESTER DISPLAY STARTS HERE -->
+                    <div id = "101">
+                        <p> We collected an SEID</p>
+                    </div>
+                {% endif %}
             </div>
-        {% else %}
-            <div id = "101">
-                <p> We collected an SEID</p>
-            </div>
-        {% endif %}
+        </div>
     </div>
-</div>
 {% endblock %}

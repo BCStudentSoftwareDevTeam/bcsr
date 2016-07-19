@@ -11,7 +11,9 @@ from app import allImports
 
 # Include an import for every python file that is serving a webpage
 #import your new python files here. It is not a part of the module until it is imported
-print("Starting application") 
 from app import index
 from app import courses
 from app import archive
+from app import uploads
+from app import deleteSyllabus
+from app import download

@@ -81,30 +81,30 @@ programs  = Programs(   name      = "Biology",
 #######
 users     = Users(      firstName = "Scott",
                         lastName  = "Heggen",
-                        userName  = "heggens",
+                        username  = "heggens",
                         email     = "heggens@berea.edu",
-                        admin     = True
-                  ).save()
+                        isAdmin     = True
+                  ).save(force_insert=True)
             
-users     = Users(      firstName = "Jan",
-                        lastName  = "Pearce",
-                        userName  = "pearcej",
-                        email     = "pearcej@berea.edu",
-                        DID       = 2
-                  ).save()
+users     = Users(      firstName  = "Jan",
+                        lastName   = "Pearce",
+                        username   = "pearcej",
+                        email      = "pearcej@berea.edu",
+                        DID        = 2
+                  ).save(force_insert=True)
                         
 users     = Users(      firstName = "Mario",
                         lastName  = "Nakazawa",
-                        userName  = "nakazawam",
+                        username  = "nakazawam",
                         PID       = 1,
                         email     = "nakazawam@berea.edu"
-                  ).save()
+                  ).save(force_insert=True)
                   
 users     = Users(      firstName = "Matt",
                         lastName  = "Jadud",
-                        userName  = "jadudm",
+                        username  = "jadudm",
                         email     = "jadudm@berea.edu",
-                  ).save()  
+                  ).save(force_insert=True)  
 #########                  
 #COURSES#  
 #########             
@@ -124,10 +124,10 @@ courses   = Courses(  prefix  = "CSC",
 ##############
 #USERSCOURSES#
 ##############
-userscourses  = UsersCourses ( userName = 'heggens',
+userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 1
                               ).save()
                               
-userscourses  = UsersCourses ( userName = 'heggens',
+userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 2
                               ).save()

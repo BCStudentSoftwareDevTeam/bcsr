@@ -1,0 +1,15 @@
+{% extends "/snips/base.html" %} 
+{% set currentPage = "Courses" %}
+{% block body %}
+
+{# MY COURSES VIEW #}
+{% if my_courses_key != None %}
+  <h2>My Courses</h2>
+  {% include "snips/coursesHeader.html" %}
+  {% for course in my_courses %}
+    {% include "snips/coursesRows.html" %}  
+  {% endfor %}
+  {% include "snips/coursesFooter.html" %} 
+{% endif %}
+
+{% endblock %}

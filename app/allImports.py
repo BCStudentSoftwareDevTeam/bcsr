@@ -13,10 +13,16 @@ from flask import url_for
 import pprint
 from app import models
 from models import *                # all the database models
-from app.switch import switch       # implements switch/case statements
 
 
-
+def authUser(env):
+    envK = "eppn"
+    if (envK in env):
+        return env[envK].split("@")[0]
+    elif ("DEBUG" in app.config) and app.config["DEBUG"]:
+        return cfg["DEBUG"]["user"]
+    else:
+        return None
 
 ''' Creates an Flask object; @app will be used for all decorators.
 from: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/

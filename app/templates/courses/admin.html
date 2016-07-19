@@ -1,0 +1,31 @@
+{% extends "/snips/base.html" %} 
+{% set currentPage = "Courses" %}
+{% block body %}
+
+{# MY COURSES VIEW #}
+{% if my_courses_key != None %}
+  <h2>My Courses</h2>
+  {% include "snips/coursesHeader.html" %}
+  {% for course in my_courses %}
+    {% include "snips/coursesRows.html" %}  
+  {% endfor %}
+  {% include "snips/coursesFooter.html" %} 
+{% endif %}
+
+{# ADMIN VIEW #}
+{%for division in divisions_to_programs %}
+  <h2>{{ division }}</h2>
+  {% for program in divisions_to_programs[division] %}
+    <div style = "margin-left:25px;">
+    <h3>{{ program.name}}</h3>
+    {% include "snips/coursesHeader.html" %}
+    {% for course in programs_to_courses[program.name] %}
+      {% include "snips/coursesRows.html" %} 
+    {% endfor %} 
+    {% include "snips/coursesFooter.html" %}
+    </div>
+  {% endfor %}
+{% endfor %}
+
+{% endblock %}
+

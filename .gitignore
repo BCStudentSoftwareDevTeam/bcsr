@@ -1,0 +1,5 @@
+app/.~c9_invoke_*
+*.pyc
+data/bcsr.sqlite
+venv/*
+

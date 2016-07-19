@@ -1,9 +1,6 @@
 from peewee import *
 import os
-#from allImports import *   #Don't believe this import is needed for this file
-# Create a database
 from app.loadConfig import *
-
 
 cfg       = load_config('app/config.yaml')
 mainDB    = SqliteDatabase(cfg['databases']['dev'])
@@ -13,40 +10,42 @@ class dbModel (Model):
   class Meta: 
     database = mainDB
     
+'''
+When adding a new table to the DB, add a new class here (also add
+it to the config.yaml file)
+Class Style Structure
+--------------------------------------------------------------------------------
+Data Structure      | Style                       | Example      
+--------------------------------------------------------------------------------
+Class Names        | CAP Case                     |  Ex. Semester
+Primary Keys       | All Caps                     |  Ex. SEID
+ForeignKeyField    | All Caps (Same as other key) |  Ex. Divisions.DID = Programs.DID
+Variables in Class | Mixed Case                   |  Ex. filePath
+--------------------------------------------------------------------------------
+'''
 
-# When adding new tables to the DB, add a new class here (also add 
-# to the config.yaml file)
-###########################CLASSES#############################
-#Class Names        -> Camel Case                                         Ex. Semester
-#Primary Keys       -> All Caps                                           Ex. SEID
-#ForeignKeyField    -> Same Name as Key being related to                  Ex. Divisions.DID = Programs.DID
-#Variables in Class -> Mixed Case                                         Ex. filePath
-
-
-######## CLASSES WITH NO FOREIGN KEY FIELD ########
+# CLASSES WITH NO FOREIGN KEY FIELD 
 class Semesters (dbModel):
   SEID          = PrimaryKeyField()
   year          = IntegerField()
   term          = CharField()
-  current       = BooleanField(default = False)
  
 class Divisions (dbModel):
   DID           = PrimaryKeyField()
   name          = CharField()
   
-######## CLASSES WITH FOREIGN KEY FIELDS ########
+# CLASSES WITH FOREIGN KEY FIELDS 
 class Programs (dbModel):
   PID           = PrimaryKeyField()
   name          = CharField()
   DID           = ForeignKeyField(Divisions)
   
 class Users (dbModel):
-  UID           = PrimaryKeyField()
+  username      = CharField(primary_key=True)
   firstName     = CharField()
   lastName      = CharField()
-  userName      = CharField()
   email         = CharField()
-  admin         = BooleanField(default = False)
+  isAdmin       = BooleanField(default = False)
   PID           = ForeignKeyField(Programs,  null = True)
   DID           = ForeignKeyField(Divisions, null = True)
   
@@ -62,5 +61,5 @@ class Courses (dbModel):
   
 class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()
-  userName      = ForeignKeyField(Users, to_field = "userName")
+  username      = ForeignKeyField(Users)
   CID           = ForeignKeyField(Courses)
