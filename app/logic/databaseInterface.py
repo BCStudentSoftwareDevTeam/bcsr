@@ -46,6 +46,23 @@ def get_division(DID):
   
 def get_program(PID):
   program = Programs.get(Programs.PID == PID)
+  return program
+  
+def get_course_info(CID):
+  course = (Courses
+                    .select()
+                    .join(Programs)
+                    .join(Divisions)
+                    .where(
+                            Courses.CID  == CID,
+                            Courses.PID  == Programs.PID,
+                            Programs.DID == Divisions.DID
+                          )).get()
+  return course
+  
+
+  
+      
                                           
     
     

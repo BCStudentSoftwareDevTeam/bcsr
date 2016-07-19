@@ -17,7 +17,7 @@ def courses():
     
     #CREATE TWO DEFAULT DICTIONARIES
     getCourses            = GetCourses()
-    two_dictionaries = getCourses.create_dictionaries()
+    two_dictionaries      = getCourses.create_dictionaries()
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
