@@ -60,7 +60,10 @@ def get_course_info(CID):
                           )).get()
   return course
   
-
+def get_course_file_path(CID):
+  course = get_course_info(CID)
+  file_path = str(cfg['fileOperations']['dataPaths']['uploads']) + str(course.filePath)
+  return file_path
   
       
                                           

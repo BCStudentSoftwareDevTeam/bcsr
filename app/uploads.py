@@ -10,7 +10,6 @@ from app.logic import databaseInterface
 def uploads(CID):
   auth       = AuthorizedUser()
   user_name  = auth.get_username()
-  app.logger.info("{0} attempting to upload file.".format(user_name))
   file = request.files['file']
   getUploads  = GetUploads(file)
   try:
@@ -20,7 +19,7 @@ def uploads(CID):
     course_path     = getUploads.get_course_path(CID)
     directory_path  = upload_path + course_path
     #Make sure that the directories exist and creates it if it doesn't
-    getUploads.check_path_exist(directory_path)
+    result = getUploads.check_path_exist(directory_path)
     #Now we rename the file to our create standard
     new_file_name   = getUploads.create_filename(CID,user_name)
     complete_path   = (directory_path + new_file_name).replace(" ","")

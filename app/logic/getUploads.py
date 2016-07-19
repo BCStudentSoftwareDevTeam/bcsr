@@ -25,7 +25,7 @@ class GetUploads():
                               ).replace(" ","")
     return course_file_path
     
-  def check_path_exist(path)
+  def check_path_exist(self,path):
     if not os.path.exists(path):
         try:
           app.logger.info("Trying to make directories")
@@ -35,7 +35,7 @@ class GetUploads():
           pass
     return 0
     
-  def create_filename(CID, user_name):
+  def create_filename(self,CID, user_name):
     course_info = databaseInterface.get_course_info(CID)
     new_file_name          = (    'CID' 
                                 + str(course_info.CID) 
@@ -48,7 +48,7 @@ class GetUploads():
                                 + '-' 
                                 + user_name
                                 + "." 
-                                + str(file.filename.split(".").pop())
+                                + str(self.file.filename.split(".").pop())
                               ).replace(" ","")
     return new_file_name
   

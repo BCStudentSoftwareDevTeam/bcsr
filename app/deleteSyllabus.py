@@ -2,20 +2,18 @@ from allImports import *
 import datetime
 #IMPORT LOGIC FILES
 from app.logic.getAuthUser import AuthorizedUser 
+from app.logic import databaseInterface
 
 @app.route("/delete/<CID>", methods = ["POST"])
 def delete(CID):
   auth      = AuthorizedUser()
   user_name = auth.get_username()
   try:
-    course_path = (Courses
-                    .select(Courses.filePath)
-                    .where(
-                            Courses.CID == CID
-                          )
-                  ).get()
-    file_path = 'app/'+str(cfg['fileOperations']['dataPaths']['uploads']) + str(course_path.filePath)
+    #need to add app/ in the front to tell the os where to start looking
+    file_path = 'app/'+databaseInterface.get_course_file_path(CID)
+    #Remove file from server
     os.remove(file_path)
+    #Remove the file from the database
     delete_filePath = Courses.update(filePath=None).where(Courses.CID==CID)
     delete_filePath.execute()
     #RECORD THE CHANGE
