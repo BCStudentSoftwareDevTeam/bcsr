@@ -1,7 +1,7 @@
 {% extends "/snips/base.html" %} 
-{% set currentPage = "Courses" %}
 {% block body %}
-
+{# currentPage needs to be in block body for tableHeader.html #}
+{% set currentPage = "Courses" %}
 {# MY COURSES VIEW #}
 {% if my_courses_key != None %}
   <h2>My Courses</h2>
