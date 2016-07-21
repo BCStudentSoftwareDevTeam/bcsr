@@ -51,7 +51,7 @@ def courses():
         return render_template('courses/program.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
-                                _key                  = program_key,
+                                program_key                  = program_key,
                                 programs_to_courses   = programs_to_courses
                                )    
         break;

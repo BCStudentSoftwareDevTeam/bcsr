@@ -1,0 +1,24 @@
+<tr>
+  <td>
+    {{course.username.firstName}} {{course.username.lastName}}
+  </td>
+  <td>
+    {% if course.CID.filePath == None %}
+      {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+    {% else %}
+      <a href = "/download/{{course.CID.CID}}">
+        {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+      </a>
+    {% endif %}
+  </td>
+  <td>
+    {{course.CID.SEID.term}}-{{course.CID.SEID.year}}
+  </td>
+  <td>
+    {% if course.CID.lastModified == None %}
+      <p>Course has not yet been modified.</p>
+    {% else %}
+      <p>{{course.CID.lastModified}}</p>
+    {% endif %}
+  </td>
+</tr>
