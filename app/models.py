@@ -15,7 +15,7 @@ When adding a new table to the DB, add a new class here (also add
 it to the config.yaml file)
 Class Style Structure
 --------------------------------------------------------------------------------
-Data Structure      | Style                       | Example      
+Data               | Style                       | Example      
 --------------------------------------------------------------------------------
 Class Names        | CAP Case                     |  Ex. Semester
 Primary Keys       | All Caps                     |  Ex. SEID

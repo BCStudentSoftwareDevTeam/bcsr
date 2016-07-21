@@ -18,16 +18,7 @@
         </div>
         <div id="page-content-wrapper">
             <div class="container-fluid">
-                {% if SEID == None %}
-                    <div class="jumbotron" id="SEID-None">
-                        <h1>Syllabi Archive</h1>
-                        <p>Please pick a semeter to begin.</p>
-                    </div>
-                {% else %} <!-- SEMESTER DISPLAY STARTS HERE -->
-                    <div id = "101">
-                        <p> We collected an SEID</p>
-                    </div>
-                {% endif %}
+                {{SEID}}
             </div>
         </div>
     </div>

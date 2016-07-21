@@ -54,10 +54,10 @@ mainDB.create_tables(get_classes('mainDB'))
 ###########
 #SEMESTERS#
 ###########
-semesters = Semesters(  year      = 2016,
+semesters = Semesters(  SEID      = 201612,
+                        year      = 2017,
                         term      = "Spring",
-                        current   = True
-                      ).save()
+                      ).save(force_insert = True)
 ###########
 #DIVISIONS#
 ###########            
@@ -112,14 +112,14 @@ courses   = Courses(  prefix  = "BIO",
                       number  = "101",
                       section = "A1",
                       PID     = 2,
-                      SEID    = 1
+                      SEID    = 201612
                   ).save()
                   
 courses   = Courses(  prefix  = "CSC",
                       number  = "415",
                       section = "SH",
                       PID     = 1,
-                      SEID    = 1
+                      SEID    = 201612
                   ).save()
 ##############
 #USERSCOURSES#

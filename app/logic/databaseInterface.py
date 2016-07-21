@@ -16,7 +16,7 @@ def grab_programs_in_division(DID):
   peeweeObj = (Programs.select().where(Programs.DID == DID))
   return peeweeObj
                                         
-def grab_courses_in_program(PID):
+def grab_courses_in_program(PID,SEID):
     peeweeObj               = (UsersCourses
                                           .select()
                                           .join(Courses)
@@ -24,18 +24,18 @@ def grab_courses_in_program(PID):
                                           .where(
                                                   UsersCourses.CID  == Courses.CID,
                                                   Courses.PID       == PID,
-                                                  Courses.SEID      == grab_current_semester()
+                                                  Courses.SEID      == SEID
                                                 ))
     return peeweeObj
     
-def grab_my_courses(username):
+def grab_my_courses(username,SEID):
   my_courses = (UsersCourses
                             .select()                      
                             .join(Courses)
                             .where(
                                     UsersCourses.username  == username,
                                     UsersCourses.CID       == Courses.CID,
-                                    Courses.SEID      == grab_current_semester()
+                                    Courses.SEID           == SEID
                                    ))
   peeweeObj = my_courses.execute()
   return peeweeObj
@@ -65,6 +65,9 @@ def get_course_file_path(CID):
   file_path = str(cfg['fileOperations']['dataPaths']['uploads']) + str(course.filePath)
   return file_path
   
+def grab_all_semesters():
+  semesters = Semesters.select()
+  return semesters
       
                                           
     

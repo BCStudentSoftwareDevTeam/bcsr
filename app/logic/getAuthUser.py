@@ -1,3 +1,5 @@
+'''Any function that is related to user information or authentication should
+be located here'''
 from app.allImports import *
 
 class AuthorizedUser:

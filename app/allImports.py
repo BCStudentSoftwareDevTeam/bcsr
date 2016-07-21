@@ -14,6 +14,8 @@ import pprint
 from app import models
 from models import *                # all the database models
 
+import sys
+sys.dont_write_bytecode = True
 
 def authUser(env):
     envK = "eppn"

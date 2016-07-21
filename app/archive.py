@@ -1,23 +1,21 @@
 from allImports import *
+from app.logic import databaseInterface
+from app.logic.getAll import GetAll
 
-@app.route("/archive/", defaults={'post_SEID': None}, methods = ["GET", "POST"])
-@app.route("/archive/<post_SEID>", methods = ["GET", "POST"])
-def archive(post_SEID):
+@app.route("/archive/", defaults={'SEID': None}, methods = ["GET", "POST"])
+@app.route("/archive/<SEID>", methods = ["GET", "POST"])
+def archive(SEID):
+    semesters = databaseInterface.grab_all_semesters()
+    if SEID == None:
+        SEID = databaseInterface.grab_current_semester()
     
-    if post_SEID != None:
+    
+    
+    
         
-        # division_info = (Divisions.select()
-        #                             .where(Divisions)
-        #                     )
-        return render_template("archive.html",
-                            cfg = cfg,
-                            semesters = semesters,
-                            SEID      = post_SEID
-                            )
-    else:
-        return render_template("archive.html",
-                            cfg = cfg,
-                            semesters = semesters,
-                            SEID      = post_SEID
-                            )
-    
+    return render_template("archive.html",
+                        cfg = cfg,
+                        semesters = semesters,
+                        SEID      = SEID
+                        )
+  
