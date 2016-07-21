@@ -18,6 +18,7 @@ models:
     - Users
     - Courses
     - UsersCourses
+    - Deadline
 # this makes the navigation bar
 mainMenu:
   - title: "Home"
@@ -26,6 +27,15 @@ mainMenu:
     link: "/courses"
   - title: "Archive"
     link: "/archive"
+    
+adminMenu:
+  Administration:
+    - title: "Program Management"
+      link:  "/redirect/program_management"
+    - title: "Division Management"
+      link:  "/redirect/division_management"
+    - title: "System Management"
+      link:  "/admin/systemManagement"
     
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Action','Last Modified By']
@@ -44,7 +54,7 @@ fileOperations:
       temp: "static/files/tmp"
   
 DEBUG:
-  # user: "heggens" #Admin Access
-  user: "pearcej" #Division Chair Access
+  user: "heggens" #Admin Access
+  # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access

@@ -9,6 +9,7 @@ from flask import redirect
 from flask import request
 from flask import g
 from flask import url_for
+from flask import flash
 
 import pprint
 from app import models
@@ -33,6 +34,7 @@ returns a replacement function. See start.py for an example"
 '''
 app = Flask(__name__)
 #from app import app
+app.config.from_object('settings')
 
 # Builds all the database connections on app run
 # Don't panic, if you need clarification ask.

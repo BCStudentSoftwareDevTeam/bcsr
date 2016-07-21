@@ -5,6 +5,7 @@ from app.allImports import *
 class AuthorizedUser:
   def __init__(self):
     self.username = authUser(request.environ)
+    self.isAdmin  = self.get_user().isAdmin 
 
   def get_username(self):
     '''returns the username of the user'''

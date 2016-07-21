@@ -63,3 +63,7 @@ class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()
   username      = ForeignKeyField(Users)
   CID           = ForeignKeyField(Courses)
+  
+class Deadline(dbModel):
+  description  = TextField()
+  date         = DateField()
