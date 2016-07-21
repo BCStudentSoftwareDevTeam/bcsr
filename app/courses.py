@@ -18,9 +18,8 @@ def courses():
     user_level = auth.user_level()
     #CREATE TWO DEFAULT DICTIONARIES
     currentSEID           = databaseInterface.grab_current_semester()
-    two_dictionaries      = getAll.create_dictionaries(currentSEID)
     getCourses            = GetCourses(auth)
-    two_dictionaries      = getCourses.create_dictionaries()
+    two_dictionaries      = getAll.create_dictionaries(currentSEID)
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
