@@ -1,0 +1,46 @@
+{% extends "/snips/base.html" %}
+{% set currentPage = "Program Management" %}
+{% block body %}
+<div id="wrapper">
+{# include "programManagementSidebar.html"#}
+
+{% include "snips/messages.html" %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
+  <div id="page-content-wrapper">
+          <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+  <div class="container-fluid">
+    <div class="row">
+        <form action="\editProgram" method="post" id="programEditForm{{program.pID}}">
+          <!--<div class="form-group">-->
+            <h2>{{program.name}}</h2>
+            <h4>Change Program Chair(s)</h4>
+            <!--Make a hidden input to pass the program.pID-->
+            <input value={{program.PID}} id="PID" name="PID" hidden readonly="readonly"/> 
+            <select class="selectpicker form-control" id="professors"  name="professors[]" data-live-search="true" multiple>
+              {% for user in users %}
+                <option value="{{user.username}}" 
+                    {%for chair in programChairs[program.PID] %}
+                      {% if chair == user %}
+                        selected
+                      {% endif %}
+                    {% endfor %}
+                >
+                  {{user.firstName}} {{user.lastName}} ({{user.username}})
+                </option>
+              {% endfor %}
+            </select>
+          <!--</div>-->
+          <input type="submit" class="btn btn-success pull-right" value="Submit"/>
+        </form>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+</div>
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+{% endblock %}

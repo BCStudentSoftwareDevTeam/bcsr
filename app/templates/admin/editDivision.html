@@ -1,0 +1,49 @@
+{% extends "/snips/base.html" %}
+
+{% block body %}
+{% set currentPage = "Division Management" %}
+<div id="wrapper">
+{# include "divisionManagementSidebar.html"#}
+
+{# include "snips/messages.html" #}
+
+<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
+<div id="page-content-wrapper">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <form action="\editDivision" method="post" id="divisionEditForm{{division.dID}}">
+          <div class="form-group">
+            <h2>{{division.name}}</h2>
+            <input value={{division.DID}} id="DID" name="DID" hidden readonly="readonly"/> 
+            <h4>Change Division Chair(s)</h4>
+            <select class="selectpicker form-control" id="professors"  name="professors[]" multiple data-live-search="true">
+              {% for user in users %}
+                <option value="{{user.username}}" 
+                  {% if (division is defined)  %}
+                    {%for chair in divisionChairs[division.DID] %}
+                      {% if chair == user %}
+                        selected
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                  data-subtext="{{user.username}}"
+                >
+                  {{user.firstName}} {{user.lastName}}
+                </option>
+              {% endfor %}
+            </select>
+          </div>
+          <div>
+            <input type="submit" class ="btn btn-success pull-right" value="Submit"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- /#page-content-wrapper -->
+</div>
+<!-- /#wrapper -->
+ <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+{% endblock %}

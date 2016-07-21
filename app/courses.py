@@ -30,6 +30,7 @@ def courses():
         return render_template('courses/admin.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
+                                isAdmin               = auth.isAdmin,
                                 divisions_to_programs = divisions_to_programs,
                                 programs_to_courses   = programs_to_courses
                                )              

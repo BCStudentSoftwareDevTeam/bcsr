@@ -1,10 +1,12 @@
 from allImports import *
 from app.logic import databaseInterface
+from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getAll import GetAll
 
 @app.route("/archive/", defaults={'SEID': None}, methods = ["GET", "POST"])
 @app.route("/archive/<SEID>", methods = ["GET", "POST"])
 def archive(SEID):
+    authorizedUser = AuthorizedUser()
     getAll = GetAll()
     semesters = databaseInterface.grab_all_semesters()
     if SEID == None:
@@ -15,6 +17,7 @@ def archive(SEID):
                         cfg       = cfg,
                         semesters = semesters,
                         SEID      = SEID,
+                        isAdmin   = authorizedUser.isAdmin,
                         divisions_to_programs = two_dictionaries[0],
                         programs_to_courses   = two_dictionaries[1]
                         )
