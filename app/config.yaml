@@ -24,8 +24,12 @@ mainMenu:
     link: "/"
   - title: "Courses"
     link: "/courses"
-  - title: "Syllabi Archive"
+  - title: "Archive"
     link: "/archive"
+    
+Headers:
+  Courses: ['Instructor','Course','Term','Syllabus Action','Last Modified By']
+  Archive: ['Instructor','Course','Term','Last Modified By']
     
 fileOperations:
   allowedExtension:

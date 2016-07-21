@@ -1,0 +1,14 @@
+<div style = "margin-left:25px;">
+  <table style = "width:100%;" border = "1" class= "table table-striped">
+    <tr style = "text-align:center;">
+      {% for item in cfg['Headers'][currentPage] %}
+        {% if item == "Syllabus Action" %}
+          <th style = "width:255px;">{{item}}</th>
+        {% else %}
+          <th>{{item}}</th>
+        {% endif %}
+      {% endfor %}
+    </tr>
+    
+
+    

@@ -5,11 +5,11 @@
 {# MY COURSES VIEW #}
 {% if my_courses_key != None %}
   <h2>My Courses</h2>
-  {% include "snips/coursesHeader.html" %}
+  {% include "snips/tableHeader.html" %}
   {% for course in my_courses %}
     {% include "snips/coursesRows.html" %}  
   {% endfor %}
-  {% include "snips/coursesFooter.html" %} 
+  {% include "snips/tableFooter.html" %} 
 {% endif %}
 
 {% endblock %}
