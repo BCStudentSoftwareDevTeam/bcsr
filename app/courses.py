@@ -12,7 +12,6 @@ def courses():
     '''This function will render the correct template based off of the user's role'''
     #activate classes used on this controller
     getAll                = GetAll()
-    getCourses            = GetCourses()
     #Grab user information
     auth       = AuthorizedUser()
     user       = auth.get_user()
@@ -20,6 +19,8 @@ def courses():
     #CREATE TWO DEFAULT DICTIONARIES
     currentSEID           = databaseInterface.grab_current_semester()
     two_dictionaries      = getAll.create_dictionaries(currentSEID)
+    getCourses            = GetCourses(auth)
+    two_dictionaries      = getCourses.create_dictionaries()
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
@@ -35,8 +36,7 @@ def courses():
                                )              
         break;
       if case('division'):
-        division                = databaseInterface.get_division(user.isDivision)
-        division_key            = division.name
+        division_key            = user.DID.name
         return render_template('courses/division.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
@@ -46,12 +46,11 @@ def courses():
                                )   
         break;
       if case('program'):
-        program                 = databaseInterface.get_program(user.isProgram)
-        program_key             = program.name
+        program_key             = user.PID.name
         return render_template('courses/program.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
-                                program_key                  = program_key,
+                                program_key           = program_key,
                                 programs_to_courses   = programs_to_courses
                                )    
         break;

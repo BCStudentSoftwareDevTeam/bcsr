@@ -4,18 +4,18 @@ from app.allImports import *
 
 class AuthorizedUser:
   def __init__(self):
-    #self.username = authUser(request.environ)
-    self.username = 'heggens'
+    self.username = authUser(request.environ)
 
   def get_username(self):
+    '''returns the username of the user'''
     return self.username
   
   def get_user(self):
-      user = Users.get(Users.username == self.username)
-      return user
+    '''retruns the user object corresponding to the logged on user'''
+    user = Users.get(Users.username == self.username)
+    return user
     
   def user_level(self):
-      #user = get_user(user_name)
       user = self.get_user()
       try:
           if user.isAdmin:
