@@ -2,7 +2,69 @@
 {% block body %}
 {% set currentPage ="systemManagement" %}
 {% include "snips/messages.html" %}
-
-<p> We have hit the System Admin page </p>
-
+{# TERM MANAGEMENT #}
+<div class="panel panel-default">
+  
+  
+  <div class="panel-heading">
+    <h3 class="panel-title">Semester Management</h3>
+  </div>
+  <table class= "table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Download Semester Syllabi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for semester in semesters %}
+        <tr>
+          <td>
+            <a href="download/SEID/{{semester.SEID}}">
+              {{semester.term}} {{semester.year}}
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <table class = "table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Add A Semester</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <div class="form-group">
+        <form action = "" method="post">
+          <td>
+            <label for="year">Year:</label>
+            <select class="form-control" name="year" id ="year">
+              <option value="">---</option>
+              {% for year in years %}
+                <option value="{{year}}" required>{{year}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <label for="term">Term:</label>
+            <select class="form-control" name="term" id="term">
+              <option value="">---</option>
+              {% for term in terms %}
+                <option value="{{term.term}}" required>{{term.term}}</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td>
+            <label for="submit">Add Semester:</label>
+            <div>
+              <input type="submit" class="btn btn-info" value="Submit" id="submit" >
+            </div>
+          </td>
+        </form>
+      </div>
+    </tbody>
+  </table>
+</div>
 {% endblock %}

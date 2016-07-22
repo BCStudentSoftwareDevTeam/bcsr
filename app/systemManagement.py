@@ -8,6 +8,7 @@ def systemManagement():
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
     semesters = Semesters.select()
+    terms     = Semesters.select().distinct(Semesters.term)
     today     = datetime.date.today()
     #We want the user to have the ability to select a year ago and 
     #three years ahead of the current year
@@ -17,10 +18,14 @@ def systemManagement():
     for x in range(5):
       if x == 0:
         years.append(str(year))
-      year + 1
+      year = year + 1
       years.append(str(year))
     return render_template('admin/editSystem.html',
                             cfg = cfg,
+                            #This variable is for the navbar
+                            isAdmin       = authorizedUser.isAdmin,
                             semesters = semesters,
-                            years     = years
+                            years     = years,
+                            terms     = terms
+                            
                             )
