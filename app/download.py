@@ -1,5 +1,6 @@
 #from Python
 import os
+from os.path import basename
 import sys
 import zipfile
 #from Flask
@@ -31,7 +32,7 @@ def download(CID):
 def downloadAll(SEID):
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
-    #For os stuff we need to include app because it doesn't know to start at
+    #For os methods we need to include app because it doesn't know to start at
     #app like in flask
     parent_folder   = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
     zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
@@ -42,19 +43,14 @@ def downloadAll(SEID):
       for root, folders, files in contents:
         for folder_name in folders:
           absolute_path = os.path.join(root, folder_name)
-          relative_path = absolute_path.replace(parent_folder + '\\', '')
-          print "Adding '%s' to Archive" % absolute_path
+          relative_path = absolute_path.replace(parent_folder, '')
           zip_file.write(absolute_path, relative_path)
         for file_name in files:
           absolute_path = os.path.join(root, file_name)
-          relative_path = absolute_path.replace(parent_folder +'\\', '')
-          
-          print "Adding '%s' to Archive" % output_path
+          relative_path = absolute_path.replace(parent_folder, '')
           zip_file.write(absolute_path, relative_path)
-          print "'%s' created successfully." % output_path
       zip_file.close()
       return send_file(zip_path,as_attachment=True)
-      
     except Exception,e:
       return render_template('error.html',
                               cfg = cfg,
