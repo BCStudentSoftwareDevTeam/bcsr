@@ -16,35 +16,45 @@ $(".hamburger").show()
         overlay.hide();
         trigger.removeClass('is-open');
         trigger.addClass('is-closed');
-        $(".hamburger").animate({ left: 30});
+        $(".hamburger").stop().animate({ left: 30});
         isClosed = false;
       } else {   
         overlay.show();
         trigger.removeClass('is-closed');
         trigger.addClass('is-open');
-        $(".hamburger").animate({ left: 230});
+        $(".hamburger").stop().animate({ left: 230});
         isClosed = true;
       }
   }
   
-
+  var animateDown = function() {
+     $(".hamburger").animate({ top: 250 })
+    $("#sidebar-wrapper").animate({top: 180})
+  };
+  
+  var animateUp = function() {
+    $(".hamburger").animate({ top: 70 })
+      $("#sidebar-wrapper").stop().animate({top: 0})
+  };
   $('[data-toggle="offcanvas"]').click(function (evt) {
         $('#wrapper').toggleClass('toggled');
         evt.stopImmediatePropagation();
   });  
   
-  var isCollapsed;
-  $('.navbar-toggle').click(function (evt) {
-    if(!isCollapsed){
-    $(".hamburger").animate({ top: 250 })
-    $("#sidebar-wrapper").animate({top: 180})
+  var moveHamburger = function(isNavCollapsed) {
+    if(isNavCollapsed){
+      animateUp()
     } else {
-      $(".hamburger").animate({ top: 70 })
-      $("#sidebar-wrapper").animate({top: 0})
+      animateDown()
     }
-    
+  }
+  
+  var isCollapsed = true;
+  $('.navbar-toggle').click(function (evt) {
+    moveHamburger(!isCollapsed);
     isCollapsed = !isCollapsed;
   });
+ 
 });
 
 function toggleArrowIcon(iconID,labelID) {
