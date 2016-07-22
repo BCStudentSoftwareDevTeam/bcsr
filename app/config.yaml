@@ -51,7 +51,7 @@ fileOperations:
   dataPaths:
       uploads: "static/files/uploads"
       zips: "static/files/zips"
-      temp: "static/files/tmp"
+      tSmp: "static/files/tmp"
   
 DEBUG:
   user: "heggens" #Admin Access
