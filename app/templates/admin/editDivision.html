@@ -2,19 +2,22 @@
 
 {% block body %}
 {% set currentPage = "Division Management" %}
-<div id="wrapper">
-{# include "divisionManagementSidebar.html"#}
+
+<script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+<div id="wrapper" >
+{% include "sidebar/divisionManagementSidebar.html" %}
 
 {# include "snips/messages.html" #}
-
-<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
 <div id="page-content-wrapper">
+   <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+            <span class="hamb-top"></span>
+            <span class="hamb-middle"></span>
+            <span class="hamb-bottom"></span>
+          </button>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-12">
         <form action="\editDivision" method="post" id="divisionEditForm{{division.dID}}">
-          <div class="form-group">
             <h2>{{division.name}}</h2>
             <input value={{division.DID}} id="DID" name="DID" hidden readonly="readonly"/> 
             <h4>Change Division Chair(s)</h4>
@@ -34,16 +37,15 @@
                 </option>
               {% endfor %}
             </select>
-          </div>
           <div>
             <input type="submit" class ="btn btn-success pull-right" value="Submit"/>
           </div>
         </form>
-      </div>
     </div>
   </div>
   <!-- /#page-content-wrapper -->
 </div>
 <!-- /#wrapper -->
+</div>
  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 {% endblock %}

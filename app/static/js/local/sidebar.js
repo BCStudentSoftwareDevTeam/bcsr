@@ -6,12 +6,19 @@ $(document).ready(function () {
 
     trigger.click(function () {
       hamburger_cross();      
+<<<<<<< Updated upstream
+=======
+      
+>>>>>>> Stashed changes
     });
 // position the hamburger and show. Needed so that the hamburger is positioned correctly
 $(".hamburger").offset({ top: 70, left: 30});
 $(".hamburger").show()
     function hamburger_cross() {
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
       if (isClosed == true) {          
         overlay.hide();
         trigger.removeClass('is-open');
@@ -27,8 +34,14 @@ $(".hamburger").show()
       }
   }
   
+<<<<<<< Updated upstream
   $('[data-toggle="offcanvas"]').click(function () {
         $('#wrapper').toggleClass('toggled');
+=======
+  $('[data-toggle="offcanvas"]').click(function (evt) {
+        $('#wrapper').toggleClass('toggled');
+        evt.stopImmediatePropagation();
+>>>>>>> Stashed changes
   });  
 });
 

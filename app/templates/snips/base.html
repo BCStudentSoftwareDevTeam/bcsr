@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
     
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/static/css/chosen.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
+    
     
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
@@ -21,35 +24,36 @@
     <link rel = "stylesheet" href = "/static/css/jquery.bootstrap-touchspin.css" />
     <script src = "/static/js/ext/jquery.bootstrap-touchspin.js"> </script>
     
-    <!-- External js-->
+    <!-- AJA, Sweetalert, Dropzone -->
     <script src = "/static/js/ext/aja.min.js"> </script>
     <script src = "/static/js/ext/sweetalert.min.js"> </script>
     <script src = "/static/js/ext/dropzone.js"> </script>
-    <script src ="/static/js/ext/bootbox.min.js" type = "text/javascript"></script>
-   
-    <!-- External css -->
+    
     <link rel = "stylesheet" href = "/static/css/sweetalert.css" />    
-    <link rel = "stylesheet" href = "/static/css/dropzone.css"   />  
-    
-    
-    <!-- Internal js -->
-    <script src = "/static/js/local/app.js"> </script>
-    <script src = "/static/js/local/courses.js" type = "text/javascript"></script>
-    <script src = "/static/js/local/sidebar.js" type = "text/javascript"></script>
-    
-    <!-- Internal css -->
-    <link rel = "stylesheet" href = "/static/css/sidebar.css"    />
-    
+    <link rel = "stylesheet" href = "/static/css/dropzone.css" />    
+   
+    <!-- Our javascript -->
+
     <meta name="referrer" content="always">    
+    
+    <!-- Bootrstrap X-editable -->
+    <link href="/static/css/bootstrap-editable.css" rel="stylesheet">
+    <script src="/static/js/ext/bootstrap-editable.min.js"></script>
+    <link href='/static/css/reset.css' rel="stylesheet" />
 
   </head>
   <body>
       {% include "snips/navigation.html" %}
-
     <div class="container">
       {# All content should get rendered in here #}
       {% block body %} {% endblock %}  
     </div>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    
+     <link rel = "stylesheet" href = "/static/css/{{currentPage}}.css"/>
+     <script type = "text/javascript"
+            src  = "/static/js/local/{{currentPage}}.js"> 
+    </script>
   </body>
 
 </html>
