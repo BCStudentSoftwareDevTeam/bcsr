@@ -1,27 +1,21 @@
-{% extends "/snips/base.html" %}
-
-{% block body %}
-{% set currentPage = "Division Management" %}
-
+{% extends "/snips/base.html" %} {% block body %} {% set currentPage = "Division Management" %}
 <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
-<div id="wrapper" >
-{% include "sidebar/divisionManagementSidebar.html" %}
-
-{# include "snips/messages.html" #}
-<div id="page-content-wrapper">
-   <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+<div id="wrapper">
+  {% include "sidebar/divisionManagementSidebar.html" %} {% include "snips/messages.html" %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" />
+  <div id="page-content-wrapper">
+    <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
             <span class="hamb-top"></span>
             <span class="hamb-middle"></span>
             <span class="hamb-bottom"></span>
           </button>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
-  <div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+      <div class="row">
         <form action="\editDivision" method="post" id="divisionEditForm{{division.dID}}">
-            <h2>{{division.name}}</h2>
-            <input value={{division.DID}} id="DID" name="DID" hidden readonly="readonly"/> 
-            <h4>Change Division Chair(s)</h4>
-            <select class="selectpicker form-control" id="professors"  name="professors[]" multiple data-live-search="true">
+          <h2>{{division.name}}</h2>
+          <input value={{division.DID}} id="DID" name="DID" hidden readonly="readonly" />
+          <h4>Change Division Chair(s)</h4>
+          <select class="selectpicker form-control" id="professors" name="professors[]" multiple data-live-search="true">
               {% for user in users %}
                 <option value="{{user.username}}" 
                   {% if (division is defined)  %}
@@ -38,14 +32,14 @@
               {% endfor %}
             </select>
           <div>
-            <input type="submit" class ="btn btn-success pull-right" value="Submit"/>
+            <input type="submit" class="btn btn-success pull-right" value="Submit" />
           </div>
         </form>
+      </div>
     </div>
+    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#page-content-wrapper -->
+  <!-- /#wrapper -->
 </div>
-<!-- /#wrapper -->
-</div>
- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 {% endblock %}

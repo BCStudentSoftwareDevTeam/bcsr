@@ -6,43 +6,45 @@ $(document).ready(function () {
 
     trigger.click(function () {
       hamburger_cross();      
-<<<<<<< Updated upstream
-=======
-      
->>>>>>> Stashed changes
     });
 // position the hamburger and show. Needed so that the hamburger is positioned correctly
 $(".hamburger").offset({ top: 70, left: 30});
 $(".hamburger").show()
     function hamburger_cross() {
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
       if (isClosed == true) {          
         overlay.hide();
         trigger.removeClass('is-open');
         trigger.addClass('is-closed');
-        $(".hamburger").animate({ top: 70, left: 30});
+        $(".hamburger").animate({ left: 30});
         isClosed = false;
       } else {   
         overlay.show();
         trigger.removeClass('is-closed');
         trigger.addClass('is-open');
-        $(".hamburger").animate({ top: 70, left: 230});
+        $(".hamburger").animate({ left: 230});
         isClosed = true;
       }
   }
   
-<<<<<<< Updated upstream
-  $('[data-toggle="offcanvas"]').click(function () {
-        $('#wrapper').toggleClass('toggled');
-=======
+
   $('[data-toggle="offcanvas"]').click(function (evt) {
         $('#wrapper').toggleClass('toggled');
         evt.stopImmediatePropagation();
->>>>>>> Stashed changes
   });  
+  
+  var isCollapsed;
+  $('.navbar-toggle').click(function (evt) {
+    if(!isCollapsed){
+    $(".hamburger").animate({ top: 250 })
+    $("#sidebar-wrapper").animate({top: 180})
+    } else {
+      $(".hamburger").animate({ top: 70 })
+      $("#sidebar-wrapper").animate({top: 0})
+    }
+    
+    isCollapsed = !isCollapsed;
+  });
 });
 
 function toggleArrowIcon(iconID,labelID) {
