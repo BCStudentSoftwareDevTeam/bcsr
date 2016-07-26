@@ -4,7 +4,7 @@ import datetime
 from app.logic.getAuthUser import AuthorizedUser 
 from app.logic import databaseInterface
 
-@app.route("/delete/<CID>", methods = ["POST"])
+@app.route("/delete/<CID>", methods = ["GET"])
 def delete(CID):
   auth      = AuthorizedUser()
   user_name = auth.get_username()

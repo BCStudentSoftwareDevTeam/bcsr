@@ -21,9 +21,10 @@
       </form>
     {% else %}
       <!-- Buttons -->
-      <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
-        <input id="form_btn" class="btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
-      </form>
+      <a href="/delete/{{course.CID.CID}}" class="btn btn-danger">Delete</a>
+      <!--<form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">-->
+      <!--  <input id="form_btn" class="btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">-->
+      <!--</form>-->
     {% endif %}
   </td>
   <td>
