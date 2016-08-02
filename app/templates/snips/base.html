@@ -49,8 +49,7 @@
       {% block body %} {% endblock %}  
     </div>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-      {% filter lower %}
-      <p>Here:{{currentPage}}</p>
+     {% filter lower %}
      <link rel = "stylesheet" href = "/static/css/{{currentPage}}.css"/>
      <script type = "text/javascript" src  = "/static/js/local/{{currentPage}}.js"></script>
      {% endfilter %}
