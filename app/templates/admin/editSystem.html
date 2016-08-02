@@ -4,8 +4,6 @@
 {% include "snips/messages.html" %}
 {# TERM MANAGEMENT #}
 <div class="panel panel-default">
-  
-  
   <div class="panel-heading">
     <h3 class="panel-title">Semester Management</h3>
   </div>
@@ -39,20 +37,20 @@
       <div class="form-group">
         <form action = "" method="post">
           <td>
-            <label for="year">Year:</label>
-            <select class="form-control" name="year" id ="year">
+            <label for="term">Term:</label>
+            <select class="form-control" name="term" id="term">
               <option value="">---</option>
-              {% for year in years %}
-                <option value="{{year}}" required>{{year}}</option>
+              {% for key in cfg['termInfo'] %}
+                <option value="{{key}}" required>{{cfg['termInfo'][key]}}</option>
               {% endfor %}
             </select>
           </td>
           <td>
-            <label for="term">Term:</label>
-            <select class="form-control" name="term" id="term">
+            <label for="year">Year:</label>
+            <select class="form-control" name="year" id ="year">
               <option value="">---</option>
-              {% for term in terms %}
-                <option value="{{term.term}}" required>{{term.term}}</option>
+              {% for year in years %}
+                <option value={{year}} required>{{year}}</option>
               {% endfor %}
             </select>
           </td>

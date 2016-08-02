@@ -1,31 +1,34 @@
 from allImports import *
 from app.logic.getAuthUser import AuthorizedUser
-import datetime
-import time
+from app.logic.getSystemManagement import GetSystemManagement
 
 @app.route("/admin/systemManagement", methods=["GET", "POST"])
 def systemManagement():
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
+    system    = GetSystemManagement()
     semesters = Semesters.select()
-    terms     = Semesters.select().distinct(Semesters.term)
-    today     = datetime.date.today()
-    #We want the user to have the ability to select a year ago and 
-    #three years ahead of the current year
-    years = []
-    #start with one year ago
-    year  = int(time.strftime("%Y")) - 1   
-    for x in range(5):
-      if x == 0:
-        years.append(str(year))
-      year = year + 1
-      years.append(str(year))
+    years     = system.get_years_list()
     return render_template('admin/editSystem.html',
                             cfg = cfg,
                             #This variable is for the navbar
                             isAdmin       = authorizedUser.isAdmin,
                             semesters = semesters,
                             years     = years,
-                            terms     = terms
-                            
                             )
+                            
+@app.route("/admin/systemMangement/add", methods=["POST"])
+def addSemester():
+  authorizedUser = AuthorizedUser()
+  if authorizedUser.isAmin:
+    system      = GetSystemManagement()
+    data        = request.form
+    addSemester = system.add_semester(data)
+    if addSemeser != True:
+      #Flash error message
+      flash(addSemester)
+    else:
+      flash("Semester successfully created.")
+    redirect(redirect_url())
+      
+                            

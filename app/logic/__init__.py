@@ -7,3 +7,4 @@ from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getCourses import GetCourses 
 from app.logic.getUploads import GetUploads
 from app.logic.getAll     import GetAll
+from app.logic.getSystemManagement import GetSystemManagement
