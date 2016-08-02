@@ -1,6 +1,8 @@
-{% extends "snips/base.html" %}
-{% block body %}
+{% extends "/snips/base.html" %}
 {% set currentPage = "Archive" %}
+{% block body %}
+{# can't use currentPage because of scoping issues #}
+{% set page = "Archive" %}
 <div id="wrapper"> 
   <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
