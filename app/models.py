@@ -2,7 +2,7 @@ from peewee import *
 import os
 from app.loadConfig import *
 
-here = os.path.dirnmae(__file__)
+here = os.path.dirname(__file__)
 cfg       = load_config(os.path.join(here,'config.yaml'))
 db        = os.path.join(here,'../',cfg['database']['dev'])
 mainDB    = SqliteDatabase(db,
