@@ -2,8 +2,14 @@ from peewee import *
 import os
 from app.loadConfig import *
 
-cfg       = load_config('app/config.yaml')
-mainDB    = SqliteDatabase(cfg['databases']['dev'])
+here = os.path.dirnmae(__file__)
+cfg       = load_config(os.path.join(here,'config.yaml'))
+db        = os.path.join(here,'../',cfg['database']['dev'])
+mainDB    = SqliteDatabase(db,
+                          pragmas = ( ('busy_timeout', 100),
+                                      ('journal_mode', 'WAL') ),
+                          threadlocals = True
+                          )
 
 # Creates the class that will be used by Peewee to store the database
 class dbModel (Model):
