@@ -58,8 +58,6 @@ $(".hamburger").show()
 });
 
 function toggleArrowIcon(iconID,labelID) {
-	console.log(iconID);
-	console.log(labelID);
 	$(iconID).toggleClass('glyphicon-menu-down');
 	toggleLabel(labelID);
 }
