@@ -6,6 +6,7 @@ Dropzone.options.drop = {
     acceptedFiles: ".doc,.docx,.pdf",
     accept: function(file, done) {
         done();
+        console.log("hello");
     }
 };
 

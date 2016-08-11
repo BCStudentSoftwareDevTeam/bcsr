@@ -1,10 +1,10 @@
 {% extends "/snips/base.html" %} {% set currentPage = "programManagement" %} {% block body %}
 <div id="wrapper">
-  {% include "sidebar/programManagementSidebar.html" %} {% include "snips/messages.html" %}
+  {% include "sidebar/programManagementSidebar.html" %}
   <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
   <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
   <div id="page-wrapper">
-
+{% include "snips/messages.html" %}
     <div class="container-fluid">
       <div class="row">
         <form action="\editProgram" method="post" id="programEditForm{{program.pID}}">
