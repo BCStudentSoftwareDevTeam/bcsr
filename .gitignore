@@ -3,3 +3,4 @@ app/.~c9_invoke_*
 data/
 venv/*
 app/static/files/*
+.c9/
