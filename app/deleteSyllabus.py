@@ -5,7 +5,7 @@ from app.logic.getAuthUser import AuthorizedUser
 from app.logic import databaseInterface
 from app.logic.redirectBack import redirect_url
 
-@app.route("/delete/<CID>", methods = ["GET"])
+@app.route("/delete/<CID>", methods = ["POST"])
 def delete(CID):
   auth      = AuthorizedUser()
   user_name = auth.get_username()
