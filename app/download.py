@@ -14,7 +14,7 @@ from app.logic.getAuthUser import AuthorizedUser
 
 
 
-@app.route("/download/<CID>", methods = ["POST"])
+@app.route("/download/<CID>", methods = ["GET"])
 def download(CID):
   try:
     file_path = databaseInterface.get_course_file_path(CID)
