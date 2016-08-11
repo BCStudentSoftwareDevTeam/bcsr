@@ -1,14 +1,12 @@
-{% extends "/snips/base.html" %} {% block body %} {% set currentPage = "Program Management" %}
+{% extends "/snips/base.html" %} {% set currentPage = "programManagement" %} {% block body %} 
 <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
 <div id="wrapper">
   {% include "sidebar/programManagementSidebar.html" %} {% include "snips/messages.html" %}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" />
-  <div id="page-content-wrapper">
-    <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
-            <span class="hamb-top"></span>
-            <span class="hamb-middle"></span>
-            <span class="hamb-bottom"></span>
-          </button>
+  <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+  <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+  <div id="page-wrapper">
+
     <div class="container-fluid">
       <div class="row">
         <form action="\editProgram" method="post" id="programEditForm{{program.pID}}">
@@ -17,7 +15,7 @@
           <input value={{program.PID}} id="PID" name="PID" hidden readonly="readonly" />
           <select class="selectpicker form-control" id="professors" name="professors[]" data-live-search="true" multiple>
               {% for user in users %}
-                <option value="{{user.username}}" 
+                <option value="{{user.username}}"
                     {%for chair in programChairs[program.PID] %}
                       {% if chair == user %}
                         selected

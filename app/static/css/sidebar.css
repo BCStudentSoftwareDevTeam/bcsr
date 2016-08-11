@@ -45,7 +45,7 @@
         z-index: 1;
         position: absolute;
         width: 250px;
-        margin-top: 60px;
+        margin-top: 0px;
     }
     .navbar-top-links .dropdown-messages,
     .navbar-top-links .dropdown-tasks,
