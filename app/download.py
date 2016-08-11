@@ -34,9 +34,10 @@ def downloadAll(SEID):
   if authorizedUser.isAdmin:
     #For os methods we need to include app because it doesn't know to start at
     #app like in flask
-    parent_folder   = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
+    parent_folder   = 'app/' + cfg['fileOperations']['dataPaths']['uploads'] + '/' + SEID
     zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
     output_path     = 'app/' + zip_path
+    print zip_path, output_path, parent_folder
     try:
       contents      = os.walk(parent_folder)
       zip_file      = zipfile.ZipFile(output_path,"w",zipfile.ZIP_DEFLATED)
