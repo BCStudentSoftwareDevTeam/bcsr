@@ -1,2 +1,10 @@
 [2016-08-12 14:08:18.275607] [INFO] [10.240.0.119] [None] [/create] Deadline: New deadlinew has been added 
 [2016-08-12 14:51:47.224271] [INFO] [10.240.1.17] [None] [/1] Uploads: CID1-BIO-101-Division1-heggens.docx has been Uploaded By heggens On 2016-08-12 14:51 
+[2016-08-12 15:07:34.771291] [INFO] [10.240.0.23] [None] [/1] Uploads: app/static/files/uploads/201612/Division1/BIO/CID1-BIO-101-Division1-heggens.docx has been Deleted By heggens On 2016-08-12 15:07 
+[2016-08-12 15:31:36.755567] [INFO] [10.240.0.206] [None] [/1] Uploads: CID1-BIO-101-Division1-heggens.docx has been Uploaded By heggens On 2016-08-12 15:31 
+[2016-08-12 15:33:13.793584] [INFO] [10.240.0.75] [None] [/1] Download: static/files/uploads/201612/Division1/BIO/CID1-BIO-101-Division1-heggens.docx has been downloaded 
+[2016-08-12 15:33:18.559013] [INFO] [10.240.0.182] [None] [/1] Download: static/files/uploads/201612/Division1/BIO/CID1-BIO-101-Division1-heggens.docx has been downloaded 
+[2016-08-12 15:37:50.017282] [INFO] [10.240.1.15] [None] [/editDivision] USER: nakazawam has been added as a Division chair for did: 1 
+[2016-08-12 15:38:52.040709] [INFO] [10.240.1.19] [None] [/editProgram] USER: pearcej has been removed as a program chair for pid: 1 
+[2016-08-12 15:44:27.455752] [INFO] [10.240.0.23] [None] [/201512] Download: app/static/files/uploads/201512 has been downloaded as a zip 
+[2016-08-12 15:55:08.046157] [INFO] [10.240.0.241] [None] [/add] Semester: 8 Week Summer 2017 has been created successfully. 

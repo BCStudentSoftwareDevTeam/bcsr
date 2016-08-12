@@ -16,12 +16,14 @@ from app.logic.getAuthUser import AuthorizedUser
 
 @app.route("/download/<CID>", methods = ["GET"])
 def download(CID):
+  page = r"/" + request.url.split("/")[-1]
   try:
     file_path = databaseInterface.get_course_file_path(CID)
+    message = "Download: {} has been downloaded".format(file_path)
+    log.writer("INFO", page, message)
     return send_file(file_path, as_attachment=True)
-  
   except Exception,e:
-    app.logger.info("{0} attempting to upload file.".format(str(e)))
+    app.logger.info("{0} attempting to download file.".format(str(e)))
     message = "An error occured during the download process."
     return render_template("error.html",
                               cfg                   = cfg,
@@ -30,6 +32,7 @@ def download(CID):
                             
 @app.route("/admin/download/SEID/<SEID>", methods=["POST","GET"])
 def downloadAll(SEID):
+  page = r"/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
     #For os methods we need to include app because it doesn't know to start at
@@ -51,6 +54,8 @@ def downloadAll(SEID):
           relative_path = absolute_path.replace(parent_folder, '')
           zip_file.write(absolute_path, relative_path)
       zip_file.close()
+      message = 'Download: {0} has been downloaded as a zip'.format(parent_folder)
+      log.writer("INFO", page, message)
       return send_file(zip_path,as_attachment=True)
     except Exception,e:
       return render_template('error.html',

@@ -17,7 +17,7 @@ def editDivision():
         #IF A USER'S NAME IS NOT PART OF THE NEWCHAIR LIST THEN DELETE THEM
         if currentChair.username not in newChairs:                   
           message = "USER: {0} has been removed as a Division chair for did: {1}".format(currentChair.username,did)
-          # log.writer("INFO", page, message)
+          log.writer("INFO", page, message)
           currentChair.DID = None
           currentChair.save()
         else:
@@ -30,7 +30,7 @@ def editDivision():
         newChair.DID = did 
         newChair.save()
         message = "USER: {0} has been added as a Division chair for did: {1}".format(user_name,did)
-        # log.writer("INFO", page, message)
+        log.writer("INFO", page, message)
         
       flash("Division succesfully changed")
       return redirect(redirect_url())

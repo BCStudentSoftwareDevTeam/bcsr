@@ -29,7 +29,7 @@ def addSemester():
     logList         = system.add_semester(data)
     print logList
     #TODO: figure out how to log
-    #log.writer(logList[0],page,logList[1])
+    log.writer(logList[0],page,logList[1])
     flash(logList[1])
     return redirect(redirect_url())
       

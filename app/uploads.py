@@ -8,7 +8,6 @@ from app.logic import databaseInterface
 
 @app.route('/uploads/<CID>', methods=['POST'])
 def uploads(CID):
-  page = r"/" + request.url.split("/")[-1]
   auth       = AuthorizedUser()
   user_name  = auth.get_username()
   file = request.files['file']

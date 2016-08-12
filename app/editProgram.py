@@ -18,7 +18,7 @@ def editProgram():
         #IF A USER'S NAME IS NOT PART OF THE NEWCHAIR LIST THEN DELETE THEM
         if currentChair.username not in newChairs:                 
           message = "USER: {0} has been removed as a program chair for pid: {1}".format(currentChair.username ,pid)
-          # log.writer("INFO", page, message)
+          log.writer("INFO", page, message)
           currentChair.PID = None
           currentChair.save()
         else:
@@ -32,7 +32,7 @@ def editProgram():
         newChair.PID = pid     
         newChair.save()
         message = "USER: {0} has been added as a program chair for pid: {1}".format(user_name,pid)
-        # log.writer("INFO", page, message)
+        log.writer("INFO", page, message)
         
       flash("Program succesfully changed")
       return redirect(redirect_url())
