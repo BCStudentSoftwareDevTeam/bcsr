@@ -23,4 +23,17 @@ body {
 
 .navbar {
     margin-bottom: 0;
+    background-color: #3E6B4C;
+}
+
+.btn-default {
+    background-color: #608B43;
+}
+
+.btn-default:hover {
+    background-color: #3E6B4C;
+}
+
+a {
+    color: #608B43;
 }
