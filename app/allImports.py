@@ -26,7 +26,8 @@ def authUser(env):
         return cfg["DEBUG"]["user"]
     else:
         return None
-
+from app import logtool
+log = logtool.Log()
 ''' Creates an Flask object; @app will be used for all decorators.
 from: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 "A decorator is just a callable that takes a function as an argument and 

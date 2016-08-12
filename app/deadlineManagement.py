@@ -17,6 +17,7 @@ def deadlineCreate():
         deadline.save()
 
         message = "Deadline: {0} has been added".format(deadline.description)
+        log.writer("INFO", page, message)
         flash("Your Deadline has been created")
     return redirect(redirect_url())
 
@@ -50,5 +51,6 @@ def deleteDeadline():
         deadline.delete_instance()
 
         message = "Deadline: {0} has been deleted".format(deadline.description)
+        log.writer("INFO", page, message)
         flash("Your Deadline has been deleted")
     return redirect(redirect_url())
