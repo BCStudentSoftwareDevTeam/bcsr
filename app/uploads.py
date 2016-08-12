@@ -8,6 +8,7 @@ from app.logic import databaseInterface
 
 @app.route('/uploads/<CID>', methods=['POST'])
 def uploads(CID):
+  page = r"/" + request.url.split("/")[-1]
   auth       = AuthorizedUser()
   user_name  = auth.get_username()
   file = request.files['file']
@@ -33,6 +34,9 @@ def uploads(CID):
     get_time = datetime.datetime.now()
     time_stamp = get_time.strftime("%Y-%m-%d %H:%M")
     last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
+    # log in our log file
+    message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
+    log.writer("INFO", page, message)
     #update the database to inform the users who uploaded the file
     update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
     update_last_modified.execute()
