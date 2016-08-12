@@ -1,0 +1,16 @@
+header {
+    height: 92vh;
+    width: 99vw;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/static/img/404.jpg');
+    color: #fff;
+}
+.container {
+  width: 100vw;
+  padding-left: 0px;
+}
+
