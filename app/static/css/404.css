@@ -1,16 +1,31 @@
-header {
-    height: 92vh;
-    width: 99vw;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-image: url('/static/img/404.jpg');
-    color: #fff;
-}
+ #bg {
+ position:fixed;
+ top:60px;
+ /*left:-50%;*/
+ width:100vw;
+ height:90vh;
+ }
+ #bg img {
+ position:relative;
+ top:0px;
+ left:0;
+ right:0;
+ bottom:0;
+ margin:auto;
+ min-width:100%;
+ min-height:100%;
+ }
+ 
 .container {
   width: 100vw;
   padding-left: 0px;
 }
 
+h2{
+  position: absolute;
+  color: #fff;
+}
+p{
+  position: absolute;
+  color: #fff;
+}
