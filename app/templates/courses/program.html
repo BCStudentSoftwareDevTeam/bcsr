@@ -4,6 +4,7 @@
 {# can't use currentPage because of scoping issues #}
 {% set page = "Courses" %}
 {# MY COURSES VIEW #}
+{% include 'snips/messages.html' %}
 {% if my_courses is not none %}
   <h2>My Courses</h2>
   {% include "snips/tableHeader.html" %}

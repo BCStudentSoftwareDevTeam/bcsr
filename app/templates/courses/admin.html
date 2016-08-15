@@ -3,6 +3,7 @@
 {% block body %}
 {# can't use currentPage because of scoping issues #}
 {% set page = "Courses" %}
+{% include 'snips/messages.html' %}
 {# MY COURSES VIEW #}
 {% if my_courses_key != None %}
   <h2>My Courses</h2>
