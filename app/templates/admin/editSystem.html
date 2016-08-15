@@ -29,11 +29,15 @@
     <thead>
       <tr>
         <th>Add A Semester</th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
+      <tr>
+        <td class="alert alert-danger" colspan="3">
+          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      The most recent term automatically becomes the active terms
+     </td> 
+      </tr>
       <div class="form-group">
         <form action = "/admin/systemManagement/add" method="post">
           <td>

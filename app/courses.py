@@ -18,6 +18,7 @@ def courses():
     user_level = auth.user_level()
     #CREATE TWO DEFAULT DICTIONARIES
     currentSEID           = databaseInterface.grab_current_semester()
+    current_term          = Semesters.get(Semesters.SEID == currentSEID)
     getCourses            = GetCourses(auth)
     two_dictionaries      = getAll.create_dictionaries(currentSEID)
     divisions_to_programs = two_dictionaries[0]
@@ -32,7 +33,8 @@ def courses():
                                 my_courses            = my_courses,
                                 isAdmin               = auth.isAdmin,
                                 divisions_to_programs = divisions_to_programs,
-                                programs_to_courses   = programs_to_courses
+                                programs_to_courses   = programs_to_courses,
+                                current_term          = current_term
                                )              
         break;
       if case('division'):
@@ -42,7 +44,8 @@ def courses():
                                 my_courses            = my_courses,
                                 division_key          = division_key,
                                 divisions_to_programs = divisions_to_programs,
-                                programs_to_courses   = programs_to_courses
+                                programs_to_courses   = programs_to_courses,
+                                current_term          = current_term
                                )   
         break;
       if case('program'):
@@ -51,14 +54,16 @@ def courses():
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
                                 program_key           = program_key,
-                                programs_to_courses   = programs_to_courses
+                                programs_to_courses   = programs_to_courses,
+                                current_term          = current_term
                                )    
         break;
         
       if case('faculty'):
         return render_template('courses/faculty.html',
                                 cfg                   = cfg,
-                                my_courses            = my_courses
+                                my_courses            = my_courses,
+                                current_term          = current_term
                                )  
         break;
       if case(): 
