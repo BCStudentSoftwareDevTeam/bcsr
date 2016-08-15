@@ -20,3 +20,5 @@ def adminDivisionManagement(did):
                                  users         = users,
                                  divisions     = divisions,
                                  isAdmin       = authorizedUser.isAdmin)
+      else:
+         abort(403)

@@ -63,5 +63,6 @@ def courses():
         break;
       if case(): 
         # TODO: return ERROR
+        abort(404)
         render_template('error.html')
         

@@ -4,9 +4,9 @@ from app.logic.getAuthUser import AuthorizedUser
 
 @app.route("/admin/programManagement/<pid>", methods=["GET", "POST"])
 def adminProgramManagement(pid):
-  # if (request.method == "GET"):
-   authorizedUser = AuthorizedUser()
-   if authorizedUser.isAdmin:
+    # if (request.method == "GET"):
+    authorizedUser = AuthorizedUser()
+    if authorizedUser.isAdmin:
       users = Users.select()
       divisions = Divisions.select()
       programs  = Programs.select()
@@ -24,4 +24,7 @@ def adminProgramManagement(pid):
                               programs      = programs,
                               isAdmin       = authorizedUser.isAdmin)
     #TODO: We should add an else statement that sends them to 404 
+    #sending to 403 instead
+    else:
+        abort(403)
    

@@ -36,10 +36,5 @@ def editProgram():
         
       flash("Program succesfully changed")
       return redirect(redirect_url())
-        
-      
-        
-
-     
-    
-   
+    else:
+      abort(403)

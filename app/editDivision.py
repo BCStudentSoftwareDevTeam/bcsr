@@ -34,3 +34,5 @@ def editDivision():
         
       flash("Division succesfully changed")
       return redirect(redirect_url())
+    else:
+      abort(403)

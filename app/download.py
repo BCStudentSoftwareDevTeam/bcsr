@@ -62,7 +62,5 @@ def downloadAll(SEID):
                               cfg = cfg,
                               message = e
                               )
-  
-      
-      
-
+  else:
+    abort(403)

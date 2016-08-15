@@ -18,6 +18,8 @@ def systemManagement():
                             semesters = semesters,
                             years     = years,
                             )
+  else:
+    abort(403)
                             
 @app.route("/admin/systemManagement/add", methods=["POST","GET"])
 def addSemester():
@@ -32,5 +34,7 @@ def addSemester():
     log.writer(logList[0],page,logList[1])
     flash(logList[1])
     return redirect(redirect_url())
+  else:
+    abort(403)
       
                             
