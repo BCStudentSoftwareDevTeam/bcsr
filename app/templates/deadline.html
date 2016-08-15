@@ -1,10 +1,10 @@
 <!--The below line of code is jinja which is a template engine for python-->
 <!-- If you want to learn more about jinja, refer to jinja documentation-->
-{% extends "/snips/base.html" %}  {% block body %}{% set currentPage = "start" %} {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
-<div class="alert alert-success alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button> {{message}}
-</div>
-{% endfor %} {% endif %} {% endwith %} {% if deadlines %}
+{% extends "/snips/base.html" %}  
+{% block body %}
+{% set currentPage = "start" %} 
+{% include 'snips/messages.html' %}
+{% if deadlines %}
 <table class="table table-bordered">
   <thead>
     <tr>

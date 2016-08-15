@@ -8,7 +8,10 @@ body {
 
 #page-wrapper {
     padding: 0 15px;
-    min-height: 939px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -155px; /* the bottom margin is the negative value of the footer's height */
     background-color: #fff;
 }
 
@@ -36,4 +39,16 @@ body {
 
 a {
     color: #608B43;
+}
+
+.footer {
+    height: 25px; /* .push must be the same height as .footer */
+    text-align: center
+}
+
+* {
+    margin: 0;
+}
+html, body, .container {
+    height: 95%;
 }

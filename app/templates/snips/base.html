@@ -46,14 +46,15 @@
     <div class="container">
       {# All content should get rendered in here #}
       {% block body %} {% endblock %}
+      
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.js"></script>
+    {% include 'snips/footer.html' %}
+
+  </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.js"></script>
    
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
      <link rel = "stylesheet" href = "/static/css/{{currentPage}}.css"/>
      <script type="text/javascript" src = "/static/js/local/app.js"></script>
      <script type = "text/javascript" src  = "/static/js/local/{{currentPage}}.js"></script>
-
-  </body>
-
 </html>
