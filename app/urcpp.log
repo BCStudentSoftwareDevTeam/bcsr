@@ -10,3 +10,13 @@
 [2016-08-12 15:55:08.046157] [INFO] [10.240.0.241] [None] [/add] Semester: 8 Week Summer 2017 has been created successfully. 
 [2016-08-15 18:55:49.849292] [INFO] [10.240.0.206] [None] [/create] Deadline: new deadline has been added 
 [2016-08-15 18:56:01.447851] [INFO] [10.240.0.110] [None] [/deleteDeadline] Deadline: new deadline has been deleted 
+[2016-08-16 13:47:39.951176] [INFO] [10.240.0.208] [None] [/create] Deadline: Something has been added 
+[2016-08-16 13:47:56.511981] [INFO] [10.240.0.206] [None] [/create] Deadline: asdasdd has been added 
+[2016-08-16 13:48:04.573820] [INFO] [10.240.0.119] [None] [/create] Deadline: asdas has been added 
+[2016-08-16 13:48:12.792993] [INFO] [10.240.1.15] [None] [/create] Deadline: asdasdd has been added 
+[2016-08-16 13:48:29.511225] [INFO] [10.240.0.204] [None] [/create] Deadline: Something Something has been added 
+[2016-08-16 13:58:56.956010] [INFO] [10.240.0.23] [None] [/deleteDeadline] Deadline: Something has been deleted 
+[2016-08-16 13:59:01.293499] [INFO] [10.240.1.19] [None] [/deleteDeadline] Deadline: asdasdd has been deleted 
+[2016-08-16 13:59:06.632512] [INFO] [10.240.0.206] [None] [/deleteDeadline] Deadline: asdas has been deleted 
+[2016-08-16 13:59:11.600814] [INFO] [10.240.1.20] [None] [/deleteDeadline] Deadline: asdasdd has been deleted 
+[2016-08-16 13:59:15.719992] [INFO] [10.240.1.20] [None] [/deleteDeadline] Deadline: Something Something has been deleted 
