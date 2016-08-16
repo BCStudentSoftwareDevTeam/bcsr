@@ -7,7 +7,7 @@
   <div class="panel-heading">
     <h3 class="panel-title">Semester Management</h3>
   </div>
-  <table class= "table table-striped table-hover">
+  <table class= "table table-hover">
     <thead>
       <tr>
         <th>Download Semester Syllabi</th>
@@ -17,20 +17,17 @@
       {% for semester in semesters %}
         <tr>
           <td>
-            <a href="download/SEID/{{semester.SEID}}">
               {{semester.term}} {{semester.year}}
-            </a>
           </td>
+          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
+  <div class="panel-heading">
+    <h3 class="panel-title">Add a semester</h3>
+  </div>
   <table class = "table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Add A Semester</th>
-      </tr>
-    </thead>
     <tbody>
       <tr>
         <td class="alert alert-danger" colspan="3">
@@ -61,7 +58,7 @@
           <td>
             <label for="submit">Add Semester:</label>
             <div>
-              <input type="submit" class="btn btn-info" value="Submit" id="submit" >
+              <input type="submit" class="btn btn-default" value="Submit" id="submit" >
             </div>
           </td>
         </form>
