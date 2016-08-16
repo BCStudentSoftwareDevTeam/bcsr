@@ -5,3 +5,11 @@ h2 {
 h1 {
     font-size: 2em;
 }
+
+.header {
+    display: inline-block;
+}
+
+div[id*='programs-'] {
+    display: none;
+}

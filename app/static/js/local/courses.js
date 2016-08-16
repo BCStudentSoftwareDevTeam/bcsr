@@ -23,3 +23,17 @@ function delete_syllabus(form_id) {
          $(form_id).submit();
     });
 };
+
+function showPrograms(division) {
+    var programID = '#programs-'+ division;
+    if($(programID).css('display') == 'none'){
+        $(programID).css('display', 'block');
+        
+        
+    } else {
+        $(programID).css('display', 'none');
+    }
+    
+    $('#icon-'+ division).toggleClass('glyphicon-plus')
+    $('#icon-'+ division).toggleClass('glyphicon-minus')
+}

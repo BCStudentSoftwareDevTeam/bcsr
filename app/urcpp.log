@@ -21,3 +21,6 @@
 [2016-08-16 13:59:11.600814] [INFO] [10.240.1.20] [None] [/deleteDeadline] Deadline: asdasdd has been deleted 
 [2016-08-16 13:59:15.719992] [INFO] [10.240.1.20] [None] [/deleteDeadline] Deadline: Something Something has been deleted 
 [2016-08-16 14:27:39.332900] [INFO] [10.240.0.207] [None] [/1] Download: static/files/uploads/201612/Division1/BIO/CID1-BIO-101-Division1-heggens.docx has been downloaded 
+[2016-08-16 18:16:31.935755] [INFO] [10.240.1.15] [None] [/editDivision] USER: pearcej has been added as a Division chair for did: 1 
+[2016-08-16 18:16:41.166544] [INFO] [10.240.0.186] [None] [/editDivision] USER: nakazawam has been removed as a Division chair for did: 1 
+[2016-08-16 18:19:52.313057] [INFO] [10.240.1.20] [None] [/editProgram] USER: heggens has been removed as a program chair for pid: 1 

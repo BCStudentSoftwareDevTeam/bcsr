@@ -17,7 +17,10 @@
 
 {# ADMIN VIEW #}
 {%for division in divisions_to_programs %}
-  <h2>{{ division }}</h2>
+  <div class='header col-sm-12'>
+      <h2>{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'><span id='icon-{{division.DID}}' class="col-sm-offset-9 glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
+  </div>
+  <div id='programs-{{division.DID}}'>
   {% for program in divisions_to_programs[division] %}
     <div style = "margin-left:25px;">
     <h3>{{ program.name}}</h3>
@@ -28,6 +31,7 @@
     {% include "snips/tableFooter.html" %}
     </div>
   {% endfor %}
+  </div>
 {% endfor %}
 
 <script type="text/javascript" src="static/js/local/courses.js"></script>

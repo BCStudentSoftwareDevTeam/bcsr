@@ -18,7 +18,7 @@ class GetAll():
       divisions = databaseInterface.grab_all_divisions()
       for division in divisions:
         programs = databaseInterface.grab_programs_in_division(division.DID)
-        divisions_to_programs[division.name] = programs
+        divisions_to_programs[division] = programs
         for program in programs:
           courses = databaseInterface.grab_courses_in_program(program.PID,SEID)
           programs_to_courses[program.name] = courses

@@ -38,7 +38,8 @@ def courses():
                                )              
         break;
       if case('division'):
-        division_key            = user.DID.name
+        division_key            = user.DID
+        print division_key
         return render_template('courses/division.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,

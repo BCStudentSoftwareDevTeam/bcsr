@@ -15,7 +15,7 @@
 {% endif %}
 
 {# DIVISION CHAIR VIEW #}
-<h2>{{division_key}}</h2>
+<h2>{{division_key.name}}</h2>
 {% for program in divisions_to_programs[division_key] %}
   <div style = "margin-left:25px;">
   <h3>{{ program.name }}</h3>
