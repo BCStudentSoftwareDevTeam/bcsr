@@ -1,5 +1,6 @@
 from app.allImports import *
 from app.logic import databaseInterface
+import collections
 
 class GetAll():
   '''Purpose: This class should hold any methods that are used on multiple .py
@@ -13,8 +14,8 @@ class GetAll():
       '''Purpose: Creates a mapping using dictionaries of 1)divisions to programs
       2) programs to courses. -> Author : CDM 20160720
       @param SEID {integer} - number identification of semester peewee obj '''
-      divisions_to_programs     = {}
-      programs_to_courses       = {} 
+      divisions_to_programs     = collections.OrderedDict()
+      programs_to_courses       = collections.OrderedDict()
       divisions = databaseInterface.grab_all_divisions()
       for division in divisions:
         programs = databaseInterface.grab_programs_in_division(division.DID)
