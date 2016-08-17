@@ -6,10 +6,17 @@ h1 {
     font-size: 2em;
 }
 
+h3{
+    font-size: 1em;
+}
 .header {
     display: inline-block;
 }
 
 div[id*='programs-'] {
+    display: none;
+}
+
+div[id*='courses-'] {
     display: none;
 }
