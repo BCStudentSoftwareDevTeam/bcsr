@@ -6,6 +6,7 @@ from app.logic.getAll import GetAll
 @app.route("/archive/", defaults={'SEID': None}, methods = ["GET", "POST"])
 @app.route("/archive/<SEID>", methods = ["GET", "POST"])
 def archive(SEID):
+    # we need to know if the user is authorized to see this
     authorizedUser = AuthorizedUser()
     getAll = GetAll()
     semesters = databaseInterface.grab_all_semesters()

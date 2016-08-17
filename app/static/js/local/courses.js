@@ -49,6 +49,6 @@ function showCourses(program) {
         $(programID).css('display', 'none');
     }
     
-    $('#coursesIcon-'+ programs).toggleClass('glyphicon-plus')
-    $('#coursesIcon-'+ programs).toggleClass('glyphicon-minus')
+    $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
+    $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
 }
