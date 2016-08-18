@@ -42,6 +42,7 @@ a {
 }
 
 .footer {
+    padding-top: 25px;
     height: 25px; /* .push must be the same height as .footer */
     text-align: center
 }
@@ -53,5 +54,5 @@ html, body, .container {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -25px; /* the bottom margin is the negative value of the footer's height */
+    margin: 0 auto -50; /* the bottom margin is the negative value of the footer's height */
 }
