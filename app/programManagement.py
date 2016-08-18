@@ -6,15 +6,22 @@ from app.logic.getAuthUser import AuthorizedUser
 def adminProgramManagement(pid):
     # if (request.method == "GET"):
     authorizedUser = AuthorizedUser()
+    
+    # only admin  should be able to change program chairs
     if authorizedUser.isAdmin:
+      
+      # all uses could be program chair
       users = Users.select()
+      
+      #sidebar elements
       divisions = Divisions.select()
       programs  = Programs.select()
+      
+      # program we are viewing
       program = Programs.get(Programs.PID == pid)
+      
       programChairs = {}
       programChairs[program.PID] = Users.select().where(Users.PID == pid)
-      for chair in programChairs[program.PID]:
-          print chair.username
       return render_template("/admin/editProgram.html",
                               program       = program,
                               programChairs = programChairs,
@@ -23,7 +30,6 @@ def adminProgramManagement(pid):
                               divisions     = divisions,
                               programs      = programs,
                               isAdmin       = authorizedUser.isAdmin)
-    #TODO: We should add an else statement that sends them to 404 
     #sending to 403 instead
     else:
         abort(403)

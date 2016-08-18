@@ -20,6 +20,7 @@ def courses():
     currentSEID           = databaseInterface.grab_current_semester()
     current_term          = Semesters.get(Semesters.SEID == currentSEID)
     getCourses            = GetCourses(auth)
+    # we need to get the dictionaries that populate the tables
     two_dictionaries      = getAll.create_dictionaries(currentSEID)
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]

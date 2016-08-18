@@ -40,7 +40,6 @@ def downloadAll(SEID):
     parent_folder   = 'app/' + cfg['fileOperations']['dataPaths']['uploads'] + '/' + SEID
     zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
     output_path     = 'app/' + zip_path
-    print zip_path, output_path, parent_folder
     try:
       contents      = os.walk(parent_folder)
       zip_file      = zipfile.ZipFile(output_path,"w",zipfile.ZIP_DEFLATED)

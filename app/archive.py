@@ -13,12 +13,14 @@ def archive(SEID):
     if SEID == None:
         SEID = databaseInterface.grab_current_semester()
     two_dictionaries      = getAll.create_dictionaries(SEID)
+    current_term          = Semesters.get(Semesters.SEID == SEID)
     
     return render_template("archive.html",
-                        cfg       = cfg,
-                        semesters = semesters,
-                        SEID      = SEID,
-                        isAdmin   = authorizedUser.isAdmin,
+                        cfg          = cfg,
+                        semesters    = semesters,
+                        current_term = current_term,
+                        SEID         = SEID,
+                        isAdmin      = authorizedUser.isAdmin,
                         divisions_to_programs = two_dictionaries[0],
                         programs_to_courses   = two_dictionaries[1]
                         )

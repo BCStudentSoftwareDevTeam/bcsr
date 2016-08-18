@@ -6,24 +6,25 @@ def editDivision():
     authorizedUser = AuthorizedUser()
     if authorizedUser.isAdmin:
       
+      # we need the page for logging purposes
       page        = "/" + request.url.split("/")[-1]
       data        = request.form
       newChairs   = request.form.getlist('professors[]')
       did         = data['DID']
       #SELECT ALL OF THE CURRENT CHAIRS OF THE DIVISION
       currentChairs = Users.select().where(Users.DID == did)  
-      #LOOP THROUGH ALL OF THE CURRENT CHAIRS
+      
       for currentChair in currentChairs:                                      
-        #IF A USER'S NAME IS NOT PART OF THE NEWCHAIR LIST THEN DELETE THEM
+        # we want to delete chairs that are not in the new list
         if currentChair.username not in newChairs:                   
           message = "USER: {0} has been removed as a Division chair for did: {1}".format(currentChair.username,did)
           log.writer("INFO", page, message)
           currentChair.DID = None
           currentChair.save()
+        # we dont want to duplicate chairs
         else:
-          #HOWEVER IF THEY ARE PART OF THE LIST, DELETE THEM FROM THE LIST
           newChairs.remove(currentChair.username)                  
-      #LOOK THROUGH THE NEW CHAIR LIST    
+          
       for user_name in newChairs:                                           
         #ADD THE USERNAMES TO THE Division CHAIR LIST
         newChair = Users.get(Users.username == user_name)

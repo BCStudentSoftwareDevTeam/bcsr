@@ -7,10 +7,9 @@
 {% include "sidebar/archiveSidebar.html"%}
   <div id="page-wrapper">
     <div class="container-fluid">
+<h1>{{current_term.term}} {{current_term.year}}</h1>
       {%for division in divisions_to_programs %}
-      <div class='header col-sm-12'>
-      <h2>{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'><span id='icon-{{division.DID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
-  </div>
+      <h2 class="col-xs-12">{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'><span id='icon-{{division.DID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
   
   <div id='programs-{{division.DID}}'>
       {% for program in divisions_to_programs[division] %}

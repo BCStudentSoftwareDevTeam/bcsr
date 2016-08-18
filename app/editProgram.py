@@ -5,15 +5,15 @@ from app.logic.redirectBack import redirect_url
 def editProgram():
     authorizedUser = AuthorizedUser()
     if authorizedUser.isAdmin:
+      
+      # we need the page for loggin purposes
       page        = "/" + request.url.split("/")[-1]
       data        = request.form
       newChairs   = request.form.getlist('professors[]')
       pid         = data['PID']
       
-      #SELECT ALL OF THE CURRENT CHAIRS OF THE PROGRAM
+      # TODO: the loop is repeated a lot we should be able to take it out
       currentChairs = Users.select().where(Users.PID == pid)
-      #LOOP THROUGH ALL OF THE CURRENT CHAIRS
-      # print 'hello', currentChairs
       for currentChair in currentChairs:                                    
         #IF A USER'S NAME IS NOT PART OF THE NEWCHAIR LIST THEN DELETE THEM
         if currentChair.username not in newChairs:                 

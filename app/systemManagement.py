@@ -5,11 +5,18 @@ from app.logic.getSystemManagement import GetSystemManagement
 
 @app.route("/admin/systemManagement", methods=["GET", "POST"])
 def systemManagement():
+  # we need page for logging purposes
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
+  
+  # only admin should be able to see this page
   if authorizedUser.isAdmin:
     system    = GetSystemManagement()
-    semesters = Semesters.select()
+    
+    # for dropdown
+    semesters = Semesters.select
+    
+    # the next five years
     years     = system.get_years_list()
     return render_template('admin/editSystem.html',
                             cfg = cfg,
