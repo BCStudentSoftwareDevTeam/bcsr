@@ -14,7 +14,7 @@ def systemManagement():
     system    = GetSystemManagement()
     
     # for dropdown
-    semesters = Semesters.select
+    semesters = Semesters.select()
     
     # the next five years
     years     = system.get_years_list()
