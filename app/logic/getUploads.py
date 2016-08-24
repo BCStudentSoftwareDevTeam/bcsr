@@ -32,7 +32,7 @@ class GetUploads():
         try:
           app.logger.info("Trying to make directories")
           os.makedirs(path)
-          app.logger.info("Directories made: " + path
+          app.logger.info("Directories made: " + path)
         except OSError as e:
           print e.errno
           app.logger.error("Error making directories: " + e.errno)
