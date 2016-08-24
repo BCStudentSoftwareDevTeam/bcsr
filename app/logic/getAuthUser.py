@@ -13,7 +13,7 @@ class AuthorizedUser:
   
   def get_user(self):
     '''retruns the user object corresponding to the logged on user'''
-    user = Users.select(Users.username == self.username)
+    user = Users.select().where(Users.username == self.username)
     if user:
       return user
     else:
