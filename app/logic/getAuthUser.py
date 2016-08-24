@@ -14,7 +14,7 @@ class AuthorizedUser:
   def get_user(self):
     '''retruns the user object corresponding to the logged on user'''
     user = Users.select().where(Users.username == self.username)
-    if user:
+    if user is not None:
       return user
     else:
       return 0
