@@ -4,4 +4,4 @@ data/
 venv/*
 app/static/files/*
 .c9/
-urcpp.log
+app/urcpp.log

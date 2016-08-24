@@ -7,7 +7,7 @@ filename: "bcsr.log"
 databases:
   dev: "data/bcsr.sqlite"
   stage: ""
-  prod: ""
+  prod: "data/bcsr.sqlite"
 
 # For every table in the database, add an item here
 models:
@@ -63,7 +63,7 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610 
     
 DEBUG:
-  user: "heggens" #Admin Access
+  # user: "heggens" #Admin Access
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
