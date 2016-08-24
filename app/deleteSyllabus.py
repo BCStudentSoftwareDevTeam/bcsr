@@ -13,7 +13,8 @@ def delete(CID):
   # if auth.user_level() == 'admin':
   try:
     #need to add app/ in the front to tell the os where to start looking
-    file_path = 'app/'+databaseInterface.get_course_file_path(CID)
+    #file_path = 'app/'+databaseInterface.get_course_file_path(CID)
+    file_path = '/var/www/html/bcsr-flask/app/'+databaseInterface.get_course_file_path(CID)
     #Remove file from server
     os.remove(file_path)
     #Remove the file from the database
