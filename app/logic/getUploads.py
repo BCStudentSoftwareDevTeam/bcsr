@@ -30,7 +30,7 @@ class GetUploads():
   def check_path_exist(self,path):
     if not os.path.exists(path):
         try:
-          app.logger.info("Trying to make directories")
+          app.logger.info("Trying to make directories: {0}".format(path))          
           os.makedirs(path)
           app.logger.info("Directories made: {0}".format(path))
         except OSError as e:
