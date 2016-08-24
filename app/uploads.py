@@ -35,6 +35,7 @@ def uploads(CID):
     last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
     # log in our log file
     message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
+    page = "/uploads/{0}".format(CID)
     log.writer("INFO", page, message)
     #update the database to inform the users who uploaded the file
     update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
