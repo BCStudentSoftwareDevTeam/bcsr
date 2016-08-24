@@ -11,7 +11,7 @@ class GetUploads():
   def get_upload_path(self):
     #We need the app in the front in order to mkdir
     upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
-    app.logger.info("Upload file path: " + upload_file_path)
+    app.logger.info("Upload file path: {0}".format(upload_file_path))
     return upload_file_path
 
   def get_course_path(self,CID):
@@ -24,7 +24,7 @@ class GetUploads():
                                 + str(course_info.prefix) 
                                 + "/"
                               ).replace(" ","")
-    app.logger.info("Course file path: " + course_file_path)
+    app.logger.info("Course file path: {0}".format(course_file_path))
     return course_file_path
     
   def check_path_exist(self,path):
@@ -32,10 +32,10 @@ class GetUploads():
         try:
           app.logger.info("Trying to make directories")
           os.makedirs(path)
-          app.logger.info("Directories made: " + path)
+          app.logger.info("Directories made: {0}".format(path))
         except OSError as e:
           print e.errno
-          app.logger.error("Error making directories: " + e.errno)
+          app.logger.error("Error making directories: {0}".format(e.errno))
           pass
     return 0
     
