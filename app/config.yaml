@@ -38,7 +38,7 @@ adminMenu:
       link:  "/admin/systemManagement"
     
 Headers:
-  Courses: ['Instructor','Course','Term','Syllabus Action','Last Modified By']
+  Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
   Archive: ['Instructor','Course','Term','Last Modified By']
     
 fileOperations:
