@@ -4,6 +4,10 @@
 {% block body %}
 {% set currentPage = "start" %} 
 {% include 'snips/messages.html' %}
+<div class="jumbotron">
+  Welcome to the Berea College Syllabus Repository. <br /> 
+  At the beginning of each term, upload your syllabus for each course you teach.
+</div >
 {% if deadlines %}
 <table class="table table-bordered">
   <thead>
@@ -44,9 +48,9 @@
   {% endif %} {% endfor %}
 </table>
 {% else %}
-<div class="jumbotron">
+<h2>
   Upcoming deadlines will be posted here.
-</div>
+</h2>
 {% endif %} 
 
 {% if isAdmin %} 
