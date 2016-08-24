@@ -14,19 +14,22 @@ class AuthorizedUser:
   def get_user(self):
     '''retruns the user object corresponding to the logged on user'''
     user = Users.get(Users.username == self.username)
-    return user
+    if user is not None:
+      return user
+    else:
+      abort(403)
     
   def user_level(self):
-      user = self.get_user()
-      try:
-          if user.isAdmin:
-              return 'admin'
-          elif user.PID is not None:
-              return 'program'
-          elif user.DID is not None:
-              return 'division'
-          else:
-              return 'faculty'
-      except:
-          return "error"
-                        
+    user = self.get_user()
+    try:
+        if user.isAdmin:
+            return 'admin'
+        elif user.PID is not None:
+            return 'program'
+        elif user.DID is not None:
+            return 'division'
+        else:
+            return 'faculty'
+        except:
+            return "error"
+
