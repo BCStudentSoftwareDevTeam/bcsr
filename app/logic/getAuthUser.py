@@ -17,7 +17,7 @@ class AuthorizedUser:
     if user.exists():
       return user
     else:
-      return 0
+      abort(403)
     
   def user_level(self):
     user = self.get_user()
