@@ -17,7 +17,7 @@ class AuthorizedUser:
     if user is not None:
       return user
     else:
-      abort(403)
+      return 0
     
   def user_level(self):
     user = self.get_user()
