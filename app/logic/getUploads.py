@@ -11,6 +11,7 @@ class GetUploads():
   def get_upload_path(self):
     #We need the app in the front in order to mkdir
     upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
+    print "Upload file path: " + upload_file_path
     return upload_file_path
 
   def get_course_path(self,CID):
