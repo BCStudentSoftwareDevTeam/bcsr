@@ -3,10 +3,14 @@
 Dropzone.options.drop = {
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 5, // MB
-    acceptedFiles: ".doc,.docx,.pdf",
+    maxFiles: 1,
+    acceptedFiles: ".doc,.docx,.pdf,.txt",
+    uploadMultiple: false,
+    addRemoveLinks: true,
+    clickable: true,
     accept: function(file, done) {
         done();
-        console.log("hello");
+        console.log("File uploaded");
     }
 };
 
