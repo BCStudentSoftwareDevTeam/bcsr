@@ -22,14 +22,14 @@ class AuthorizedUser:
   def user_level(self):
     user = self.get_user()
     try:
-        if user.isAdmin:
-            return 'admin'
-        elif user.PID is not None:
-            return 'program'
-        elif user.DID is not None:
-            return 'division'
-        else:
-            return 'faculty'
-        except:
-            return "error"
+      if user.isAdmin:
+        return 'admin'
+      elif user.PID is not None:
+        return 'program'
+      elif user.DID is not None:
+        return 'division'
+      else:
+        return 'faculty'
+    except:
+      return "error"
 
