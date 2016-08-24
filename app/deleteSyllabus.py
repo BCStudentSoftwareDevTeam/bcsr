@@ -17,6 +17,7 @@ def delete(CID):
     file_path = '/var/www/html/bcsr-flask/app/'+databaseInterface.get_course_file_path(CID)
     #Remove file from server
     os.remove(file_path)
+    app.logger.info("File removed: {0}".format(file_path))
     #Remove the file from the database
     delete_filePath = Courses.update(filePath=None).where(Courses.CID==CID)
     delete_filePath.execute()
