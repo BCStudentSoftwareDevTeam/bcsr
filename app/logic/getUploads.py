@@ -10,7 +10,8 @@ class GetUploads():
   
   def get_upload_path(self):
     #We need the app in the front in order to mkdir
-    upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
+    #upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
+    upload_file_path = cfg['fileOperations']['dataPaths']['uploads']
     app.logger.info("Upload file path: {0}".format(upload_file_path))
     return upload_file_path
 
