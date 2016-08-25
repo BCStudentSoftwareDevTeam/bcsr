@@ -9,7 +9,7 @@
   At the beginning of each term, upload your syllabus for each course you teach.</h2>
 </div >
 {% if deadlines %}
-<table class="table table-bordered">
+{# <table class="table table-bordered">
   <thead>
     <tr>
       <td class='tableHead'>Date</td>
@@ -46,17 +46,17 @@
     </td>
   </tr>
   {# {% endif %}#} {% endfor %}
-</table>
+</table> #}
 {% else %}
 <h3>
   Upcoming deadlines will be posted here.
 </h3>
 {% endif %} 
-
+{# 
 {% if isAdmin %} 
   {% include "snips/createDeadline.html" %} 
 {% endif %} 
-
+#}
 <script type="text/javascript" src="/static/js/local/start.js"></script>
 
 {% endblock %}
