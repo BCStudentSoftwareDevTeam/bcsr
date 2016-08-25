@@ -18,7 +18,7 @@
   </thead>
   {% for deadline in deadlines %} {# {% if deadline[0] >= today %} #}
   <tr>
-    <td>
+    {# <td>
       {# {% if deadline[0] == today %} #}
       {# <p>today</p> #}
       {#{% endif %}#} 
@@ -28,7 +28,7 @@
       <div class="month">
         <p>{{deadline[0].strftime('%b')}}</p>
       </div>
-    </td>
+    </td> #}
     <td>
       <table class="table table-hover table-bordered">
         {% for description in deadline[1] %}
