@@ -8,27 +8,27 @@
   <h2>Welcome to the Berea College Syllabus Repository. <br /> 
   At the beginning of each term, upload your syllabus for each course you teach.</h2>
 </div >
-{% if deadlines %}
-{# <table class="table table-bordered">
+{# {% if deadlines %}
+  <table class="table table-bordered">
   <thead>
     <tr>
       <td class='tableHead'>Date</td>
       <td class='tableHead'>Deadline</td>
     </tr>
   </thead>
-  {% for deadline in deadlines %} {# {% if deadline[0] >= today %} #}
+  {% for deadline in deadlines %}  {% if deadline[0] >= today %} 
   <tr>
-    {# <td>
-      {# {% if deadline[0] == today %} #}
-      {# <p>today</p> #}
-      {#{% endif %}#} 
+     <td>
+       {% if deadline[0] == today %} #}
+       <p>today</p> #}
+      {% endif %}
       <div>
         <p class="day">{{deadline[0].strftime('%d')}}</p>
       </div>
       <div class="month">
         <p>{{deadline[0].strftime('%b')}}</p>
       </div>
-    </td> #}
+    </td> 
     <td>
       <table class="table table-hover table-bordered">
         {% for description in deadline[1] %}
@@ -45,13 +45,13 @@
       {% include "/admin/deleteDeadline.html" %} {% include "/admin/editDeadline.html" %}
     </td>
   </tr>
-  {# {% endif %}#} {% endfor %}
-</table> #}
+  {# {% endif %} {% endfor %}
+</table> 
 {% else %}
 <h3>
   Upcoming deadlines will be posted here.
 </h3>
-{% endif %} 
+{% endif %} #} 
 {# 
 {% if isAdmin %} 
   {% include "snips/createDeadline.html" %} 
