@@ -16,12 +16,12 @@
       <td class='tableHead'>Deadline</td>
     </tr>
   </thead>
-  {% for deadline in deadlines %} {% if deadline[0] >= today %}
+  {% for deadline in deadlines %} {# {% if deadline[0] >= today %} #}
   <tr>
     <td>
-      {% if deadline[0] == today %}
-      <p>today</p>
-      {% endif %}
+      {# {% if deadline[0] == today %} #}
+      {# <p>today</p> #}
+      {#{% endif %}#} 
       <div>
         <p class="day">{{deadline[0].strftime('%d')}}</p>
       </div>
@@ -45,7 +45,7 @@
       {% include "/admin/deleteDeadline.html" %} {% include "/admin/editDeadline.html" %}
     </td>
   </tr>
-  {% endif %} {% endfor %}
+  {# {% endif %}#} {% endfor %}
 </table>
 {% else %}
 <h3>
