@@ -35,16 +35,24 @@ class Semesters (dbModel):
   SEID          = PrimaryKeyField()
   year          = IntegerField()
   term          = CharField()
+  
+  def __str__(self):
+    return str(self.SEID)
  
 class Divisions (dbModel):
   DID           = PrimaryKeyField()
   name          = CharField()
+  def __str__(self):
+    return str(self.DID)
   
 # CLASSES WITH FOREIGN KEY FIELDS 
 class Programs (dbModel):
   PID           = PrimaryKeyField()
   name          = CharField()
   DID           = ForeignKeyField(Divisions)
+  
+  def __str__(self):
+    return str(self.PID)
   
 class Users (dbModel):
   username      = CharField(primary_key=True)
@@ -55,6 +63,9 @@ class Users (dbModel):
   PID           = ForeignKeyField(Programs,  null = True)
   DID           = ForeignKeyField(Divisions, null = True)
   
+  def __str__(self):
+    return self.username
+  
 class Courses (dbModel):
   CID           = PrimaryKeyField()
   prefix        = CharField()
@@ -64,6 +75,9 @@ class Courses (dbModel):
   SEID          = ForeignKeyField(Semesters)
   filePath      = TextField(null = True)
   lastModified  = TextField(null = True)
+  
+  def __str__(self):
+    return str(self.CID)
   
 class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()
