@@ -11,6 +11,7 @@ from flask import g
 from flask import url_for
 from flask import flash
 from flask import abort
+from flask_admin import Admin
 
 import pprint
 from app import models
@@ -37,6 +38,8 @@ returns a replacement function. See start.py for an example"
 app = Flask(__name__)
 #from app import app
 app.config.from_object('settings')
+
+admin = Admin(app)
 
 # Builds all the database connections on app run
 # Don't panic, if you need clarification ask.

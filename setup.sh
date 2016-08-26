@@ -15,3 +15,4 @@ fi
 sudo pip install Flask  --upgrade
 sudo pip install peewee --upgrade
 sudo pip install pyyaml --upgrade
+sudo pip install flask-admin
