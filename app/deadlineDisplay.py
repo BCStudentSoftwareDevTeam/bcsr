@@ -11,7 +11,7 @@ def deadlineDisplay():
         authorizedUser = AuthorizedUser()
 
         # we don't want to show deadlines past today
-        today = (datetime.date.today())
+        today = datetime.date.today()
         
         # we don't want show repeated dates
         dates = Deadline.select().where(Deadline.date > today).distinct().order_by(
