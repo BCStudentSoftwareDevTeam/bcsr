@@ -9,6 +9,9 @@ databases:
   stage: ""
   prod: "data/bcsr.sqlite"
 
+databaseAdmin:
+  user: 'heggens'
+  
 # For every table in the database, add an item here
 models:
   mainDB:
@@ -63,7 +66,7 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610 
     
 DEBUG:
-  # user: "heggens" #Admin Access
+  user: "heggens" #Admin Access
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
