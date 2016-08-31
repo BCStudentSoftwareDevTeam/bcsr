@@ -25,9 +25,13 @@ def authUser(env):
     if (envK in env):
         # we need to sanitize the environment variable
         # TODO: this looks like a function that can be taken out
-        return env[envK].split("@")[0].split('@')[0].split('/')[-1].lower()
+        return env[envK].split("@")[0].split('/')[-1].lower()
     elif ("DEBUG" in app.config) and app.config["DEBUG"]:
-        return cfg["DEBUG"]["user"]
+        old_username =  cfg["DEBUG"]["user"]
+        converted_user = cfg["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
+        app.logger.info(old_username+ " converted to "+ converted_user) 
+
+        return cfg["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
     else:
         return None
 from app import logtool
