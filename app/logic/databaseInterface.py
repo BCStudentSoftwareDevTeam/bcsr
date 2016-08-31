@@ -68,7 +68,14 @@ def get_course_file_path(CID):
 def grab_all_semesters():
   semesters = Semesters.select()
   return semesters
-      
-                                          
+  
+def get_course_instructors(CID):
+  instructors_string = ''
+  instructors = UsersCourses.select().where(UsersCourses.CID == CID)
+  for instructor in instructors:
+    print instructor.username.username
+    instructors_string += instructor.username.username
     
-    
+  return instructors_string
+  
+  

@@ -21,7 +21,9 @@ def uploads(CID):
     #Make sure that the directories exist and creates it if it doesn't
     result = getUploads.check_path_exist(directory_path)
     #Now we rename the file to our create standard
-    new_file_name   = getUploads.create_filename(CID,user_name)
+    instructors_string = databaseInterface.get_course_instructors(CID)
+    new_file_name   = getUploads.create_filename(CID, instructors_string)
+    print new_file_name
     complete_path   = (directory_path + new_file_name).replace(" ","")
     #Save the File
     file.save(complete_path)
