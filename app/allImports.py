@@ -23,7 +23,9 @@ sys.dont_write_bytecode = True
 def authUser(env):
     envK = "eppn"
     if (envK in env):
-        return env[envK].split("@")[0]
+        # we need to sanitize the environment variable
+        # TODO: this looks like a function that can be taken out
+        return env[envK].split("@")[0].split('@')[0].split('/')[-1].lower()
     elif ("DEBUG" in app.config) and app.config["DEBUG"]:
         return cfg["DEBUG"]["user"]
     else:
