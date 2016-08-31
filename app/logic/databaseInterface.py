@@ -20,7 +20,7 @@ def grab_courses_in_program(PID,SEID):
     peeweeObj               = (UsersCourses
                                           .select()
                                           .join(Courses)
-                                          .order_by(+Courses.prefix)
+                                          .order_by(+UsersCourses.username, +Courses.prefix, +Courses.number)
                                           .where(
                                                   UsersCourses.CID  == Courses.CID,
                                                   Courses.PID       == PID,
