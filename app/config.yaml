@@ -30,6 +30,8 @@ mainMenu:
     link: "/courses"
   - title: "Archive"
     link: "/archive"
+  - title: "Log Out"
+    link: "http://login.berea.edu/ipa/profile/Logout"
     
 adminMenu:
   Administration:
