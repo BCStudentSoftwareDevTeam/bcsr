@@ -15,10 +15,10 @@ def deadlineCreate():
         # data contains 
         # deadlineDescription
         data = request.form
-
+	date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
         deadline = Deadline.create(
             description=data['deadlineDescription'],
-            date=data['deadlineDate'])
+            date=date)
         deadline.save()
         # log the messages
         message = "Deadline: {0} has been added".format(deadline.description)
