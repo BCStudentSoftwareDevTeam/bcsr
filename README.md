@@ -1,29 +1,12 @@
-# README #
+[TOC]
+#Installation#
+##Requirements##
+* python 2.7
+* linux, unix, mac, windows(with attachments)
+* git
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## Creating Development Environment ## 
 
-### What is this repository for? ###
+1. ** Fork ** the repository from BitBucket and rename the project 
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+2. If working on a **local machine**, then clone the repo from your terminal. If you are working from cloud 9 follow https://codymyers93.wordpress.com/2016/03/07/octoprint-working-in-cloud-9/ for directions on how to setup cloud 9.
