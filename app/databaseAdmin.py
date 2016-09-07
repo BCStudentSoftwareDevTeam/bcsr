@@ -2,7 +2,7 @@ from allImports import *
 from flask_admin.contrib.peewee import ModelView
 
 class AuthenticatedUser(ModelView):
-    
+    column_display_pk = True
     def is_accessible(self):
         return authUser(request.environ) == cfg['databaseAdmin']['user']
     
