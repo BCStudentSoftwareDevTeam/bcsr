@@ -34,15 +34,19 @@ def download(CID):
 def downloadAll(SEID):
   page = r"/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
+  # we need the location so that we can use relative file paths
+  here = os.path.dirname(__file__)
   if authorizedUser.isAdmin:
     #For os methods we need to include app because it doesn't know to start at
     #app like in flask
-    parent_folder   = 'app/' + cfg['fileOperations']['dataPaths']['uploads'] + '/' + SEID
+    parent_folder   = cfg['fileOperations']['dataPaths']['uploads'] + '/' + SEID
+    # get full path
+    parent_folder   = os.path.join(here, parent_folder)
     zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
-    output_path     = 'app/' + zip_path
+    zip_path        = os.path.join(here, zip_path)
     try:
       contents      = os.walk(parent_folder)
-      zip_file      = zipfile.ZipFile(output_path,"w",zipfile.ZIP_DEFLATED)
+      zip_file      = zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED)
       for root, folders, files in contents:
         for folder_name in folders:
           absolute_path = os.path.join(root, folder_name)
