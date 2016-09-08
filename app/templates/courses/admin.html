@@ -6,7 +6,7 @@
 {% include 'snips/messages.html' %}
 {# MY COURSES VIEW #}
 <h1>{{current_term.term}} {{current_term.year}}</h1>
-{% if my_courses_key != None %}
+{% if my_courses is not none %}
   <h2>My Courses</h2>
   {% include "snips/tableHeader.html" %}
   {% for course in my_courses %}
