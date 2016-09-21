@@ -17,7 +17,7 @@
 
 {# DIVISION CHAIR VIEW #}
 <h2>{{division_key.name}}</h2>
-
+{# Fixed; 20160921 SH;CM;JSV#}
 {% for program2 in divisions_to_programs %}
   {% if program2.DID == division_key.DID %}
 	{% for program in divisions_to_programs[program2] %}
