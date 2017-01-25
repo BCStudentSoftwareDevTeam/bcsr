@@ -2,6 +2,7 @@
 {% block body %}
 {% set currentPage ="systemManagement" %}
 {% include "snips/messages.html" %}
+
 {# TERM MANAGEMENT #}
 <div class="panel panel-default">
   <div class="panel-heading">
@@ -25,7 +26,6 @@
     </tbody>
   </table>
 </div>
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add a Semester</h3>
@@ -68,5 +68,17 @@
       </div>
     </tbody>
   </table>
+</div>
+{# Admin Management #}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add an Administrator</h3>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Remove an Administrator</h3>
+  </div>
 </div>
 {% endblock %}
