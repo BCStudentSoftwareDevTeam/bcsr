@@ -24,16 +24,19 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
+
+<div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Add a semester</h3>
+    <h3 class="panel-title">Add a Semester</h3>
   </div>
   <table class = "table table-striped table-hover">
     <tbody>
       <tr>
         <td class="alert alert-danger" colspan="3">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-      The most recent term automatically becomes the active terms
-     </td> 
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        The most recent term automatically becomes the active terms
+        </td> 
       </tr>
       <div class="form-group">
         <form action = "/admin/systemManagement/add" method="post">
