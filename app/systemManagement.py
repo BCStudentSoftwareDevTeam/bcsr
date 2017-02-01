@@ -2,26 +2,26 @@ from allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from app.logic.getSystemManagement import GetSystemManagement
+from app.logic import databaseInterface
 
 @app.route("/admin/systemManagement", methods=["GET", "POST"])
 def systemManagement():
-  # we need page for logging purposes
-  page = "/" + request.url.split("/")[-1]
+  page = "/" + request.url.split("/")[-1] #We need page for logging purposes
   authorizedUser = AuthorizedUser()
-  
-  # only admin should be able to see this page
-  if authorizedUser.isAdmin:
+  if authorizedUser.isAdmin:              #Ensure that the user is an Admin
+    #Class from logic folder
     system    = GetSystemManagement()
-    
-    # for dropdown
-    semesters = Semesters.select()
-    
-    # the next five years
-    years     = system.get_years_list()
+    years     = system.get_years_list()   #Returns a list of the next five years
+    #DatabaseInterface from logic folder
+    semesters = databaseInterface.get_all_semesters()
+    users     = databaseInterface.get_all_users()
+    admins    = databaseInterface.get_all_admins()
     return render_template('admin/editSystem.html',
                             cfg = cfg,
                             #This variable is for the navbar
-                            isAdmin       = authorizedUser.isAdmin,
+                            isAdmin   = authorizedUser.isAdmin,
+                            users     = users,
+                            admins    = admins,
                             semesters = semesters,
                             years     = years,
                             )
@@ -33,9 +33,10 @@ def addSemester():
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
-    system      = GetSystemManagement()
     data        = request.form
-    logList         = system.add_semester(data)
+    #Class from logic folder
+    system      = GetSystemManagement()
+    logList     = system.add_semester(data)
     print logList
     #TODO: figure out how to log
     log.writer(logList[0],page,logList[1])

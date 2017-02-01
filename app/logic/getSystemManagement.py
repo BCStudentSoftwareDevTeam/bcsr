@@ -72,5 +72,7 @@ class GetSystemManagement():
         #TODO: Log error
         message = "An error occurred while trying to create semester {0} {1}".format(termname, data['year'])
     return [logType,message]
+    
+  
                                   
   
