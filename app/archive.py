@@ -9,7 +9,7 @@ def archive(SEID):
     # we need to know if the user is authorized to see this
     authorizedUser = AuthorizedUser()
     getAll = GetAll()
-    semesters = databaseInterface.grab_all_semesters()
+    semesters = databaseInterface.get_all_semesters()
     if SEID == None:
         SEID = databaseInterface.grab_current_semester()
     two_dictionaries      = getAll.create_dictionaries(SEID)

@@ -39,6 +39,10 @@ def grab_my_courses(username,SEID):
                                    ))
   peeweeObj = my_courses.execute()
   return peeweeObj
+
+def get_all_semesters():
+  semesters = Semesters.select()
+  return semesters
   
 def get_division(DID):
   division = Divisions.get(Divisions.DID == DID)
@@ -65,17 +69,18 @@ def get_course_file_path(CID):
   file_path = str(cfg['fileOperations']['dataPaths']['uploads']) + str(course.filePath)
   return file_path
   
-def grab_all_semesters():
-  semesters = Semesters.select()
-  return semesters
-  
 def get_course_instructors(CID):
   instructors_string = ''
   instructors = UsersCourses.select().where(UsersCourses.CID == CID)
   for instructor in instructors:
     print instructor.username.username
     instructors_string += instructor.username.username
-    
   return instructors_string
   
+def get_all_users():
+  users = Users.select()
+  return users
   
+def get_all_admins():
+  admins = Users.select().where(Users.isAdmin == 1)
+  return admins
