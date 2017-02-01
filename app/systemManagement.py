@@ -14,7 +14,7 @@ def systemManagement():
     years     = system.get_years_list()   #Returns a list of the next five years
     #DatabaseInterface from logic folder
     semesters = databaseInterface.get_all_semesters()
-    users     = databaseInterface.get_all_users()
+    users     = databaseInterface.get_non_admins()
     admins    = databaseInterface.get_all_admins()
     return render_template('admin/editSystem.html',
                             cfg = cfg,

@@ -88,7 +88,6 @@
             {% if users %}
               <div>
                 <div>
-                  <p>TODO: Reduce users to current non-admin users</p>
                   <select title="Select User" class=" form-control selectpicker" id="users" name="users[]" data-live-search='true'>
                     {% for user in users %}
                       <option value="{{user.username}}">
@@ -98,7 +97,6 @@
                   </select>
                 </div>
               </div>
-              <p>Got info about users</p>
             {% else %}
               <p>An error occuried while trying to access users.</p>
             {% endif %}

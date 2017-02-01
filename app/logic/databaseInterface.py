@@ -77,8 +77,8 @@ def get_course_instructors(CID):
     instructors_string += instructor.username.username
   return instructors_string
   
-def get_all_users():
-  users = Users.select()
+def get_non_admins():
+  users = Users.select().where(Users.isAdmin == 0)
   return users
   
 def get_all_admins():
