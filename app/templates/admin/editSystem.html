@@ -87,13 +87,15 @@
           <td>
             {% if users %}
               <div>
-                  <select title="Select User" class="selectpicker form-control" id="users" name="users[]" data-live-search="true">
+                <div>
+                  <select title="Select User" class=" form-control selectpicker" id="users" name="users[]" data-live-search='true'>
                     {% for user in users %}
-                      <option value="{{user.username}}" data-subtext = "{{user.username}}">
+                      <option value="{{user.username}}">
                         {{user.firstName}} {{user.lastName}} ({{user.username}})
                       </option>                    
                     {% endfor %}
                   </select>
+                </div>
               </div>
             {% else %}
               <p>An error occuried while trying to access users.</p>
@@ -110,6 +112,9 @@
     </tbody>
   </table>
 </div>
+
+
+<p></p>
 
 {# Remove Administrator Form #}
 {# Controller: editAdmin.py #}
@@ -139,5 +144,4 @@
     </tbody>
   </table>
 </div>
-
 {% endblock %}
