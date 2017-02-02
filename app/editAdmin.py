@@ -6,10 +6,13 @@ from app.logic.redirectBack import redirect_url
 def editAdmin(action):
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
-    
     if action == 'add':
-      #message = "User: ( " + username + " ) has been added as an Admin."
-      message = "User: ( Test Message ) has been added as an Admin."
+      user = request.form.getlist('users[]')
+      print user
+      if user:
+        message = "User: ( " + user + " ) has been added as an Admin."
+      else:
+        message = "user is not passing the test"
     elif action == 'remove':
       message = "User: ( Test Message ) has been removed as an Admin."
     else:
