@@ -41,6 +41,8 @@ adminMenu:
       link:  "/redirect/division_management"
     - title: "System Management"
       link:  "/admin/systemManagement"
+    - title: "Course Management"
+      link:  "/admin/courseManagement"
     
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
