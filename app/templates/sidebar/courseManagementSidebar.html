@@ -1,0 +1,16 @@
+<div class="navbar-default sidebar" role="navigation">
+  <div class="sidebar-nav navbar-collapse">
+    <ul class="nav" id="side-menu">
+      <li class="sidebar-brand">
+        <a href="#" class="head text-center">Menu</a>
+      </li>
+      {% if isAdmin %}
+        {% for page in cfg['courseManagementSidebar'] %}
+          <li>
+            <a href={{page['link']}}>{{page['title']}}</a>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+</div>
