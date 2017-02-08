@@ -42,7 +42,7 @@ adminMenu:
     - title: "System Management"
       link:  "/admin/systemManagement"
     - title: "Course Management"
-      link:  "/admin/courseManagement"
+      link:  "/admin/courseManagement/missingSyllabi"
 
 courseManagementSidebar:
   - title: "Missing Syllabi"
