@@ -1,6 +1,8 @@
 from allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.logic.excelMaker import makeExcelFile
+from flask import send_file
 
 @app.route("/admin/courseManagement/missingSyllabi", methods=["GET"])
 def missingSyllabi():
@@ -19,12 +21,11 @@ def missingSyllabi():
 def findMissingSyllabi():
     try:
         data = request.form
-        SEID = data['SEID']
-        courses = UsersCourses.select().join(Courses).where(Courses.filePath >> None)
-        for course in courses:
-            print course.CID, course.CID.prefix, course.username, course.username.firstName
+        filePath = makeExcelFile(data['SEID'])
+        return send_file(filePath,as_attachment=True)
     except Exception as e:
         #TODO: Log e
+        print e
         flash('Error occured while trying to prepare excel sheet. ')
-    return redirect(url_for("missingSyllabi"))
+        return redirect(url_for("missingSyllabi"))
     

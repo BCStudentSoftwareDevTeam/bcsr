@@ -62,7 +62,7 @@ fileOperations:
   dataPaths:
       uploads: "static/files/uploads"
       zips: "static/files/zips"
-      tSmp: "static/files/tmp"
+      tmp: "app/static/files/tmp"
 
 termInfo:
 #the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611 
