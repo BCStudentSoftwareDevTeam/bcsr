@@ -26,6 +26,7 @@ def findMissingSyllabi():
     except Exception as e:
         #TODO: Log e
         print e
+        flash(e)
         flash('Error occured while trying to prepare excel sheet. ')
         return redirect(url_for("missingSyllabi"))
     
