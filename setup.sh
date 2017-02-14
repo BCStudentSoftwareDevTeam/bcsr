@@ -15,5 +15,6 @@ fi
 sudo pip install Flask  --upgrade
 sudo pip install peewee --upgrade
 sudo pip install pyyaml --upgrade
+sudo pip install XlsxWriter
 sudo pip install flask-admin
 sudo pip install wtf-peewee

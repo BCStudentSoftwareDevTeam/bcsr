@@ -41,6 +41,12 @@ adminMenu:
       link:  "/redirect/division_management"
     - title: "System Management"
       link:  "/admin/systemManagement"
+    - title: "Course Management"
+      link:  "/admin/courseManagement/missingSyllabi"
+
+courseManagementSidebar:
+  - title: "Missing Syllabi"
+    link:  "/admin/courseManagement/missingSyllabi"
     
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
@@ -56,7 +62,7 @@ fileOperations:
   dataPaths:
       uploads: "static/files/uploads"
       zips: "static/files/zips"
-      tSmp: "static/files/tmp"
+      tmp: "app/static/files/tmp"
 
 termInfo:
 #the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611 

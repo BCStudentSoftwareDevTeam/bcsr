@@ -1,0 +1,17 @@
+{% extends "/snips/base.html" %}
+{% set currentPage ="courseManagement" %}
+{% block body %}
+<div id="wrapper">
+  {% include "sidebar/courseManagementSidebar.html" %}
+  <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+  <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+  <div id="page-wrapper">
+    {% include "snips/messages.html" %}
+    <div class="container-fluid">
+      {% if activePage %}
+        {% include activePage %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
