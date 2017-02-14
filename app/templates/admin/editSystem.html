@@ -76,45 +76,38 @@
 
 {# Add Administrator Form #}
 {# Controller: editAdmin.py #}
+{# ERRROR ALERT: Guillermo discovered that selectpicker doesn't work well within
+a 'table' tag #}
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add an Administrator</h3>
   </div>
-  <table class = "table table-hover">
-    <tbody>
-      <div class="form-group">
-        <form action = "/editAdmin/add" method="post">
-          <td>
-            {% if users %}
-              <div>
-                <div>
-                  <select title="Select User" class=" form-control selectpicker" id="users" name="users[]" data-live-search='true'>
-                    {% for user in users %}
-                      <option value="{{user.username}}">
-                        {{user.firstName}} {{user.lastName}} ({{user.username}})
-                      </option>                    
-                    {% endfor %}
-                  </select>
-                </div>
-              </div>
-            {% else %}
-              <p>An error occuried while trying to access users.</p>
-            {% endif %}
-          </td>
-          <td width="316" height="88px">
-            <label for="submitAdd">Add Administrator:</label>
-            <div>
-              <input type="submit" class="btn btn-default" value="Submit" id="submitAdd">
-            </div>
-          </td>
-        </form>
-      </div>
-    </tbody>
-  </table>
+  <div class="panel-body">
+    <div class="form-group">
+      <form action = "/editAdmin" method="post">
+        {% if users %}
+          <div class="col-md-9">
+            <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
+              {% for user in users %}
+                <option value="{{user.username}}">
+                  {{user.firstName}} {{user.lastName}} ({{user.username}})
+                </option>                    
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <p>An error occuried while trying to access users.</p>
+        {% endif %}
+        <div width="316" height="88px">
+          <div>
+            <input type="submit" class="btn btn-default" value="Submit" id="submitAdd">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-
-
-<p></p>
 
 {# Remove Administrator Form #}
 {# Controller: editAdmin.py #}
@@ -122,26 +115,29 @@
   <div class="panel-heading">
     <h3 class="panel-title">Remove an Administrator</h3>
   </div>
-  <table class = "table table-striped table-hover">
-    <tbody>
-      <div class="form-group">
-        <form action = "/editAdmin/remove" method="post">
-          <td>
-            {% if admins %}
-              <p>Got info about admins</p>
-            {% else %}
-              <p>An error occuried while tring to access Administrators.</p>
-            {% endif %}
-          </td>
-          <td width="316" height="88px">
-            <label for="submitRemove">Remove Administrator:</label>
-            <div>
-              <input type="submit" class="btn btn-default" value="Submit" id="submitRemove">
-            </div>
-          </td>
-        </form>
-      </div>
-    </tbody>
-  </table>
+  <div class="panel-body">
+    <div class="form-group">
+      <form action = "/editAdmin" method="post">
+        {% if users %}
+          <div class="col-md-9" style="padding-left:-150px;">
+            <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
+              {% for admin in admins %}
+                <option value="{{admin.username}}">
+                  {{admin.firstName}} {{admin.lastName}} ({{admin.username}})
+                </option>                    
+              {% endfor %}
+            </select>
+          </div>
+        {% else %}
+          <p>An error occuried while trying to access users.</p>
+        {% endif %}
+        <div width="316" height="88px">
+          <div>
+            <input type="submit" class="btn btn-danger" value="Remove" id="submitRemove">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}
