@@ -15,8 +15,7 @@ def checkData(data,key):
     else:
       message="No user was selected."
   except Exception as e:
-    #message = "Either a bad key or username is not in database."
-    message = e
+    message = "Either a bad key or username is not in database."
   return [user, message]
 
 @app.route('/editAdmin', methods=["POST"])

@@ -78,16 +78,15 @@
 {# Controller: editAdmin.py #}
 {# ERRROR ALERT: Guillermo discovered that selectpicker doesn't work well within
 a 'table' tag #}
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add an Administrator</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body bodyPadding">
     <div class="form-group">
       <form action = "/editAdmin" method="post">
         {% if users %}
-          <div class="col-md-9">
+          <div class="col-md-9 selectPadding">
             <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
               {% for user in users %}
                 <option value="{{user.username}}">
@@ -115,11 +114,11 @@ a 'table' tag #}
   <div class="panel-heading">
     <h3 class="panel-title">Remove an Administrator</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body bodyPadding" style="padding-left:7px">
     <div class="form-group">
       <form action = "/editAdmin" method="post">
         {% if users %}
-          <div class="col-md-9" style="padding-left:-150px;">
+          <div class="col-md-9 selectPadding">
             <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
               {% for admin in admins %}
                 <option value="{{admin.username}}">
