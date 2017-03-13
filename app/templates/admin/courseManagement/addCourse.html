@@ -1,0 +1,68 @@
+{% extends "/snips/base.html" %}
+{% set currentPage ="courseManagement" %}
+{% block body %}
+<div id="wrapper">
+  {% include "sidebar/courseManagementSidebar.html" %}
+  <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+  <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+  <div id="page-wrapper">
+    {% include "snips/messages.html" %}
+    <div class="container-fluid">
+<!-- The code above is the header for coursemanagement -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Course</h3>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <form action="/admin/courseManagement/addCourse" method="POST">
+              <div class='col-md-2'>
+                <label for='semester' id="semester" style="padding-left: 10px;">Semester</label>
+                <select class="form-control" id='SEID' name='SEID' required>
+                  <option value>---</option>
+                  {% for semester in semesters %}
+                    <option value="{{semester.SEID}}">{{semester.term}} {{semester.year}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class='col-md-3'>
+                <label for="PID">Program</label>
+                <select class="form-control" id="PID" name="PID" required>
+                  <option value>---</option>
+                  {% for program in programs %}
+                    <option value="{{program.PID}}">{{program.name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-1">
+                <label for="prefix">Prefix</label>
+                <input name="prefix" id="prefix" type="text" class="form-control" required>
+              </div>
+              <div class="col-md-1">
+                <label for="number">Number</label>
+                <input name="number" id="number" type="text" class="form-control" required>
+              </div>
+              <div class="col-md-1">
+                <label for="section">Section</label>
+                <input name='section' id='section' type='text' class="form-control" required>
+              </div>
+              <div class="col-md-3">
+                <label for="admin">Instructor</label>
+                <select title="Select User" class="form-control selectpicker" id="user" name="user" data-live-search='true' required>
+                  {% for user in users %}
+                    <option value="{{user.username}}">
+                      {{user.firstName}} {{user.lastName}} ({{user.username}})
+                    </option>                    
+                  {% endfor %}
+                </select>
+              </div>
+              <input type="submit" class="btn btn-default inputPadding" value="Submit">
+            </form>
+          </div>
+        </div>
+      </div>
+<!-- Close the div heads -->     
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "/snips/base.html" %}
+{% set currentPage ="courseManagement" %}
+{% block body %}
+<div id="wrapper">
+  {% include "sidebar/courseManagementSidebar.html" %}
+  <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+  <script type="text/javascript" src="/static/js/local/removeCourse.js"></script>
+  <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+  <div id="page-wrapper">
+    {% include "snips/messages.html" %}
+    <div class="container-fluid">
+<!-- The code above is the header for coursemanagement -->
+    <div class='col-md-2'>
+        <label for='semester' id="semester" style="padding-left: 10px;">Semester</label>
+        <select class="form-control" onchange="getCourses()" id='SEID' required>
+          <option value="None">---</option>
+          {% for semester in semesters %}
+            <option value="{{semester.SEID|safe}}">{{semester.term}} {{semester.year}}</option>
+          {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-6">
+      <label for="courses">Courses</label>
+      <select class="form-control selectpicker" id="courses" >
+        <option value="None">Select A Semester</option>
+      </select>
+    </div>
+<!-- Close the div heads -->     
+    </div>
+  </div>
+</div>
+{% endblock %}

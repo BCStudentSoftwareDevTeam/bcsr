@@ -27,5 +27,7 @@ from app import systemManagement
 from app import errorHandler
 from app import databaseAdmin
 from app import editAdmin
-from app import courseManagement
+from app import addCourse
+from app import missingSyllabi
+from app import removeCourse
 
