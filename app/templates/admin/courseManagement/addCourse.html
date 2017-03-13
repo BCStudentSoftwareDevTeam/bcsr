@@ -27,7 +27,7 @@
               </div>
               <div class='col-md-3'>
                 <label for="PID">Program</label>
-                <select class="form-control" id="PID" name="PID" required>
+                <select class="form-control selectpicker" data-live-search='true' id="PID" name="PID" required>
                   <option value>---</option>
                   {% for program in programs %}
                     <option value="{{program.PID}}">{{program.name}}</option>

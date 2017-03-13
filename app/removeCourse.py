@@ -24,8 +24,22 @@ def removeCourse():
                              isAdmin    = authorizedUser.isAdmin,
                              semesters  = semesters
                              )
+    elif request.method == "POST":
+      try:
+        data = request.form
+        course = Courses.get(Courses.CID == data['CID'])
+        msg = 'Course (' + course.prefix + '-' + course.number + '-' + course.section + ') has been deleted.'
+        Courses.delete().where(Courses.CID == data['CID']).execute()
+        flash(msg)
+        return redirect(url_for("removeCourse"))
+      except Exception as e:
+        flash(e)
+        return redirect(url_for("removeCourse"))
+    else:
+      abort(404)
   else:
     abort(403)
+  
                              
 @app.route('/admin/courseManagement/removeCourse/json/<SEID>',methods=["GET"])
 def getJson(SEID):
@@ -47,10 +61,5 @@ def getJson(SEID):
       courseList.append(courseDict)
     jsonStr = json.dumps(courseList)
     return jsonify(Courses=jsonStr)
-    
   except Exception as e:
     print str(e)
-    
-    
-  
-    

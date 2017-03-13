@@ -10,20 +10,34 @@
     {% include "snips/messages.html" %}
     <div class="container-fluid">
 <!-- The code above is the header for coursemanagement -->
-    <div class='col-md-2'>
-        <label for='semester' id="semester" style="padding-left: 10px;">Semester</label>
-        <select class="form-control" onchange="getCourses()" id='SEID' required>
-          <option value="None">---</option>
-          {% for semester in semesters %}
-            <option value="{{semester.SEID|safe}}">{{semester.term}} {{semester.year}}</option>
-          {% endfor %}
-        </select>
-    </div>
-    <div class="col-md-6">
-      <label for="courses">Courses</label>
-      <select class="form-control selectpicker" id="courses" >
-        <option value="None">Select A Semester</option>
-      </select>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Remove A Course</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <form action='/admin/courseManagement/removeCourse' method='post'>
+            <div class='col-md-2'>
+                <label for='semester' id="semester" style="padding-left: 10px;">Semester</label>
+                <select class="form-control" onchange="getCourses()" id='SEID' required>
+                  <option value="None">---</option>
+                  {% for semester in semesters %}
+                    <option value="{{semester.SEID|safe}}">{{semester.term}} {{semester.year}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-6">
+              <label for="courses">Courses</label>
+              <select class="form-control selectpicker" data-live-search=True id="courses" name="CID" required>
+                <option value="">Select A Semester</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <input type=submit class='btn btn-danger inputPadding' value="Delete Course">
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 <!-- Close the div heads -->     
     </div>
