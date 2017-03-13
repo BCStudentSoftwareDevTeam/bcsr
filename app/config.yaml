@@ -47,6 +47,10 @@ adminMenu:
 courseManagementSidebar:
   - title: "Missing Syllabi"
     link:  "/admin/courseManagement/missingSyllabi"
+  - title: "Add Course"
+    link: "/admin/courseManagement/addCourse"
+  - title: "Remove Course"
+    link: "/admin/courseManagement/removeCourse"
     
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']

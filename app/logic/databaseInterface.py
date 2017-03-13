@@ -84,3 +84,44 @@ def get_non_admins():
 def get_all_admins():
   admins = Users.select().where(Users.isAdmin == 1)
   return admins
+  
+def check_strings(strings):
+  for string in strings:
+    if string != '' or string != None:
+      result = isinstance(string,str)
+      if result == False:
+        return False
+    else:
+      return False
+  return True
+  
+def check_integers(integers):
+  for integer in integers:
+    result = isinstance(integer,int)
+    if result == False:
+      return False
+  return True
+  
+def insert_course(pre,num,sect,pid,seid):
+  try:
+    string_result  = check_strings([pre,num,sect])   
+    integer_result = check_integers([pid,seid])
+    if string_result == True and integer_result == True:
+      new_course = Courses(prefix=pre,number=num,section=sect,PID=pid,SEID=seid)
+      new_course.save()
+    else:
+      return False
+    return new_course
+  except Exception as e:
+    return False
+    
+def insert_course_user(un,cid):
+  try:
+    newInsert = UsersCourses(username=un,CID=cid)
+    newInsert.save()
+    if newInsert:
+      return newInsert
+    else:
+      return False
+  except Exception as e:
+    return False
