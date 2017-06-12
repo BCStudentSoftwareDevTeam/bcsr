@@ -82,3 +82,33 @@ DEBUG:
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
+  
+contributors:
+  - name: "Cody Myers"
+    username: "myersco"
+    year: 2017
+  - name: "Guillermo Ramos"
+    username: "ramosg"
+    year: 2018
+  - name: "Sarah Watts"
+    username: "wattss"
+    year: 2018
+  - name: "Jose Zindia"
+    username: "zindiaj"
+    year: 2018
+  - name: "Jonathan Chauwa"
+    username: "chauwaj"
+    year: 2019
+  - name: "Kenny Nelson"
+    username: "nelsonk"
+    year: 2019
+  - name: "Sher Sanginov"
+    username: "sanginovs"
+    year: 2019
+  - name: "Evan Johnson"
+    username: "johnsone"
+    year: 2019
+
+  
+    
+    
