@@ -33,7 +33,7 @@ def uploads(CID):
     update_course_path.execute()
     #Now we need to log the changes
     get_time = datetime.datetime.now()
-    time_stamp = get_time.strftime("%Y-%m-%d %H:%M")
+    time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
     last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
     # log in our log file
     message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
