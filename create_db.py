@@ -90,13 +90,13 @@ users     = Users(      firstName  = "Jan",
                         lastName   = "Pearce",
                         username   = "pearcej",
                         email      = "pearcej@berea.edu",
-                        DID        = 2
+                        DID      =  2,
                   ).save(force_insert=True)
                         
 users     = Users(      firstName = "Mario",
                         lastName  = "Nakazawa",
                         username  = "nakazawam",
-                        PID       = 1,
+                        PID     = 1,
                         email     = "nakazawam@berea.edu"
                   ).save(force_insert=True)
                   
