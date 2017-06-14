@@ -30,4 +30,4 @@ from app import editAdmin
 from app import addCourse
 from app import missingSyllabi
 from app import removeCourse
-
+from app import contributors
