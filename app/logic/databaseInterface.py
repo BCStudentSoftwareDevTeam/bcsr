@@ -37,8 +37,11 @@ def grab_my_courses(username,SEID):
                                     UsersCourses.CID       == Courses.CID,
                                     Courses.SEID           == SEID
                                    ))
-  peeweeObj = my_courses.execute()
-  return peeweeObj
+  if my_courses.exists(): #checking whether query contains courses
+    peeweeObj = my_courses.execute()
+    return peeweeObj
+  else:
+    return None
 
 def get_all_semesters():
   semesters = Semesters.select()

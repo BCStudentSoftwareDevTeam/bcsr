@@ -12,7 +12,9 @@
   {% for course in my_courses %}
     {% include "snips/coursesRows.html" %}  
   {% endfor %}
-  {% include "snips/tableFooter.html" %} 
+  {% include "snips/tableFooter.html" %}
+{% else %}
+   <h2>You have no courses.</h2>
 {% endif %}
 
 {# ADMIN VIEW #}
