@@ -53,7 +53,7 @@ courseManagementSidebar:
     link: "/admin/courseManagement/removeCourse"
     
 Headers:
-  Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
+  Courses: ['Instructor','Course','Section','Term','Syllabus Upload','Last Modified By']
   Archive: ['Instructor','Course','Term','Last Modified By']
     
 fileOperations:

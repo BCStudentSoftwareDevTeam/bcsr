@@ -1,8 +1,6 @@
 {% if my_courses is not none %}
+{% set currentPage = "courses" %}
   <h2>My Courses</h2>
-  {% include "snips/tableHeader.html" %}
-  {% for course in my_courses %}
-    {% include "snips/coursesRows.html" %}  
-  {% endfor %}
-  {% include "snips/tableFooter.html" %} 
+  {% include "snips/myCoursesTable.html" %}
+  <p>Test</p>
 {% endif %}
