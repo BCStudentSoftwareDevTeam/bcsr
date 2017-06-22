@@ -8,10 +8,29 @@ class GetUploads():
   def __init__(self, file):
     self.file   = file
   
+  def getAbsolutePath(self, relativePath, filename=None, makeDirs=False):
+    '''Creates the AbsolutePath based off of the relative path.
+    Also creates the directories in path if they are not found.
+    @param {string} relaitivePath - a string of directories found in config.yaml
+    @param {string} filename - the name of the file that should be in that directory
+    @return {string} filepath -returns the absolute path of the directory'''
+    '''TODO: ADD @PARAm for make dirs'''
+    filepath = os.path.join(sys.path[0], relativePath)
+    if makeDirs == True:
+        try:
+            os.makedirs(filepath)
+        except:
+            pass
+    if filename != None:
+        filepath = os.path.join(filepath, filename)
+    return filepath
+
   def get_upload_path(self):
     #We need the app in the front in order to mkdir
-    #upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']    
-    upload_file_path = '/var/www/html/bcsr-flask/app/' + cfg['fileOperations']['dataPaths']['uploads']   
+    #upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
+    relative_path=cfg['fileOperations']['dataPaths']['uploads']
+    upload_file_path=self.getAbsolutePath(relative_path)
+    #previous hardcoded version: upload_file_path = '/var/www/html/bcsr-flask/app/' + cfg['fileOperations']['dataPaths']['uploads']
     app.logger.info("Upload file path: {0}".format(upload_file_path))
     return upload_file_path
 
