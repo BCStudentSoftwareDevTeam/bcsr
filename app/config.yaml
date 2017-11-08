@@ -31,7 +31,7 @@ mainMenu:
   - title: "Archive"
     link: "/archive"
   - title: "Log Out"
-    link: "http://login.berea.edu/idp/profile/Logout"
+    link: "https://login.berea.edu/idp/profile/Logout"
     
 adminMenu:
   Administration:
