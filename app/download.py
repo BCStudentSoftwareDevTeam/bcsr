@@ -18,7 +18,8 @@ from app.logic.getAuthUser import AuthorizedUser
 def download(CID):
   page = r"/" + request.url.split("/")[-1]
   try:
-    file_path = databaseInterface.get_course_file_path(CID)
+    file_path = databaseInterface.get_course_download_file_path(CID)
+    print "This is file_path: {}".format(file_path)
     message = "Download: {} has been downloaded".format(file_path)
     log.writer("INFO", page, message)
     return send_file(file_path, as_attachment=True)

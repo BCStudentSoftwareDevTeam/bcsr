@@ -14,7 +14,7 @@ def delete(CID):
   try:
     #need to add app/ in the front to tell the os where to start looking
     #file_path = 'app/'+databaseInterface.get_course_file_path(CID)
-    file_path = '/var/www/html/bcsr-flask/app/'+databaseInterface.get_course_file_path(CID)
+    file_path = '/var/www/html/bcsr-flask/'+databaseInterface.get_course_file_path(CID)
     #Remove file from server
     os.remove(file_path)
     app.logger.info("File removed: {0}".format(file_path))
