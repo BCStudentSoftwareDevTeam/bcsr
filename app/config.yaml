@@ -64,9 +64,10 @@ fileOperations:
   allowedSize:
       size: 8000000
   dataPaths:
-      uploads: "static/files/uploads"
+      uploads: "app/static/files/uploads"
       zips: "static/files/zips"
       tmp: "app/static/files/tmp"
+      download: "static/files/uploads"
 
 termInfo:
 #the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611 
