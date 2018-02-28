@@ -40,7 +40,7 @@ def downloadAll(SEID):
   if authorizedUser.isAdmin:
     #For os methods we need to include app because it doesn't know to start at
     #app like in flask
-    parent_folder   = cfg['fileOperations']['dataPaths']['uploads'] + '/' + SEID
+    parent_folder   = cfg['fileOperations']['dataPaths']['download'] + '/' + SEID
     # get full path
     parent_folder   = os.path.join(here, parent_folder)
     zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
