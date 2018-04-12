@@ -62,13 +62,12 @@ def courses():
                                 current_term          = current_term
                                )
         
-     
-     
-    #This is commented out because we should implement a new way to manage level access
+    # TO-DO:
+        # Implement level of access for users; hence the reason the bottom lines were commented out/ 
+       
     
     
-    
-    
+
     
     # for case in switch(user_level):
     #   if case('admin'):
