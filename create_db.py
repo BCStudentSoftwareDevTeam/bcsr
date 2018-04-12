@@ -8,6 +8,7 @@ import importlib
 
 # Don't forget to import your own models!
 from app.models import *
+from app.loadConfig import *
 
 conf = load_config('app/config.yaml')
 

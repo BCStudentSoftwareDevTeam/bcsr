@@ -8,7 +8,7 @@ db        = os.path.join(here,'../',cfg['databases']['dev'])
 mainDB    = SqliteDatabase(db,
                           pragmas = ( ('busy_timeout', 100),
                                       ('journal_mode', 'WAL') ),
-                          threadlocals = True
+                          
                           )
 
 # Creates the class that will be used by Peewee to store the database
@@ -67,14 +67,15 @@ class Users (dbModel):
     return self.username
   
 class Courses (dbModel):
-  CID           = PrimaryKeyField()
-  prefix        = CharField()
-  number        = CharField()
-  section       = CharField()
-  PID           = ForeignKeyField(Programs)
-  SEID          = ForeignKeyField(Semesters)
-  filePath      = TextField(null = True)
-  lastModified  = TextField(null = True)
+  CID              = PrimaryKeyField()
+  prefix           = CharField()
+  number           = CharField()
+  section          = CharField()
+  PID              = ForeignKeyField(Programs)
+  SEID             = ForeignKeyField(Semesters)
+  filePath         = TextField(null = True)
+  optionalFilepath = TextField(null = True)
+  lastModified     = TextField(null = True)
   
   def __str__(self):
     return str(self.CID)

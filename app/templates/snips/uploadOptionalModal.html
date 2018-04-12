@@ -1,0 +1,26 @@
+
+{% block body %}
+    <div class="modal fade" id="uploadOptionalModal" role="dialog" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <a type="button" class="close"  aria-label="Close" data-dismiss = "modal" onclick="reload()"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="modal-title">Upload Additional Files</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="help-block">Please upload additional files here. </p>
+                    <form class="dropzone" id="dropOptional">
+                        <div class="box"></div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type = 'submit' data-dismiss="modal" class="btn btn-success"  id = "submit" onclick="reload()">Submit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <script type="text/javascript" src="/static/js/local/uploadOptional.js"></script>
+     <script>
+
+     </script>
+{% endblock %}

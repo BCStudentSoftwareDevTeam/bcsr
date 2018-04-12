@@ -4,40 +4,80 @@
 {# can't use currentPage because of scoping issues #}
 {% set page = "Courses" %}
 {% include 'snips/messages.html' %}
+
 {# MY COURSES VIEW #}
-<h1>{{current_term.term}} {{current_term.year}}</h1>
-{% if my_courses is not none %}
-  <h2>My Courses</h2>
-  {% include "snips/tableHeader.html" %}
-  {% for course in my_courses %}
-    {% include "snips/coursesRows.html" %}  
-  {% endfor %}
-  {% include "snips/tableFooter.html" %}
-{% else %}
-   <h2>You have no courses.</h2>
-{% endif %}
+<div id = "wrapper">
+    {% include "sidebar/courseSidebar.html"%}
+<div id = "page-wrapper">
+<div class = "container-fluid"> 
+<!--If user is faculty:-->
+ <h1 class = "text-center">My Courses: {{current_term.term}} {{current_term.year}}</h1>
+<!--If user is program/department chair/admin-->
+<!--<h1 class = "text-center">Courses: {{current_term.term}} {{current_term.year}}</h1>-->
+</div>
+<div class = "container-fluid">
+    <table id = "courses" class = "table table-striped table-hover table-bordered table-condensed" >
+        <thead> 
+            <tr>
+                <th>Course</th>
+                <th>Instructor</th>
+                <th>Syllabus</th>
+                <th>Additional Files</th>
+                <th>Last Modified By</th>
+                <th>File Management</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in my_courses %}
+                <tr>
+                    <td>
+                        {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+                    </td>
+                    <td>
+                        {{course.username.firstName}} {{course.username.lastName}}
+                    </td>
+                    <td> 
+                        {% if course.CID.filePath == None %}
+                            <a onclick = "upload({{course.CID.CID}})" > Upload syllabus</a>
+                            {% include 'snips/uploadSyllabusModal.html' %}
+                        
+                        {% else %}
+                             <p>Syllabus Uploaded</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if course.CID.optionalFilepath == None %}
+                            <a onclick = "uploadOptional({{course.CID.CID}})"> Upload additional files</a>
+                            {% include 'snips/uploadOptionalModal.html' %} 
+                              
+                            
+                        {% else %}
+                            <p>Files uploaded</p> 
+                           
+                          
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if course.CID.lastModified == None %}
+                            <p>Course has not yet been modified.</p>
+                        {% else %}
+                            <p>{{course.CID.lastModified}}</p>
+                        {% endif %}
+                    </td>
+                    <td> 
+                        <a data-toggle ="modal" data-target = "#deleteModal">Delete Files</a>
+                        {% include 'snips/deleteFilesModal.html' %}
+                    
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+</div>   
+</div>
+</div>
 
-{# ADMIN VIEW #}
-{%for division in divisions_to_programs %}
-  <div class='header col-sm-12'>
-      <h2>{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'><span id='icon-{{division.DID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
-  </div>
-  <div id='programs-{{division.DID}}'>
-  {% for program in divisions_to_programs[division] %}
-    <div style = "margin-left:25px;">
-    <h3>{{ program.name}} <a onclick='showCourses("{{program.PID}}")'><span id='coursesIcon-{{program.PID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h3>
-    <div id='courses-{{program.PID}}'>
-    {% include "snips/tableHeader.html" %}
-    {% for course in programs_to_courses[program.name] %}
-      {% include "snips/coursesRows.html" %} 
-    {% endfor %} 
-    {% include "snips/tableFooter.html" %}
-    </div>
-    </div>
-  {% endfor %}
-  </div>
-{% endfor %}
-
-<script type="text/javascript" src="static/js/local/courses.js"></script>
 {% endblock %}
+<script type="text/javascript" src="/static/js/local/Courses.js"></script>
 

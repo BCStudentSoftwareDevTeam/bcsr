@@ -25,7 +25,7 @@ from app import editDivision
 from app import editProgram
 from app import systemManagement
 from app import errorHandler
-from app import databaseAdmin
+# from app import databaseAdmin
 from app import editAdmin
 from app import addCourse
 from app import missingSyllabi

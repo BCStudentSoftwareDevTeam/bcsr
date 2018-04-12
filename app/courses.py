@@ -26,50 +26,95 @@ def courses():
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
     my_courses                  = getCourses.check_for_my_courses(currentSEID)
+    # syllabus_dict = {}
+    # for course in my_courses:
+    #     syllabus_dict[course.CID] = ((course.filePath).split()).pop()
+    # print(syllabus_dict)                
+    print (my_courses)
+    semesters = databaseInterface.get_all_semesters()
     # RENDER CORRECT PAGE BASED ON ACCESS LEVEL
-    for case in switch(user_level):
-      if case('admin'):
-        return render_template('courses/admin.html',
+    return render_template('courses/admin.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
                                 isAdmin               = auth.isAdmin,
                                 divisions_to_programs = divisions_to_programs,
                                 programs_to_courses   = programs_to_courses,
+                                semesters             = semesters,
                                 current_term          = current_term
-                               )              
-        break;
-      if case('division'):
-        division_key            = user.DID
-        print division_key
-        return render_template('courses/division.html',
+                               )
+                               
+    @app.route("/courses/files/<CID>", methods = ["GET"])
+    def redirectToDelete(CID):
+        #activate classes used on this controller
+        getAll                = GetAll()
+        #Grab user information
+        auth       = AuthorizedUser()
+        user       = auth.get_user()
+        user_level = auth.user_level()
+    
+    return render_template('courses/admin.html',
                                 cfg                   = cfg,
                                 my_courses            = my_courses,
-                                division_key          = division_key,
+                                isAdmin               = auth.isAdmin,
                                 divisions_to_programs = divisions_to_programs,
                                 programs_to_courses   = programs_to_courses,
+                                semesters             = semesters,
                                 current_term          = current_term
-                               )   
-        break;
-      if case('program'):
-        program_key             = user.PID.name
-        return render_template('courses/program.html',
-                                cfg                   = cfg,
-                                my_courses            = my_courses,
-                                program_key           = program_key,
-                                programs_to_courses   = programs_to_courses,
-                                current_term          = current_term
-                               )    
-        break;
+                               )
         
-      if case('faculty'):
-        return render_template('courses/faculty.html',
-                                cfg                   = cfg,
-                                my_courses            = my_courses,
-                                current_term          = current_term
-                               )  
-        break;
-      if case(): 
-        # TODO: return ERROR
-        abort(404)
-        render_template('error.html')
+     
+     
+    #This is commented out because we should implement a new way to manage level access
+    
+    
+    
+    
+    
+    # for case in switch(user_level):
+    #   if case('admin'):
+    #     return render_template('courses/admin.html',
+    #                             cfg                   = cfg,
+    #                             my_courses            = my_courses,
+    #                             isAdmin               = auth.isAdmin,
+    #                             divisions_to_programs = divisions_to_programs,
+    #                             programs_to_courses   = programs_to_courses,
+    #                             semesters             = semesters,
+    #                             current_term          = current_term
+    #                           )              
+    #     break;
+    #   if case('division'):
+    #     division_key            = user.DID
+    #     print division_key
+    #     return render_template('courses/division.html',
+    #                             cfg                   = cfg,
+    #                             my_courses            = my_courses,
+    #                             division_key          = division_key,
+    #                             divisions_to_programs = divisions_to_programs,
+    #                             programs_to_courses   = programs_to_courses,
+    #                             current_term          = current_term
+    #                           )   
+    #     break;
+    #   if case('program'):
+    #     program_key             = user.PID.name
+    #     return render_template('courses/program.html',
+    #                             cfg                   = cfg,
+    #                             my_courses            = my_courses,
+    #                             program_key           = program_key,
+    #                             programs_to_courses   = programs_to_courses,
+    #                             current_term          = current_term
+    #                           )    
+    #     break;
         
+    #   if case('faculty'):
+    #     return render_template('courses/faculty.html',
+    #                             cfg                   = cfg,
+    #                             my_courses            = my_courses,
+    #                             current_term          = current_term
+    #                           )  
+    #     break;
+    #   if case(): 
+    #     # TODO: return ERROR
+    #     abort(404)
+    #     render_template('error.html')
+        
+

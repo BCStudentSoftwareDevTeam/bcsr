@@ -4,6 +4,7 @@
     <title>{% block title %} {% endblock %}</title>
     <script src = "//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src = "//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <scrip src = "http://code.jquery.com/jquery-1.12.4.js"></scrip>
 
     <!-- Bootstrap: Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -38,12 +39,13 @@
     <!-- Bootrstrap X-editable -->
     <link href="/static/css/bootstrap-editable.css" rel="stylesheet">
     <script src="/static/js/ext/bootstrap-editable.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
     <link href='/static/css/reset.css' rel="stylesheet" />
     <link href='/static/css/custom.css' rel="stylesheet" />
   </head>
   <body>
       {% include "snips/navigation.html" %}
-    <div class="container">
+    <div class="container-fluid">
       {# All content should get rendered in here #}
       {% block body %} {% endblock %}
       
@@ -56,6 +58,13 @@
   <link rel = "stylesheet" href = "/static/css/{{currentPage}}.css"/>
   <script type="text/javascript" src = "/static/js/local/app.js"></script>
   <script type = "text/javascript" src  = "/static/js/local/{{currentPage}}.js"></script>
+  <script type="text/javascript" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+
+  <script type="text/javascript" src="//cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="//cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -25,10 +25,14 @@ class GetUploads():
         filepath = os.path.join(filepath, filename)
     return filepath
 
-  def get_upload_path(self):
+  def get_upload_path(self, type):
     #We need the app in the front in order to mkdir
     #upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
-    relative_path=cfg['fileOperations']['dataPaths']['uploads']
+    if type == "syllabus":
+      relative_path=cfg['fileOperations']['dataPaths']['uploadSyllabus']
+    elif type == "other":
+      relative_path=cfg['fileOperations']['dataPaths']['uploadAdditional']
+      
     upload_file_path=self.getAbsolutePath(relative_path)
     #previous hardcoded version: upload_file_path = '/var/www/html/bcsr-flask/app/' + cfg['fileOperations']['dataPaths']['uploads']
     app.logger.info("Upload file path: {0}".format(upload_file_path))
@@ -59,21 +63,37 @@ class GetUploads():
           pass
     return 0
     
-  def create_filename(self,CID, user_name):
+  def create_filename(self,CID, user_name, type):
     course_info = databaseInterface.get_course_info(CID)
-    new_file_name          = (    'CID' 
-                                + str(course_info.CID) 
-                                + '-' 
-                                + str(course_info.prefix) 
-                                +  '-' 
-                                + str(course_info.number) 
-                                + '-' 
-                                + str(course_info.PID.DID.name) 
-                                + '-' 
-                                + user_name
-                                + "." 
-                                + str(self.file.filename.split(".").pop())
-                              ).replace(" ","")
+    if type == "syllabus":
+      new_file_name          = (    'CID' 
+                                  + str(course_info.CID) 
+                                  + '-' 
+                                  + str(course_info.prefix) 
+                                  +  '-' 
+                                  + str(course_info.number) 
+                                  + '-' 
+                                  + str(course_info.PID.DID.name) 
+                                  + '-' 
+                                  + user_name
+                                  + "." 
+                                  + str(self.file.filename.split(".").pop())
+                                ).replace(" ","")
+    elif type == "other":
+      new_file_name          = (    'additionalFile_CID' 
+                                  + str(course_info.CID) 
+                                  + '-' 
+                                  + str(course_info.prefix) 
+                                  +  '-' 
+                                  + str(course_info.number) 
+                                  + '-' 
+                                  + str(course_info.PID.DID.name) 
+                                  + '-' 
+                                  + user_name
+                                  + "." 
+                                  + str(self.file.filename.split(".").pop())
+                                ).replace(" ","")
+      
     app.logger.info("Filename created: " + new_file_name)
     return new_file_name
   
