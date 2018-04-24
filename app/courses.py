@@ -7,7 +7,7 @@ from app.logic.switch import switch
 from app.logic.getAll import GetAll
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
-
+@app.route("/courses/<SEID>/<prefix>", methods=["GET"])
 def courses():
     '''This function will render the correct template based off of the user's role'''
     #activate classes used on this controller
@@ -26,15 +26,25 @@ def courses():
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
     my_courses                  = getCourses.check_for_my_courses(currentSEID)
-    # syllabus_dict = {}
-    # for course in my_courses:
-    #     syllabus_dict[course.CID] = ((course.filePath).split()).pop()
-    # print(syllabus_dict)                
-    print (my_courses)
+    syllabus_dict = {}
+    additional_dict = {}
+    for course in my_courses:
+        if course.CID.filePath is not None:
+            syllabus_dict[course.CID.CID] = (course.CID.filePath.split("/")).pop()
+        if course.CID.optionalFilepath is not None:
+            additional_dict[course.CID.CID] = (course.CID.optionalFilepath.split("/")).pop()
+            
+            
+            
+
+    #To-Do: create additional file dictionary for the view
+    
     semesters = databaseInterface.get_all_semesters()
     # RENDER CORRECT PAGE BASED ON ACCESS LEVEL
     return render_template('courses/admin.html',
                                 cfg                   = cfg,
+                                syllabus_dict         = syllabus_dict,
+                                additional_dict       = additional_dict,
                                 my_courses            = my_courses,
                                 isAdmin               = auth.isAdmin,
                                 divisions_to_programs = divisions_to_programs,

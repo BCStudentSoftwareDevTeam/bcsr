@@ -50,7 +50,7 @@ function uploadOptional(CID){
      url: new_url,
      paramName: "file", // The name that will be used to transfer the file
      maxFilesize: 5, // MB
-     maxFiles: 1,
+     maxFiles: 100,
      acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
      dictDefaultMessage: "Upload your additional materials here",
      uploadMultiple: false,

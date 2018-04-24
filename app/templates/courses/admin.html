@@ -42,7 +42,7 @@
                             {% include 'snips/uploadSyllabusModal.html' %}
                         
                         {% else %}
-                             <p>Syllabus Uploaded</p>
+                             <a>{{syllabus_dict[course.CID.CID]}}</a>
                         {% endif %}
                     </td>
                     <td>
@@ -52,7 +52,7 @@
                               
                             
                         {% else %}
-                            <p>Files uploaded</p> 
+                            <p>{{additional_dict[course.CID.CID]}}</p> 
                            
                           
                         {% endif %}

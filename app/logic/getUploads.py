@@ -63,36 +63,35 @@ class GetUploads():
           pass
     return 0
     
-  def create_filename(self,CID, user_name, type):
+  def create_filename(self,CID, user_name):
     course_info = databaseInterface.get_course_info(CID)
-    if type == "syllabus":
-      new_file_name          = (    'CID' 
-                                  + str(course_info.CID) 
-                                  + '-' 
-                                  + str(course_info.prefix) 
-                                  +  '-' 
-                                  + str(course_info.number) 
-                                  + '-' 
-                                  + str(course_info.PID.DID.name) 
-                                  + '-' 
-                                  + user_name
-                                  + "." 
-                                  + str(self.file.filename.split(".").pop())
-                                ).replace(" ","")
-    elif type == "other":
-      new_file_name          = (    'additionalFile_CID' 
-                                  + str(course_info.CID) 
-                                  + '-' 
-                                  + str(course_info.prefix) 
-                                  +  '-' 
-                                  + str(course_info.number) 
-                                  + '-' 
-                                  + str(course_info.PID.DID.name) 
-                                  + '-' 
-                                  + user_name
-                                  + "." 
-                                  + str(self.file.filename.split(".").pop())
-                                ).replace(" ","")
+    new_file_name               = (    'CID' 
+                                + str(course_info.CID) 
+                                + '-' 
+                                + str(course_info.prefix) 
+                                +  '-' 
+                                + str(course_info.number) 
+                                + '-' 
+                                + str(course_info.PID.DID.name) 
+                                + '-' 
+                                + user_name
+                                + "." 
+                                + str(self.file.filename.split(".").pop())
+                              ).replace(" ","")
+    # elif type == "other":
+    #   new_file_name          = (    'additionalFile_CID' 
+    #                               + str(course_info.CID) 
+    #                               + '-' 
+    #                               + str(course_info.prefix) 
+    #                               +  '-' 
+    #                               + str(course_info.number) 
+    #                               + '-' 
+    #                               + str(course_info.PID.DID.name) 
+    #                               + '-' 
+    #                               + user_name
+    #                               + "." 
+    #                               + str(self.file.filename.split(".").pop())
+    #                             ).replace(" ","")
       
     app.logger.info("Filename created: " + new_file_name)
     return new_file_name
