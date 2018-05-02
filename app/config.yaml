@@ -68,7 +68,8 @@ fileOperations:
       uploadAdditional: "app/static/files/additionalFiles"
       zips: "static/files/zips"
       tmp: "app/static/files/tmp"
-      download: "static/files/syllabus"
+      downloadSyllabus: "static/files/syllabus"
+      downloadAdditional: "static/files/additionalFiles"
 
 termInfo:
 #the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611 

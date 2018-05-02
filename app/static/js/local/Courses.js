@@ -4,13 +4,32 @@ $(document).ready(function() {
     Dropzone.autoDiscover = false;
 });
 
+window.onload = function(){
+    var selectEl = document.getElementById('termSelect');
+    $('select[id=termSelect]').val('{{current_term}}')
+    $('.selectpicker').selectpicker('refresh')
+};
+
+
+function filterTable(SEID, filterType){
+    if (filterType == 1){
+        window.location.replace("/courses/"+SEID+"/allCourses")
+    } 
+    if (filterType == 2){
+        window.location.replace("/courses/"+SEID+"/withSyllabus")
+    }
+     if (filterType == 3){
+        window.location.replace("/courses/"+SEID+"/noSyllabus")
+    }
+}
+
 
 function upload(CID){
    $("#uploadSyllabusModal").modal('toggle');
    var type = "syllabus"
    var new_url  = "/uploads/"+type+"/"+ CID
    console.log(new_url)
-//   Dropzone.autoDiscover = false;
+
    var uploader = document.querySelector('#drop');
    var dropzone_options = {
      url: new_url,
@@ -38,13 +57,12 @@ function reload() {
 
 
 
-//To-DO: 
 
 function uploadOptional(CID){
   $("#uploadOptionalModal").modal('toggle');
   var type = "other"
   var new_url  = "/uploads/"+type+"/"+ CID
-//   Dropzone.autoDiscover = false;
+
   var uploader = document.querySelector('#dropOptional');
   var dropzone_options = {
      url: new_url,
@@ -69,97 +87,3 @@ function uploadOptional(CID){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // var length = $('[id="drop"]').length;
-    // var counter = 0;
-    // for (i = 0; i < length; i++){
-    //     changeID(counter);
-    //     counter++;
-    // }
-// function changeID(counter){
-//     var element = document.getElementById("drop");
-//     element.id = "element"+counter;
-//     console.log("element"+counter)
-//     console.log("Counter:" + counter);
-// }
-
-// function delete_syllabus(form_id) {
-//     swal({
-//         title: "Are you sure?",
-//         text: "You will not be able to recover this file!",
-//         type: "warning",
-//         showCancelButton: true,
-//         confirmButtonColor: "#DD6B55",
-//         confirmButtonText: "Yes, delete it!",
-//         closeOnConfirm: false
-//     }, function() {
-//          $(form_id).submit();
-//     });
-// };
-
-// function showPrograms(division) {
-//     var programID = '#programs-'+ division;
-//     if($(programID).css('display') == 'none'){
-//         $(programID).css('display', 'block');
-        
-        
-//     } else {
-//         $(programID).css('display', 'none');
-//     }
-    
-//     $('#icon-'+ division).toggleClass('glyphicon-plus')
-//     $('#icon-'+ division).toggleClass('glyphicon-minus')
-// }
-
-
-// function showCourses(program) {
-//     var programID = '#courses-'+ program;
-//     if($(programID).css('display') == 'none'){
-//         $(programID).css('display', 'block');
-        
-        
-//     } else {
-//         $(programID).css('display', 'none');
-//     }
-    
-//     $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
-//     $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
-// }

@@ -59,6 +59,11 @@ semesters = Semesters(  SEID      = 201612,
                         year      = 2017,
                         term      = "Spring",
                       ).save(force_insert = True)
+                      
+semesters = Semesters(  SEID      = 201611,
+                        year      = 2016,
+                        term      = "Fall",
+                      ).save(force_insert = True)
 ###########
 #DIVISIONS#
 ###########            
@@ -122,6 +127,18 @@ courses   = Courses(  prefix  = "CSC",
                       PID     = 1,
                       SEID    = 201612
                   ).save()
+courses   = Courses(  prefix  = "CSC",
+                      number  = "410",
+                      section = "SH",
+                      PID     = 1,
+                      SEID    = 201611
+                  ).save()
+courses   = Courses(  prefix  = "CHM",
+                      number  = "415",
+                      section = "SH",
+                      PID     = 1,
+                      SEID    = 201611
+                  ).save()
 ##############
 #USERSCOURSES#
 ##############
@@ -131,4 +148,10 @@ userscourses  = UsersCourses ( username = 'heggens',
                               
 userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 2
+                              ).save()
+userscourses  = UsersCourses ( username = 'heggens',
+                               CID      = 3
+                              ).save()
+userscourses  = UsersCourses ( username = 'heggens',
+                               CID      = 4
                               ).save()

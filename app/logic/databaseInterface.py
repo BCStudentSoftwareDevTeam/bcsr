@@ -72,9 +72,12 @@ def get_course_file_path(CID):
   file_path = str(cfg['fileOperations']['dataPaths']['uploads']) + str(course.filePath)
   return file_path
 
-def get_course_download_file_path(CID):
+def get_course_download_file_path(filetype, CID):
   course = get_course_info(CID)
-  file_path = str(cfg['fileOperations']['dataPaths']['download']) + str(course.filePath)
+  if filetype == "syllabus":
+    file_path = str(cfg['fileOperations']['dataPaths']['downloadSyllabus']) + str(course.filePath)
+  elif filetype == "other":
+    file_path = str(cfg['fileOperations']['dataPaths']['downloadAdditional']) + str(course.optionalFilepath)
   return file_path
  
 def get_course_instructors(CID):
@@ -85,6 +88,37 @@ def get_course_instructors(CID):
     instructors_string += instructor.username.username
   return instructors_string
   
+  
+def get_courses_with_syllabus(username,SEID):
+  courses = (UsersCourses.select()                      
+                            .join(Courses)
+                            .where(
+                                    UsersCourses.username  == username,
+                                    UsersCourses.CID       == Courses.CID,
+                                    Courses.SEID           == SEID,
+                                    Courses.filePath != None
+                                   ))
+  if courses.exists(): #checking whether query contains courses
+    peeweeObj = courses.execute()
+    return peeweeObj
+  else:
+    return None
+    
+def get_courses_with_no_syllabus(username,SEID):
+  courses = (UsersCourses.select()                      
+                            .join(Courses)
+                            .where(
+                                    UsersCourses.username  == username,
+                                    UsersCourses.CID       == Courses.CID,
+                                    Courses.SEID           == SEID,
+                                    Courses.filePath       == None
+                                   ))
+  if courses.exists(): #checking whether query contains courses
+    peeweeObj = courses.execute()
+    return peeweeObj
+  else:
+    return None
+    
 def get_non_admins():
   users = Users.select().where(Users.isAdmin == 0)
   return users

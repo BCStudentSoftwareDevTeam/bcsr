@@ -16,4 +16,19 @@ class GetCourses():
     except DoesNotExist:
       my_courses = None
     return my_courses
+    
+    
+  def check_for_my_courses_with_syllabus(self, SEID):
+    try:
+      my_courses = databaseInterface.get_courses_with_syllabus(self.username,SEID)
+    except DoesNotExist:
+      my_courses = None
+    return my_courses
+  
+  def check_for_my_courses_with_no_syllabus(self, SEID):
+    try:
+        my_courses = databaseInterface.get_courses_with_no_syllabus(self.username,SEID)
+    except DoesNotExist:
+      my_courses = None
+    return my_courses
       

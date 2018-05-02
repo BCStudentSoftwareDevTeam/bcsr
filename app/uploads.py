@@ -39,7 +39,6 @@ def uploads(fileType, CID):
         update_optional_path = Courses.update(optionalFilepath=database_path).where(Courses.CID==CID)
         update_optional_path.execute()
         
-      	  
     	#Now we need to log the changes
     	get_time = datetime.datetime.now()
     	time_stamp = get_time.strftime("%Y-%m-%d %I:%M")

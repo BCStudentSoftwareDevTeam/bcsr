@@ -6,9 +6,10 @@ from app.logic.getCourses import GetCourses
 from app.logic.switch import switch
 from app.logic.getAll import GetAll
 
-@app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
-@app.route("/courses/<SEID>/<prefix>", methods=["GET"])
-def courses():
+@app.route("/courses", methods = ["GET"], defaults ={'SEID':None, 'filterType':None}) #SET A DEFAULT APP ROUTE
+@app.route("/courses/<SEID>", methods=["GET"], defaults ={'filterType':None})
+@app.route("/courses/<SEID>/<filterType>", methods=["GET"])
+def courses(SEID, filterType):
     '''This function will render the correct template based off of the user's role'''
     #activate classes used on this controller
     getAll                = GetAll()
@@ -17,22 +18,38 @@ def courses():
     user       = auth.get_user()
     user_level = auth.user_level()
     #CREATE TWO DEFAULT DICTIONARIES
-    currentSEID           = databaseInterface.grab_current_semester()
-    current_term          = Semesters.get(Semesters.SEID == currentSEID)
+  
+    if SEID is None:
+        currentSEID           = databaseInterface.grab_current_semester()
+        current_term          = Semesters.get(Semesters.SEID == currentSEID)
+    else:
+        currentSEID = SEID
+        current_term = Semesters.get(Semesters.SEID == currentSEID)
     getCourses            = GetCourses(auth)
+    
     # we need to get the dictionaries that populate the tables
     two_dictionaries      = getAll.create_dictionaries(currentSEID)
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
-    my_courses                  = getCourses.check_for_my_courses(currentSEID)
+    if filterType == "allCourses" or filterType == None:
+        my_courses = getCourses.check_for_my_courses(currentSEID)
+    
+    if filterType == "withSyllabus":
+        my_courses = getCourses.check_for_my_courses_with_syllabus(currentSEID)
+
+    if filterType == "noSyllabus":
+        my_courses = getCourses.check_for_my_courses_with_no_syllabus(currentSEID)
+   
     syllabus_dict = {}
     additional_dict = {}
-    for course in my_courses:
-        if course.CID.filePath is not None:
-            syllabus_dict[course.CID.CID] = (course.CID.filePath.split("/")).pop()
-        if course.CID.optionalFilepath is not None:
-            additional_dict[course.CID.CID] = (course.CID.optionalFilepath.split("/")).pop()
+    print (currentSEID)
+    if my_courses is not None: 
+        for course in my_courses:
+            if course.CID.filePath is not None:
+                syllabus_dict[course.CID.CID] = (course.CID.filePath.split("/")).pop()
+            if course.CID.optionalFilepath is not None:
+                additional_dict[course.CID.CID] = (course.CID.optionalFilepath.split("/")).pop()
             
             
             
@@ -50,7 +67,9 @@ def courses():
                                 divisions_to_programs = divisions_to_programs,
                                 programs_to_courses   = programs_to_courses,
                                 semesters             = semesters,
-                                current_term          = current_term
+                                current_term          = current_term,
+                                currentSEID          = currentSEID
+                                
                                )
                                
     @app.route("/courses/files/<CID>", methods = ["GET"])

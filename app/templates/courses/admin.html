@@ -28,6 +28,7 @@
             </tr>
         </thead>
         <tbody>
+            {% if my_courses != None %}
             {% for course in my_courses %}
                 <tr>
                     <td>
@@ -42,7 +43,7 @@
                             {% include 'snips/uploadSyllabusModal.html' %}
                         
                         {% else %}
-                             <a>{{syllabus_dict[course.CID.CID]}}</a>
+                             <a href = "/download/syllabus/{{course.CID.CID}}">{{syllabus_dict[course.CID.CID]}}</a>
                         {% endif %}
                     </td>
                     <td>
@@ -52,7 +53,7 @@
                               
                             
                         {% else %}
-                            <p>{{additional_dict[course.CID.CID]}}</p> 
+                            <a  href = "/download/other/{{course.CID.CID}}">{{additional_dict[course.CID.CID]}}</a> 
                            
                           
                         {% endif %}
@@ -71,6 +72,8 @@
                     </td>
                 </tr>
             {% endfor %}
+            {%endif%}
+            
         </tbody>
         
     </table>
@@ -80,4 +83,7 @@
 
 {% endblock %}
 <script type="text/javascript" src="/static/js/local/Courses.js"></script>
+
+
+
 
