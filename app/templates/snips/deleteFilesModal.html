@@ -8,15 +8,28 @@
                     <h4 class="modal-title">Manage Files</h4>
                 </div>
                 <div class="modal-body">
-                    <p class="help-block">Select the file(s) to delete:</p>
-                    <input type="checkbox" id="syllabus" name="syllabus">
-                    <label for="syllabus">Syllabus</label>
-                    {% for file in additionalFiles %}
-                        <input type="checkbox" id="additionalFiles" name="additionalFile">
-                        <label for="syllabus">file.filename</label>
-                    {% endfor %}
-                        
-                    
+		<div class="row" id="BODY">
+		  {# {% for file in courses_to_files[course.CID]%} #}
+		  {#   {% if loop.index % 3 == 0 %} #}
+		  {#     <div class="row"> #}
+		  {#   {% endif %} #}
+		  {#     <div class="col-md-4" id="{{loop.index}}"> #}
+			{#   <div class="thumbnail"> #}
+			{#     <a href="{{file.filePath}}" > #}
+			{#       <img class="img-thumbnail" src="/static/images/document_icon.svg" alt="{{file}}" > #}
+			{#       <p class = "text-center col-xs-12"> {{file}} </p> #}
+			{#     </a> #}
+			{#     <button onclick="delete_image(this)" data-div="{{loop.index}}" data-filepath="{{file}}" type="button" class="center-block btn btn-danger btn-sm"> #}
+			{# 	<span class="glyphicon glyphicon-trash"></span> Delete  #}
+			{#     </button> #}
+			{#   </div> #}
+		  {#     </div> #}
+		  {#   {% if loop.index % 3 == 0 %}  #}
+		  {#     </div > #}
+		  {#   {% endif %} #}
+		  {# {% endfor %} #}
+		</div> 
+
                 </div>
                 <div class="modal-footer">
                   <button type = 'submit' data-dismiss="modal" class="btn btn-success" onclick="reload()" id = "submit" >Submit</a>
@@ -25,4 +38,5 @@
         </div>
     </div>
      <script type="text/javascript" src="/static/js/local/Courses.js"></script>
+     <script type="text/javascript" src="/static/js/local/delete.js"></script>
 {% endblock %}

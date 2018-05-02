@@ -26,6 +26,19 @@ def courses():
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
     my_courses                  = getCourses.check_for_my_courses(currentSEID)
+    CID = list()
+    for course in my_courses:
+        cid = course.CID
+        if cid not in CID:
+            CID.append(cid)
+
+    courses_with_files = FilesCourses.select().join(Courses).where(Courses.CID << CID)
+    courses_to_files = dict()
+    for course in courses_with_files:
+        if course.CID in courses_to_files:
+            courses_to_files[course.CID].append(course.FID)
+        else:
+            courses_to_files[course.CID] = [course.FID]
     # syllabus_dict = {}
     # for course in my_courses:
     #     syllabus_dict[course.CID] = ((course.filePath).split()).pop()
@@ -40,7 +53,8 @@ def courses():
                                 divisions_to_programs = divisions_to_programs,
                                 programs_to_courses   = programs_to_courses,
                                 semesters             = semesters,
-                                current_term          = current_term
+                                current_term          = current_term,
+                                courses_to_files      = courses_to_files 
                                )
                                
     @app.route("/courses/files/<CID>", methods = ["GET"])

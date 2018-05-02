@@ -22,6 +22,8 @@ models:
     - Courses
     - UsersCourses
     - Deadline
+    - Files
+    - FilesCourses
 # this makes the navigation bar
 mainMenu:
   - title: "Home"

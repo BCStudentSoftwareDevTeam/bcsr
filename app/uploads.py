@@ -26,31 +26,32 @@ def uploads(fileType, CID):
     complete_path   = (directory_path + new_file_name).replace(" ","")
     #Save the File
     file.save(complete_path)
-    	#Now we need to course_path with its new file name to the database
+        #Now we need to course_path with its new file name to the database
     if os.path.exists(complete_path):
       database_path = (course_path+new_file_name).replace(" ","")
       if fileType == "syllabus":
         update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
         update_course_path.execute()
       elif fileType == "other":
-        update_optional_path = Courses.update(optionalFilepath=database_path).where(Courses.CID==CID)
-        update_optional_path.execute()
-        
-      	  
-    	#Now we need to log the changes
-    	get_time = datetime.datetime.now()
-    	time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
-    	last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
-    	# log in our log file
-    	message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
-    	page = "/uploads/{0}".format(CID)
-    	log.writer("INFO", page, message)
-    	#update the database to inform the users who uploaded the file
-    	update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
-    	update_last_modified.execute()
-    	return redirect(url_for("courses"))
+        update_optional_path = Courses.get(Courses.CID==CID)
+        FID = Files.create(filePath=database_path)
+        FID.save()
+        FilesCourses.create(FID=FID, CID=CID).save()
+
+        #Now we need to log the changes
+        get_time = datetime.datetime.now()
+        time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
+        last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
+        # log in our log file
+        message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
+        page = "/uploads/{0}".format(CID)
+        log.writer("INFO", page, message)
+        #update the database to inform the users who uploaded the file
+        update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
+        update_last_modified.execute()
+        return redirect(url_for("courses"))
     else:
- 	return render_template("error.html",
+        return render_template("error.html",
                                cfg     = cfg,
                                message = "An error occured during the upload process.")  
   except Exception as e:
