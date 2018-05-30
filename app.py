@@ -14,7 +14,15 @@ import os
 import sys
 
 from app import app
-sys.path.insert(0,'/home/ubuntu/workspace/')
+
+# Use local path if local variable is provided
+if os.getenv("LOCAL"):
+    if os.getenv("LOCAL").lower() == 'true':
+        sys.path.insert(0,os.getcwd())
+    else:
+        sys.path.insert(0,os.getenv("LOCAL"))
+else:
+    sys.path.insert(0,'/home/ubuntu/workspace/')
 
 # Builds the server configuration
 if os.getenv('IP'):

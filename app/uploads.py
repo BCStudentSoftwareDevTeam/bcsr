@@ -20,12 +20,18 @@ def uploads(fileType, CID):
     directory_path  = upload_path + course_path
     #Make sure that the directories exist and creates it if it doesn't
     result = getUploads.check_path_exist(directory_path)
-    #Now we rename the file to our create standard
+    
+    
+    #Now we rename the syllabus file to our create standard
     instructors_string = databaseInterface.get_course_instructors(CID)
     if fileType == "syllabus":
       new_file_name   = getUploads.create_filename(CID, instructors_string)
+      
+      
     elif fileType == "other":
       new_file_name = file.filename
+      
+      
     complete_path   = (directory_path + new_file_name).replace(" ","")
     #Save the File
     file.save(complete_path)
@@ -50,11 +56,12 @@ def uploads(fileType, CID):
     	#update the database to inform the users who uploaded the file
     	update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
     	update_last_modified.execute()
-    	return redirect(url_for("courses"))
+    	
     else:
- 	return render_template("error.html",
+ 	    return render_template("error.html",
                                cfg     = cfg,
                                message = "An error occured during the upload process.")  
+    return redirect(url_for("courses"))
   except Exception as e:
     app.logger.info("{0}".format(e))
     return render_template("error.html",

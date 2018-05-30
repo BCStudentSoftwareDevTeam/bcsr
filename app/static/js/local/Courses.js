@@ -28,8 +28,6 @@ function upload(CID){
    $("#uploadSyllabusModal").modal('toggle');
    var type = "syllabus"
    var new_url  = "/uploads/"+type+"/"+ CID
-   console.log(new_url)
-
    var uploader = document.querySelector('#drop');
    var dropzone_options = {
      url: new_url,
@@ -41,6 +39,7 @@ function upload(CID){
      uploadMultiple: false,
      addRemoveLinks: true,
      clickable: true,
+     autoProcessQueue: false,
      accept: function(file, done) {
          done();
          console.log("File uploaded");
@@ -48,12 +47,16 @@ function upload(CID){
    };
    Dropzone.autoDiscover = false;
    var MyDropzone = new Dropzone(uploader, dropzone_options);
+   var submitButton = document.querySelector("#submitSyllabus")
+    submitButton.addEventListener("click", function() {
+      MyDropzone.processQueue(); // Tell Dropzone to process all queued files.
+      console.log("The queue for syllabus was processed")
+      location.reload();
+    });
+ 
 
 }
 
-function reload() {
-    location.reload();
-}
 
 
 
@@ -74,6 +77,7 @@ function uploadOptional(CID){
      uploadMultiple: false,
      addRemoveLinks: true,
      clickable: true,
+     autoProcessQueue: false,
      accept: function(file, done) {
          done();
          console.log("File uploaded");
@@ -81,7 +85,13 @@ function uploadOptional(CID){
   };
   Dropzone.autoDiscover = false;
   var optionalDropzone = new Dropzone(uploader, dropzone_options);
-
+     var submitButton = document.querySelector("#submitOptional")
+     submitButton.addEventListener("click", function() {
+      optionalDropzone.processQueue(); // Tell Dropzone to process all queued files.
+      console.log("The queue for optional was processed!")
+      location.reload();
+    });
+ 
 }
 
 
