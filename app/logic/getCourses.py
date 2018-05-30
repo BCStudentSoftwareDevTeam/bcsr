@@ -16,6 +16,7 @@ class GetCourses():
     except DoesNotExist:
       my_courses = None
     return my_courses
+<<<<<<< HEAD
     
     
   def check_for_my_courses_with_syllabus(self, SEID):
@@ -32,3 +33,6 @@ class GetCourses():
       my_courses = None
     return my_courses
       
+=======
+      
+>>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a

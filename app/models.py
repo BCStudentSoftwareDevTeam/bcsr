@@ -65,6 +65,10 @@ class Users (dbModel):
   
   def __str__(self):
     return self.username
+
+class Files(dbModel):
+  filePath = TextField()
+
   
 class Courses (dbModel):
   CID              = PrimaryKeyField()
@@ -74,8 +78,8 @@ class Courses (dbModel):
   PID              = ForeignKeyField(Programs)
   SEID             = ForeignKeyField(Semesters)
   filePath         = TextField(null = True)
-  optionalFilepath = TextField(null = True)
   lastModified     = TextField(null = True)
+
   
   def __str__(self):
     return str(self.CID)
@@ -84,7 +88,13 @@ class UsersCourses (dbModel):
   UCID          = PrimaryKeyField()
   username      = ForeignKeyField(Users)
   CID           = ForeignKeyField(Courses)
-  
+
+class FilesCourses(dbModel):
+  FID          = ForeignKeyField(Files)
+  CID           = ForeignKeyField(Courses)
+
 class Deadline(dbModel):
   description  = TextField()
   date         = DateField()
+
+  

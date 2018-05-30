@@ -35,7 +35,7 @@ def uploads(fileType, CID):
     complete_path   = (directory_path + new_file_name).replace(" ","")
     #Save the File
     file.save(complete_path)
-    	#Now we need to course_path with its new file name to the database
+        #Now we need to course_path with its new file name to the database
     if os.path.exists(complete_path):
       database_path = (course_path+new_file_name).replace(" ","")
       if fileType == "syllabus":
@@ -44,7 +44,10 @@ def uploads(fileType, CID):
       elif fileType == "other":
         update_optional_path = Courses.update(optionalFilepath=database_path).where(Courses.CID==CID)
         update_optional_path.execute()
-        
+      
+      FID = Files.create(filePath=database_path)
+      FID.save()
+      FilesCourses.create(FID=FID, CID=CID).save()  
     	#Now we need to log the changes
     	get_time = datetime.datetime.now()
     	time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
@@ -56,12 +59,13 @@ def uploads(fileType, CID):
     	#update the database to inform the users who uploaded the file
     	update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
     	update_last_modified.execute()
+    	return redirect(url_for("courses"))
     	
     else:
- 	    return render_template("error.html",
+        return render_template("error.html",
                                cfg     = cfg,
                                message = "An error occured during the upload process.")  
-    return redirect(url_for("courses"))
+    
   except Exception as e:
     app.logger.info("{0}".format(e))
     return render_template("error.html",

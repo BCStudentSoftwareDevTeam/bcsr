@@ -32,6 +32,7 @@ def courses(SEID, filterType):
     divisions_to_programs = two_dictionaries[0]
     programs_to_courses   = two_dictionaries[1]
     # MY COURSES SELECT QUERY
+<<<<<<< HEAD
     if filterType == "allCourses" or filterType == None:
         my_courses = getCourses.check_for_my_courses(currentSEID)
     
@@ -56,6 +57,27 @@ def courses(SEID, filterType):
 
     #To-Do: create additional file dictionary for the view
     
+=======
+    my_courses                  = getCourses.check_for_my_courses(currentSEID)
+    CID = list()
+    for course in my_courses:
+        cid = course.CID
+        if cid not in CID:
+            CID.append(cid)
+
+    courses_with_files = FilesCourses.select().join(Courses).where(Courses.CID << CID)
+    courses_to_files = dict()
+    for course in courses_with_files:
+        if course.CID in courses_to_files:
+            courses_to_files[course.CID].append(course.FID)
+        else:
+            courses_to_files[course.CID] = [course.FID]
+    # syllabus_dict = {}
+    # for course in my_courses:
+    #     syllabus_dict[course.CID] = ((course.filePath).split()).pop()
+    # print(syllabus_dict)                
+    print (my_courses)
+>>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a
     semesters = databaseInterface.get_all_semesters()
     # RENDER CORRECT PAGE BASED ON ACCESS LEVEL
     return render_template('courses/admin.html',
@@ -68,8 +90,12 @@ def courses(SEID, filterType):
                                 programs_to_courses   = programs_to_courses,
                                 semesters             = semesters,
                                 current_term          = current_term,
+<<<<<<< HEAD
                                 currentSEID          = currentSEID
                                 
+=======
+                                courses_to_files      = courses_to_files 
+>>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a
                                )
                                
     @app.route("/courses/files/<CID>", methods = ["GET"])
