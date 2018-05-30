@@ -23,11 +23,6 @@ if os.getenv("LOCAL"):
         sys.path.insert(0,os.getenv("LOCAL"))
 else:
     sys.path.insert(0,'/home/ubuntu/workspace/')
-<<<<<<< HEAD
-=======
-
-
->>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a
 
 # Builds the server configuration
 if os.getenv('IP'):

@@ -52,14 +52,7 @@
                             <a onclick = "uploadOptional({{course.CID.CID}})"> Upload additional files</a>
                             {% include 'snips/uploadOptionalModal.html' %} 
                         {% else %}
-<<<<<<< HEAD
                             <a  href = "/download/other/{{course.CID.CID}}">{{additional_dict[course.CID.CID]}}</a> 
-                           
-                          
-=======
-                            <a onclick = "uploadOptional({{course.CID.CID}})"> Upload additional files</a>
-                            <p>Files uploaded</p> 
->>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a
                         {% endif %}
                     </td>
                     <td>
@@ -71,15 +64,11 @@
                     </td>
                     <td> 
                         <a data-toggle ="modal" data-target = "#deleteModal">Delete Files</a>
+                        {% include 'snips/deleteFilesModal.html' %}
                     </td>
                 </tr>
             {% endfor %}
-<<<<<<< HEAD
             {%endif%}
-            
-=======
-            {% include 'snips/deleteFilesModal.html' %}
->>>>>>> b01e646186df1c4785d24ce459fc415d078eac5a
         </tbody>
         
     </table>
