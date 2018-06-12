@@ -8,8 +8,14 @@ Instructions:
  - A portion of the data required for this script to run properly directly 
  depends on the format and content of the csv file. Therefore any data that is 
  dependent on csv is located in the Global Variables Section. The intent is to 
- have the developer edit the global variables to the accomodate the csv and then
- the script should run prperly form there. 
+ have the server admin edit the global variables to the accomodate the csv and then
+ the script should run prperly form there.
+
+ - It is also currently the server admin's responsiblity to filter out all of the courses
+ that do not have an instructor assigned to them. You can go ahead and add the course to 
+ the database, but without an instructor the software will not hold anyone responsible for
+ uploading that syllabi. Therefore, it may be best to seperate those courses into a serperate
+ excel file and them to the registrar's office.    
 '''
 from app.models import *
 import csv
@@ -18,8 +24,8 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'Spring2017.csv'
-SEID        = 201612
+csvFileName = 'Fall2018.csv'
+SEID        = 201811
 #Create Index Map
 '''TODO:
   - Record the csv column index for the table column names below
