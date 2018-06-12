@@ -24,8 +24,8 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'Fall2018.csv'
-SEID        = 201811
+csvFileName = 'terms_csv/Summer2018.csv'
+SEID        = 201713
 #Create Index Map
 '''TODO:
   - Record the csv column index for the table column names below
