@@ -1,11 +1,11 @@
-
+  
 # The log file location   
 log:
 filename: "bcsr.log"
 
 # All the databases used by the system
 databases:
-  dev: "data/bcsr.sqlite"
+  dev: "data/syllus.sqlite"
   stage: ""
   prod: "data/bcsr.sqlite"
 

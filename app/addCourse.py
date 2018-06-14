@@ -32,7 +32,7 @@ def addCourse():
                     if new_user_course:
                         flash('The course ({0} {1}) has been added'.format(data['prefix'],data['number']))
                     else:
-                        flash('Course failed to be uploaded with instructor. Contact customer support')
+                        flash('Course failed to be uploaded with instructor. Contact the system support')
                 else:
                     flash('There was an error adding the course. The course was not added.')
             except Exception as e:

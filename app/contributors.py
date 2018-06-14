@@ -8,7 +8,7 @@ from app.logic.getAll import GetAll
 def contributors():
     # we need to know if the user is authorized to see this
   
-    return render_template("snips/nameList.html",
+    return render_template("",
                         cfg = cfg
 
                         )
