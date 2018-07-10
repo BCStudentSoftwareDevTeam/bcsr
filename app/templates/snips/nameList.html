@@ -1,23 +1,23 @@
-{% extends "snips/base.html" %}
-{% set currentPage = 'List of Students' %}
-{% block body %}
-<div id="List of Names">
-    <h2>Contributors</h2>
-    <p> These are the student who helped to create this database and continue to work on it.</p>
-    <table class="table table-bordered">
+<!--{% extends "snips/base.html" %}-->
+<!--{% set currentPage = 'List of Students' %}-->
+<!--{% block body %}-->
+<!--<div id="List of Names">-->
+<!--    <h2>Contributors</h2>-->
+<!--    <p> These are the student who helped to create this database and continue to work on it.</p>-->
+<!--    <table class="table table-bordered">-->
         
-    <tr class"info"> 
-        <th>Name</th>
-        <th>Graduating Year</th>
-    </tr>
+<!--    <tr class"info"> -->
+<!--        <th>Name</th>-->
+<!--        <th>Graduating Year</th>-->
+<!--    </tr>-->
     
 
-    {% for contrib in cfg.contributors %}
-    <tr class"info">
-        <td>{{contrib.name}}</td>
-        <td>{{contrib.year}}</td>
-    </tr>
-    {% endfor %}
-    </table>
-</div>
-{% endblock %}
+<!--    {% for contrib in cfg.contributors %}-->
+<!--    <tr class"info">-->
+<!--        <td>{{contrib.name}}</td>-->
+<!--        <td>{{contrib.year}}</td>-->
+<!--    </tr>-->
+<!--    {% endfor %}-->
+<!--    </table>-->
+<!--</div>-->
+<!--{% endblock %}-->

@@ -8,7 +8,7 @@ class GetAll():
   it will affect multiple files.'''
   def __init__(self):
     #self.username = authUser(request.environ)
-    self.username = 'heggens'
+    self.username = 'hopperg'
 
   def create_dictionaries(self,SEID):
       '''Purpose: Creates a mapping using dictionaries of 1)divisions to programs
