@@ -81,10 +81,10 @@ programs  = Programs(   name      = "Biology",
 #######
 #USERS#
 #######
-users     = Users(      firstName = "Scott",
-                        lastName  = "Heggen",
-                        username  = "heggens",
-                        email     = "heggens@berea.edu",
+users     = Users(      firstName = "Grace",
+                        lastName  = "Hopper",
+                        username  = "hopperg",
+                        email     = "hopperg@email.com",
                         isAdmin     = True
                   ).save(force_insert=True)
             

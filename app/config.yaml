@@ -31,7 +31,11 @@ mainMenu:
   - title: "Archive"
     link: "/archive"
   - title: "Log Out"
+<<<<<<< HEAD
     link: "#TODO_LOGOUT_"
+=======
+    link: "#TODO_LOGOUT_URL"
+>>>>>>> bceee20be13ad58f1cb4e0b89a372041b83c8507
     
 adminMenu:
   Administration:
@@ -85,6 +89,7 @@ DEBUG:
   # user: "turinga" #Division Chair Access
   # user: "borga"  #Professor Access
   # user: "doej" #Program Access
+
   
 # contributors:
 #   - name: "Cody Myers"
