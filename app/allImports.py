@@ -22,7 +22,7 @@ sys.dont_write_bytecode = True
 
 def authUser(env):
     envK = "eppn"
-    if (envK in env):
+    if (envK in env): #Grabs env variables from shibboleth
         # we need to sanitize the environment variable
         # TODO: this looks like a function that can be taken out
         return env[envK].split("@")[0].split('/')[-1].lower()
@@ -76,3 +76,7 @@ def teardown_request(exception):
     dbM = getattr(g, 'db', None)
     if (dbM is not None) and (not dbM.is_closed()):
       dbM.close()
+      
+      
+      
+      

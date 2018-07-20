@@ -7,7 +7,8 @@ It also includes all the application files that are used as "pages" in the app
 '''
 
 from allImports import *
-from app import allImports
+from app import allImports 
+
 
 # Include an import for every python file that is serving a webpage
 #import your new python files here. It is not a part of the module until it is imported

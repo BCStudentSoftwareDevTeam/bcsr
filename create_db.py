@@ -8,8 +8,10 @@ import importlib
 
 # Don't forget to import your own models!
 from app.models import *
+from app.loadConfig import *
 
 conf = load_config('app/config.yaml')
+
 
 sqlite_dbs  = [ conf['databases']['dev']
                 # add more here if multiple DBs
@@ -86,24 +88,24 @@ users     = Users(      firstName = "Scott",
                         isAdmin     = True
                   ).save(force_insert=True)
             
-users     = Users(      firstName  = "Jan",
-                        lastName   = "Pearce",
-                        username   = "pearcej",
-                        email      = "pearcej@berea.edu",
+users     = Users(      firstName  = "Alan",
+                        lastName   = "Turing",
+                        username   = "turinga",
+                        email      = "turinga@email.com",
                         DID        = 2
                   ).save(force_insert=True)
                         
-users     = Users(      firstName = "Mario",
-                        lastName  = "Nakazawa",
-                        username  = "nakazawam",
+users     = Users(      firstName = "Anita",
+                        lastName  = "Borg",
+                        username  = "borga",
                         PID       = 1,
-                        email     = "nakazawam@berea.edu"
+                        email     = "borga@email.com"
                   ).save(force_insert=True)
                   
-users     = Users(      firstName = "Matt",
-                        lastName  = "Jadud",
-                        username  = "jadudm",
-                        email     = "jadudm@berea.edu",
+users     = Users(      firstName = "John",
+                        lastName  = "Doe",
+                        username  = "doej",
+                        email     = "doej@email.com",
                   ).save(force_insert=True)  
 #########                  
 #COURSES#  
@@ -117,17 +119,17 @@ courses   = Courses(  prefix  = "BIO",
                   
 courses   = Courses(  prefix  = "CSC",
                       number  = "415",
-                      section = "SH",
+                      section = "GH",
                       PID     = 1,
                       SEID    = 201612
                   ).save()
 ##############
 #USERSCOURSES#
 ##############
-userscourses  = UsersCourses ( username = 'heggens',
+userscourses  = UsersCourses ( username = 'hopperg',
                                CID      = 1
                               ).save()
                               
-userscourses  = UsersCourses ( username = 'heggens',
+userscourses  = UsersCourses ( username = 'hopperg',
                                CID      = 2
                               ).save()

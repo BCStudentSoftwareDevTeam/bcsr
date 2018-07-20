@@ -9,7 +9,7 @@ To rename the app, you need to make three changes:
 2) Rename the "app" folder to "helloWorldForm"
 3) Rename this file to "helloWorldForm.py"
 
-'''
+# '''
 import os
 import sys
 
@@ -30,3 +30,5 @@ else:
 # Print statements go to your log file in production; to your console while developing
 print ("Running server at http://{0}:{1}/".format(IP, PORT))
 app.run(host = IP, port = PORT, debug = True, threaded = True)
+
+

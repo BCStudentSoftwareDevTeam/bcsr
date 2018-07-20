@@ -3,7 +3,7 @@ from allImports import *
 @app.route("/", methods = ["GET"])
 def start():
     #TODO: FIND OUT HOW TO CATCH THE USERNAME FROM THE LOGIN PROCESS
-    un = "heggens";
+    un = "hopperg";
     #TODO: NEED TO FIGURE OUT HOW TO HANDLE SESSION VARIABLES IN FLASK
         #TODO: SAVE THE USER'S USERNAME WITHIN A SESSION VARIABLE
         #TODO: ROLE LETTER

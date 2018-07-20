@@ -7,10 +7,10 @@ filename: "bcsr.log"
 databases:
   dev: "data/syllus.sqlite"
   stage: ""
-  prod: "data/bcsr.sqlite"
+  prod: "data/syllus.sqlite"
 
 databaseAdmin:
-  user: 'heggens'
+  user: 'hopperg'
   
 # For every table in the database, add an item here
 models:
@@ -31,7 +31,7 @@ mainMenu:
   - title: "Archive"
     link: "/archive"
   - title: "Log Out"
-    link: "https://login.berea.edu/idp/profile/Logout"
+    link: "#TODO_LOGOUT_"
     
 adminMenu:
   Administration:
@@ -81,36 +81,36 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610 
     
 DEBUG:
-  user: "HEGGENS@berea.edu" #Admin Access
-  # user: "pearcej" #Division Chair Access
-  # user: "jadudm"  #Professor Access
-  # user: "nakazawam" #Program Access
+  user: "hopperg@email.com" #Admin Access
+  # user: "turinga" #Division Chair Access
+  # user: "borga"  #Professor Access
+  # user: "doej" #Program Access
   
-contributors:
-  - name: "Cody Myers"
-    username: "myersco"
-    year: 2017
-  - name: "Guillermo Ramos"
-    username: "ramosg"
-    year: 2018
-  - name: "Sarah Watts"
-    username: "wattss"
-    year: 2018
-  - name: "Jose Zindia"
-    username: "zindiaj"
-    year: 2018
-  - name: "Jonathan Chauwa"
-    username: "chauwaj"
-    year: 2019
-  - name: "Kenny Nelson"
-    username: "nelsonk"
-    year: 2019
-  - name: "Sher Sanginov"
-    username: "sanginovs"
-    year: 2019
-  - name: "Evan Johnson"
-    username: "johnsone"
-    year: 2019
+# contributors:
+#   - name: "Cody Myers"
+#     username: "myersco"
+#     year: 2017
+#   - name: "Guillermo Ramos"
+#     username: "ramosg"
+#     year: 2018
+#   - name: "Sarah Watts"
+#     username: "wattss"
+#     year: 2018
+#   - name: "Jose Zindia"
+#     username: "zindiaj"
+#     year: 2018
+#   - name: "Jonathan Chauwa"
+#     username: "chauwaj"
+#     year: 2019
+#   - name: "Kenny Nelson"
+#     username: "nelsonk"
+#     year: 2019
+#   - name: "Sher Sanginov"
+#     username: "sanginovs"
+#     year: 2019
+#   - name: "Evan Johnson"
+#     username: "johnsone"
+#     year: 2019
 
   
     

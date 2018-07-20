@@ -15,7 +15,7 @@ Instructions:
  that do not have an instructor assigned to them. You can go ahead and add the course to 
  the database, but without an instructor the software will not hold anyone responsible for
  uploading that syllabi. Therefore, it may be best to seperate those courses into a serperate
- excel file and them to the registrar's office.    
+ excel file and them to the registrar's office.  
 '''
 from app.models import *
 import csv
@@ -123,6 +123,7 @@ def main():
       print "TODO: Use BCSR database to add semester then run script again"
     else:
       print (e, "Line ({})".format(exc_tb.tb_lineno))
+      
 
 main()
 
