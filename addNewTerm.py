@@ -24,62 +24,86 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'terms_csv/Summer2018.csv'
-SEID        = 201713
+csvFileName = 'terms_csv/just-geo.csv'
+SEID        = 201811
+
+
 #Create Index Map
 '''TODO:
   - Record the csv column index for the table column names below
   - If the csv doesn't include some the data column then set the values to None'''
 #Courses Table
-CRN      = 0 
-prefix   = 1
-number   = 2
-section  = 3
+CRN      = 2 
+prefix   = 3
+number   = 4
+section  = 5
 #UsersCourses Table
 '''There may be more than one instructor per course, the max instructors a course
 can have is 3, but they rarely have more than 2. Therefore, we need get the index
 for the potential teachers here. '''
-username1  = 7
-username2  = 10
-username3  = 13
+firstName1 = 18
+lastName1 = 19
+username1  = 20
+firstName2 = 21
+lastName2 = 22
+username2  = 23
+firstName3 = 24
+lastName3 = 25
+username3  = 26
 
 def createPrefixMapping():
+  """ Creates a dictionary of all prefixes (e.g., CSC, TAD) """
   prefixDict = dict()
   pids = Programs.select(Programs.PID)
   for pid in pids:
     prefixs = Courses.select(Courses.prefix).distinct().where(Courses.PID == pid)
     for pre in prefixs:
       prefixDict[str(pre.prefix)] = pid.PID
+  # print(prefixDict)
   return prefixDict
 
 def addCourse(course,prefixDict):
     try:
-      pid = prefixDict[course[prefix]]
+      pid = prefixDict[course[prefix].strip()]  # Strip off white space because dirty data
       addCourse = Courses.create(prefix  = course[prefix],
                      number  = course[number],
                      section = course[section],
                      PID     = pid,
                      SEID    = SEID)
+#      print ("added", course[CRN])
+#      print (addCourse.prefix + " " + addCourse.number)
       return addCourse.CID
     except Exception as e:
       exc_type, exc_obj, exc_tb = sys.exc_info()
       print (e, 
             'CRN: {} '.format(course[CRN]),
+	    'Course: {}'.format(course[prefix] + " " + course[number] + " - " + course[section]),
             "Line ({})".format(exc_tb.tb_lineno))
       return False
             
 def findInstructors(course):
+  ''' 
+	Gets all of the instructors for a course, or creates them if they do not already exist
+  '''
   instructors = []
   usernames=[username1,username2,username3]
+  firstNames = [firstName1, firstName2, firstName3]
+  lastNames = [lastName1, lastName2, lastName3]
+  index = 0
   for username in usernames:
     if username != None:
       if course[username] != "":
         try:
-          check = Users.get(Users.username==course[username])
-          instructors.append(course[username])
+	  check = Users.get(Users.username == course[username])
         except Exception as e:
-          print e
-          pass
+          check = Users.get_or_create(username=course[username], 
+				      firstName = course[firstNames[index]], 
+				      lastName = course[lastNames[index]], 
+				      email = course[username] + "@berea.edu")	# Find the user in the db; all these fields are required
+	  # print e
+          # pass
+        instructors.append(course[username])                  # Adds to instructor list
+    index += 1  
   if instructors == []:
     return False
   else:

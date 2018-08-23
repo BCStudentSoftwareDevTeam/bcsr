@@ -28,8 +28,11 @@ def removeCourse():
       try:
         data = request.form
         course = Courses.get(Courses.CID == data['CID'])
-        msg = 'Course (' + course.prefix + '-' + course.number + '-' + course.section + ') has been deleted.'
-        Courses.delete().where(Courses.CID == data['CID']).execute()
+        msg = 'The course (' + course.prefix + '-' + course.number + '-' + course.section + ') has been deleted.'
+	
+	UsersCourses.delete().where(UsersCourses.CID == data['CID']).execute()  # Delete any relationships to users as well	
+
+	Courses.delete().where(Courses.CID == data['CID']).execute()
         flash(msg)
         return redirect(url_for("removeCourse"))
       except Exception as e:
