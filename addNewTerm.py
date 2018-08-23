@@ -94,7 +94,7 @@ def findInstructors(course):
     if username != None:
       if course[username] != "":
         try:
-	  check = Users.get(Users.username == course[username])
+          check = Users.get(Users.username == course[username])
         except Exception as e:
           check = Users.get_or_create(username=course[username], 
 				      firstName = course[firstNames[index]], 
