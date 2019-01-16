@@ -62,7 +62,7 @@ fileOperations:
       doc: "doc"
       docx: "docx"
   allowedSize:
-      size: 8000000
+      size: 24000000
   dataPaths:
       uploads: "app/static/files/uploads"
       zips: "static/files/zips"
