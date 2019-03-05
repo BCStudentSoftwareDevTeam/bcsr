@@ -13,10 +13,12 @@ h3{
     display: inline-block;
 }
 
+/* Grabs all elements with the id starting with programs-: https://www.w3schools.com/cssref/sel_attr_contain.asp */
 div[id*='programs-'] {
     display: none;
 }
 
+/* Grabs all elements with the id starting with courses-: https://www.w3schools.com/cssref/sel_attr_contain.asp */
 div[id*='courses-'] {
     display: none;
 }

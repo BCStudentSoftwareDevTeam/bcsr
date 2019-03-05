@@ -1,5 +1,7 @@
 {% extends "/snips/base.html" %}
-{% set currentPage = "Courses" %}
+{# Prevent the JS file for this page from loading on page load #}
+{% set currentPage = "no" %}
+
 {% block body %}
 {# can't use currentPage because of scoping issues #}
 {% set page = "Courses" %}
@@ -36,5 +38,6 @@
     
 {% endfor %}        
 
-<script type="text/javascript" src="static/js/local/courses.js"></script>
+<link rel = "stylesheet" href = "/static/css/Courses.css"/>
+<script type="text/javascript" src="/static/js/local/courses.js"></script>
 {% endblock %}
