@@ -24,8 +24,8 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'terms_csv/just-geo.csv'
-SEID        = 201811
+csvFileName = 'terms_csv/201812.csv'
+SEID        = 201812
 
 
 #Create Index Map
@@ -33,7 +33,7 @@ SEID        = 201811
   - Record the csv column index for the table column names below
   - If the csv doesn't include some the data column then set the values to None'''
 #Courses Table
-CRN      = 2 
+CRN      = 2	#NOTE: start at zero 
 prefix   = 3
 number   = 4
 section  = 5
@@ -41,14 +41,14 @@ section  = 5
 '''There may be more than one instructor per course, the max instructors a course
 can have is 3, but they rarely have more than 2. Therefore, we need get the index
 for the potential teachers here. '''
-firstName1 = 18
-lastName1 = 19
+firstName1 = 19
+lastName1 = 18
 username1  = 20
-firstName2 = 21
-lastName2 = 22
+firstName2 = 22
+lastName2 = 21
 username2  = 23
-firstName3 = 24
-lastName3 = 25
+firstName3 = 25
+lastName3 = 24
 username3  = 26
 
 def createPrefixMapping():

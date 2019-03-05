@@ -2,7 +2,7 @@
 /* global bootbox  */
 Dropzone.options.drop = {
     paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 5, // MB
+    maxFilesize: 24, // MB
     maxFiles: 1,
     acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
     dictDefaultMessage: "Upload your syllabus here",
