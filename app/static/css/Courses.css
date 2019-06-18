@@ -22,3 +22,13 @@ div[id*='programs-'] {
 div[id*='courses-'] {
     display: none;
 }
+
+#reload {
+  color: #FFFFFF;
+  font-size: 15px;
+  font-family: Helvetica;
+  background-color: #608b43;
+  border-color: #95a5a6;
+  float: right;
+  margin-top: 25px;
+}

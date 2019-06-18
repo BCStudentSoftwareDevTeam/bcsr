@@ -69,8 +69,8 @@ admin = Admin(app)
 # Don't panic, if you need clarification ask.
 @app.before_request
 def before_request():
-    g.dbMain =  mainDB.connect()
-
+    # g.dbMain =  mainDB.connect()
+    pass
 @app.teardown_request
 def teardown_request(exception):
     dbM = getattr(g, 'db', None)
