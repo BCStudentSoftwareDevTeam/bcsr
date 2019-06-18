@@ -9,9 +9,11 @@ from app.logic import databaseInterface
 @app.route('/uploads/<CID>', methods=['POST'])
 def uploads(CID):
   auth       = AuthorizedUser()
-  user_name  = auth.get_username()
-  file = request.files['file']
-  getUploads  = GetUploads(file)
+  user_name  = auth.get_username()  
+  thefile = request.files['thefile']  
+  
+  getUploads  = GetUploads(thefile)
+  
   try:
     upload_path     = getUploads.get_upload_path()
     #course_path is the map of where the syllabus should be in the upload folder
@@ -23,10 +25,11 @@ def uploads(CID):
     instructors_string = databaseInterface.get_course_instructors(CID)
     new_file_name   = getUploads.create_filename(CID, instructors_string)
     complete_path   = (directory_path + new_file_name).replace(" ","")
+    print(complete_path)
     #Save the File
-    file.save(complete_path)
+    thefile.save(complete_path)
     if os.path.exists(complete_path):
-    	#Now we need to course_path with its new file name to the database
+    	#Now we need to add course_path with its new file name to the database
     	database_path = (course_path+new_file_name).replace(" ","")
     	update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
     	update_course_path.execute()
@@ -43,7 +46,7 @@ def uploads(CID):
     	update_last_modified.execute()
     	return redirect(url_for("courses"))
     else:
- 	return render_template("error.html",
+ 	    return render_template("error.html",
                                cfg     = cfg,
                                message = "An error occured during the upload process.")  
   except Exception as e:
