@@ -8,7 +8,7 @@ from app.logic import databaseInterface
 def systemManagement():
   page = "/" + request.url.split("/")[-1] #We need page for logging purposes
   authorizedUser = AuthorizedUser()
-  if authorizedUser.isAdmin:              #Ensure that the user is an Admin
+  if authorizedUser:              #Ensure that the user is an Admin
     #Class from logic folder
     system    = GetSystemManagement()
     years     = system.get_years_list()   #Returns a list of the next five years
@@ -19,7 +19,7 @@ def systemManagement():
     return render_template('admin/editSystem.html',
                             cfg = cfg,
                             #This variable is for the navbar
-                            isAdmin   = authorizedUser.isAdmin,
+                            isAdmin   = authorizedUser,
                             users     = users,
                             admins    = admins,
                             semesters = semesters,
@@ -32,7 +32,7 @@ def systemManagement():
 def addSemester():
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
-  if authorizedUser.isAdmin:
+  if authorizedUser:
     data        = request.form
     #Class from logic folder
     system      = GetSystemManagement()
