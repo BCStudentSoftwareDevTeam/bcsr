@@ -8,7 +8,7 @@ import sys
 import os
 reload(sys)
 sys.setdefaultencoding("utf-8")
-from app.config.loadConfig import load_config
+from app.loadConfig import load_config
 
 print("Hello")
 dir_name  = os.path.dirname(__file__) # Return the directory name of pathname _file_
@@ -32,8 +32,8 @@ cursor = cnx.cursor()
 ##############
 add_semesters = ("INSERT INTO semesters (SEID, year, term) VALUES (%s, %s, %s)")
 
-semesters = old.SemestersQueries()
-semeseters = form.select_all()
+semesters = old.Semesters()
+semesters = semesters.select()
 for i in semesters:
     SEID = int(i.SEID)
     year = int(i.year)
@@ -45,8 +45,8 @@ for i in semesters:
 ##############
 add_divisions = (" INSERT INTO divisions (DID, name) VALUES (%s, %s)")
 
-divisions = old.DivisionsQueries()
-divisions = divisions.select_all()
+divisions = old.Divisions()
+divisions = divisions.select()
 for i in divisions:
     DID = int(i.DID)
     name = str(i.name)
@@ -57,69 +57,68 @@ for i in divisions:
 #################
 add_programs = ("INSERT INTO programs (PID, name, DID_id) VALUES (%s, %s, %s)")
 
-programs = old.ProgramsQueries()
-programs = programs.select_all()
+programs = old.Programs()
+programs = programs.select()
 for i in programs:
     PID = int(i.PID)
     name = str(i.name) #Foerign key to User table, username
-    DID_id = int(i.DID_id.DID_id)
+    DID = int(i.DID.DID)
 
-    data_programs = (PID, name, DID_id)
+    data_programs = (PID, name, DID)
 
     cursor.execute(add_programs, data_programs)
 #################
 add_users = ("INSERT INTO users (username, firstname, lastname, email, isAdmin, PID_id, DID_id) VALUES (%s, %s, %s, %s, %s, %s, %s)")
-
-users = old.UsersQueries()
-users = users.select_all()
+users = old.Users()
+users = users.select()
 for i in users:
     username = str(i.username)
-    firstname = str(i.firstname)
-    lastname = str(i.lastname)
+    firstName = str(i.firstName)
+    lastName = str(i.lastName)
     email = str(i.email)
     isAdmin = bool(i.isAdmin)
-    PID_id = int(i.PID_id.PID_id)
-    DID_id = int(i.DID_id.DID_id)
+    PID = int(i.PID.PID) if i.PID else None
+    DID = int(i.DID.DID) if i.DID else None
 
-    data_users = (username, firstname, lastname, email, isAdmin, PID_id, DID_id)
+    data_users = (username, firstName, lastName, email, isAdmin, PID, DID)
 
     cursor.execute(add_users, data_users)
 #################
 add_courses = ("INSERT INTO courses (CID, prefix, number, section, PID_id, SEID_id, filePath, lastModified) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 
-courses = old.CoursesQueries()
-courses = courses.select_all()
+courses = old.Courses()
+courses = courses.select()
 for i in courses:
     CID = int(i.CID)
     prefix = str(i.prefix)
     number = str(i.number)
     section = str(i.section)
-    PID_id = int(i.PID_id.PID_id)
-    SEID_id = int(i.SEID_id.SEID_id)
+    PID = int(i.PID.PID)
+    SEID = int(i.SEID.SEID)
     filePath = str(i.filePath)
     lastModified = str(i.lastModified)
 
-    data_courses = (CID, prefix, number, section, PID_id, SEID_id, filePath, lastModified)
+    data_courses = (CID, prefix, number, section, PID, SEID, filePath, lastModified)
 
     cursor.execute(add_courses, data_courses)
 #################
 add_userscourses = ("INSERT INTO userscourses (UCID, username_id, CID_id) VALUES (%s, %s, %s)")
 
-userscourses = old.UsersCoursesQueries()
-userscourses = userscourses.select_all()
+userscourses = old.UsersCourses()
+userscourses = userscourses.select()
 for i in userscourses:
     UCID = int(i.UCID)
-    username_id = str(i.username_id.username_id)
-    CID_id = int(i.CID_id.CID_id)
+    username = str(i.username.username)
+    CID = int(i.CID.CID)
 
-    data_userscourses = (UCID, username_id, CID_id)
+    data_userscourses = (UCID, username, CID)
 
     cursor.execute(add_userscourses, data_userscourses)
 #################
 add_deadline = ("INSERT INTO deadline (description, date) VALUES (%s, %s)")
 
-deadline = old.DeadlineQueries()
-deadline = deadline.select_all()
+deadline = old.Deadline()
+deadline = deadline.select()
 for i in deadline:
     descriptiion = str(i.description)
     date = str(i.date)
