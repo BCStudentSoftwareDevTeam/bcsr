@@ -20,6 +20,7 @@ username  = cfg['db']['username']
 password  = cfg['db']['password']
 # Create a connection to the mysql database
 cnx = mysql.connector.connect(database=db_name, host = host, password = password, user = username)
+
 print("Hello2")
 
 # *******************************
@@ -31,17 +32,20 @@ print("Hello2")
 cursor = cnx.cursor()
 ##############
 add_semesters = ("INSERT INTO semesters (SEID, year, term) VALUES (%s, %s, %s)")
-
+# x = old.Semesters.create(SEID = 201615, year = 2016, term = "Fake")
+# print(x.SEID)
 semesters = old.Semesters()
 semesters = semesters.select()
 for i in semesters:
     SEID = int(i.SEID)
     year = int(i.year)
     term = str(i.term)
-
+    print (i)
     data_semesters = (SEID, year, term)
-
+    print (data_semesters)
     cursor.execute(add_semesters, data_semesters)
+
+
 ##############
 add_divisions = (" INSERT INTO divisions (DID, name) VALUES (%s, %s)")
 
@@ -85,10 +89,20 @@ for i in users:
     cursor.execute(add_users, data_users)
 #################
 add_courses = ("INSERT INTO courses (CID, prefix, number, section, PID_id, SEID_id, filePath, lastModified) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
+# 11716,12072,12149,12234,12238,12241,12290,
+badcourses = [12352,12788,13282,13283,13284,13285,13286,13287,13288,13289,13290,13291,13292,13295,13296,13297,13298,13299,13300,13301,13302,13303,13304,13305,13306,13307,13308,13309,13310,13311,13312,13313,13314,13315,13316,13321,13322,13323,13324,13325,13326,13327,13328,13329,13330,13331,13332,13333,13334,13335,13336,13337,13338,13340,13341,13342,13343,13344,13345,13346,13347,13348,13349,13350,13351,13352,13353,13354,13355,13356,13357,13358,13359,13360,13361,13362,13363,13364,13365,13366,13367,13368,13369,13370,13371,13372,13373,13374,13375,13376,13380,13381,13382,13383,13384,13385,13386,13387,13388,13389,13390,13391,13392,13393,13394,13395,13396,13397,13398,13399,13400,13401,13402,13403,13404,13405,13406,13407,13408,13409,13412,13413,13414,13415,13416,13417,13418,13419,13420,13421,13422,13423,13424,13425,13426,13427,13428,13429]
+for c in badcourses:
+    print(c)
+    try:
+        x = old.Courses.create(CID= c, prefix = "CSC", number = "999", section="A", PID = 17, SEID = 201615)
+    except Exception as e:
+        print(e)
+
 
 courses = old.Courses()
 courses = courses.select()
 for i in courses:
+
     CID = int(i.CID)
     prefix = str(i.prefix)
     number = str(i.number)
@@ -109,7 +123,11 @@ userscourses = userscourses.select()
 for i in userscourses:
     UCID = int(i.UCID)
     username = str(i.username.username)
-    CID = int(i.CID.CID)
+    print(i.CID.CID)
+    if i.CID:
+        CID = int(i.CID.CID)
+    else:
+        continue
 
     data_userscourses = (UCID, username, CID)
 
@@ -120,7 +138,8 @@ add_deadline = ("INSERT INTO deadline (description, date) VALUES (%s, %s)")
 deadline = old.Deadline()
 deadline = deadline.select()
 for i in deadline:
-    descriptiion = str(i.description)
+
+    description = str(i.description)
     date = str(i.date)
 
     data_deadline = (description, date)
