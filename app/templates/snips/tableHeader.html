@@ -1,9 +1,14 @@
 <div style = "margin-left:25px;">
-  <table style = "width:100%;" class= "table table-striped table-hover">
+  <table id="tableHeader" style = "width:100%;" class= "table table-striped table-bordered table-sm" cellspacing="0">
     <tr style = "text-align:center;">
       {% for item in cfg['Headers'][page] %}
         {% if item == "Syllabus Upload" %}
-          <th style = "width:255px;">{{item}}</th>
+          <th style = "width:245px;">{{item}}</th>
+        
+        {% elif item == "Instructor" %}
+          <th class="th-sm">Instructor</th> <!--Hailey, this code modifies the instructor portion of the table on bcsr.  I couldn't get it to sort though.  It could be something to do with the tableHeader.js file -->
+        {% elif item == "Course" %}
+          <th class="th-sm">Course</th> <!--Same deal with this line.  Still can't get the column to sort -->
         {% else %}
           <th>{{item}}</th>
         {% endif %}

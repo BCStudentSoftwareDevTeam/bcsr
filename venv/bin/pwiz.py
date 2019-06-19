@@ -1,4 +1,4 @@
-#!/var/www/html/bcsr-flask/venv/bin/python2
+#!/var/www/html/bcsr-flask/venv/bin/python
 
 import datetime
 import sys
