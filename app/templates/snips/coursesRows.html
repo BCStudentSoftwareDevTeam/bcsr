@@ -1,39 +1,46 @@
+<link rel="stylesheet" href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"</script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"</script>
+<script type="text/javascript" src="/static/js/local/tableHeader.js"></script>
 <link rel="stylesheet" href="/static/css/courses_form.css">
-<tr>
-  <td>
-    {{course.username.firstName}} {{course.username.lastName}}
-  </td>
-  <td>git 
-    {% if course.CID.filePath == None %}
-      {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
-    {% else %}
-      <a href = "/download/{{course.CID.CID}}">
-        {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
-      </a>
-    {% endif %}
-  </td>
-  <td>
-    {{course.CID.SEID.term}}-{{course.CID.SEID.year}}
-  </td>
-  <td>
-    {% if course.CID.filePath == None %}
-      <form class="dropzone" id="drop" action = "/uploads/{{course.CID.CID}}">
-        <div class="box"></div>
-      </form>
-    {% else %}
-      <!-- Buttons -->
-
-      <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
-      <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
-        <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
-      </form>
-    {% endif %}
-  </td>
-  <td>
-    {% if course.CID.lastModified == None %}
-      <p>Course has not yet been modified.</p>
-    {% else %}
-      <p>{{course.CID.lastModified}}</p>
-    {% endif %}
-  </td>
-</tr>
+          <tbody>
+              <tr>
+                <td>
+                  {{course.username.firstName}} {{course.username.lastName}}
+                </td>
+                <td> 
+                  {% if course.CID.filePath == None %}
+                    {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+                  {% else %}
+                    <a href = "/download/{{course.CID.CID}}">
+                      {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+                    </a>
+                  {% endif %}
+                </td>
+                <td>
+                  {{course.CID.SEID.term}}-{{course.CID.SEID.year}}
+                </td>
+                <td>
+                  {% if course.CID.filePath == None %}
+                    <form class="dropzone" id="drop" action = "/uploads/{{course.CID.CID}}">
+                      <div class="box"></div>
+                    </form>
+                  {% else %}
+                    <!-- Buttons -->
+              
+                    <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
+                    <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
+                      <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
+                    </form>
+                  {% endif %}
+                </td>
+                <td>
+                  {% if course.CID.lastModified == None %}
+                    <p>Course has not yet been modified.</p>
+                  {% else %}
+                    <p>{{course.CID.lastModified}}</p>
+                  {% endif %}
+                </td>
+              </tr>
+          </tbody>
