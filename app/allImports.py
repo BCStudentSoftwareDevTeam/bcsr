@@ -11,7 +11,6 @@ from flask import g
 from flask import url_for
 from flask import flash
 from flask import abort
-from flask_admin import Admin
 
 import pprint
 from app import models
@@ -63,14 +62,13 @@ app = Flask(__name__)
 #from app import app
 app.config.from_object('settings')
 
-admin = Admin(app)
 
 # Builds all the database connections on app run
 # Don't panic, if you need clarification ask.
 @app.before_request
 def before_request():
-    g.dbMain =  mainDB.connect()
-
+    #g.dbMain =  mainDB.connect()
+    pass
 @app.teardown_request
 def teardown_request(exception):
     dbM = getattr(g, 'db', None)
