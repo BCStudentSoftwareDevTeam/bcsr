@@ -18,12 +18,12 @@ fi
 
 . venv/bin/activate
 
-pip install flask
-pip install peewee
-pip install pyyaml
-pip install XlsxWriter
-pip install flask-admin
-pip install wtf-peewee
-pip install jinja2
-pip install itsdangerous
-pip install click
+pip install "flask==$FLASK_VERSION"
+pip install "peewee==$PEEWEE_VERSION"
+pip install "pyyaml==$PYAML_VERSION"
+pip install "XlsxWriter==$XLSXWRITER_VERSION"
+pip install "flask-admin==$FLASK_ADMIN_VERSION"
+pip install "wtf-peewee==$WTF_PEEWEE_VERSION"
+pip install "jinja2"
+pip install "itsdangerous"
+pip install "click"
