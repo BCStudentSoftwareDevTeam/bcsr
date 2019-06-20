@@ -16,12 +16,12 @@ def SEID_courses_dict():
 @app.route('/admin/courseManagement/removeCourse',methods=["GET","POST"])
 def removeCourse():
   authorizedUser = AuthorizedUser()
-  if authorizedUser:
+  if authorizedUser.isAdmin:
     if request.method == "GET":
       semesters = Semesters.select()
       return render_template('admin/courseManagement/removeCourse.html',
                              cfg        = cfg,
-                             isAdmin    = authorizedUser,
+                             isAdmin    = authorizedUser.isAdmin,
                              semesters  = semesters
                              )
     elif request.method == "POST":
