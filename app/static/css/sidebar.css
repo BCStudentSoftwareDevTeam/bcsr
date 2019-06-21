@@ -61,3 +61,11 @@
 .head2 {
     font-size: 1.5em;
 }
+
+#program_submit {
+    padding-top: 10px;
+}
+
+#division_submit {
+  padding-top: 10px;
+}
