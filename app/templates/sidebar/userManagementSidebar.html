@@ -1,0 +1,47 @@
+<div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+
+                        <li class="sidebar-brand">
+                            <a href="#" class='head text-center'> Menu</a>
+                        </li>
+                       {% for division in divisions %}
+                        <li>
+                            <a href="#"><i class="fa fa-wrench fa-fw"></i>{{division.name}}<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                              {% for program in programs %}
+                              {%if program.DID.DID == division.DID %}
+                                <li>
+                                    <a href="{{program.PID}}">{{program.name}}</a>
+                                </li>
+                              {% endif %}
+                              {% endfor %}
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>{% endfor %}
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+
+
+
+# For divisions
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+        <ul class="nav" id="side-menu">
+
+            <li class="sidebar-brand">
+                <a href="#" class=' head text-center'> Menu</a>
+            </li>
+            {% for division in divisions %}
+            <li>
+
+                <a href="{{division.DID}}">{{division.name}}</a>
+            </li>
+
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>
