@@ -19,8 +19,7 @@ from app import archive
 from app import uploads
 from app import deleteSyllabus
 from app import download
-from app import divisionManagement
-from app import programManagement
+# from app import programManagement
 from app import editDivision
 from app import editProgram
 from app import semesterManagement

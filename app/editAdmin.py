@@ -32,8 +32,6 @@ def editAdmin():
       user.save()
       #TODO: LOG HERE
     flash(result[1])
-    return redirect(redirect_url('systemManagement'))
+    return redirect(redirect_url('userManagement'))
   else:
     abort(403)
-
-  

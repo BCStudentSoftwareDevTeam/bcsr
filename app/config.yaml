@@ -35,10 +35,6 @@ mainMenu:
 
 adminMenu:
   Administration:
-    - title: "Program Management"
-      link:  "/redirect/program_management"
-    - title: "Division Management"
-      link:  "/redirect/division_management"
     - title: "Semester Management"
       link:  "/admin/semesterManagement"
     - title: "User Management"
