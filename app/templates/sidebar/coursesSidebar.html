@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/static/css/sidebar.css">
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse">
+      <nav>
+        <ul class="nav flex-column" id="side-menu">
+
+            <li class="sidebar-brand">
+                <a href="#" class='head text-center'>Divisions</a>
+            </li>
+
+            {% for division in divisions_to_programs %}
+              <li class="nav-item">
+                <a class="nav-link" id = "testdiv" name="{{division.DID}}">{{division.name}}</a>
+
+                    {% for prog in divisions_to_programs[division]%}
+                      {%if prog.DID == division.DID %}
+                        <li>
+                        <a href="{{prog.PID}}">{{prog.name}}</a>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+              </li>
+              {% endfor %}
+        </ul>
+      </nav>
+    </div>
+    <!-- /.sidebar-collapse -->
+</div>

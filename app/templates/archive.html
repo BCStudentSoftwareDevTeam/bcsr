@@ -10,7 +10,7 @@
 <h1>{{current_term.term}} {{current_term.year}}</h1>
       {%for division in divisions_to_programs %}
       <h2 class="col-xs-12">{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'><span id='icon-{{division.DID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
-  
+
   <div id='programs-{{division.DID}}'>
       {% for program in divisions_to_programs[division] %}
         <div style = "margin-left:25px;">
@@ -29,4 +29,6 @@
     </div>
   </div>
 </div>
+
 {% endblock %}
+</div>
