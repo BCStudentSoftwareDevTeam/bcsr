@@ -50,6 +50,20 @@ courseManagementSidebar:
   - title: "Remove Course"
     link: "/admin/courseManagement/removeCourse"
 
+userManagementSidebar:
+  - title: "Add Administrator"
+    link: "/admin/userManagement/addAdministrator"
+  - title: "Remove Administrator"
+    link: "/admin/userManagement/removeAdministrator"
+  - title: "Add Division Chair(s)"
+    link: "/admin/userManagement/addDivisionChair"
+  - title: "Remove Division Chair"
+    link: "/admin/userManagement/removeDivisionChair"
+  - title: "Add Program Chair(s)"
+    link: "/admin/userManagement/addProgramChair"
+  - title: "Remove Program Chair"
+    link: "/admin/userManagement/removeProgramChair"
+
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
   Archive: ['Instructor','Course','Term','Last Modified By']

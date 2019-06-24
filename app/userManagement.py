@@ -34,7 +34,8 @@ def userManagement_get():
                                 isAdmin   = authorizedUser.isAdmin,
                                 # users     = users,
                                 # admins    = admins,
-                                programs  = programs
+                                programs  = programs,
+                                divisions = divisions
                                 # divisions = divisions,
                                 # program       = program,
                                 # programChairs = programChairs,

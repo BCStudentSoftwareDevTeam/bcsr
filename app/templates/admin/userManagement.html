@@ -1,16 +1,12 @@
 {% set currentPage ="userManagement" %}
 {% extends "snips/base.html" %}
 {% block body %}
-{% include "snips/messages.html" %}
-
-{# This is for programs #}
-
-<div id="wrapper">
+<div class="wrapper">
   {% include "sidebar/userManagementSidebar.html" %}
   <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
   <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
   <div id="page-wrapper">
-{% include "snips/messages.html" %}
+    {% include "snips/messages.html" %}
     <div class="container-fluid">
       <div class="row">
         <form action="{{url_for('editProgram')}}" method="post" id="programEditForm">
@@ -18,18 +14,12 @@
           <h4>Change Program Chair(s)</h4>
           <input  id="PID" name="PID" />
           <select class="selectpicker form-control" id="professors" name="professors[]" data-live-search="true" multiple>
-            </select>
-          <!--</div>-->
+          </select>
           <input type="submit" class="btn btn-default pull-right" value="Submit" />
         </form>
       </div>
     </div>
-    <!-- /#page-content-wrapper -->
   </div>
-  <!-- /#wrapper -->
 </div>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-
-
-
 {% endblock %}
