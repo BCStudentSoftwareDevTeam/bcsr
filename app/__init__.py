@@ -8,7 +8,6 @@ It also includes all the application files that are used as "pages" in the app
 
 from allImports import *
 from app import allImports
-
 # Include an import for every python file that is serving a webpage
 #import your new python files here. It is not a part of the module until it is imported
 from app import deadlineDisplay
@@ -23,7 +22,8 @@ from app import download
 from app import editDivision
 from app import editProgram
 from app import semesterManagement
-from app import userManagement
+from app import changeAdministrator
+from app import changeDivision
 from app import errorHandler
 # from app import databaseAdmin
 from app import editAdmin
