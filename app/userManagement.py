@@ -5,7 +5,7 @@ from app.logic.getSemesterManagement import GetSemesterManagement
 from app.logic import databaseInterface
 from app.programManagement import adminProgramManagement
 
-@app.route("/admin/userManagement", methods=["GET", "POST"])
+@app.route("/admin/userManagement/changeAdministrator", methods=["GET", "POST"])
 def userManagement_get():
   page = "/" + request.url.split("/")[-1] #We need page for logging purposes
   authorizedUser = AuthorizedUser()
@@ -18,8 +18,8 @@ def userManagement_get():
 
         #DatabaseInterface from logic folder
         # semesters = databaseInterface.get_all_semesters()
-        # users     = databaseInterface.get_non_admins()
-        # admins    = databaseInterface.get_all_admins()
+        users     = databaseInterface.get_non_admins()
+        admins    = databaseInterface.get_all_admins()
 
         #
         programs  = Programs.select()
@@ -28,12 +28,12 @@ def userManagement_get():
         # programChairs = {}
         # programChairs[program.PID] = Users.select().where(Users.PID == pid)
         # programChairs.save()
-        return render_template('admin/userManagement.html',
+        return render_template('admin/userManagement/administrator.html',
                                 cfg = cfg,
                                 #This variable is for the navbar
                                 isAdmin   = authorizedUser.isAdmin,
-                                # users     = users,
-                                # admins    = admins,
+                                users     = users,
+                                admins    = admins,
                                 programs  = programs,
                                 divisions = divisions
                                 # divisions = divisions,
@@ -42,40 +42,40 @@ def userManagement_get():
                                 # data = data,
                                 # pid = pid
                                 )
-    elif request.method == "POST":
-        def adminProgramManagement():
-            # if (request.method == "GET"):
-            authorizedUser = AuthorizedUser()
-            data        = request.form
-            pid         = data['PID']
-            print(pid)
-            # only admin  should be able to change program chairs
-            if authorizedUser.isAdmin:
-
-              # all uses could be program chair
-              users = Users.select()
-
-              #sidebar elements
-              divisions = Divisions.select()
-              programs  = Programs.select()
-
-              # program we are viewing
-              program = Programs.get(Programs.PID == pid)
-
-              programChairs = {}
-              programChairs[program.PID] = Users.select().where(Users.PID == pid)
-              programChairs.save()
-              return render_template("admin/userManagement.html",
-                                      program       = program,
-                                      programChairs = programChairs,
-                                      cfg           = cfg,
-                                      users         = users,
-                                      divisions     = divisions,
-                                      programs      = programs,
-                                      isAdmin       = authorizedUser.isAdmin)
-
-    else:
-        abort(404)
+    # elif request.method == "POST":
+    #     def adminProgramManagement():
+    #         # if (request.method == "GET"):
+    #         authorizedUser = AuthorizedUser()
+    #         data        = request.form
+    #         pid         = data['PID']
+    #         print(pid)
+    #         # only admin  should be able to change program chairs
+    #         if authorizedUser.isAdmin:
+    #
+    #           # all uses could be program chair
+    #           users = Users.select()
+    #
+    #           #sidebar elements
+    #           divisions = Divisions.select()
+    #           programs  = Programs.select()
+    #
+    #           # program we are viewing
+    #           program = Programs.get(Programs.PID == pid)
+    #
+    #           programChairs = {}
+    #           programChairs[program.PID] = Users.select().where(Users.PID == pid)
+    #           programChairs.save()
+    #           return render_template("admin/userManagement.html",
+    #                                   program       = program,
+    #                                   programChairs = programChairs,
+    #                                   cfg           = cfg,
+    #                                   users         = users,
+    #                                   divisions     = divisions,
+    #                                   programs      = programs,
+    #                                   isAdmin       = authorizedUser.isAdmin)
+    #
+    # else:
+    #     abort(404)
   else:
     abort(403)
 
