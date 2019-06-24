@@ -5,7 +5,7 @@ from app.logic.getSemesterManagement import GetSemesterManagement
 from app.logic import databaseInterface
 from app.programManagement import adminProgramManagement
 
-@app.route("/admin/userManagement/changeAdministrator", methods=["GET"])
+@app.route("/admin/userManagement/changeAdministrator", methods=["GET", "POST"])
 def userManagement_get():
   page = "/" + request.url.split("/")[-1] #We need page for logging purposes
   authorizedUser = AuthorizedUser()
@@ -28,7 +28,7 @@ def userManagement_get():
         # programChairs = {}
         # programChairs[program.PID] = Users.select().where(Users.PID == pid)
         # programChairs.save()
-        return render_template('admin/userManagement/changeAdministrator.html',
+        return render_template('admin/userManagement/administrator.html',
                                 cfg = cfg,
                                 #This variable is for the navbar
                                 isAdmin   = authorizedUser.isAdmin,
