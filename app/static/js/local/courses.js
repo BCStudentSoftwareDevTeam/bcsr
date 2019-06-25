@@ -33,27 +33,47 @@ function showPrograms(division) {
     var programID = '#programs-'+ division;
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
-        
-        
+
+
     } else {
         $(programID).css('display', 'none');
     }
-    
-    $('#icon-'+ division).toggleClass('glyphicon-plus')
-    $('#icon-'+ division).toggleClass('glyphicon-minus')
+
+    $('#icon-'+ division).toggleClass('fa arrow')
+    $('#icon-'+ division).toggleClass('fa arrow')
 }
 
 
-function showCourses(program) {
+function showCourses(seid, program) {
     var programID = '#courses-'+ program;
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
-        
-        
+
+
     } else {
         $(programID).css('display', 'none');
     }
-    
-    $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
-    $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
+
+    $('#coursesIcon-'+ program).toggleClass('fa arrow')
+    $('#coursesIcon-'+ program).toggleClass('fa arrow')
+}
+
+function showAll() {
+  $('.side-menu').metisMenu({ toggle: false });
+  }
+
+  $('.first-level').on('click', function(){
+     $(this).children().toggleClass('fa arrow');
+     $(this).children().toggleClass('fa arrow');
+  });
+
+ function showCourseTables (seid, pid){
+   $.ajax({
+     url: '/courses/showCourses/'+seid + "/" + pid,
+     dataType: 'json',
+     type: "GET",
+     success: function (response){
+
+     }
+   })
 }

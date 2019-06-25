@@ -8,7 +8,8 @@ class GetAll():
   it will affect multiple files.'''
   def __init__(self):
     #self.username = authUser(request.environ)
-    self.username = 'heggens'
+    # self.username = 'heggens'
+    pass
 
   def create_dictionaries(self,SEID):
       '''Purpose: Creates a mapping using dictionaries of 1)divisions to programs
@@ -26,4 +27,4 @@ class GetAll():
       return(divisions_to_programs,programs_to_courses)
       ''' @return (divisions_to_programs, programs_to_courses) {tuple of dicts}
       1)division... @key = divisionName {string} @value = Programs{peewee obj}
-      2)programs... @key = programName  {string} @value = Courses{peewee obj}''' 
+      2)programs... @key = programName  {string} @value = Courses{peewee obj}'''

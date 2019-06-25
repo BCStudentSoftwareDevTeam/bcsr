@@ -8,6 +8,7 @@ from app.logic.getAll import GetAll
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
 @app.route("/courses/<term>", methods = ["GET"]) #SET A DEFAULT APP ROUTE
+
 def courses(term = 0):
   if term == 0:
     # Gets the highest term id (201711, 201712, etc)
@@ -82,3 +83,7 @@ def courses(term = 0):
       # TODO: return ERROR
       abort(404)
       render_template('error.html')
+
+@app.route("/courses/showCourses/<seid>/<pid>", methods=["GET"])
+def showCourseDeets(seid, pid):
+    courses = databaseInterface.grab_courses_in_program(pid, seid)

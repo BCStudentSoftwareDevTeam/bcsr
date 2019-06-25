@@ -27,16 +27,29 @@
 
 {% endif %}
 
+
+{# ADMIN VIEW #}
 {%for division in divisions_to_programs %}
-  <h2 class="col-xs-12">{{ division.name }} <a onclick='showPrograms("{{division.DID}}")'>
-   <span id='icon-{{division.DID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h2>
+  <div id="div1">
+    <div class='header col-sm-12'>
+    </div>
+    <div id='programs-{{division.DID}}'>
+    {% for program in divisions_to_programs[division] %}
+      <div style = "margin-left:25px;">
+      <h3> <a>
+        <span id='coursesIcon-{{program.PID}}' aria-hidden="true"></span></a></h3>
+      <div id='courses-{{program.PID}}'>
+      {% include "snips/tableHeader.html" %}
+      {% for course in programs_to_courses[program.name] %}
+        {% include "snips/coursesRows.html" %}
+      {% endfor %}
+      {% include "snips/tableFooter.html" %}
+      </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
 {% endfor %}
-
-
-  {# ADMIN VIEW #}
-  <div class="container-fluid">
-<h1>{{current_divison}}</h1>
-
 <link rel = "stylesheet" href = "/static/css/Courses.css"/>
 
 <script type="text/javascript" src="/static/js/local/courses.js"></script>
