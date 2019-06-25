@@ -15,19 +15,15 @@
       <div class="panel-body bodyPadding">
         <div class="form-group">
           <form action = "/editDivision" method="post">
-            {% if users %}
               <div class="col-md-9 selectPadding">
-                <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
+                <select title="Select User" class="form-control selectpicker"  onchange="getDID()" name="professors[]" data-live-search='true'>
                   {% for user in users %}
                     <option value="{{user.username}}">
-                      {{user.firstName}} {{user.lastName}} ({{user.username}})
+                      {{user.firstName}} {{user.lastName}}
                     </option>
                   {% endfor %}
                 </select>
               </div>
-            {% else %}
-              <p>An error occuried while trying to access users.</p>
-            {% endif %}
             <div width="316" height="88px">
               <div>
                 <input type="submit" class="btn btn-default" value="Submit" id="submitAdd">
@@ -45,19 +41,15 @@
       <div class="panel-body bodyPadding" style="padding-left:7px">
         <div class="form-group">
           <form action = "/editDivision" method="post">
-            {% if users %}
               <div class="col-md-9 selectPadding">
-                <select title="Select User" class="form-control selectpicker" id="admin" name="admin[]" data-live-search='true'>
-                  {% for admin in admins %}
-                    <option value="{{admin.username}}">
-                      {{admin.firstName}} {{admin.lastName}} ({{admin.username}})
+                <select title="Select User" class="form-control selectpicker" onchange="getDID()" id='did' value="divisionchair" name="professors[]"data-live-search='true'>
+                  {% for divisionchair in chairList %}
+                    <option value="{{divisionchair.username}}">
+                      {{divisionchair.firstName}} {{divisionchair.lastName}} ({{divisionchair.username}})
                     </option>
                   {% endfor %}
                 </select>
               </div>
-            {% else %}
-              <p>An error occuried while trying to access users.</p>
-            {% endif %}
             <div width="316" height="88px">
               <div>
                 <input type="submit" class="btn btn-danger" value="Remove" id="submitRemove">
