@@ -87,7 +87,7 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610
 
 DEBUG:
-  user: "HEGGENS@berea.edu" #Admin Access
+  user: "heggens" #Admin Access
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
