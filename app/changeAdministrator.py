@@ -14,12 +14,13 @@ def changeAdministrator():
 
         users     = databaseInterface.get_non_admins()
         admins    = databaseInterface.get_all_admins()
-
+        divisions = databaseInterface.grab_all_divisions()
         return render_template('admin/userManagement/changeAdministrator.html',
                                 cfg = cfg,
                                 isAdmin   = authorizedUser.isAdmin,
                                 users     = users,
-                                admins    = admins
+                                admins    = admins,
+                                divisions = divisions
                                 )
   else:
     abort(403)

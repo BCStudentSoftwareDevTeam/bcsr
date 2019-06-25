@@ -18,7 +18,7 @@ def checkData(data,key):
     message = "Either a bad key or username is not in database."
   return [user, message]
 
-@app.route('/admin/userManagement/changeAdministrator', methods=["POST"])
+@app.route('/editAdmin', methods=["POST"])
 def editAdmin():
   username = authUser(request.environ)
   authorizedUser = AuthorizedUser()
@@ -32,6 +32,6 @@ def editAdmin():
       user.save()
       #TODO: LOG HERE
     flash(result[1])
-    return redirect(redirect_url('userManagement'))
+    return redirect(redirect_url('changeAdministrator'))
   else:
     abort(403)
