@@ -1,0 +1,16 @@
+{
+  "boxAppSettings": {
+    "clientID": "9am56iz1abzvzytr8pqwu72yabb2f6km",
+    "clientSecret": "ddLOsE4lywXvUfO59iNgqGWTp8jRW6Q6",
+    "appAuth": {
+      "publicKeyID": "yl95olil",
+      "privateKey": "-----BEGIN ENCRYPTED PRIVATE KEY-----\nMIIFDjBABgkqhkiG9w0BBQ0wMzAbBgkqhkiG9w0BBQwwDgQIP3Z8kwhP0YICAggA\nMBQGCCqGSIb3DQMHBAhEUPq4E+q+dASCBMglfcOCpTc2301z7hS9I8enA3mK95HG\nLqGzKMjN3nQJtgnQOEsOBr00PtezDCiIquiG4HWLCwKVlJtdYYARowUR6Vnl/nj4\nOLzpB4jAcUvEYoXHRtj4LdlmSq4KhKeQcRRWuYzucxZgMfnPJDjHQSeqFffx8En1\nnFhnFnRtLMqNFknW2EN9rvmzp9jcsj3F/UVHT1qGeEaB0jlwSb7zDrnRsKTw/IA9\nWw17TzaW7fwqnGxtZAxU3nSHPQ9zzqmqgUrYadngc7i57jMefNjBH04AXUlNoEu8\n2bUHgAd2D/njLygF4j72sWGqtXrEUhmX0Bp/0ZUu0Q2lU5rVZCwT4sb4bEbNTWdg\nyCghWYP60E6ldimlZ01k7unBxmLcJ5A0bdTfNJtKG4BC4pStnkUtlczqRi3M30Nx\nnlKPsedUnWZpjZ7mqm9PuL1NPiPfkINaWK9i7UjwPi7An32YYvc4Gt/OJUQHBXq0\n/jSbGIJIsG1sVB21nwsGF0kD65UJHkbrqi/h4CKEf1pFb/B/jhd8x2KmoIXayJiL\n+E3IN0/77HJZpz7qjfkNIYYopxMAitIrRi2vR1om0JVNmbc9ncf46A9J5tIXIK1e\nBFX+h3n9arPVl8qKEsH9z93dZZJmsWNnnZmPNhj0zTuC2gvYkM2hqX3O+dgyXbcg\nfxLEFxrcOMNTha6XQbp+o98/g9rT54v4UUfc4H+ltOdFNYJ4/KS7dudYAyGE3J64\nBf4pJjxohear4Lbb0LTpjgnYeBdEhiTazNiN6MpoXVTOzeUHtA7I1ZK2jaJYFBCD\ncBSU8AI4EE4nk8YAEakMphe0TuzyCIJWDLzdyTk7trgcqhLuMCUInKmApIBfhz3A\nHNnxoru/rCh7VRRV7O6M42M3cua7wCV5S3nS59PQMDCsJaG5q85xueYefiIXxD8d\n8Ay5kzMELTV0VeW2QpjJUl9uJV09dk8vrQ/t/04Gjfs83rw6/WmQpKP4OqsLRUWs\n+WuXOYUAi75CWG/oSaFY4KQm47qgwAiX5kriJsoa0uizMnkL8FxeAW87D8+ie78T\nhXSt59l15080T3KG31qzVYjrbPcUy2ATzh30+mnz5RAzsnEiQ7YCh4Vt+VLO9gEy\nqoDKcueFUQZI2/X9/mc6b+XloXTq/09LhcyEvqRRcRvvQYgB9KkYbL3ml+MteyD7\nCPcxLXlbjtXcsfYV6qSXlW29FHRqTMwluivXoChneScNtgvpAKuSZQq8D+RpzO1y\nYhw99lWTRNcs5BAF/NFZym2JEc7h54/je2MIfwj4fXv3bpOXK4b2E1YDlh8fcOt1\n2FV3+4pCS4mvUXEuCZboqE75DE1xeG9H0Cz1Nh3RKGQOnCGdrgzFbr2edvBQuCeP\nqiB1WyuGWJXyy1hP6Mi0R+1ecLhsTXox0PGqoiuyfGzfM+9Gi6FSyiOA3f3OGZTL\nF4OMYavY5oAUHjmJRLl6a+Cd5AUaMhZkAFFwNZrOLC/+FdnCdevf7IJlKd+702qe\nF4U6x6oQekoI4LWjNZPvA6xGSu88QV/3ZwLOh9fbF2qEVJbrCw685JCg5eI+xAtx\nROwvDWhCOE+Yk2xXwcDe4yPF2R4xbMFlN+IuTNlOBGciY9TCVGYgs099talZoknI\npGo=\n-----END ENCRYPTED PRIVATE KEY-----\n",
+      "passphrase": "8f0b89b887713b48c13f3608f50c8a12"
+    }
+  },
+  "enterpriseID": "211774935",
+  "webhooks": {
+    "primaryKey": "hGWYEUr2GyPescx9F0T4jFRFnuGJTE9R",
+    "secondaryKey": "0Kq5Yz5RfX43fCjYoLqDTFlleL4SegQX"
+  }
+}

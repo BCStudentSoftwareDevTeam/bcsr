@@ -5,12 +5,16 @@ import datetime
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getUploads import GetUploads
 from app.logic import databaseInterface
+import boxjwt
+import json
+
 
 @app.route('/uploads/<CID>', methods=['POST'])
 def uploads(CID):
   auth       = AuthorizedUser()
   user_name  = auth.get_username()
   file = request.files['file']
+
   getUploads  = GetUploads(file)
   try:
     upload_path     = getUploads.get_upload_path()
@@ -23,13 +27,23 @@ def uploads(CID):
     instructors_string = databaseInterface.get_course_instructors(CID)
     new_file_name   = getUploads.create_filename(CID, instructors_string)
     complete_path   = (directory_path + new_file_name).replace(" ","")
+    print("Here come the print statements! Boi.")
+    print(upload_path)
+    print(directory_path)
+    print(complete_path)
+    # Uploads to box
+
     #Save the File
     file.save(complete_path)
+    boxUpload(new_file_name, complete_path)
     if os.path.exists(complete_path):
     	#Now we need to course_path with its new file name to the database
     	database_path = (course_path+new_file_name).replace(" ","")
     	update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
-    	update_course_path.execute()
+
+        print(update_course_path)
+
+        update_course_path.execute()
     	#Now we need to log the changes
     	get_time = datetime.datetime.now()
     	time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
@@ -45,10 +59,13 @@ def uploads(CID):
     else:
  	return render_template("error.html",
                                cfg     = cfg,
-                               message = "An error occured during the upload process.")  
+                               message = "An error occured during the upload process.")
   except Exception as e:
     app.logger.info("{0}".format(e))
     return render_template("error.html",
                           cfg                   = cfg,
                           message               = "An error occured during the upload process."
                         )
+
+def boxUpload(name, path):
+    boxjwt.uploadToBox(name, path)

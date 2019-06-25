@@ -1,6 +1,6 @@
 '''
-This file sets up the virtual environment. 
-Run "source setup.sh" each time you want to run the app. 
+This file sets up the virtual environment.
+Run "source setup.sh" each time you want to run the app.
 '''
 FLASK_VERSION="${FLASK_VERSION:-0.12.2}"              #0.12.2
 PEEWEE_VERSION="${PEEWEE_VERSION:-2.10.2}"            #2.10.2
@@ -27,3 +27,4 @@ pip install "wtf-peewee==$WTF_PEEWEE_VERSION"
 pip install "jinja2"
 pip install "itsdangerous"
 pip install "click"
+pip install "pyjwt"
