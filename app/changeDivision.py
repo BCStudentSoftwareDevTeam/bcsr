@@ -12,7 +12,6 @@ def adminDivisionManagement():
       if authorizedUser.isAdmin:
          users     = databaseInterface.get_non_admins()
          divisions = databaseInterface.grab_all_divisions()
-         print("first route")
          return render_template("admin/userManagement/changeDivision.html",
                                  divisions      = divisions,
                                  cfg           = cfg,
@@ -31,12 +30,6 @@ def get_divisions_json(did):
         chairList = []
         for chair in chairs:
             chairList.append(chair.username)
-        print(chairList)
-        # return jsonify({did: chairList})
-    return render_template("admin/userManagement/changeDivision.html",
-                            cfg           = cfg,
-                            chairs = chairs,
-                            chairList = chairList,
-                            divisions      = divisions,
-                            users         = users,
-                            isAdmin       = authorizedUser.isAdmin)
+        division_dic = {}
+        division_dic[did] = chairList
+        return jsonify(division_dic)

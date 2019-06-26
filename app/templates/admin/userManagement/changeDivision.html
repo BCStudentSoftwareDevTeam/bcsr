@@ -10,7 +10,7 @@
     {% include "snips/messages.html" %}
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Add a Division Chair</h3>
+        <h3 class="panel-title">Add</h3>
       </div>
       <div class="panel-body bodyPadding">
         <div class="form-group">
@@ -36,23 +36,20 @@
     {# Controller: editDivision.py #}
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Remove a Chair Division</h3>
+        <h3 class="panel-title">Remove</h3>
       </div>
       <div class="panel-body bodyPadding" style="padding-left:7px">
         <div class="form-group">
           <form action = "/editDivision" method="post">
               <div class="col-md-9 selectPadding">
-                <select title="Select User" class="form-control selectpicker" onchange="getDID()" id='did' value="divisionchair" name="professors[]"data-live-search='true'>
-                  {% for divisionchair in chairList %}
-                    <option value="{{divisionchair.username}}">
-                      {{divisionchair.firstName}} {{divisionchair.lastName}} ({{divisionchair.username}})
+                <select title="Select User" class="form-control selectpicker"  id='divisionRemoveSelectpicker' value="divisionchair" name="professors[]"data-live-search='true'>
+                    <option id = division_did>
                     </option>
-                  {% endfor %}
                 </select>
               </div>
             <div width="316" height="88px">
               <div>
-                <input type="submit" class="btn btn-danger" value="Remove" id="submitRemove">
+                <input type="submit" class="b tn btn-danger" value="Remove" id="submitRemove">
               </div>
             </div>
           </form>
