@@ -14,8 +14,8 @@
                               {%if program.DID.DID == division.DID %}
                                 <li>
                                     <a href="#"
-                                    onclick= "showCourses({{current_term.year}}, {{program.PID}})"
-                                    >{{program.name}}</a>
+                                    onclick= "showCourses({{current_term.year}}, {{program.PID}})">
+                                    {{program.name}}</a>
                                 </li>
                               {% endif %}
                               {% endfor %}

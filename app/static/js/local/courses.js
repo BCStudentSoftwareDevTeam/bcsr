@@ -29,14 +29,15 @@ function delete_syllabus(form_id) {
     });
 };
 
+
 function showPrograms(division) {
-    var programID = '#programs-'+ division;
+     var programID = '#programs-'+ division;
     if($(programID).css('display') == 'none'){
-        $(programID).css('display', 'block');
-
-
+        $(programID).css('display', 'block');   
+       
     } else {
         $(programID).css('display', 'none');
+       
     }
 
     $('#icon-'+ division).toggleClass('fa arrow')
@@ -44,18 +45,49 @@ function showPrograms(division) {
 }
 
 
+//$(document).ready(function() {
+//  $("#side-menu li a").on('click', function(e) {
+//        e.preventDefault();
+//        var showMe = $(this)).data('showMe');
+//        $("#coursesIcon-{{program.PID}} .showMe:not('.hide')").stop()
+//        
+//        function () {
+//          $(this).addClass('hide');
+//          $('#coursesIcon-{{program.PID}} .showMe[data-showMe="' +showMe+ '"]').removeClass('hide');
+//        
+//        }
+//  
+//  }
+//
+//}
+
+var currentProg = null;
 function showCourses(seid, program) {
+  //coursesIcon-{{program.PID}}
+  if (currentProg == null){  
+
     var programID = '#courses-'+ program;
-    if($(programID).css('display') == 'none'){
+    currentProg = '#coursesIcon-'+ program;
+    console.log("the ID is" + programID);
+    console.log("the current is" + currentProg);
+    
+
+        if($(programID).css('display') == 'none') {
         $(programID).css('display', 'block');
-
-
+        
+        
     } else {
         $(programID).css('display', 'none');
+        //$('.coursesIcon-'+ program).hide();
     }
-
-    $('#coursesIcon-'+ program).toggleClass('fa arrow')
-    $('#coursesIcon-'+ program).toggleClass('fa arrow')
+    
+  for (prog in programID) {
+  
+    $(currentProg).toggleClass('fa arrow');
+    $(currentProg).toggleClass('fa arrow')
+    currentProg != null;
+  } 
+ }
 }
 
 function showAll() {
