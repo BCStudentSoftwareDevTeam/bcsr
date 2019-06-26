@@ -73,7 +73,7 @@ function showCourses(seid, program) {
     
 
         if($(programID).css('display') == 'none') {
-        $(programID).css('display', 'block');
+          $(programID).css('display', 'block');
         
         
     } else {
@@ -84,7 +84,6 @@ function showCourses(seid, program) {
   for (prog in programID) {
   
     $(currentProg).toggleClass('fa arrow');
-    $(currentProg).toggleClass('fa arrow')
     currentProg != null;
   } 
  }
