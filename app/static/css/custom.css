@@ -1,9 +1,11 @@
 body {
     background-color: #f8f8f8;
+    height: 100%;
 }
 
 #wrapper {
     width: 100%;
+    margin-bottom:85px !important;
 }
 
 #page-wrapper {
@@ -55,9 +57,4 @@ a {
 
 * {
     margin: 0;
-}
-
-html, body, .container {
-    min-height: 100%;
-    height: auto !important;
 }
