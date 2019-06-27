@@ -42,7 +42,7 @@ a {
 }
 
 .footer {
-    position:absolute;
+    position:fixed;
     left:0;
     color: #1e2433;
     text-align: center;
@@ -50,7 +50,7 @@ a {
     width: 100%;
     padding-top: 12px;
     height: 85px;
-    line-height: 30px;  
+    line-height: 30px;
 }
 
 * {
