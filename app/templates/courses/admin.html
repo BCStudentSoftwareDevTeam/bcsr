@@ -38,7 +38,7 @@
       <div style = "margin-left:25px;">
       <h3> <a>
         <span id='coursesIcon-{{program.PID}}' aria-hidden="true"></span></a></h3>
-      <div id='courses-{{program.PID}}'>
+      <div id='courses-{{program.PID}}' class= "tab-content">
       {% include "snips/tableHeader.html" %}
       {% for course in programs_to_courses[program.name] %}
         {% include "snips/coursesRows.html" %}
