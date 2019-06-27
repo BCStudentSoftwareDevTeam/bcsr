@@ -2,3 +2,61 @@
   width: 100vw;
   padding-left: 0px;
 }
+#center_block{
+    margin-left : 280px;
+
+}
+
+#remove_btn{
+    margin-bottom : 50px;
+    margin-top : 50px;
+}
+
+#add_btn{
+    margin-bottom : 50px;
+    margin-top : 50px;
+}
+.bootstrap-select.btn-group .dropdown-menu selectpicker {
+     color: whitesmoke !important;
+     background: #bf5279 !important;
+ }
+
+ #program_dropdown{
+   width: 40%;
+   position: relative;
+   left: 30%;
+}
+
+ #divisionDropdown{
+   width: 40%;
+   position: relative;
+   left: 30%;
+   text-align: center;
+ }
+
+ #left_adminDropdown{
+   width: 65%;
+   position: relative;
+   left: 77%
+ }
+
+ #right_adminDrop{
+   width: 65%;
+   position: relative;
+   right: 40%;
+ }
+
+ #currentUser{
+   position: relative;
+   right: 95px;
+ }
+
+ #addButton{
+   position: relative;
+   left: 77%;
+ }
+
+ #removeButton{
+   position: relative;
+   right: 75%;
+ }

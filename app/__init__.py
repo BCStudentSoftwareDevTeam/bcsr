@@ -23,7 +23,7 @@ from app import editDivision
 from app import editProgram
 from app import semesterManagement
 from app import changeAdministrator
-from app import changeDivision
+from app import userManagement
 from app import errorHandler
 # from app import databaseAdmin
 from app import editAdmin

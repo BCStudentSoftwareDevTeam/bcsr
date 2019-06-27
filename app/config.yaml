@@ -38,7 +38,7 @@ adminMenu:
     - title: "Semester Management"
       link:  "/admin/semesterManagement"
     - title: "User Management"
-      link:  "/admin/userManagement/changeAdministrator"
+      link:  "/admin/userManagement"
     - title: "Course Management"
       link:  "/admin/courseManagement/missingSyllabi"
 
@@ -50,13 +50,13 @@ courseManagementSidebar:
   - title: "Remove Course"
     link: "/admin/courseManagement/removeCourse"
 
-userManagementSidebar:
-  - title: "Change Administrator"
-    link: "/admin/userManagement/changeAdministrator"
-  - title: "Change Division Chair(s)"
-    link: "/admin/userManagement/changeDivisionChair"
-  - title: "Change Program Chair(s)"
-    link: "/admin/userManagement/changeProgramChair"
+accessLevel:
+  - name: "Program Chair"
+    id: "program_chair"
+  - name: "Division Chair"
+    id: "division_chair"
+  - name: "Administrator"
+    id: "administrator"
 
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
