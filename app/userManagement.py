@@ -12,6 +12,7 @@ def adminDivisionManagement():
       if authorizedUser.isAdmin:
          page        = "/" + request.url.split("/")[-1]
          users = Users.select().order_by(Users.firstName.asc())
+         # print(users)
          programs = Programs.select().order_by(Programs.name.asc())
          divisions = Divisions.select().order_by(Divisions.name.asc())
          admins = Users.select().where(Users.isAdmin == 1).order_by(Users.firstName.asc())
@@ -30,9 +31,7 @@ def user_insert():
     this function is used to update and delete data from the user input
     request.form requests data from the front end on what the user has entered
     for updating added users, we use get_or_create to prevent duplication of data in the database when a user is added more than once
-    '''
-    if request.form.get('adduser') == 'adduser' :
-        if request.form.get('access') == "program_chair":
+         if request.form.get('access') == "program_chair":
             pch = ProgramChair.get_or_create(username = request.form.get("userToAdd"), pid =request.form.get("program"))
             flash("Your changes have been successfully saved!")
         elif request.form.get('access') == 'division_chair':
@@ -79,9 +78,9 @@ def program_chair(program):
     print(allchairs, "hello")
     newchairs={}
     for chair in allchairs:
-        newchairs[chair.username.username]={'firstname':chair.username.firstName,
-                        'lastname':chair.username.lastName,
-                        'username':chair.username.username
+        newchairs[chair.username]={'firstname':chair.firstName,
+                        'lastname':chair.lastName,
+                        'username':chair.username
         }
     return json.dumps(newchairs)
 
@@ -92,10 +91,10 @@ def get_divisions_json(division):
     if authorizedUser.isAdmin:
         chairs = Users.select().where(Users.DID == division)
         chairList = {}
-        for chair in chairList:
-            chairList[chair.username.username]={'firstname':chair.username.firstName,
-                            'lastname':chair.username.lastName,
-                            'username':chair.username.username
+        for chair in chairs:
+            chairList[chair.username]={'firstname':chair.firstName,
+                            'lastname':chair.lastName,
+                            'username':chair.username
             }
 
         return json.dumps(chairList)

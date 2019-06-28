@@ -2,16 +2,14 @@ $("#Programs").hide();
 $("#Divisions").hide();
 $("#Add").hide();
 $("#Remove").hide();
-console.log ("im here")
 function show_access_level(s) {
-        console.log(s);
+  
         $("#Programs").hide();
         $("#Divisions").hide();
         $("#Add").hide();
         $("#Remove").hide();
-        console.log(s)
-        if (s == "program_chair"){
 
+        if (s == "program_chair"){
             $("#Programs").show();
         }
         else if (s == "division_chair"){
