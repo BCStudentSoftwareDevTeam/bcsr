@@ -1,5 +1,7 @@
 /* global Dropzone */
 /* global bootbox  */
+var global = this;
+var currentProgram = "0";
 Dropzone.options.drop = {
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 24, // MB
@@ -32,17 +34,7 @@ function delete_syllabus(form_id) {
 
 function showPrograms(division) {
   var programID = '#programs-'+ division;
-  var elementIsClicked = false;
-  function clickHandler() {
-    elementIsClicked = true;
-  }
-  var isClicked = document.getElementById(programID);
-
-
   console.log('Here is the ' + programID + division)
-  console.log('Here is the ' + programID + division)
-
-  if (isClicked.addEventListener('click', clickHandler) == true) {
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
 
@@ -50,62 +42,38 @@ function showPrograms(division) {
         $(programID).css('display', 'none');
     }
 
-
      $('#icon-'+ division).toggleClass('fa arrow')
      $('#icon-'+ division).toggleClass('fa arrow')
    }
-  }
 
 
 
 
-/*  $("ul.nav-tabs a").click(function (e) {
-   e.preventDefault();
-   $(this).tab('show');
- }); */
+  function showCourses(seid, program) {
+    //coursesIcon-{{program.PID}}
+      // $('#coursesIcon-'+ program).hide();
+      console.log(this.currentProgram)
+      if (this.currentProgram != "0"){
+          $(this.currentProgram).css('display', 'none');
+      }
+      var programID = '#courses-'+ program;
+      console.log("the ID is" + programID);
+    //  var $this = $(this).parent().find('span');
 
-//}
+      if ($(programID).css('display') == 'none') {
+          $(programID).css('display', 'block');
+
+      } else {
+          $(programID).css('display', 'none');
+          //$('.coursesIcon-'+ program).hide();
+      }
+        $('#coursesIcon-'+ program).show();
+        this.currentProgram = programID
+       }
+
+
 
 /*
-$(document).ready(function(){
-  $('ul.nav-second-level').each(function(){
-    var sideEl= $(this);
-    $("a.{{program.name}}", sideEl).click(function(e){
-    var programID= '#courses-'+ e;
-    programID.preventDefault();
-      sideEl2 = $("a.sideTab", sideEl);
-      sideEl2.toggleClass();
-      $("div.courses-{{program.PID}}").not(sideEl2).css('display', 'none');
-      return false
-  });
-});
-  $('html').click(function(){
-    $("div.courses-{{program.PID}}").css('display', 'none')
-  });
-});
-
-*/
-
-
-
-function showCourses(seid, program) {
-  //coursesIcon-{{program.PID}}
-    var programID = '#courses-'+ program;
-    console.log("the ID is" + programID);
-
-
-    if ($(programID).css('display') == 'none') {
-        $(programID).css('display', 'block');
-
-    } else {
-        $(programID).css('display', 'none');
-        //$('.coursesIcon-'+ program).hide();
-    }
-    $('#coursesIcon-'+ program).toggleClass('fa arrow');
-    $('#coursesIcon-'+ program).toggleClass('fa arrow');
-     }
-
-
 function showAll() {
   $('.side-menu').metisMenu({ toggle: false });
   }
@@ -125,3 +93,5 @@ function showAll() {
      }
    })
 }
+
+*/
