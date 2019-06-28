@@ -27,20 +27,17 @@ def adminDivisionManagement():
          abort(403)
 @app.route("/admin/userInsert", methods = ["POST"]) #'admin/userInsert points to the URL for the form in html file'
 def user_insert():
-    '''
-    this function is used to update and delete data from the user input
-    request.form requests data from the front end on what the user has entered
-    for updating added users, we use get_or_create to prevent duplication of data in the database when a user is added more than once
-         if request.form.get('access') == "program_chair":
-            pch = ProgramChair.get_or_create(username = request.form.get("userToAdd"), pid =request.form.get("program"))
-            flash("Your changes have been successfully saved!")
-        elif request.form.get('access') == 'division_chair':
-            dc = DivisionChair.get_or_create(username = request.form.get("userToAdd"), did = request.form.get("division"))
-            flash("Your changes have been successfully saved!")
-        elif request.form.get('access') == 'administrator' :
-            user = Users.get(username = request.form.get("userToAdd"))
-            user.isAdmin = 1
-            user.save() # We add save() for admin because it is not adding a new record
+
+    if request.form.get('access') == "program_chair":
+        pch = ProgramChair.get_or_create(username = request.form.get("userToAdd"), pid =request.form.get("program"))
+        flash("Your changes have been successfully saved!")
+    elif request.form.get('access') == 'division_chair':
+        dc = DivisionChair.get_or_create(username = request.form.get("userToAdd"), did = request.form.get("division"))
+        flash("Your changes have been successfully saved!")
+    elif request.form.get('access') == 'administrator' :
+        user = Users.get(username = request.form.get("userToAdd"))
+        user.isAdmin = 1
+        user.save() # We add save() for admin because it is not adding a new record
 
 
     #for updating removed users
