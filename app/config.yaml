@@ -1,5 +1,5 @@
 
-# The log file location   
+# The log file location
 log:
 filename: "bcsr.log"
 
@@ -11,7 +11,7 @@ databases:
 
 databaseAdmin:
   user: 'heggens'
-  
+
 # For every table in the database, add an item here
 models:
   mainDB:
@@ -22,6 +22,7 @@ models:
     - Courses
     - UsersCourses
     - Deadline
+    - Prefixes
 # this makes the navigation bar
 mainMenu:
   - title: "Home"
@@ -32,7 +33,7 @@ mainMenu:
     link: "/archive"
   - title: "Log Out"
     link: "https://login.berea.edu/idp/profile/Logout"
-    
+
 adminMenu:
   Administration:
     - title: "Program Management"
@@ -51,11 +52,11 @@ courseManagementSidebar:
     link: "/admin/courseManagement/addCourse"
   - title: "Remove Course"
     link: "/admin/courseManagement/removeCourse"
-    
+
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
   Archive: ['Instructor','Course','Term','Last Modified By']
-    
+
 fileOperations:
   allowedExtension:
       pdf: "pdf"
@@ -70,22 +71,22 @@ fileOperations:
       download: "static/files/uploads"
 
 termInfo:
-#the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611 
+#the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611
     11: 'Fall'              # e.g. Fall 2016 = 201611
     12: 'Spring'            # e.g. Spring 2017 = 201612 (note the different year)
-    13: 'Summer'            
+    13: 'Summer'
     #NOTE: Scott Steele asked us to replace the 3 summer terms with just summer 20180612
     #13: '8 Week Summer'     # e.g. 8 Week Summer 2017 = 201613 (note the different year)
     #14: '1st 4 Week Summer'
     #15: '2nd 4 Week Summer'
-    #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610 
-    
+    #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610
+
 DEBUG:
   user: "HEGGENS@berea.edu" #Admin Access
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
-  
+
 contributors:
   - name: "Cody Myers"
     username: "myersco"
@@ -111,7 +112,3 @@ contributors:
   - name: "Evan Johnson"
     username: "johnsone"
     year: 2019
-
-  
-    
-    

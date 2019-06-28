@@ -5,10 +5,10 @@
   </td>
   <td>
     {% if course.CID.filePath == None %}
-      {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+      {{course.CID.prefix.prefix}}-{{course.CID.number}}-{{course.CID.section}}
     {% else %}
       <a href = "/download/{{course.CID.CID}}">
-        {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
+        {{course.CID.prefix.prefix}}-{{course.CID.number}}-{{course.CID.section}}
       </a>
     {% endif %}
   </td>
