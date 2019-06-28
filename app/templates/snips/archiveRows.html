@@ -14,6 +14,22 @@
   <td>
     {{course.CID.SEID.term}}-{{course.CID.SEID.year}}
   </td>
+{% if isAdmin == True %} 
+  <td>
+    {% if course.CID.filePath == None %}
+      <form class="dropzone" id="drop" action = "/uploads/{{course.CID.CID}}">
+        <div class="box"></div>
+      </form>
+    {% else %}
+      <!-- Buttons -->
+
+      <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
+      <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
+        <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
+      </form>
+    {% endif %}
+  </td>
+{% endif %} 
   <td>
     {% if course.CID.lastModified == None %}
       <p>Course has not yet been modified.</p>

@@ -3,8 +3,12 @@
     <tr style = "text-align:center;">
       {% for item in cfg['Headers'][page] %}
         {% if item == "Syllabus Upload" %}
-          <th style = "width:255px;">{{item}}</th>
-        {% else %}
+		{% if page == "Archive" and isAdmin == True %} 
+          		<th style = "width:255px;">{{item}}</th>
+        	{% elif page == "Courses" %}
+        		<th style = "width:255px;">{{item}}</th>
+		{% endif %}
+	{% else %}
           <th>{{item}}</th>
         {% endif %}
       {% endfor %}
