@@ -1,21 +1,21 @@
-''' 
+'''
 Author: Cody Myers Date: 20161206
-File Purpose: 
+File Purpose:
 The purpose of this file is to add courses to a new semester given a csv, while
-also running debug checks to ensure that no problems occur.  
+also running debug checks to ensure that no problems occur.
 
 Instructions:
- - A portion of the data required for this script to run properly directly 
- depends on the format and content of the csv file. Therefore any data that is 
- dependent on csv is located in the Global Variables Section. The intent is to 
+ - A portion of the data required for this script to run properly directly
+ depends on the format and content of the csv file. Therefore any data that is
+ dependent on csv is located in the Global Variables Section. The intent is to
  have the server admin edit the global variables to the accomodate the csv and then
  the script should run prperly form there.
 
  - It is also currently the server admin's responsiblity to filter out all of the courses
- that do not have an instructor assigned to them. You can go ahead and add the course to 
+ that do not have an instructor assigned to them. You can go ahead and add the course to
  the database, but without an instructor the software will not hold anyone responsible for
  uploading that syllabi. Therefore, it may be best to seperate those courses into a serperate
- excel file and them to the registrar's office.    
+ excel file and them to the registrar's office.
 '''
 from app.models import *
 import csv
@@ -24,8 +24,8 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'terms_csv/201812.csv'
-SEID        = 201812
+csvFileName = 'terms_csv/201813.csv'
+SEID        = 202213
 
 
 #Create Index Map
@@ -33,7 +33,7 @@ SEID        = 201812
   - Record the csv column index for the table column names below
   - If the csv doesn't include some the data column then set the values to None'''
 #Courses Table
-CRN      = 2	#NOTE: start at zero 
+CRN      = 2	#NOTE: start at zero
 prefix   = 3
 number   = 4
 section  = 5
@@ -75,14 +75,14 @@ def addCourse(course,prefixDict):
       return addCourse.CID
     except Exception as e:
       exc_type, exc_obj, exc_tb = sys.exc_info()
-      print (e, 
+      print (e,
             'CRN: {} '.format(course[CRN]),
 	    'Course: {}'.format(course[prefix] + " " + course[number] + " - " + course[section]),
             "Line ({})".format(exc_tb.tb_lineno))
       return False
-            
+
 def findInstructors(course):
-  ''' 
+  '''
 	Gets all of the instructors for a course, or creates them if they do not already exist
   '''
   instructors = []
@@ -96,14 +96,14 @@ def findInstructors(course):
         try:
           check = Users.get(Users.username == course[username])
         except Exception as e:
-          check = Users.get_or_create(username=course[username], 
-				      firstName = course[firstNames[index]], 
-				      lastName = course[lastNames[index]], 
+          check = Users.get_or_create(username=course[username],
+				      firstName = course[firstNames[index]],
+				      lastName = course[lastNames[index]],
 				      email = course[username] + "@berea.edu")	# Find the user in the db; all these fields are required
 	  # print e
           # pass
         instructors.append(course[username])                  # Adds to instructor list
-    index += 1  
+    index += 1
   if instructors == []:
     return False
   else:
@@ -115,13 +115,13 @@ def addInstructor(instructor,cid):
     return addInstr.UCID
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
-    print (e, 
+    print (e,
            'CID: {} '.format(cid),
            'Username: {}'.format(instructor),
            "Line ({})".format(exc_tb.tb_lineno))
     print "TODO: Add relationship manually."
     return False
-    
+
 def main():
   try:
     # Make sure that the semester is in the database
@@ -139,7 +139,7 @@ def main():
           if instructors:
             for instructor in instructors:
               addInstructor(instructor,CID)
-                
+
   except Exception as e:
     exc_type, exc_obj, exc_tb = sys.exc_info()
     if "SemestersDoesNotExist" in str(exc_type):
@@ -149,4 +149,3 @@ def main():
       print (e, "Line ({})".format(exc_tb.tb_lineno))
 
 main()
-

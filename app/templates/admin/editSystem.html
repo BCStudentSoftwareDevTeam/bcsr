@@ -40,7 +40,7 @@
         <td class="alert alert-danger" colspan="3">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         The most recent term automatically becomes the active terms
-        </td> 
+        </td>
       </tr>
       <div class="form-group">
         <form action = "/admin/systemManagement/add" method="post">
@@ -65,7 +65,7 @@
           <td width="316" height="88px">
             <label for="submit">Add Semester:</label>
             <div>
-              <input type="submit" class="btn btn-default" value="Submit" id="submit" >
+              <input type="submit" class="btn btn-default" value="Submit" id="add_semester_button" data-toggle="modal" data-target ="#boxUploading" data-backdrop="static" data-keyboard="false">
             </div>
           </td>
         </form>
@@ -73,6 +73,8 @@
     </tbody>
   </table>
 </div>
+
+
 
 {# Add Administrator Form #}
 {# Controller: editAdmin.py #}
@@ -91,7 +93,7 @@ a 'table' tag #}
               {% for user in users %}
                 <option value="{{user.username}}">
                   {{user.firstName}} {{user.lastName}} ({{user.username}})
-                </option>                    
+                </option>
               {% endfor %}
             </select>
           </div>
@@ -100,7 +102,7 @@ a 'table' tag #}
         {% endif %}
         <div width="316" height="88px">
           <div>
-            <input type="submit" class="btn btn-default" value="Submit" id="submitAdd">
+            <input type="submit" class="btn btn-default" value="Submit" id="submitAdd" />
           </div>
         </div>
       </form>
@@ -123,7 +125,7 @@ a 'table' tag #}
               {% for admin in admins %}
                 <option value="{{admin.username}}">
                   {{admin.firstName}} {{admin.lastName}} ({{admin.username}})
-                </option>                    
+                </option>
               {% endfor %}
             </select>
           </div>
@@ -137,6 +139,22 @@ a 'table' tag #}
         </div>
       </form>
     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="boxUploading" tabindex="-1" role="dialog" aria-labelledby="boxUploaderWaiting">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h4 class="modal-title">Creating Box folders. Please wait...</h4>
+        </div>
+        <div class="modal-body">
+	        <div class="loader" id="loader-1"></div>
+		</div>
+        <div class="modal-footer">
+        </div>
+      </div>
   </div>
 </div>
 {% endblock %}

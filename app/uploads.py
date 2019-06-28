@@ -7,7 +7,7 @@ from app.logic.getUploads import GetUploads
 from app.logic import databaseInterface
 from boxjwt import *
 import json
-from pprint import pprint
+
 
 
 @app.route('/uploads/<CID>', methods=['POST'])
@@ -15,8 +15,6 @@ def uploads(CID):
   auth       = AuthorizedUser()
   user_name  = auth.get_username()
   file = request.files['file']
-  cfile = json.load(open('/var/www/html/bcsr-flask/app/config.json'))
-  boxupload = uploadTobox(cfile)
   getUploads  = GetUploads(file)
   try:
     upload_path     = getUploads.get_upload_path()
@@ -33,7 +31,10 @@ def uploads(CID):
 
     #Save the File
     file.save(complete_path)
-    boxupload.fileUpload(complete_path, new_file_name)
+    # upload file to box
+    boxupload = BoxUploader(complete_path,  CID)
+    boxupload.fileUpload(course_path.split("/")[1])
+
     if os.path.exists(complete_path):
     	#Now we need to course_path with its new file name to the database
     	database_path = (course_path+new_file_name).replace(" ","")
