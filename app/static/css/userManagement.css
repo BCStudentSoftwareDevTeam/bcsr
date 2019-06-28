@@ -60,3 +60,13 @@
    position: relative;
    right: 75%;
  }
+
+ #usersLabel{
+   position: relative;
+   left: 107%;
+ }
+
+ #addDelete_buttons{
+   position: relative;
+   top: -500px;
+ }
