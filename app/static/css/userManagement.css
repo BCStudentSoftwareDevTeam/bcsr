@@ -37,36 +37,49 @@
  #left_adminDropdown{
    width: 65%;
    position: relative;
-   left: 77%
+   left: 75%;
+   bottom: 253px;
  }
 
  #right_adminDrop{
    width: 65%;
    position: relative;
-   right: 40%;
+   right: -70%;
+   top: 533px;
  }
 
  #currentUser{
    position: relative;
-   right: 95px;
+   right: -94%;
+   top: 526px;
  }
 
  #addButton{
    position: relative;
-   left: 77%;
+   left: 75%;
+   bottom: 264px;
  }
 
  #removeButton{
    position: relative;
-   right: 75%;
+   right: -35%;
+   top: 522px;
  }
 
  #usersLabel{
    position: relative;
-   left: 107%;
+   left: 104%;
+   bottom: 259px
  }
 
  #addDelete_buttons{
    position: relative;
+   right: 32%;
    top: -500px;
+ }
+
+ #Add{
+   position: relative;
+   top: 786px;
+   left: 552px
  }

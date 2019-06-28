@@ -3,7 +3,7 @@ $("#Divisions").hide();
 $("#Add").hide();
 $("#Remove").hide();
 function show_access_level(s) {
-  
+
         $("#Programs").hide();
         $("#Divisions").hide();
         $("#Add").hide();
@@ -11,14 +11,25 @@ function show_access_level(s) {
 
         if (s == "program_chair"){
             $("#Programs").show();
+            at = $("#accessType")
+            at.val("program_chair");
+            console.log($("#accessType").val())
         }
         else if (s == "division_chair"){
             $("#Divisions").show();
+            at = $("#accessType")
+            at.val("division_chair");
+            console.log($("#accessType").val())
+
         }
         else if(s== "administrator"){
              retrieveAdmins();
              $("#Add").show();
              $("#Remove").show();
+             at = $("#accessType")
+             at.val("administrator");
+             console.log($("#accessType").val())
+
         }
     }
 
@@ -55,6 +66,8 @@ function retrievePrograms(obj){
                 success: function(response){
                     console.log(response)
           		    fillProgramChairs(response);
+                  $("#Add").show();
+                  $("#Remove").show();
           			}
           			// error: function(error){
           			// 	console.log(error);
@@ -64,8 +77,7 @@ function retrievePrograms(obj){
 
 function program_chairs_show_names(s) { //Called in HTML
             retrievePrograms(s);
-            $("#Add").show();
-            $("#Remove").show();
+
 }
 
 function fillDivisionChairs(response){
@@ -108,6 +120,8 @@ function retrieveDivisions(obj){
 
 function division_chairs_show_names(s) { //Called in html
            retrieveDivisions(s);
+           retrievePrograms(s);
+           $("#Programs").show();
            $("#Add").show();
            $("#Remove").show();
        }
@@ -140,7 +154,9 @@ function retrieveAdmins(){
           url:"/admin/userManagement/get_admin",
           type:"GET",
           success:function(response){
+            console.log(response)
             fillAdmin(response);
+
           }
        });
 }

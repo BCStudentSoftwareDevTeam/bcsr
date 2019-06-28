@@ -3,8 +3,8 @@
 {% block body %}
 
  {% include "snips/messages.html" %}
-  <script type="text/javascript" src="/static/js/local/sidebar.js"></script>
-  <link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
+<script type="text/javascript" src="/static/js/local/sidebar.js"></script>
+<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css" />
 
 
 <div class="navbar-default sidebar" role="navigation">
@@ -15,44 +15,46 @@
     </li>
     {% for page in cfg['accessLevel'] %}
       <li>
-        <a href = "#" onclick="show_access_level('{{page['id']}}')" name= "access">{{page['name']}}</a>
+        <a value = "{{page['id']}}" onclick="show_access_level('{{page['id']}}')" name= "access">{{page['name']}}</a>
       </li>
     {% endfor %}
 </div>
 </div>
-
+<form method="POST" action="/admin/userInsert">
+  <input hidden id="accessType" name="accessType" type="text" value = "" />
         <!--PROGRAMS DROPDOWN-->
 <h1 style="text-align: center" role="navigation">User Management</h1>
-<form method="POST" action="/admin/userInsert">
 <div class = "container" role="main">
+
+  <!--DIVIONS DROPDOWN-->
+              <div id="Divisions">
+                  <label for="Divisions">Divisions</label>
+                      <div class = "form-group" id="divisionDropdown">
+                          <select onchange="division_chairs_show_names(this)" class = "form-control selectpicker"
+                          data-show-subtext="true" data-live-search="true" name= "division">
+                          <option value = "---" disabled selected>---</option>
+                              {% for division in divisions %}
+                              <option value="{{division.DID}}" required>{{division.name}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+              </div>
 
           <div class="row">
                     <div id="Programs">
                         <label for="Programs">Programs</label>
                             <div class = "form-group" id="program_dropdown">
-                                <select onchange="program_chairs_show_names(this)"class = "form-control selectpicker"
+                                <select onchange="retrievePrograms(this)"class = "form-control selectpicker"
                                 data-show-subtext="true" data-live-search="true"  name= "program">
                                 <option value = "---" disabled selected>---</option>
                                 {% for program in programs %}
-                                <option value="{{program.PID}}" required>{{program.name}} </option> == $0
+                                <option value="{{program.PID}}" required>{{program.name}} </option>
                                 {% endfor %}
                                 </select>
                             </div>
                         </div>
 
-            <!--DIVIONS DROPDOWN-->
-                        <div id="Divisions">
-                            <label for="Divisions">Divisions</label>
-                                <div class = "form-group" id="divisionDropdown">
-                                    <select onchange="division_chairs_show_names(this)" class = "form-control selectpicker"
-                                    data-show-subtext="true" data-live-search="true" name= "division">
-                                    <option value = "---" disabled selected>---</option>
-                                        {% for division in divisions %}
-                                        <option value="{{division.DID}}" required>{{division.name}}</option> == $0
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                        </div>
+
             </div>
         </div>
 
@@ -65,9 +67,11 @@
                      <div class = "form-group" id="left_adminDropdown">
                         <select class = "form-control selectpicker col-md-4" data-show-subtext="true" data-live-search="true" name= "userToAdd" id="AddDropdown">
                             <option value = "---" disabled selected>---</option>
+
                                 {% for user in users %} <!--- displays names--->
                                     <option value="{{user.username}}"> {{user.firstName}} {{user.lastName}} ({{user.username}})</option>
                                 {% endfor %}
+
                         </select>
                     </div>
                 <div>
