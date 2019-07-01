@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="/static/css/courses_form.css">
-              <tr>
+        {% if course.CID.filePath == None %}   
+		 <tr style="height: 160px">
+	{% else %}
+		<tr>
+	{% endif %}
                 <td>
                   {{course.username.firstName}} {{course.username.lastName}}
                 </td>
@@ -17,7 +21,7 @@
                 </td>
                 <td>
                   {% if course.CID.filePath == None %}
-                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}">
+                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
                      </form>
                   {% else %}
                     <!-- Buttons -->
