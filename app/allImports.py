@@ -69,6 +69,7 @@ admin = Admin(app)
 # Don't panic, if you need clarification ask.
 @app.before_request
 def before_request():
+
     #g.dbMain =  mainDB.connect()
     pass
 
