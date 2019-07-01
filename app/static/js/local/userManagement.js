@@ -120,8 +120,6 @@ function retrieveDivisions(obj){
 
 function division_chairs_show_names(s) { //Called in html
            retrieveDivisions(s);
-           retrievePrograms(s);
-           $("#Programs").show();
            $("#Add").show();
            $("#Remove").show();
        }

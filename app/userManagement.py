@@ -31,16 +31,15 @@ def user_insert():
     print("Type: ", request.form.get('accessType'))
     if request.form.get('accessType') == "program_chair":
         add_program_chair(request)
-
     elif request.form.get('accessType') == 'division_chair':
-        divisionchair = Users.get_or_create(username = request.form.get("userToAdd"), DID = request.form.get("division"))
-        flash("Division successfully changed")
+        add_division_chair(request)
     elif request.form.get('accessType') == 'administrator' :
-        user = Users.get(username = request.form.get("userToAdd"))
-        user.isAdmin = 1
-        user.save() # We add save() for admin because it is not adding a new record
-        flash("Administrator successfully changed")
-
+        # user = Users.get(username = request.form.get("userToAdd"))
+        # user.isAdmin = 1
+        # user.save () # We add save() for admin because it is not adding a new record
+        # flash("Administrator successfully changed")
+        add_administrator(request)
+    return redirect(url_for("userManagement"))
 
 
     #for updating removed users
@@ -69,7 +68,7 @@ def user_insert():
     #         user.isAdmin = 0
     #         user.save()
 
-    return redirect(url_for("userManagement"))
+
 def add_program_chair(request):
     print("here2")
     # programchair = Users.get_or_create(username = request.form.get("userToAdd"), PID =request.form.get("program"))
@@ -86,6 +85,16 @@ def add_program_chair(request):
     message = "USER: {0} has been added as a program chair for pid: {1}".format(newChairs,PID)
     app.logger.info(message)
     flash("Program successfully changed")
+
+def add_division_chair(request):
+    newChairs    = request.form.get("userToAdd")
+    DID          = request.form.get("division")
+    newChair     = Users.get(Users.username == newChairs)
+    newChair.DID = DID
+    newChair.save()
+    message      = "USER: {0} has been added as a division chair for did: {1}".format(newChairs,DID)
+    app.logger.info(message)
+    flash("Division successfully changed")
 
 @app.route("/admin/userManagement/get_admin", methods = ["GET"])
 def administrators():
