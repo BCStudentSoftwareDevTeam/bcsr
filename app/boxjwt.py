@@ -15,7 +15,6 @@ from boxsdk import Client
 import os
 import requests
 
-import os
 import datetime
 
 from logic.getAll import *
@@ -30,7 +29,11 @@ class BoxUploader():
     """
     def __init__(self, complete_path="", CID=0):
         """
-        
+        User authentication using JWT.
+        JWT authentication is designed for working directly with the Box API without requiring a user to redirect through Box to authorize.
+
+        @param {string} complete_path - server's direcotry path
+        @param {string} CID - Course id
         """
 
         if complete_path != "":
@@ -115,12 +118,14 @@ class BoxUploader():
         """
         Finds the file directory inside box based off the complete_path, which is the file path in our server.
         Uploads file to the box.
+
+        @param {string} term -
         """
         box_path = self.new_path.split("/")[-4:-1]
         # get the semester id
         semester = Semesters.get(Semesters.SEID == term)
 
-        # get the dictionary that holds all Box API folder ids and get that semester's folder id
+        # get the dictionary that holds all Box API folder-ids and get that semester's folder id
         box_folder_dict = eval(semester.box_folders)
         # get program folder id
         prog_folder = box_folder_dict[box_path[0]][box_path[1]][box_path[2]]
@@ -137,14 +142,21 @@ class BoxUploader():
         """
         Convert Prefix to Program Name.
         Example: BIO to Biology
+
+        @param {string} CID - course id that will be changed to program name.
         """
-        # Bo
+        # Box directory path uses Program name while server directry path uses Prefix, therefore, we are converting prefix to program name for box.
         self.c = Courses.get(Courses.CID == CID)
         new_path = self.complete_path.replace(self.c.prefix, self.c.PID.name, 1).replace(self.c.PID.DID.name.replace(" ", ""), "Division" + str(self.c.PID.DID.DID), 1)
         return new_path
 
 
     def createAllFolders(self, term):
+        """
+        Creates a term folder that contains division folders and program folders.
+
+        @param {string} term - a string used for naming the term-folder.
+        """
         term_dict = {}
         try:
             folder = self.client.folder(folder_id = "0").create_subfolder(term)
