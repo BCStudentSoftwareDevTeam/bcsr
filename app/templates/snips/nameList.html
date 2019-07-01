@@ -1,7 +1,8 @@
 {% extends "snips/base.html" %}
 {% set currentPage = 'List of Students' %}
 {% block body %}
-<div id="List of Names">
+<div id="wrapper">
+  <div id="page-wrapper">
     <h2>Contributors</h2>
     <p> These are the student who helped to create this database and continue to work on it.</p>
     <table class="table table-bordered">
@@ -19,5 +20,7 @@
     </tr>
     {% endfor %}
     </table>
+    <a type='button' class='btn btn-success' style= "padding: 7px 30px; margin-top: 5px; color: black" onclick="window.history.back()">Back</a>
+  </div>
 </div>
 {% endblock %}

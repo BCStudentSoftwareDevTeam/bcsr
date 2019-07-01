@@ -29,12 +29,12 @@ def authUser(env):
     elif ("DEBUG" in app.config) and app.config["DEBUG"]:
         old_username =  cfg["DEBUG"]["user"]
         converted_user = cfg["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
-        app.logger.info(old_username+ " converted to "+ converted_user) 
+        app.logger.info(old_username+ " converted to "+ converted_user)
 
         return cfg["DEBUG"]["user"].split('@')[0].split('/')[-1].lower()
     else:
         return None
-        
+
 '''Creates the AbsolutePath based off of the relative path.
 Also creates the directories in path if they are not found.
 @param {string} relaitivePath - a string of directories found in config.yaml
@@ -51,12 +51,12 @@ def getAbsolutePath(relaitivePath,filename=None,makeDirs=False):
     if filename != None:
         filepath = os.path.join(filepath,filename)
     return filepath
-    
+
 from app import logtool
 log = logtool.Log()
 ''' Creates an Flask object; @app will be used for all decorators.
 from: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
-"A decorator is just a callable that takes a function as an argument and 
+"A decorator is just a callable that takes a function as an argument and
 returns a replacement function. See start.py for an example"
 '''
 app = Flask(__name__)
@@ -69,8 +69,8 @@ admin = Admin(app)
 # Don't panic, if you need clarification ask.
 @app.before_request
 def before_request():
-    g.dbMain =  mainDB.connect()
-
+#    g.dbMain =  mainDB.connect()
+    pass
 @app.teardown_request
 def teardown_request(exception):
     dbM = getattr(g, 'db', None)
