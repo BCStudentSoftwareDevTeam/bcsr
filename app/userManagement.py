@@ -30,36 +30,18 @@ def user_insert():
     # print("here adding")
     # print("Type: ", request.form.get('accessType'))
     # for adding users
-    if request.form.get('accessType') == "program_chair":
-        add_program_chair(request)
-    elif request.form.get('accessType') == 'division_chair':
-        add_division_chair(request)
-    elif request.form.get('accessType') == 'administrator' :
-        add_administrator(request)
+    if request.form.get('adduser') == 'adduser':
+        if request.form.get('accessType') == "program_chair":
+            add_program_chair(request)
+        elif request.form.get('accessType') == 'division_chair':
+            add_division_chair(request)
+        elif request.form.get('accessType') == 'administrator' :
+            add_administrator(request)
     #for updating removed users
     elif request.form.get('removeuser') == 'removeuser':
         if request.form.get('accessType') == "program_chair":
-            
+            remove_program_chair(request)
     return redirect(url_for("userManagement"))
-
-
-
-
-    #     if request.form.get('access') == "program_chair":
-    #         # programchair = Users.get(Users.username == request.form.get("userToRemove"), Users.PID == request.form.get("program"))
-    #         # programchair.delete_instance()
-    #         # flash("Your changes have been successfully saved!")
-    #         currentChair = Users.select().where(Users.PID == program)
-    #         newChairs   = request.form.get("userToRemove")
-    #         if currentChair.username not in newChairs:
-    #             message = "USER: {0} has been removed as a program chair for pid: {1}".format(currentChair.username ,pid)
-    #             log.writer("INFO", page, message)
-    #             currentChair.PID = None
-    #             currentChair.save()
-    #         else:
-    #         #HOWEVER IF THEY ARE PART OF THE LIST, DELETE THEM FROM THE LIST
-    #             newChairs.remove(currentChair.username)
-    #
     #     elif request.form.get('access') == 'division_chair':
     #         divisionchair = Users.get(Users.username == request.form.get("userToRemove"), Users.DID== request.form.get("division"))
     #         dc.delete_instance()
@@ -105,6 +87,26 @@ def add_administrator(request):
     message     = "USER: {0} has been added as an admin".format(newAdmins)
     app.logger.info(message)
     flash("Admin successfully changed")
+
+def remove_program_chair(request):
+    print("i'm here now 1")
+    chair_to_remove  =  request.form.get("userToRemove")
+    # print(chair_to_remove)
+    PID              =  request.form.get("program")
+    # currentChairs = Users.select().where(Users.PID == PID)
+    # print(currentChairs)
+    # for currentChair in currentChairs:
+    #     if currentChair.username == chair_to_remove:
+    #         todelet = currentChair.username
+    #         todelet.delete_instance()
+    #
+    #         currentChair.PID = None
+    #         currentChair.save()
+    dc = Users.get(Users.username == request.form.get("userToRemove"), Users.PID== request.form.get("program"))
+    dc.delete_instance()
+    message = "USER: {0} has been removed as a program chair for pid: {1}".format(chair_to_remove ,PID)
+    app.logger.info(message)
+
 
 @app.route("/admin/userManagement/get_admin", methods = ["GET"])
 def administrators():
