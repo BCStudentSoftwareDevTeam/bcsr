@@ -1,20 +1,18 @@
 /* global Dropzone */
 /* global bootbox  */
-
-
 Dropzone.options.drop = {
-   paramName: "file", // The name that will be used to transfer the file
-   maxFilesize: 24, // MB
-   maxFiles: 1,
-   acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
-   dictDefaultMessage: "Upload your syllabus here",
-   uploadMultiple: false,
-   addRemoveLinks: true,
-   clickable: true,
-   accept: function(file, done) {
-       done();
-       console.log("File uploaded");
-   }
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 24, // MB
+    maxFiles: 1,
+    acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
+    dictDefaultMessage: "Upload your syllabus here",
+    uploadMultiple: false,
+    addRemoveLinks: true,
+    clickable: true,
+    accept: function(file, done) {
+        done();
+        console.log("File uploaded");
+    }
 };
 
 function delete_syllabus(form_id) {

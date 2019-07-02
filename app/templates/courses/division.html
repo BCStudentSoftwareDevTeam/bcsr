@@ -27,7 +27,8 @@
 	    <h3>{{ program.name}} <a onclick='showCourses("{{program.PID}}")'><span id='coursesIcon-{{program.PID}}' class="pull-right glyphicon glyphicon-plus" aria-hidden="true"></span></a></h3>
 	    <div id='courses-{{program.PID}}'>
 	  {% include "snips/tableHeader.html" %}
-	  {% for course in programs_to_courses[program.name] %}  
+     <tbody>
+	  {% for course in programs_to_courses[program.name] %} 
 	    {% include "snips/coursesRows.html" %} 
 	  {% endfor %}    
 	  {% include "snips/tableFooter.html" %}      
