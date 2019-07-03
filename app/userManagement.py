@@ -8,11 +8,9 @@ from app.logic import databaseInterface
 def userManagement():
   if (request.method == "GET"):
       authorizedUser = AuthorizedUser()
-      # only admin should be able to change division chairs
       if authorizedUser.isAdmin:
          page        = "/" + request.url.split("/")[-1]
          users = Users.select().order_by(Users.firstName.asc())
-         # print(users)
          programs = Programs.select().order_by(Programs.name.asc())
          divisions = Divisions.select().order_by(Divisions.name.asc())
          admins = Users.select().where(Users.isAdmin == 1).order_by(Users.firstName.asc())
@@ -25,11 +23,9 @@ def userManagement():
                                  isAdmin       = authorizedUser.isAdmin)
       else:
          abort(403)
-@app.route("/admin/userInsert", methods = ["POST"]) #'admin/userInsert points to the URL for the form in html file'
+
+@app.route("/admin/userInsert", methods = ["POST"])
 def user_insert():
-    # print("here adding")
-    # print("Type: ", request.form.get('accessType'))
-    # for adding users
     if request.form.get('adduser') == 'adduser':
         if request.form.get('accessType') == "program_chair":
             add_program_chair(request)
@@ -41,33 +37,21 @@ def user_insert():
     elif request.form.get('removeuser') == 'removeuser':
         if request.form.get('accessType') == "program_chair":
             remove_program_chair(request)
+        elif request.form.get('accessType') == 'division_chair':
+            remove_division_chair(request)
+        elif request.form.get('accessType') == 'administrator' :
+            remove_administratorr(request)
     return redirect(url_for("userManagement"))
-    #     elif request.form.get('access') == 'division_chair':
-    #         divisionchair = Users.get(Users.username == request.form.get("userToRemove"), Users.DID== request.form.get("division"))
-    #         dc.delete_instance()
-    #         flash("Your changes have been successfully saved!")
-    #     elif request.form.get('access') == 'administrator' :
-    #         user = Users.get(Users.username == request.form.get("userToRemove"))
-    #         user.isAdmin = 0
-    #         user.save()
-
 
 def add_program_chair(request):
-    print("here2")
-    # programchair = Users.get_or_create(username = request.form.get("userToAdd"), PID =request.form.get("program"))
-    # flash("Your changes have been successfully saved!")
     newChairs   = request.form.get("userToAdd")
-    print(newChairs)
     PID =request.form.get("program")
-        # for user_name in newChairs:
-          #ADD THE USERNAMES TO THE PROGRAM CHAIR LIST
     newChair  = Users.get(Users.username == newChairs)
-    print (newChair.username)
     newChair.PID = PID
     newChair.save()
     message = "USER: {0} has been added as a program chair for pid: {1}".format(newChairs,PID)
     app.logger.info(message)
-    flash("Program successfully changed")
+    flash("Program chair successfully added.")
 
 def add_division_chair(request):
     newChairs    = request.form.get("userToAdd")
@@ -77,7 +61,7 @@ def add_division_chair(request):
     newChair.save()
     message      = "USER: {0} has been added as a division chair for did: {1}".format(newChairs,DID)
     app.logger.info(message)
-    flash("Division successfully changed")
+    flash("Division chair successfully added.")
 
 def add_administrator(request):
     newAdmins   = request.form.get("userToAdd")
@@ -86,33 +70,38 @@ def add_administrator(request):
     newAdmin.save()
     message     = "USER: {0} has been added as an admin".format(newAdmins)
     app.logger.info(message)
-    flash("Admin successfully changed")
+    flash("Admin successfully added.")
 
 def remove_program_chair(request):
-    print("i'm here now 1")
     chair_to_remove  =  request.form.get("userToRemove")
-    # print(chair_to_remove)
     PID              =  request.form.get("program")
-    # currentChairs = Users.select().where(Users.PID == PID)
-    # print(currentChairs)
-    # for currentChair in currentChairs:
-    #     if currentChair.username == chair_to_remove:
-    #         todelet = currentChair.username
-    #         todelet.delete_instance()
-    #
-    #         currentChair.PID = None
-    #         currentChair.save()
-    dc = Users.get(Users.username == request.form.get("userToRemove"), Users.PID== request.form.get("program"))
-    dc.delete_instance()
+    program_chair = Users.get(Users.username == request.form.get("userToRemove"), Users.PID== request.form.get("program"))
+    program_chair.delete_instance()
     message = "USER: {0} has been removed as a program chair for pid: {1}".format(chair_to_remove ,PID)
     app.logger.info(message)
+    flash("Program chair successfully removed.")
 
+def remove_division_chair(request):
+    division_to_remove = request.form.get("userToRemove")
+    DID                = request.form.get("division")
+    division_chair      = Users.get(Users.username == request.form.get("userToRemove"), Users.DID== request.form.get("division"))
+    division_chair.delete_instance()
+    message = "USER: {0} has been removed as a division chair for did: {1}".format(division_to_remove ,DID)
+    app.logger.info(message)
+    flash("Division chair successfully removed.")
+
+def remove_administratorr(request):
+    user = Users.get(Users.username == request.form.get("userToRemove"))
+    user.isAdmin = 0
+    user.save()
+    message = "USER: {0} has been removed as an administrator".format(user)
+    app.logger.info(message)
+    flash("Administrator successfully removed.")
 
 @app.route("/admin/userManagement/get_admin", methods = ["GET"])
 def administrators():
     alladmin = Users.select().where(Users.isAdmin == 1)
     newadmin={}
-    print(alladmin)
     for admin in alladmin:
         newadmin[admin.username]={'firstname':admin.firstName,
                         'lastname':admin.lastName,
@@ -123,7 +112,6 @@ def administrators():
 @app.route('/admin/userManagement/get_program_chairs/<program>', methods = ["GET"])
 def program_chair(program):
     allchairs = Users.select().where(Users.PID==program)
-    print(allchairs, "hello")
     newchairs={}
     for chair in allchairs:
         newchairs[chair.username]={'firstname':chair.firstName,
@@ -131,7 +119,6 @@ def program_chair(program):
                         'username':chair.username
         }
     return json.dumps(newchairs)
-
 
 @app.route('/admin/userManagement/get_division_chairs/<division>',methods=["GET"])
 def get_divisions_json(division):
