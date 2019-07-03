@@ -69,9 +69,6 @@ function retrievePrograms(obj){
                   $("#Add").show();
                   $("#Remove").show();
           			}
-          			// error: function(error){
-          			// 	console.log(error);
-          			// }
                 }); }
 }
 
@@ -81,7 +78,6 @@ function program_chairs_show_names(s) { //Called in HTML
 }
 
 function fillDivisionChairs(response){
-    // console.log(response)
     var divisionselect = document.getElementById("RemoveDropdown");
     $("#RemoveDropdown").empty();
     var option = document.createElement("option");
@@ -104,12 +100,10 @@ function retrieveDivisions(obj){
     var selected_division = obj.value;
     if(selected_division){
         var url = '/admin/userManagement/get_division_chairs/'+selected_division;
-        // console.log("URL: " + url);
          $.ajax({
                 url: url,
                 dataType: 'json',
                 success: function(response){
-                    // console.log(response)
           		    fillDivisionChairs(response);
           			},
           			error: function(error){
@@ -125,7 +119,6 @@ function division_chairs_show_names(s) { //Called in html
        }
 
 function fillAdmin(response){
-   // console.log(response)
    var adminselect = document.getElementById("RemoveDropdown")
        $("#RemoveDropdown").empty();
        var count = 0;
@@ -158,51 +151,3 @@ function retrieveAdmins(){
           }
        });
 }
-
-
-// function getDID(did){
-//   // Getting the Division DID that has been clicked on in userManagementSidebar
-//     if (did.value != 'None'){
-//       $.ajax({
-//           dataType : "json",
-//           url:"/admin/userManagement/changeDivision" + did,
-//           type:"GET",
-//           success:function(response){
-//             fillRemoveChairs(response, did);
-//           }
-//        });
-//     }
-// }
-// function fillRemoveChairs(response, did) {
-//   // get the selectpicker object
-//   var chair_did = $("#divisionRemoveSelectpicker");
-//   // Remove all chairs from selectpicker
-//   chair_did.empty().append('<option selected="selected" value="0">Please Select</option>');
-//   for (var i = 0; i < response[did].length; i++) {
-//     // add the chairs from the response
-//     chair_did.append('<option>'+response[did][i]+'</option>');
-//   }
-//   // refresh selectpicker
-//    $('.selectpicker').selectpicker('refresh');
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function programRemoveChairs(response, pid) {
-//   var program_pid = $("#programRemoveSelectpicker")
-//   program_pid.empty().append('<option selected="selected" value="0">Please Select</option>');
-//   for (var i = 0; i < response[did].length; i++) {
-//     program_pid.append('<option>'+response[pid][i]+'</option>');
-//   }
-//   // $('.selectpicker')
-// }
