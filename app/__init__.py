@@ -19,14 +19,14 @@ from app import uploads
 from app import deleteSyllabus
 from app import download
 # from app import programManagement
-from app import editDivision
-from app import editProgram
-from app import semesterManagement
-from app import changeAdministrator
+# from app import editDivision
+# from app import editProgram
+# from app import semesterManagement
+# from app import changeAdministrator
 from app import userManagement
 from app import errorHandler
 # from app import databaseAdmin
-from app import editAdmin
+# from app import editAdmin
 from app import addCourse
 from app import missingSyllabi
 from app import removeCourse
