@@ -27,3 +27,15 @@ div[id*='programs-'] {
 div[id*='courses-'] {
     display: none;
 }
+
+#page-wrapper {
+    margin-left: 96px;
+}
+
+#courseSidebar {
+    left: 0px;
+}
+
+.btn-light:hover {
+    color: #2c3e50;
+}

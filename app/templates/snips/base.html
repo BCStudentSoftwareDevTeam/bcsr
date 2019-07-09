@@ -43,10 +43,10 @@
   </head>
   <body>
       {% include "snips/navigation.html" %}
-    <div class="container">
+    <div id="base-container" class="container">
       {# All content should get rendered in here #}
       {% block body %} {% endblock %}
-      
+
     </div>
     {% include 'snips/footer.html' %}
 

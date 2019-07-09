@@ -73,25 +73,17 @@ function showPrograms(division) {
 
 
 
-/*
-function showAll() {
-  $('.side-menu').metisMenu({ toggle: false });
-  }
+function showAll(program) {
+    var programID = '#courses-'+ program;
+  $('.btn').on('click', function(){
 
-  $('.first-level').on('click', function(){
-     $(this).children().toggleClass('fa arrow');
-     $(this).children().toggleClass('fa arrow');
+    if ($(programID).css('display') == 'none') {
+        $(programID).css('display', 'block');
+
+    } else {
+        $(programID).css('display', 'none');
+        //$('.coursesIcon-'+ program).hide();
+    }
   });
 
- function showCourseTables (seid, pid){
-   $.ajax({
-     url: '/courses/showCourses/'+seid + "/" + pid,
-     dataType: 'json',
-     type: "GET",
-     success: function (response){
-
-     }
-   })
 }
-
-*/
