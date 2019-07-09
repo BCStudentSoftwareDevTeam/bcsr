@@ -15,7 +15,6 @@
                  <ul class= "nav nav-second-level" id="v-pills-tab"  aria-labelledby="v-pills-home-tab">
                    {% for program in divisions_to_programs[division] %}
 
-
                      <li class="tabbable">
 
                         <a id= "{{program.name}}" href="#" onclick="showCourses({{current_term.year}}, {{program.PID}})">{{program.name}}
@@ -26,9 +25,8 @@
                    {% endfor %}
                  </ul>
                  <!-- /.nav-second-level -->
-
-
-           </li>{% endfor %}
+           </li>
+          {% endfor %}
           <li>
            <a type="button" class="btn btn-light" onclick="showAll()">Show All</a>
           </li>

@@ -2,6 +2,7 @@
 /* global bootbox  */
 var global = this;
 var currentProgram = "0";
+var currentDivision = "0";
 Dropzone.options.drop = {
     paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 24, // MB
@@ -73,17 +74,36 @@ function showPrograms(division) {
 
 
 
-function showAll(program) {
-    var programID = '#courses-'+ program;
-  $('.btn').on('click', function(){
+  function showAll() {
+    //var programID = '#courses-'+ program;
+    console.log("Hello")
+    var division_DIDs = [1, 2, 3, 4, 5, 6, 12]
+    var division_length = division_DIDs.length
+    var program_PIDs = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    var length = program_PIDs.length
 
-    if ($(programID).css('display') == 'none') {
-        $(programID).css('display', 'block');
+    if (this.currentProgram != "0"){
+        $(this.currentProgram).css('display', 'none');
+    }
+
+    if (this.currentDivision != "0"){
+        $(this.currentDivision).css('display', 'none');
+    }
+
+    for (var k = 0; k < division_length; k++) {
+      showPrograms(division_DIDs[k])
+    }
+
+    for (var i = 0; i < length; i++) {
+    if ($('#courses-' + program_PIDs[i]).css('display') == 'none') {
+      $('#courses-' + program_PIDs[i]).css('display', 'block');
 
     } else {
-        $(programID).css('display', 'none');
-        //$('.coursesIcon-'+ program).hide();
+      $('#courses-' + program_PIDs[i]).css('display', 'none');
+      //$('.coursesIcon-'+ program).hide();
     }
-  });
+    $('#coursesIcon-'+ program_PIDs[i]).show();
+    this.currentProgram = program_PIDs[i]
+  }
 
-}
+  }
