@@ -79,7 +79,12 @@ function showPrograms(division) {
     console.log("Hello")
     var division_DIDs = [1, 2, 3, 4, 5, 6, 12]
     var division_length = division_DIDs.length
-    var program_PIDs = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    var firstPID = 11
+    var lastPID = 40
+    var program_PIDs = []
+    while(firstPID <= lastPID){
+      program_PIDs.push(firstPID++)
+    }
     var length = program_PIDs.length
 
     if (this.currentProgram != "0"){
