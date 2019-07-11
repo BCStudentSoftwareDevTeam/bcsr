@@ -1,9 +1,19 @@
+.container {
+  width: 100vw;
+  padding-left: 0px;
+}
+
+#wrapper {
+  margin-top: -20;
+}
+
 h2 {
     font-size: 1.5em;
 }
 
 h1 {
     font-size: 2em;
+    padding-top: 20px;
 }
 
 h3{
@@ -27,7 +37,7 @@ div[id*='programs-'] {
 div[id*='courses-'] {
     display: none;
 }
-
+/*
 #page-wrapper {
     margin-left: 96px;
 }
@@ -39,3 +49,4 @@ div[id*='courses-'] {
 .btn-light:hover {
     color: #2c3e50;
 }
+*/

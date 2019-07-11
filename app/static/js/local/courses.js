@@ -34,17 +34,25 @@ function delete_syllabus(form_id) {
 
 
 function showPrograms(division) {
+  if (this.currentDivision != "0"){
+      $(this.currentDivision).css('display', 'none');
+  }
   var programID = '#programs-'+ division;
-  console.log('Here is the ' + programID + division)
+  console.log('Here is the ' + programID + division);
+  $(programID).toggleClass('fa arrow');
+  //$(programID).toggle('fa arrow');
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
 
     } else {
         $(programID).css('display', 'none');
     }
+    //$('#coursesIcon-'+ division).show();
+    $(programID).toggleClass('fa arrow');
+    this.currentDivision = programID
 
-     $('#icon-'+ division).toggleClass('fa arrow')
-     $('#icon-'+ division).toggleClass('fa arrow')
+     //$('#icon-'+ division).toggleClass('fa arrow')
+     //$('#icon-'+ division).toggleClass('fa arrow')
    }
 
 
@@ -60,7 +68,8 @@ function showPrograms(division) {
       var programID = '#courses-'+ program;
       console.log("the ID is" + programID);
     //  var $this = $(this).parent().find('span');
-
+      $(programID).toggleClass('fa arrow');
+      //$(programID).toggle('fa arrow');
       if ($(programID).css('display') == 'none') {
           $(programID).css('display', 'block');
 
@@ -68,6 +77,7 @@ function showPrograms(division) {
           $(programID).css('display', 'none');
           //$('.coursesIcon-'+ program).hide();
       }
+        $(programID).toggleClass('fa arrow');
         $('#coursesIcon-'+ program).show();
         this.currentProgram = programID
        }
