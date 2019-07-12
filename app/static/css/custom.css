@@ -53,6 +53,7 @@ a {
     padding-top: 12px;
     height: 85px;
     line-height: 30px;
+    z-index: 100;
 }
 
 * {
