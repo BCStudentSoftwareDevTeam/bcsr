@@ -18,6 +18,7 @@ fi
 
 . venv/bin/activate
 
+pip install "cryptography"
 pip install "flask==$FLASK_VERSION"
 pip install "peewee==$PEEWEE_VERSION"
 pip install "pyyaml==$PYAML_VERSION"
