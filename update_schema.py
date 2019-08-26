@@ -16,14 +16,24 @@ class dbModel (Model):
 
 migrator = SqliteMigrator(mainDB)
 
+
+
+####################################
+#############IMPORTANT!#############
+####################################
+# If you get the error "unable to open database file", you need to run
+# "sudo chmod 774 data -R"
+
 # Created the new table "Prefixes" in database
 try:
     migrate(
-    mainDB.create_table(Prefixes),
+    # mainDB.create_tables(Prefixes),
+    Prefixes.create_table()
     )
 except Exception as e:
     print("Table Prefixes already exists.")
     print(e)
+    print("I'm below here")
 
 # Populated new table "Prefixes" with our desired data
 try:
@@ -99,7 +109,8 @@ migrator.rename_table('Courses', 'Courses_old'),
 # Created our new "Courses" table
 try:
     migrate(
-    mainDB.create_table(Courses),
+    # mainDB.create_tables(Courses),
+    Courses.create_table()
     )
 except Exception as e:
     print("Table Courses already exists.")
@@ -129,7 +140,8 @@ except Exception as e:
 # Deleted the table "Courses_old" from our database
 try:
     migrate(
-    mainDB.drop_table(Courses_old),
+    # mainDB.drop_tables(Courses_old),
+    Courses_old.drop_table()
     )
 except Exception as e:
     print(e)

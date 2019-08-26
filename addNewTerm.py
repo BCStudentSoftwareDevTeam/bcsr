@@ -24,8 +24,8 @@ import sys
 import os
 
 ##Global Variables##
-csvFileName = 'terms_csv/Fall2018.csv'
-SEID        = 201713
+csvFileName = 'terms_csv/Spring2017.csv'
+SEID        = 201813
 
 
 #Create Index Map
@@ -128,6 +128,7 @@ def main():
     Semesters.get(Semesters.SEID == SEID)
     # If you get the error 'unable to open database file' at line 128, it's
     # because you don't have the correct permission on your sqlite file
+    # To get the correct permission, run "sudo chmod 774 data -R"
     # Create a prefixDict so that we can map a course prefix to a program id
     prefixDict = createPrefixMapping()
     with open(csvFileName, 'rb') as csvfile: #Open CSV file
