@@ -18,12 +18,6 @@ migrator = SqliteMigrator(mainDB)
 
 
 
-####################################
-#############IMPORTANT!#############
-####################################
-# If you get the error "unable to open database file", you need to run
-# "sudo chmod 774 data -R"
-
 # Created the new table "Prefixes" in database
 try:
     migrate(
@@ -154,5 +148,18 @@ try:
     migrator.add_index('courses', ('PID_id',)),
     migrator.add_index('courses', ('SEID_id',)),
     )
+except Exception as e:
+    print(e)
+
+try:
+    allWell = Courses.select().join_from(Courses, Prefixes).where(Courses.prefix.prefix == "WELL")
+    for i in allWell:
+        if i.filePath != None:
+            x = i.filePath
+            x = x.replace("DivisionIV", "DivisionIII")
+            # print(x)
+            # print(i.filePath)
+            query = Courses.update(filePath = x).where(Courses.CID == i.CID)
+            query.execute()
 except Exception as e:
     print(e)
