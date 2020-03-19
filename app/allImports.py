@@ -63,7 +63,7 @@ app = Flask(__name__)
 #from app import app
 app.config.from_object('settings')
 
-admin = Admin(app)
+# admin = Admin(app)
 
 # Builds all the database connections on app run
 # Don't panic, if you need clarification ask.
