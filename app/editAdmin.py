@@ -1,6 +1,7 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Users
 
 def checkData(data,key):
   user    = None
@@ -16,6 +17,7 @@ def checkData(data,key):
       message="No user was selected."
   except Exception as e:
     message = "Either a bad key or username is not in database."
+    print(e)
   return [user, message]
 
 @app.route('/editAdmin', methods=["POST"])
@@ -35,5 +37,3 @@ def editAdmin():
     return redirect(redirect_url('systemManagement'))
   else:
     abort(403)
-
-  

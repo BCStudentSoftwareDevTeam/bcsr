@@ -1,7 +1,9 @@
-from allImports import *
-from app.logic.getAuthUser import AuthorizedUser
 import datetime
 import time
+
+from app.allImports import *
+from app.logic.getAuthUser import AuthorizedUser
+from app.models import Deadline
 #from datetime import datetime
 
 
@@ -12,11 +14,11 @@ def deadlineDisplay():
 
         # we don't want to show deadlines past today
         today = datetime.date.today()
-        
+
         # we don't want show repeated dates
         dates = Deadline.select().where(Deadline.date > today).distinct().order_by(
             Deadline.date)
-           
+
 
     return render_template("deadline.html",
                            cfg=cfg,

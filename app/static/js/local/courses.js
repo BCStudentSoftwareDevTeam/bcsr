@@ -1,9 +1,9 @@
 /* global Dropzone */
 /* global bootbox  */
 Dropzone.options.drop = {
-    paramName: "thefile", // The name that will be used to transfer the file
+    paramName: "file", // The name that will be used to transfer the file
     maxFilesize: 24, // MB
-    maxFiles: 5,
+    maxFiles: 1,
     acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
     dictDefaultMessage: "Upload your syllabus here",
     uploadMultiple: false,
@@ -33,12 +33,12 @@ function showPrograms(division) {
     var programID = '#programs-'+ division;
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
-        
-        
+
+
     } else {
         $(programID).css('display', 'none');
     }
-    
+
     $('#icon-'+ division).toggleClass('glyphicon-plus')
     $('#icon-'+ division).toggleClass('glyphicon-minus')
 }
@@ -48,12 +48,12 @@ function showCourses(program) {
     var programID = '#courses-'+ program;
     if($(programID).css('display') == 'none'){
         $(programID).css('display', 'block');
-        
-        
+
+
     } else {
         $(programID).css('display', 'none');
     }
-    
+
     $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
     $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
 }
