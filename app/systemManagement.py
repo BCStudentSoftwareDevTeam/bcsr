@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from app.logic.getSystemManagement import GetSystemManagement
@@ -27,7 +27,7 @@ def systemManagement():
                             )
   else:
     abort(403)
-                            
+
 @app.route("/admin/systemManagement/add", methods=["POST","GET"])
 def addSemester():
   page = "/" + request.url.split("/")[-1]
@@ -37,12 +37,10 @@ def addSemester():
     #Class from logic folder
     system      = GetSystemManagement()
     logList     = system.add_semester(data)
-    print logList
+    # print logList
     #TODO: figure out how to log
     log.writer(logList[0],page,logList[1])
     flash(logList[1])
     return redirect(redirect_url())
   else:
     abort(403)
-      
-                            

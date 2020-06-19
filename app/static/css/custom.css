@@ -43,8 +43,13 @@ a {
     color: #608B43;
 }
 
+.bottom-buffer {
+    padding-bottom: 20px;
+    width: 100%;
+}
 .footer {
-    position:fixed;
+    background-color: #DCDCDC;
+    /* position:fixed; */
     left:0;
     color: #1e2433;
     text-align: center;
@@ -53,6 +58,7 @@ a {
     padding-top: 12px;
     height: 85px;
     line-height: 30px;
+    margin-top: 50px;
 }
 
 * {
