@@ -18,7 +18,7 @@ python3 -m pip install -r requirements.txt
 echo
 if [[ ! -e app/config/secret_config.yaml ]]; then
 	cp app/config/example_secret_config.yaml app/config/secret_config.yaml
-	echo "Remember to edit your mail settings and MySQL connection information in 'app/config/secret_config.yaml'"
+	echo "Remember to edit your mail settings and MySQL connection information in 'app/secret_config.yaml'"
 	echo
 	echo "If your database has not been set up, you will need to run database/reset_database.sh"
 fi
