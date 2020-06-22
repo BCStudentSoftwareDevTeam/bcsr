@@ -10,11 +10,9 @@ import os
 # sys.setdefaultencoding("utf-8")
 from app.loadConfig import load_config
 
-print("Hello")
 dir_name  = os.path.dirname(__file__) # Return the directory name of pathname _file_
 cfg       = load_config(os.path.join(dir_name, 'app/config.yaml')) #load config file
 db_name   = cfg['db']['db_name']
-print(db_name)
 host      = cfg['db']['host']
 username  = cfg['db']['username']
 password  = cfg['db']['password']
@@ -31,7 +29,6 @@ cursor = cnx.cursor()
 ##############
 add_semesters = ("INSERT INTO semesters (SEID, year, term) VALUES (%s, %s, %s)")
 # x = old.Semesters.create(SEID = 201615, year = 2016, term = "Fake")
-# print(x.SEID)
 semesters = old.Semesters()
 semesters = semesters.select()
 for i in semesters:
@@ -78,7 +75,7 @@ for i in programs:
 
         cursor.execute(add_programs, data_programs)
     except Exception as e:
-        print(e)
+        print("Could not create Program: ", e)
 #################
 add_users = ("INSERT INTO users (username, firstname, lastname, email, isAdmin, PID_id, DID_id) VALUES (%s, %s, %s, %s, %s, %s, %s)")
 users = old.Users()
@@ -97,7 +94,7 @@ for i in users:
 
         cursor.execute(add_users, data_users)
     except Exception as e:
-        print(e)
+        print("Could not create user: ", e)
 #################
 add_courses = ("INSERT INTO courses (CID, prefix, number, section, PID_id, SEID_id, filePath, lastModified) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 # 11716,12072,12149,12234,12238,12241,12290,
@@ -125,7 +122,7 @@ for i in courses:
 
         cursor.execute(add_courses, data_courses)
     except Exception as e:
-        print(e)
+        print("Could not create course: ", e)
 #################
 add_userscourses = ("INSERT INTO userscourses (UCID, username_id, CID_id) VALUES (%s, %s, %s)")
 
@@ -145,7 +142,7 @@ for i in userscourses:
 
         cursor.execute(add_userscourses, data_userscourses)
     except Exception as e:
-        print(e)
+        print("Could not add user to course: ", e)
 #################
 add_deadline = ("INSERT INTO deadline (description, date) VALUES (%s, %s)")
 
@@ -160,10 +157,8 @@ for i in deadline:
 
         cursor.execute(add_deadline, data_deadline)
     except Exception as e:
-        print(e)
+        print("Could not create deadline: ", e)
 
 cnx.commit()
 cursor.close()
 cnx.close()
-
-print("Last")
