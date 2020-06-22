@@ -1,7 +1,8 @@
-from allImports import *
-from app.logic import databaseInterface 
+from app.allImports import *
+from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import *
 
 #Add Course
 @app.route('/admin/courseManagement/addCourse',methods=["GET","POST"])
@@ -42,4 +43,3 @@ def addCourse():
             abort(404)
     else:
         abort(403)
-        

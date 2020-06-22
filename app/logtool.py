@@ -4,13 +4,11 @@ import os.path
 import os
 
 class Log():
-    
+
     def __init__(self, logfile = 'urcpp.log'):
-	here 	     = os.path.dirname(__file__)
-	self.logfile = os.path.join(os.path.join(here,logfile))
+        here = os.path.dirname(__file__)
+        self.logfile = os.path.join(os.path.join(here,logfile))
         self.lowPrivilege = "User does not have enough access privileges for this operation"
-    
-    
     def writer(self, level, page, message):
         envK = "HTTP_X_PROXY_REMOTE_USER"
         username = request.environ.get(envK)
@@ -22,9 +20,3 @@ class Log():
         print(logInfo)
         log.write(logInfo)
         log.close()
-        
-        
-
-    
-    
-    

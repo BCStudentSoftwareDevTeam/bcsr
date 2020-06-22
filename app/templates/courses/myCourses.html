@@ -2,6 +2,7 @@
   <h2>My Courses</h2>
   {% include "snips/tableHeader.html" %}
   {% for course in my_courses %}
+    <tbody>
     {% include "snips/coursesRows.html" %}  
   {% endfor %}
   {% include "snips/tableFooter.html" %} 
