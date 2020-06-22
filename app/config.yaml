@@ -4,16 +4,6 @@ log:
 filename: "bcsr.log"
 
 # All the databases used by the system
-databases:
-  dev: "data/bcsr.sqlite"
-  stage: ""
-  prod: "data/bcsr.sqlite"
-
-db:
-  db_name: c9
-  host: localhost
-  password: '1234'
-  username: root
 
 databaseAdmin:
   user: 'heggens'

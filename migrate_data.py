@@ -6,8 +6,8 @@ import time
 from datetime import datetime
 import sys
 import os
-reload(sys)
-sys.setdefaultencoding("utf-8")
+# reload(sys)
+# sys.setdefaultencoding("utf-8")
 from app.loadConfig import load_config
 
 print("Hello")
@@ -19,9 +19,7 @@ host      = cfg['db']['host']
 username  = cfg['db']['username']
 password  = cfg['db']['password']
 # Create a connection to the mysql database
-cnx = mysql.connector.connect(database=db_name, host = host, password = password, user = username)
-
-print("Hello2")
+cnx = mysql.connector.connect(database=db_name, host = host, password = password, user = username, auth_plugin='mysql_native_password')
 
 # *******************************
 # A cursor is a temporary work area created in the system memory when a SQL statement is executed.
@@ -48,7 +46,7 @@ for i in semesters:
 
         cursor.execute(add_semesters, data_semesters)
     except Exception as e:
-        print(e)
+        print("Could not create semester: ", SEID, e)
 
 ##############
 add_divisions = (" INSERT INTO divisions (DID, name) VALUES (%s, %s)")
@@ -64,7 +62,7 @@ for i in divisions:
 
         cursor.execute(add_divisions, data_divisions)
     except Exception as e:
-        print(e)
+        print("Could not create Division: ", i.DID, e)
 #################
 add_programs = ("INSERT INTO programs (PID, name, DID_id) VALUES (%s, %s, %s)")
 
@@ -163,7 +161,7 @@ for i in deadline:
         cursor.execute(add_deadline, data_deadline)
     except Exception as e:
         print(e)
-        
+
 cnx.commit()
 cursor.close()
 cnx.close()
