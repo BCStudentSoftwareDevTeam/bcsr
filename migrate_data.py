@@ -10,6 +10,11 @@ import os
 # sys.setdefaultencoding("utf-8")
 from app.loadConfig import load_config
 
+def write_to_log(logEntry):
+    f = open("migrateLog.txt", "a")
+    f.write(logEntry + "\n")
+    f.close()
+
 dir_name  = os.path.dirname(__file__) # Return the directory name of pathname _file_
 cfg       = load_config('app/secret_config.yaml') #load config file
 db_name   = cfg['db']['db_name']
@@ -31,20 +36,22 @@ add_semesters = ("INSERT INTO semesters (SEID, year, term) VALUES (%s, %s, %s)")
 # x = old.Semesters.create(SEID = 201615, year = 2016, term = "Fake")
 semesters = old.Semesters()
 semesters = semesters.select()
+
 for i in semesters:
     try:
         SEID = int(i.SEID)
         year = int(i.year)
         term = str(i.term)
-        print (i)
+        # print (i)
 
         data_semesters = (SEID, year, term)
-        print (data_semesters)
+        # print (data_semesters)
 
         cursor.execute(add_semesters, data_semesters)
     except Exception as e:
-        print("Could not create semester: ", SEID, e)
+        write_to_log("Could not create semester: "+ str(i))
 
+print("Semesters added: ", len(semesters))
 ##############
 add_divisions = (" INSERT INTO divisions (DID, name) VALUES (%s, %s)")
 
@@ -59,7 +66,9 @@ for i in divisions:
 
         cursor.execute(add_divisions, data_divisions)
     except Exception as e:
-        print("Could not create Division: ", i.DID, e)
+        write_to_log("Could not create Division: "+ str(i))
+
+print("Divisions added: ", len(divisions))
 #################
 add_programs = ("INSERT INTO programs (PID, name, DID_id) VALUES (%s, %s, %s)")
 
@@ -75,7 +84,9 @@ for i in programs:
 
         cursor.execute(add_programs, data_programs)
     except Exception as e:
-        print("Could not create Program: ", e)
+        write_to_log("Could not create Program: "+ str(i))
+
+print("Programs added: ", len(programs))
 #################
 add_users = ("INSERT INTO users (username, firstname, lastname, email, isAdmin, PID_id, DID_id) VALUES (%s, %s, %s, %s, %s, %s, %s)")
 users = old.Users()
@@ -94,7 +105,9 @@ for i in users:
 
         cursor.execute(add_users, data_users)
     except Exception as e:
-        print("Could not create user: ", e)
+        write_to_log("Could not create user: "+ str(i))
+
+print("Users added: ", len(users))
 #################
 add_courses = ("INSERT INTO courses (CID, prefix, number, section, PID_id, SEID_id, filePath, lastModified) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)")
 # 11716,12072,12149,12234,12238,12241,12290,
@@ -122,7 +135,9 @@ for i in courses:
 
         cursor.execute(add_courses, data_courses)
     except Exception as e:
-        print("Could not create course: ", e)
+        write_to_log("Could not create course: "+ str(i))
+
+print("Courses added: ", len(courses))
 #################
 add_userscourses = ("INSERT INTO userscourses (UCID, username_id, CID_id) VALUES (%s, %s, %s)")
 
@@ -132,7 +147,7 @@ for i in userscourses:
     try:
         UCID = int(i.UCID)
         username = str(i.username.username)
-        print(i.CID.CID)
+
         if i.CID:
             CID = int(i.CID.CID)
         else:
@@ -142,7 +157,9 @@ for i in userscourses:
 
         cursor.execute(add_userscourses, data_userscourses)
     except Exception as e:
-        print("Could not add user to course: ", e)
+        write_to_log("Could not add user to course: "+ str(i))
+
+print("User to course relationships added: ", len(userscourses))
 #################
 add_deadline = ("INSERT INTO deadline (description, date) VALUES (%s, %s)")
 
@@ -157,7 +174,9 @@ for i in deadline:
 
         cursor.execute(add_deadline, data_deadline)
     except Exception as e:
-        print("Could not create deadline: ", e)
+        write_to_log("Could not create deadline: "+ str(i))
+
+print("Deadlines created: ", len(deadline))
 
 cnx.commit()
 cursor.close()

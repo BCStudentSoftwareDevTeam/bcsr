@@ -9,6 +9,10 @@ mainDB = MySQLDatabase(cfg['db']['db_name'],
                        user = cfg['db']['username'],
                        passwd = cfg['db']['password'])
 
+# FOR USE IN MIGRATING FROM SQLITE TO SQL ONLY!
+#mainDB = SqliteDatabase("data/bcsr.sqlite", pragmas = (('busy_timeout', 100), ('journal_mode', 'WAL'))
+                          )
+
 # Creates the class that will be used by Peewee to store the database
 class dbModel (Model):
   class Meta:
