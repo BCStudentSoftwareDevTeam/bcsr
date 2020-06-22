@@ -8,7 +8,7 @@ from app import models
 from app import *
 # from models import *                # all the database models
 
-admin = Admin(app)
+# admin = Admin(app)
 
 from app.loadConfig import load_config
 cfg = load_config()
@@ -62,10 +62,8 @@ returns a replacement function. See start.py for an example"
 # Don't panic, if you need clarification ask.
 @app.before_request
 def before_request():
-
-    #g.dbMain =  mainDB.connect()
+    # g.dbMain =  mainDB.connect()
     pass
-
 @app.teardown_request
 def teardown_request(exception):
     dbM = getattr(g, 'db', None)

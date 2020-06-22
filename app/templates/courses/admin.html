@@ -14,12 +14,15 @@
   <h2>My Courses</h2>
   {% include "snips/tableHeader.html" %}
   {% for course in my_courses %}
-    {% include "snips/coursesRows.html" %}  
+    {% include "snips/coursesRows.html" %}
   {% endfor %}
   {% include "snips/tableFooter.html" %}
 {% else %}
    <h2>You have no courses.</h2>
 {% endif %}
+
+
+
 
 {# ADMIN VIEW #}
 {%for division in divisions_to_programs %}
@@ -33,8 +36,8 @@
     <div id='courses-{{program.PID}}'>
     {% include "snips/tableHeader.html" %}
     {% for course in programs_to_courses[program.name] %}
-      {% include "snips/coursesRows.html" %} 
-    {% endfor %} 
+      {% include "snips/coursesRows.html" %}
+    {% endfor %}
     {% include "snips/tableFooter.html" %}
     </div>
     </div>
@@ -42,8 +45,9 @@
   </div>
 {% endfor %}
 
+<input type="submit" class="btn btn-default inputPadding" value="Submit" id="reload" onclick="window.location.reload()">
+
 <link rel = "stylesheet" href = "/static/css/Courses.css"/>
 
 <script type="text/javascript" src="/static/js/local/courses.js"></script>
 {% endblock %}
-

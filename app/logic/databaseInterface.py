@@ -1,5 +1,6 @@
-from app.allImports import *
+from app.allImports import cfg
 from app.models import *
+
 
 def grab_current_semester():
     semesters = Semesters.select()
