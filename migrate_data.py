@@ -11,7 +11,7 @@ import os
 from app.loadConfig import load_config
 
 dir_name  = os.path.dirname(__file__) # Return the directory name of pathname _file_
-cfg       = load_config(os.path.join(dir_name, 'app/config.yaml')) #load config file
+cfg       = load_config('app/secret_config.yaml') #load config file
 db_name   = cfg['db']['db_name']
 host      = cfg['db']['host']
 username  = cfg['db']['username']
