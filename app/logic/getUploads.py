@@ -31,7 +31,7 @@ class GetUploads():
     #We need the app in the front in order to mkdir
     #upload_file_path = 'app/' + cfg['fileOperations']['dataPaths']['uploads']
     relative_path=cfg['fileOperations']['dataPaths']['uploads']
-    upload_file_path=self.getAbsolutePath(relative_path)
+    upload_file_path=self.getAbsolutePath(relative_path, makeDirs=True)
     #previous hardcoded version: upload_file_path = '/var/www/html/bcsr-flask/app/' + cfg['fileOperations']['dataPaths']['uploads']
     app.logger.info("Upload file path: {0}".format(upload_file_path))
     return upload_file_path

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/static/css/courses_form.css">
-        {% if course.CID.filePath == None %}   
+        {% if course.CID.filePath == None %}
 		 <tr style="height: 160px">
 	{% else %}
 		<tr>
@@ -7,7 +7,7 @@
                 <td>
                   {{course.username.firstName}} {{course.username.lastName}}
                 </td>
-                <td> 
+                <td>
                   {% if course.CID.filePath == None %}
                     {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}
                   {% else %}
@@ -25,7 +25,7 @@
                      </form>
                   {% else %}
                     <!-- Buttons -->
-              
+
                     <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
                     <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
                       <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
