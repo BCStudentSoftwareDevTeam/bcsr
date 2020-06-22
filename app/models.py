@@ -3,15 +3,14 @@ import os
 from app.loadConfig import load_config
 
 
-cfg = load_config('app/secret_config.yaml')
-mainDB = MySQLDatabase(cfg['db']['db_name'],
-                       host = cfg['db']['host'],
-                       user = cfg['db']['username'],
-                       passwd = cfg['db']['password'])
+secret_cfg = load_config('app/secret_config.yaml')
+mainDB = MySQLDatabase(secret_cfg['db']['db_name'],
+                       host = secret_cfg['db']['host'],
+                       user = secret_cfg['db']['username'],
+                       passwd = secret_cfg['db']['password'])
 
 # FOR USE IN MIGRATING FROM SQLITE TO SQL ONLY!
-#mainDB = SqliteDatabase("data/bcsr.sqlite", pragmas = (('busy_timeout', 100), ('journal_mode', 'WAL'))
-                          )
+#mainDB = SqliteDatabase("data/bcsr.sqlite", pragmas = (('busy_timeout', 100), ('journal_mode', 'WAL')))
 
 # Creates the class that will be used by Peewee to store the database
 class dbModel (Model):

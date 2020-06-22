@@ -21,8 +21,8 @@ app = Flask(__name__)
 from app import allImports
 from app.loadConfig import load_config
 
-cfg = load_config("app/secret_config.yaml")
-app.secret_key = cfg["secret_key"]
+secret_cfg = load_config("app/secret_config.yaml")
+app.secret_key = secret_cfg["secret_key"]
 
 # Include an import for every python file that is serving a webpage
 #import your new python files here. It is not a part of the module until it is imported

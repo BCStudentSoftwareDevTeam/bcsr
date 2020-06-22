@@ -8,7 +8,7 @@ from app import models
 from app import *
 # from models import *                # all the database models
 
-admin = Admin(app)
+# admin = Admin(app)
 
 from app.loadConfig import load_config
 cfg = load_config()
