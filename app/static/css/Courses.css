@@ -27,3 +27,15 @@ div[id*='courses-'] {
   float: right;
   margin-top: 25px;
 }
+
+#drop{
+  height: 65px;
+}
+
+.dropzone .dz-message {
+  margin-top: 0px
+}
+
+.dropzone{
+  min-height: 0px
+}

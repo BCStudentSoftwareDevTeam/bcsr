@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 import datetime
@@ -6,16 +6,16 @@ import datetime
 
 @app.route("/deadline/create", methods=["POST"])
 def deadlineCreate():
-    # we need the page for loggin purposes 
+    # we need the page for loggin purposes
     page = "/" + request.url.split("/")[-1]
-    
+
     # we need the user to know if they are is admin
     authorizedUser = AuthorizedUser()
     if authorizedUser.isAdmin:
-        # data contains 
+        # data contains
         # deadlineDescription
         data = request.form
-	date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
+        date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)

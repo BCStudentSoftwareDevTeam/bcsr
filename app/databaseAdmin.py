@@ -1,11 +1,12 @@
-from allImports import *
+from app.allImports import *
 from flask_admin.contrib.peewee import ModelView
+from app.models import *
 
 class AuthenticatedUser(ModelView):
     column_display_pk = True
     def is_accessible(self):
         return authUser(request.environ) == cfg['databaseAdmin']['user']
-    
+
 admin.add_view(AuthenticatedUser(Semesters))
 admin.add_view(AuthenticatedUser(Divisions))
 admin.add_view(AuthenticatedUser(Programs))
