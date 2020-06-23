@@ -22,36 +22,14 @@ div{
 
 }
 
-#remove_btn{
-    margin-bottom : 50px;
-    margin-top : 50px;
-}
-
-#add_btn{
-    margin-bottom : 50px;
-    margin-top : 50px;
-}
 .bootstrap-select.btn-group .dropdown-menu selectpicker {
      color: whitesmoke !important;
      background: #bf5279 !important;
  }
-
- #program_dropdown{
-   width: 40%;
-   position: relative;
-   left: 30%;
-}
-
- #divisionDropdown{
-   width: 40%;
-   position: relative;
-   left: 30%;
-   text-align: center;
- }
-
+/* 
 #addDelete_buttons{
   position: relative;
-}
+} */
 
  /*** Desktop ***/
 @media (min-width: 992px){

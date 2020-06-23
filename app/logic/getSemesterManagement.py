@@ -4,7 +4,7 @@ from app.allImports import *
 from app.logic import databaseInterface
 from app.models import Semesters
 
-class GetSystemManagement():
+class GetSemesterManagement():
   '''Purpose: This class should hold any method directly related to
   systemMangement.py should be located inside of this class'''
 

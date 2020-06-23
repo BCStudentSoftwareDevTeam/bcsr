@@ -37,7 +37,7 @@ def addSemester():
     #Class from logic folder
     semester      = GetSemesterManagement()
     logList     = semester.add_semester(data)
-    print logList
+    
     #TODO: figure out how to log
     log.writer(logList[0],page,logList[1])
     flash(logList[1])

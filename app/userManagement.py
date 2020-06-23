@@ -1,8 +1,9 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from flask import json, jsonify
 from app.logic import databaseInterface
+from app.models import *
 
 @app.route("/admin/userManagement", methods=["GET"])
 def userManagement():
@@ -14,7 +15,7 @@ def userManagement():
          programs = Programs.select().order_by(Programs.name.asc())
          divisions = Divisions.select().order_by(Divisions.name.asc())
          admins = Users.select().where(Users.isAdmin == 1).order_by(Users.firstName.asc())
-         return render_template("admin/userManagement/userManagement.html",
+         return render_template("admin/userManagement.html",
                                  divisions      = divisions,
                                  cfg           = cfg,
                                  users         = users,
@@ -72,11 +73,20 @@ def add_administrator(request):
     app.logger.info(message)
     flash("Admin successfully added.")
 
+def remove_administratorr(request):
+    user = Users.get(Users.username == request.form.get("userToRemove"))
+    user.isAdmin = 0
+    user.save()
+    message = "USER: {0} has been removed as an administrator".format(user)
+    app.logger.info(message)
+    flash("Administrator successfully removed.")
+
 def remove_program_chair(request):
     chair_to_remove  =  request.form.get("userToRemove")
     PID              =  request.form.get("program")
-    program_chair = Users.get(Users.username == request.form.get("userToRemove"), Users.PID== request.form.get("program"))
-    program_chair.delete_instance()
+    program_chair = Users.get(Users.username == chair_to_remove, Users.PID== PID)
+    program_chair.PID = None
+    program_chair.save()
     message = "USER: {0} has been removed as a program chair for pid: {1}".format(chair_to_remove ,PID)
     app.logger.info(message)
     flash("Program chair successfully removed.")
@@ -85,18 +95,11 @@ def remove_division_chair(request):
     division_to_remove = request.form.get("userToRemove")
     DID                = request.form.get("division")
     division_chair      = Users.get(Users.username == request.form.get("userToRemove"), Users.DID== request.form.get("division"))
-    division_chair.delete_instance()
+    division_chair.DID = None
+    division_chair.save()
     message = "USER: {0} has been removed as a division chair for did: {1}".format(division_to_remove ,DID)
     app.logger.info(message)
     flash("Division chair successfully removed.")
-
-def remove_administratorr(request):
-    user = Users.get(Users.username == request.form.get("userToRemove"))
-    user.isAdmin = 0
-    user.save()
-    message = "USER: {0} has been removed as an administrator".format(user)
-    app.logger.info(message)
-    flash("Administrator successfully removed.")
 
 @app.route("/admin/userManagement/get_admin", methods = ["GET"])
 def administrators():
