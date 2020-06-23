@@ -1,8 +1,12 @@
 ######This is not being used, User Management uses userManagement.py#######
 ############################################################################
 ##############################################################################from allImports import *
+
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Users
+
 @app.route("/editDivision", methods=["POST"])
 def editDivision():
     authorizedUser = AuthorizedUser()

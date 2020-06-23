@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from app.logic.getSemesterManagement import GetSemesterManagement
@@ -28,7 +28,7 @@ def semesterManagement():
   else:
     abort(403)
 
-@app.route("/admin/semesterManagement/add", methods=["POST","GET"])
+@app.route("/admin/systemManagement/add", methods=["POST","GET"])
 def addSemester():
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()

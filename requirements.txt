@@ -1,0 +1,11 @@
+flask
+peewee
+pyyaml
+XlsxWriter
+flask-admin
+wtf-peewee
+jinja2
+itsdangerous
+click
+Flask-MySQL
+mysql-connector-python

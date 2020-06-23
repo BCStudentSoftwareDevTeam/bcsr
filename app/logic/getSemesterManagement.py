@@ -1,8 +1,10 @@
-from app.allImports import *
-from app.logic import databaseInterface
 import time
 
-class GetSemesterManagement():
+from app.allImports import *
+from app.logic import databaseInterface
+from app.models import Semesters
+
+class GetSystemManagement():
   '''Purpose: This class should hold any method directly related to
   systemMangement.py should be located inside of this class'''
 
@@ -31,7 +33,7 @@ class GetSemesterManagement():
     @key   -year => {string}
     @key   -term => {integer}
     '''
-    print 'inside create'
+    # print 'inside create'
     year = data['year']
     term_key  = str(data['term'])
     #same year is a list of all term keys that go off the current year,
@@ -43,7 +45,7 @@ class GetSemesterManagement():
       else:
         seid = str(int(year)-1) + term_key
 
-    print "This is the SEID: " + str(seid)
+    # print "This is the SEID: " + str(seid)
     return seid
 
   def add_semester(self, data):
@@ -59,7 +61,7 @@ class GetSemesterManagement():
     logType       = "ERROR"
     if checkSeid:
       #TODO: Log error
-      message = "Semester: {0} {1} already exsists in the database.".format(term_name, data['year'])
+      message = "Semester: {0} {1} already exists in the database.".format(term_name, data['year'])
     else:
       try:
         newSemester = Semesters(SEID = int(SEID),

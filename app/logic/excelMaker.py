@@ -1,10 +1,12 @@
 import xlsxwriter
+import sys, os
+
 from app.allImports import *
-import sys
+from app.models import *
 
 def makeExcelFile(SEID):
     filename = "bcsr-{}-missing-syllabi.xlsx".format(SEID)
-    path = getAbsolutePath(cfg['fileOperations']['dataPaths']['tmp'],filename,False)
+    path = getAbsolutePath(cfg['fileOperations']['dataPaths']['tmp'],filename,True)
     workbook = xlsxwriter.Workbook(path)
     workbook.set_properties({
         'title':    'Missing Syllabi for {}'.format(SEID),
@@ -33,7 +35,7 @@ def makeExcelFile(SEID):
                     Courses.SEID == SEID)
         colLetter = 'D'
         for c in courses:
-            colLetter = chr(ord(colLetter) + 1) 
+            colLetter = chr(ord(colLetter) + 1)
             #Turns value in to next letter up
             #E.G. D -> E
             colName   = colLetter + '{}'
@@ -41,8 +43,5 @@ def makeExcelFile(SEID):
             master_worksheet.write(colName.format(master_row),course_info)
         master_row  += 1
     workbook.close()
+    print(path)
     return path
-    
-    
-    
-    
