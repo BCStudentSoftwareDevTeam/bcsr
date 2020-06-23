@@ -36,11 +36,8 @@ from app import deleteSyllabus
 from app import download
 from app import divisionManagement
 from app import programManagement
-from app import editDivision
-from app import editProgram
 from app import semesterManagement
 from app import errorHandler
-from app import editAdmin
 from app import addCourse
 from app import missingSyllabi
 from app import removeCourse
