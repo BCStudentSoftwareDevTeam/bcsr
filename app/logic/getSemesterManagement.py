@@ -4,7 +4,7 @@ from app.allImports import *
 from app.logic import databaseInterface
 from app.models import Semesters
 
-class GetSystemManagement():
+class GetSemesterManagement():
   '''Purpose: This class should hold any method directly related to
   systemMangement.py should be located inside of this class'''
 
@@ -72,5 +72,5 @@ class GetSystemManagement():
         logType = "INFO"
       except Exception as e:
         #TODO: Log error
-        message = "An error occurred while trying to create semester {0} {1}".format(termname, data['year'])
+        message = "An error occurred while trying to create semester {0} {1}".format(term_name, data['year'])
     return [logType,message]

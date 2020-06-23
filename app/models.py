@@ -61,8 +61,8 @@ class Users (dbModel):
   lastName      = CharField()
   email         = CharField()
   isAdmin       = BooleanField(default = False)
-  PID           = ForeignKeyField(Programs,  null = True)
-  DID           = ForeignKeyField(Divisions, null = True)
+  PID           = ForeignKeyField(Programs,  null = True)   # indicates I'm a Program Chair
+  DID           = ForeignKeyField(Divisions, null = True)   # indicates I'm a Division Chair
 
   def __str__(self):
     return self.username

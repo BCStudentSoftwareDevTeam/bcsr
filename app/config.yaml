@@ -1,4 +1,3 @@
-
 # The log file location
 log:
 filename: "bcsr.log"
@@ -31,14 +30,12 @@ mainMenu:
 
 adminMenu:
   Administration:
-    - title: "Program Management"
-      link:  "/redirect/program_management"
-    - title: "Division Management"
-      link:  "/redirect/division_management"
-    - title: "System Management"
-      link:  "/admin/systemManagement"
-    - title: "Course Management"
-      link:  "/admin/courseManagement/missingSyllabi"
+  - title: "Semester Management"
+    link:  "/admin/semesterManagement"
+  - title: "User Management"
+    link:  "/admin/userManagement"
+  - title: "Course Management"
+    link:  "/admin/courseManagement/missingSyllabi"
 
 courseManagementSidebar:
   - title: "Missing Syllabi"
@@ -47,6 +44,14 @@ courseManagementSidebar:
     link: "/admin/courseManagement/addCourse"
   - title: "Remove Course"
     link: "/admin/courseManagement/removeCourse"
+
+accessLevel:
+ - name: "Program Chair"
+   id: "program_chair"
+ - name: "Division Chair"
+   id: "division_chair"
+ - name: "Administrator"
+   id: "administrator"
 
 Headers:
   Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
