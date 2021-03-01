@@ -1,8 +1,10 @@
-from allImports import *
-from app.logic import databaseInterface 
+from flask import json, jsonify
+
+from app.allImports import *
+from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
-from flask import json, jsonify
+from app.models import *
 
 def SEID_courses_dict():
   dictionary = dict()
@@ -12,7 +14,7 @@ def SEID_courses_dict():
     SEID = str(term.SEID)
     dictionary[SEID] = courses
   return dictionary
-    
+
 @app.route('/admin/courseManagement/removeCourse',methods=["GET","POST"])
 def removeCourse():
   authorizedUser = AuthorizedUser()
@@ -29,7 +31,7 @@ def removeCourse():
         data = request.form
         course = Courses.get(Courses.CID == data['CID'])
         msg = 'The course (' + course.prefix + '-' + course.number + '-' + course.section + ') has been deleted.'
-        UsersCourses.delete().where(UsersCourses.CID == data['CID']).execute()  # Delete any relationships to users as well	
+        UsersCourses.delete().where(UsersCourses.CID == data['CID']).execute()  # Delete any relationships to users as well
         Courses.delete().where(Courses.CID == data['CID']).execute()
         flash(msg)
         return redirect(url_for("removeCourse"))
@@ -40,8 +42,8 @@ def removeCourse():
       abort(404)
   else:
     abort(403)
-  
-                             
+
+
 @app.route('/admin/courseManagement/removeCourse/json/<SEID>',methods=["GET"])
 def getJson(SEID):
   try:
@@ -63,4 +65,5 @@ def getJson(SEID):
     jsonStr = json.dumps(courseList)
     return jsonify(Courses=jsonStr)
   except Exception as e:
-    print str(e)
+    # print str(e)
+    pass

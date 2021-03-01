@@ -1,10 +1,12 @@
-from allImports import *
+from app.allImports import *
 #IMPORT LOGIC FILES
 from app.logic import databaseInterface
-from app.logic.getAuthUser import AuthorizedUser 
+from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getCourses import GetCourses
 from app.logic.switch import switch
 from app.logic.getAll import GetAll
+
+from app.models import Semesters
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
 @app.route("/courses/<term>", methods = ["GET"]) #SET A DEFAULT APP ROUTE
@@ -18,16 +20,16 @@ def courses(term = 0):
   current_term = Semesters.get(Semesters.SEID == currentSEID)
   #instantiate GetAll object
   getAll = GetAll()
-  
+
   #Grab user information
   auth       = AuthorizedUser()
   user       = auth.get_user()
   user_level = auth.user_level()
   #CREATE TWO DEFAULT DICTIONARIES
-  
-  
+
+
   getCourses            = GetCourses(auth)
-  
+
   # we need to get the dictionaries that populate the tables
   two_dictionaries      = getAll.create_dictionaries(currentSEID)
   divisions_to_programs = two_dictionaries[0]
@@ -44,11 +46,11 @@ def courses(term = 0):
                               divisions_to_programs = divisions_to_programs,
                               programs_to_courses   = programs_to_courses,
                               current_term          = current_term
-                             )              
+                             )
       break;
     if case('division'):
       division_key            = user.DID
-      print division_key
+      # print division_key
       return render_template('courses/division.html',
                               cfg                   = cfg,
                               my_courses            = my_courses,
@@ -56,7 +58,7 @@ def courses(term = 0):
                               divisions_to_programs = divisions_to_programs,
                               programs_to_courses   = programs_to_courses,
                               current_term          = current_term
-                             )   
+                             )
       break;
     if case('program'):
       program_key             = user.PID.name
@@ -66,18 +68,17 @@ def courses(term = 0):
                               program_key           = program_key,
                               programs_to_courses   = programs_to_courses,
                               current_term          = current_term
-                             )    
+                             )
       break;
-      
+
     if case('faculty'):
       return render_template('courses/faculty.html',
                               cfg                   = cfg,
                               my_courses            = my_courses,
                               current_term          = current_term
-                             )  
+                             )
       break;
-    if case(): 
+    if case():
       # TODO: return ERROR
       abort(404)
       render_template('error.html')
-        
