@@ -3,8 +3,6 @@
 //data so that I can loop through the dictionary using javascript.
 function getCourses(){
     var SEID = document.getElementById('SEID');
-    console.log('This is SEID')
-    console.log(SEID.value)
     if (SEID.value != 'None'){
         $('#courses').find('option').remove().end()
         addEmptyLine('Select a Course')
@@ -13,7 +11,7 @@ function getCourses(){
             $.each(data,function(list,courses){
                 $.each(JSON.parse(courses),function(element,course){
                     var optionText = course.title + ' ' + course.instructor
-                    var optionValue = course.CID                            
+                    var optionValue = course.CID
                     $('#courses').append($('<option>', {
                         value: optionValue,
                         text: optionText
@@ -22,7 +20,7 @@ function getCourses(){
             })
         $('#courses').selectpicker('refresh');
         })
-        
+
     } else {
         $('#courses').find('option').remove()
         addEmptyLine('Select a Semester')
