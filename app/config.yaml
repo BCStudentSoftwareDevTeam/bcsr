@@ -54,7 +54,7 @@ accessLevel:
    id: "administrator"
 
 Headers:
-  Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
+  Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By', 'Division', 'Program']
   Archive: ['Instructor','Course','Term','Last Modified By']
 
 fileOperations:
