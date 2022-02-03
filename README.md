@@ -9,8 +9,7 @@
 
 ##Requirements##
 * python 2.7
-* linux, unix, mac, windows(with attachments)
-* git
+* linux, unix, mac, windows(with attachments), Ubuntu
 
 ## Creating Development Environment
 
@@ -18,16 +17,32 @@
 
 2. If working on a **local machine**, then clone the repo from your terminal.
 
-3. Run ```source setup.sh```
+3. Edit your ```secret_config.yaml``` file.
+
+4. Run ```source setup.sh```
+
 
 ## Creating the database
+### PHPMYADMIN
+1. Go to http://0.0.0.0/phpmyadmin/ replacing the 0.0.0.0 with your server
+2. Log in with the credentials used in secret_config.yaml
+3. Click on "New" on top of the sidebar at the left of the screen
+4. If there is already a database named "bcsr", drop it
+5. Create a new database with the name "bcsr"
+6. Run ```python create_db.py```
 
-1. 
+### MYSQL WORKBENCH
+1. Go to MySQL Workbench, log in to your MySQL Connection that you use for SSDT.
+2. On the top left corner of the application, click on the fourth icon (a plus and container picture) to create a new schema, name it 'bcsr' and click apply.
+3. Run ```python create_db.py```
+4. If you are successful you will see the tables and their data in 'bcsr'
 
-If you are successful you will see something like:
-``` bash
+## Run the Application
+1. Run ```python app.py```
+If successful you will see something like this:
 Starting application
 Running server at http://0.0.0.0:8080/
+
 ```
 Click the link in your terminal to check if it deployed correctly.
 
@@ -47,4 +62,3 @@ Click the link in your terminal to check if it deployed correctly.
 		- allImports.py
 		- config.yaml
 		- models.py
-		- starty.py #This an example of where your controllers will go
