@@ -12,15 +12,10 @@
 * linux, unix, mac, windows(with attachments), Ubuntu
 
 ## Creating Development Environment
-
 1. Clone the BCSR repository (from Github) in your home directory: ```git clone <URL>```
-
 2. If working on a **local machine**, then clone the repo from your terminal.
-
 3. Edit your ```secret_config.yaml``` file.
-
 4. Run ```source setup.sh```
-
 
 ## Creating the database
 ### PHPMYADMIN
@@ -32,10 +27,18 @@
 6. Run ```python create_db.py```
 
 ### MYSQL WORKBENCH
-1. Go to MySQL Workbench, log in to your MySQL Connection that you use for SSDT.
-2. On the top left corner of the application, click on the fourth icon (a plus and container picture) to create a new schema, name it 'bcsr' and click apply.
+1. Log into mysql from the command line using: ```mysql -u root -p```. It will prompt you to enter password
+2. Create the database using the command: ```create database bcsr```
 3. Run ```python create_db.py```
-4. If you are successful you will see the tables and their data in 'bcsr'
+4. If you are successful you will see something like this:
+  Creating empty SQLite file: data/bcsr.sql.
+	Creating model for 'Semesters'
+	Creating model for 'Divisions'
+	Creating model for 'Programs'
+	Creating model for 'Users'
+	Creating model for 'Courses'
+	Creating model for 'UsersCourses'
+	Creating model for 'Deadline'
 
 ## Run the Application
 1. Run ```python app.py```
