@@ -14,7 +14,7 @@
 ## Creating Development Environment
 1. Clone the BCSR repository (from Github) in your home directory: ```git clone <URL>```
 2. If working on a **local machine**, then clone the repo from your terminal.
-3. Edit your ```secret_config.yaml``` file.
+3. Edit your ```secret_config.yaml``` file by referencing the example_secret_config.yaml file.
 4. Run ```source setup.sh```
 
 ## Creating the database
