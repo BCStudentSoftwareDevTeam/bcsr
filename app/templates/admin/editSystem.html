@@ -40,7 +40,12 @@
         <td class="alert alert-danger" colspan="3">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         The most recent term automatically becomes the active terms
-        </td> 
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          Please email your master list of classes to <a href="mailto:heggens@berea.edu" class="footerlink">Scott Heggen</a> or  <a href="mailto:ramsayb2@berea.edu" class="footerlink">Brian Ramsay</a>.
+        </td>
       </tr>
       <div class="form-group">
         <form action = "/admin/systemManagement/add" method="post">
@@ -91,7 +96,7 @@ a 'table' tag #}
               {% for user in users %}
                 <option value="{{user.username}}">
                   {{user.firstName}} {{user.lastName}} ({{user.username}})
-                </option>                    
+                </option>
               {% endfor %}
             </select>
           </div>
@@ -123,7 +128,7 @@ a 'table' tag #}
               {% for admin in admins %}
                 <option value="{{admin.username}}">
                   {{admin.firstName}} {{admin.lastName}} ({{admin.username}})
-                </option>                    
+                </option>
               {% endfor %}
             </select>
           </div>
