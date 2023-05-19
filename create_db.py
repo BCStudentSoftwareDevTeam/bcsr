@@ -1,17 +1,18 @@
 # WARNING: NOT FOR USE IN PRODUCTION AFTER REAL DATA EXISTS!!!!!!!!!!!!!!!!!!!!!!
 '''
-This script creates the database tables in the SQLite file. 
+This script creates the database tables in the SQLite file.
 Update this file as you update your database.
 '''
 import os, sys
 import importlib
+here = os.path.dirname(__file__)
 
 # Don't forget to import your own models!
 from app.models import *
 
-conf = load_config('app/config.yaml')
+conf = load_config(os.path.join(here,'app/config.yaml'))
 
-sqlite_dbs  = [ conf['databases']['dev']
+sqlite_dbs  = [ conf['databases'][0]
                 # add more here if multiple DBs
               ]
 
@@ -29,7 +30,7 @@ for fname in sqlite_dbs:
     print ("Database {0} should not exist at this point!".format(fname))
   print ("Creating empty SQLite file: {0}.".format(fname))
   open(fname, 'a').close()
-  
+
 
 def class_from_name (module_name, class_name):
   # load the module, will raise ImportError if module cannot be loaded
@@ -37,7 +38,7 @@ def class_from_name (module_name, class_name):
   # get the class, will raise AttributeError if class cannot be found
   c = getattr(module_name, class_name)
   return c
-    
+
 """This file creates the database and fills it with some dummy run it after you have made changes to the models pages."""
 def get_classes (db):
   classes = []
@@ -47,7 +48,7 @@ def get_classes (db):
     classes.append(c)
   return classes
 
-  
+
 mainDB.create_tables(get_classes('mainDB'))
 
 # When adding dummy data the varialbes should be in Mixed case and should be the name of the class
@@ -60,7 +61,7 @@ semesters = Semesters(  SEID      = 201612,
                       ).save(force_insert = True)
 ###########
 #DIVISIONS#
-###########            
+###########
 divisions = Divisions(  name      = "Division 1"
                       ).save()
 
@@ -72,7 +73,7 @@ divisions = Divisions(  name      = "Division 2"
 programs  = Programs(   name      = "Computer Science",
                         DID       = 2
                      ).save()
-                     
+
 programs  = Programs(   name      = "Biology",
                         DID       = 1
                     ).save()
@@ -85,36 +86,36 @@ users     = Users(      firstName = "Scott",
                         email     = "heggens@berea.edu",
                         isAdmin     = True
                   ).save(force_insert=True)
-            
+
 users     = Users(      firstName  = "Jan",
                         lastName   = "Pearce",
                         username   = "pearcej",
                         email      = "pearcej@berea.edu",
                         DID        = 2
                   ).save(force_insert=True)
-                        
+
 users     = Users(      firstName = "Mario",
                         lastName  = "Nakazawa",
                         username  = "nakazawam",
                         PID       = 1,
                         email     = "nakazawam@berea.edu"
                   ).save(force_insert=True)
-                  
+
 users     = Users(      firstName = "Matt",
                         lastName  = "Jadud",
                         username  = "jadudm",
                         email     = "jadudm@berea.edu",
-                  ).save(force_insert=True)  
-#########                  
-#COURSES#  
-#########             
+                  ).save(force_insert=True)
+#########
+#COURSES#
+#########
 courses   = Courses(  prefix  = "BIO",
                       number  = "101",
                       section = "A1",
                       PID     = 2,
                       SEID    = 201612
                   ).save()
-                  
+
 courses   = Courses(  prefix  = "CSC",
                       number  = "415",
                       section = "SH",
@@ -127,7 +128,7 @@ courses   = Courses(  prefix  = "CSC",
 userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 1
                               ).save()
-                              
+
 userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 2
                               ).save()
