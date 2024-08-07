@@ -12,12 +12,15 @@ from flask import url_for
 from flask import flash
 from flask import abort
 from flask_admin import Admin
-
-import pprint
-from app import models
-from models import *                # all the database models
-
 import sys
+import pprint
+
+from app import models
+# from models import *                # all the database models
+from app.loadConfig import *
+here = os.path.dirname(__file__)
+cfg       = load_config(os.path.join(here,'config.yaml'))
+
 sys.dont_write_bytecode = True
 
 def authUser(env):
@@ -41,7 +44,7 @@ Also creates the directories in path if they are not found.
 @param {string} filename - the name of the file that should be in that directory
 @return {string} filepath -returns the absolute path of the directory'''
 '''TODO: ADD @PARAm for make dirs'''
-def getAbsolutePath(relaitivePath,filename=None,makeDirs=False):
+def getAbsolutePath(relaitivePath, filename=None, makeDirs=False):
     filepath = os.path.join(sys.path[0],relaitivePath)
     if makeDirs == True:
         try:
@@ -59,8 +62,8 @@ from: http://simeonfranklin.com/blog/2012/jul/1/python-decorators-in-12-steps/
 "A decorator is just a callable that takes a function as an argument and
 returns a replacement function. See start.py for an example"
 '''
-app = Flask(__name__)
-#from app import app
+# app = Flask(__name__)
+from app import app
 app.config.from_object('settings')
 
 # admin = Admin(app)

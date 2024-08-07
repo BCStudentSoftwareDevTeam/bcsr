@@ -1,7 +1,8 @@
-from allImports import *
+from app.allImports import *
 from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getAll import GetAll
+from app.models import Semesters
 
 @app.route("/archive/", defaults={'SEID': None}, methods = ["GET", "POST"])
 @app.route("/archive/<SEID>", methods = ["GET", "POST"])
