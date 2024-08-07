@@ -1,8 +1,9 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from app.logic.getSystemManagement import GetSystemManagement
 from app.logic import databaseInterface
+from app.models import Semesters
 
 @app.route("/admin/systemManagement", methods=["GET", "POST"])
 def systemManagement():
@@ -37,7 +38,7 @@ def addSemester():
     #Class from logic folder
     system      = GetSystemManagement()
     logList     = system.add_semester(data)
-    print logList
+    print(logList)
     #TODO: figure out how to log
     log.writer(logList[0],page,logList[1])
     flash(logList[1])
