@@ -1,7 +1,8 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 import datetime
+from app.models import Deadline
 
 
 @app.route("/deadline/create", methods=["POST"])
@@ -15,7 +16,7 @@ def deadlineCreate():
         # data contains 
         # deadlineDescription
         data = request.form
-	date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
+        date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)

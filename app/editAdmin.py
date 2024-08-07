@@ -1,6 +1,7 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Users
 
 def checkData(data,key):
   user    = None

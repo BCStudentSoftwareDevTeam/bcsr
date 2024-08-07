@@ -57,3 +57,39 @@ function showCourses(program) {
     $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
     $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
 }
+
+var cid = 0;
+$('input[type=checkbox]').change(function () {
+    cid = $(this).data("cid");
+    //Ensures state of None Required and all the other checkboxes can't be in an impossible state
+    if($(this).prop('name') == "NoneRequired" && $(this).prop("checked")) {
+        console.log("Clicked none required");
+        var courseCheckboxes = $("td#" +cid).find("input:checkbox");
+        console.log(courseCheckboxes);
+        var first = true;
+        $(courseCheckboxes).each(function() {
+            console.log($(this));
+            $(this).prop('checked', first);
+            if (first) {
+                first = false;
+            }
+        });
+    } else if ($(this).prop("checked")) {
+        $("td#" +cid).find("input:checkbox#NoneRequired").prop("checked", false);
+    }
+
+    //Submits the form
+    var rightForm = $("td#" +cid).find("form#courseMaterials");
+    $.ajax({
+        type: "POST",
+        url: rightForm.attr('action'),
+        data: rightForm.serialize(), // serializes the form's elements.
+        success: function(data)
+            {
+            }
+    });
+});
+
+$('form#courseMaterials').submit(function(e){
+    e.preventDefault();
+});

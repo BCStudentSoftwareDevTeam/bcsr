@@ -1,6 +1,7 @@
 '''Any function that is related to user information or authentication should
 be located here'''
 from app.allImports import *
+from app.models import Users
 
 class AuthorizedUser:
   def __init__(self):

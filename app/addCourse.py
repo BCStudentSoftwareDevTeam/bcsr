@@ -1,7 +1,9 @@
-from allImports import *
+from app.allImports import *
 from app.logic import databaseInterface 
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Semesters, Programs, Users
+
 
 #Add Course
 @app.route('/admin/courseManagement/addCourse',methods=["GET","POST"])

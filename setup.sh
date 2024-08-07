@@ -13,7 +13,7 @@ mkdir -p data
 
 if [ ! -d venv ]
 then
-  virtualenv venv
+  python3 -m venv venv
 fi
 
 . venv/bin/activate
@@ -27,3 +27,4 @@ pip install wtf-peewee
 pip install jinja2
 pip install itsdangerous
 pip install click
+pip install cryptography

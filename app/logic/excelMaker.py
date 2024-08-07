@@ -1,10 +1,12 @@
 import xlsxwriter
 from app.allImports import *
 import sys
+from app.models import UsersCourses, Courses
+
 
 def makeExcelFile(SEID):
     filename = "bcsr-{}-missing-syllabi.xlsx".format(SEID)
-    path = getAbsolutePath(cfg['fileOperations']['dataPaths']['tmp'],filename,False)
+    path = getAbsolutePath(cfg['fileOperations']['dataPaths']['tmp'], filename, False)
     workbook = xlsxwriter.Workbook(path)
     workbook.set_properties({
         'title':    'Missing Syllabi for {}'.format(SEID),

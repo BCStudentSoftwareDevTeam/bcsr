@@ -1,6 +1,6 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
-
+from app.models import Divisions, Users
 
 @app.route("/admin/divisionManagement/<did>", methods=["GET", "POST"])
 def adminDivisionManagement(did):

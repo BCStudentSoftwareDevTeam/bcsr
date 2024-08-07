@@ -29,6 +29,34 @@
       </form>
     {% endif %}
   </td>
+  <td id="{{course.CID.CID}}">
+    <form method="POST" name="courseMaterials" id="courseMaterials" action="/editCourseMaterials/{{course.CID.CID}}">
+      <div class="checkbox">
+        <label>
+          <input id="NoneRequired" type="checkbox" name="NoneRequired" value="NoneRequired" data-cid="{{course.CID.CID}}" {{"" if course.CID.courseMaterials is none else "checked" if "NoneRequired" in course.CID.courseMaterials }}>
+          No course materials required
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="OER" value="OER" data-cid="{{course.CID.CID}}" {{"" if course.CID.courseMaterials is none else "checked" if "OER" in course.CID.courseMaterials }}>
+          Open educational resources
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="Library" value="Library" data-cid="{{course.CID.CID}}" {{"" if course.CID.courseMaterials is none else "checked" if "Library" in course.CID.courseMaterials }}>
+          Library resources
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="Paid" value="Paid" data-cid="{{course.CID.CID}}" {{"" if course.CID.courseMaterials is none else "checked" if "Paid" in course.CID.courseMaterials }}>
+          Paid resources (textbooks, courseware, etc)
+        </label>
+      </div>
+    </form>
+  </td>
   <td>
     {% if course.CID.lastModified == None %}
       <p>Course has not yet been modified.</p>

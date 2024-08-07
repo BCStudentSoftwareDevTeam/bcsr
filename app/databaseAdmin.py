@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 from flask_admin.contrib.peewee import ModelView
 
 class AuthenticatedUser(ModelView):

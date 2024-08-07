@@ -1,10 +1,11 @@
-from allImports import *
+from app.allImports import *
 #IMPORT LOGIC FILES
 from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser 
 from app.logic.getCourses import GetCourses
 from app.logic.switch import switch
 from app.logic.getAll import GetAll
+from app.models import Semesters
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
 @app.route("/courses/<term>", methods = ["GET"]) #SET A DEFAULT APP ROUTE
@@ -34,6 +35,10 @@ def courses(term = 0):
   programs_to_courses   = two_dictionaries[1]
   # MY COURSES SELECT QUERY
   my_courses                  = getCourses.check_for_my_courses(currentSEID)
+  if my_courses and my_courses.courseMaterials:
+      print(my_courses.courseMaterials)
+      my_courses.courseMaterials = list(my_courses.courseMaterials)
+      print(my_courses.courseMaterials)
   # RENDER CORRECT PAGE BASED ON ACCESS LEVEL
   for case in switch(user_level):
     if case('admin'):
@@ -48,7 +53,7 @@ def courses(term = 0):
       break;
     if case('division'):
       division_key            = user.DID
-      print division_key
+      print(division_key)
       return render_template('courses/division.html',
                               cfg                   = cfg,
                               my_courses            = my_courses,
@@ -81,3 +86,19 @@ def courses(term = 0):
       abort(404)
       render_template('error.html')
         
+@app.route("/editCourseMaterials/<courseID>", methods = ["POST"])
+def editCourseMaterials(courseID):
+    data = request.form.to_dict(flat=False)
+    print(courseID)
+    # courseMaterials = []
+    # if len(data) >= 0:
+    #     for courseMaterialUsed in data:
+    #         if courseMaterialUsed == "NoneRequired":
+    #             break
+    #         courseMaterials.append(courseMaterialUsed)
+    course = databaseInterface.get_course_info(courseID)
+    # print(str(courseMaterials))
+    course.courseMaterials = data
+    course.save()
+    print(course.courseMaterials)
+    return "", 200

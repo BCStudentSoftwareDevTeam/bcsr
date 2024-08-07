@@ -53,7 +53,7 @@ courseManagementSidebar:
     link: "/admin/courseManagement/removeCourse"
     
 Headers:
-  Courses: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
+  Courses: ['Instructor','Course','Term','Syllabus Upload','Course Materials','Last Modified By']
   Archive: ['Instructor','Course','Term','Syllabus Upload','Last Modified By']
     
 fileOperations:
@@ -81,9 +81,9 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610 
     
 DEBUG:
-  #user: "HEGGENS@berea.edu" #Admin Access
+  user: "HEGGENS@berea.edu" #Admin Access
   # user: "pearcej" #Division Chair Access
-   user: "jadudm"  #Professor Access
+  # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
   
 contributors:

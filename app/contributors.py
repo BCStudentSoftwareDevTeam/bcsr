@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.getAll import GetAll

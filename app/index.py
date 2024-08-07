@@ -1,5 +1,5 @@
 # This is the home page for bcsr
-from allImports import *
+from app.allImports import *
 @app.route("/", methods = ["GET"])
 def start():
     #TODO: FIND OUT HOW TO CATCH THE USERNAME FROM THE LOGIN PROCESS
