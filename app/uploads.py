@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 import os
 import datetime
 #IMPORT LOGIC FILES
@@ -26,24 +26,24 @@ def uploads(CID):
     #Save the File
     file.save(complete_path)
     if os.path.exists(complete_path):
-    	#Now we need to course_path with its new file name to the database
-    	database_path = (course_path+new_file_name).replace(" ","")
-    	update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
-    	update_course_path.execute()
-    	#Now we need to log the changes
-    	get_time = datetime.datetime.now()
-    	time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
-    	last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
-    	# log in our log file
-    	message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
-    	page = "/uploads/{0}".format(CID)
-    	log.writer("INFO", page, message)
-    	#update the database to inform the users who uploaded the file
-    	update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
-    	update_last_modified.execute()
-    	return redirect(url_for("courses"))
+        #Now we need to course_path with its new file name to the database
+        database_path = (course_path+new_file_name).replace(" ","")
+        update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
+        update_course_path.execute()
+        #Now we need to log the changes
+        get_time = datetime.datetime.now()
+        time_stamp = get_time.strftime("%Y-%m-%d %I:%M")
+        last_modified_message = "Uploaded By {0} On {1}".format(user_name,str(time_stamp))
+        # log in our log file
+        message = "Uploads: {0} has been {1}".format(new_file_name, last_modified_message)
+        page = "/uploads/{0}".format(CID)
+        log.writer("INFO", page, message)
+        #update the database to inform the users who uploaded the file
+        update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
+        update_last_modified.execute()
+        return redirect(url_for("courses"))
     else:
- 	return render_template("error.html",
+        return render_template("error.html",
                                cfg     = cfg,
                                message = "An error occured during the upload process.")  
   except Exception as e:
