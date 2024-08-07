@@ -1,8 +1,10 @@
-from allImports import *
+from app.allImports import *
 from app.logic import databaseInterface 
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
 from flask import json, jsonify
+from app.models import Courses, Semesters, UsersCourses
+
 
 def SEID_courses_dict():
   dictionary = dict()
@@ -63,4 +65,4 @@ def getJson(SEID):
     jsonStr = json.dumps(courseList)
     return jsonify(Courses=jsonStr)
   except Exception as e:
-    print str(e)
+    print(str(e))

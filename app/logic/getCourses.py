@@ -13,7 +13,7 @@ class GetCourses():
     try: 
       temp_courses = UsersCourses.get(UsersCourses.username == self.username)
       my_courses   = databaseInterface.grab_my_courses(self.username,SEID)
-    except DoesNotExist:
+    except Exception:   # Using blanket exception, DoesNotExist no longer exists...
       my_courses = None
     return my_courses
       

@@ -74,6 +74,7 @@ class Courses (dbModel):
   SEID          = ForeignKeyField(Semesters)
   filePath      = TextField(null = True)
   lastModified  = TextField(null = True)
+  courseMaterials = CharField(default = None)
   
   def __str__(self):
     return str(self.CID)

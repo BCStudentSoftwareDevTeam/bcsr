@@ -4,7 +4,7 @@ from os.path import basename
 import sys
 import zipfile
 #from Flask
-from allImports import *
+from app.allImports import *
 from flask import send_file
 from flask import send_from_directory
 # From Logic 
@@ -19,11 +19,11 @@ def download(CID):
   page = r"/" + request.url.split("/")[-1]
   try:
     file_path = databaseInterface.get_course_download_file_path(CID)
-    print "This is file_path: {}".format(file_path)
+    print("This is file_path: {}".format(file_path))
     message = "Download: {} has been downloaded".format(file_path)
     log.writer("INFO", page, message)
     return send_file(file_path, as_attachment=True)
-  except Exception,e:
+  except Exception as e:
     app.logger.info("{0} attempting to download file.".format(str(e)))
     message = "An error occured during the download process."
     return render_template("error.html",
@@ -61,7 +61,7 @@ def downloadAll(SEID):
       message = 'Download: {0} has been downloaded as a zip'.format(parent_folder)
       log.writer("INFO", page, message)
       return send_file(zip_path,as_attachment=True)
-    except Exception,e:
+    except Exception as e:
       return render_template('error.html',
                               cfg = cfg,
                               message = e

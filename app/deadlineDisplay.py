@@ -1,7 +1,9 @@
-from allImports import *
+# from app import app
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 import datetime
 import time
+from app.models import Deadline
 #from datetime import datetime
 
 

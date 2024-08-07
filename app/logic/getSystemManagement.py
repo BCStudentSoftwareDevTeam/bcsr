@@ -1,6 +1,7 @@
 from app.allImports import *
 from app.logic import databaseInterface 
 import time
+from app.models import Semesters
 
 class GetSystemManagement():
   '''Purpose: This class should hold any method directly related to
@@ -31,7 +32,6 @@ class GetSystemManagement():
     @key   -year => {string}
     @key   -term => {integer}
     '''
-    print 'inside create'
     year = data['year']
     term_key  = str(data['term'])
     #same year is a list of all term keys that go off the current year, 
@@ -42,8 +42,6 @@ class GetSystemManagement():
         seid = year + term_key
       else:
         seid = str(int(year)-1) + term_key
-    
-    print "This is the SEID: " + str(seid)
     return seid
   
   def add_semester(self, data):

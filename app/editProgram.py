@@ -1,6 +1,8 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Users
+
 @app.route("/editProgram", methods=["POST"])
 def editProgram():
     authorizedUser = AuthorizedUser()
@@ -27,9 +29,8 @@ def editProgram():
       #LOOK THROUGH THE NEW CHAIR LIST    
       for user_name in newChairs:                                           
         #ADD THE USERNAMES TO THE PROGRAM CHAIR LIST
-        newChair  = Users.get(Users.username == user_name)   
-        print newChair.username
-        newChair.PID = pid     
+        newChair  = Users.get(Users.username == user_name)
+        newChair.PID = pid
         newChair.save()
         message = "USER: {0} has been added as a program chair for pid: {1}".format(user_name,pid)
         log.writer("INFO", page, message)

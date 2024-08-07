@@ -1,4 +1,5 @@
 from app.allImports import *
+from app.models import *
 
 def grab_current_semester():
     semesters = Semesters.select()
@@ -81,7 +82,6 @@ def get_course_instructors(CID):
   instructors_string = ''
   instructors = UsersCourses.select().where(UsersCourses.CID == CID)
   for instructor in instructors:
-    print instructor.username.username
     instructors_string += instructor.username.username
   return instructors_string
   

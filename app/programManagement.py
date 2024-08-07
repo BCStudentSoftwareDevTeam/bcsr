@@ -1,6 +1,6 @@
-from allImports import *
+from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
-
+from app.models import Programs, Divisions, Users
 
 @app.route("/admin/programManagement/<pid>", methods=["GET", "POST"])
 def adminProgramManagement(pid):

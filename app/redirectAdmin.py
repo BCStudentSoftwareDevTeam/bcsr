@@ -1,4 +1,5 @@
-from allImports import *
+from app.allImports import *
+from app.models import Programs, Divisions, Users
 
 @app.route("/redirect/program_management", methods=["GET"])
 def redirectProgramManagement():

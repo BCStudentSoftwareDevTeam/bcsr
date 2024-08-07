@@ -1,4 +1,4 @@
-from allImports import *
+from app.allImports import *
 import datetime
 #IMPORT LOGIC FILES
 from app.logic.getAuthUser import AuthorizedUser 
@@ -32,7 +32,7 @@ def delete(CID):
     update_last_modified.execute()
     return redirect(redirect_url())
     
-  except Exception,e:
+  except Exception as e:
     app.logger.info("{0} attempting to delete a syllabus.".format(str(e)))
     message = "An error occured during the delete process of the file."
     return render_template("error.html",
