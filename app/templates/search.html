@@ -1,0 +1,34 @@
+<h2>Search Course</h2>
+
+<form method="GET">
+    Prefix:
+    <input type="text" name="prefix">
+
+    Number:
+    <input type="text" name="number">
+
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+<h3>Past Offerings</h3>
+
+<table border="1">
+<tr>
+    <th>Prefix</th>
+    <th>Number</th>
+    <th>Section</th>
+    <th>Semester</th>
+</tr>
+
+{% for course in results %}
+<tr>
+    <td>{{ course.prefix }}</td>
+    <td>{{ course.number }}</td>
+    <td>{{ course.section }}</td>
+    <td>{{ course.SEID }}</td>
+</tr>
+{% endfor %}
+
+</table>
+{% endif %}
