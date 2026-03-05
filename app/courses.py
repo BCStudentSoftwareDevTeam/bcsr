@@ -6,7 +6,8 @@ from app.logic.getCourses import GetCourses
 from app.logic.switch import switch
 from app.logic.getAll import GetAll
 
-from app.models import Semesters
+from app.models import Courses, Semesters
+from flask import request, render_template
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
 @app.route("/courses/<term>", methods = ["GET"]) #SET A DEFAULT APP ROUTE
@@ -82,3 +83,23 @@ def courses(term = 0):
       # TODO: return ERROR
       abort(404)
       render_template('error.html')
+
+@app.route("/course-search", methods=["GET"])
+def course_search():
+
+    prefix = request.args.get("prefix")
+    number = request.args.get("number")
+
+    results = None
+
+    if prefix and number:
+        results = (Courses
+                   .select(Courses, Semesters)
+                   .join(Semesters)
+                   .where(
+                       (Courses.prefix == prefix) &
+                       (Courses.number == number)
+                   )
+                   .order_by(Semesters.SEID.desc()))
+
+    return render_template("search.html", results=results)
