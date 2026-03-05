@@ -23,6 +23,8 @@ mainMenu:
     link: "/"
   - title: "Courses"
     link: "/courses"
+  - title: "Search"
+    link: "/course-search"
   - title: "Archive"
     link: "/archive"
   - title: "Log Out"
