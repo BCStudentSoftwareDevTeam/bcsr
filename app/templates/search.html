@@ -1,34 +1,79 @@
-<h2>Search Course</h2>
+{% extends "/snips/base.html" %}
+{% set currentPage = "no" %}
+{% block body %}
+{% set page = "Courses" %}
+{% include 'snips/messages.html' %}
 
-<form method="GET">
-    Prefix:
-    <input type="text" name="prefix">
+<h1>Course Search</h1>
 
-    Number:
-    <input type="text" name="number">
-
-    <button type="submit">Search</button>
+<form method="GET" action="/course-search">
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-sm-3">
+      <label for="prefix">Prefix</label>
+      <input type="text" class="form-control" name="prefix" id="prefix" placeholder="e.g. CSC" value="{{ request.args.get('prefix', '') }}">
+    </div>
+    <div class="col-sm-3">
+      <label for="number">Number</label>
+      <input type="text" class="form-control" name="number" id="number" placeholder="e.g. 226" value="{{ request.args.get('number', '') }}">
+    </div>
+    <div class="col-sm-2" style="margin-top: 25px;">
+      <button type="submit" class="btn btn-default">Search</button>
+    </div>
+  </div>
 </form>
 
-{% if results %}
-<h3>Past Offerings</h3>
-
-<table border="1">
-<tr>
-    <th>Prefix</th>
-    <th>Number</th>
-    <th>Section</th>
-    <th>Semester</th>
-</tr>
-
-{% for course in results %}
-<tr>
-    <td>{{ course.prefix }}</td>
-    <td>{{ course.number }}</td>
-    <td>{{ course.section }}</td>
-    <td>{{ course.SEID }}</td>
-</tr>
-{% endfor %}
-
-</table>
+{% if results is not none %}
+  {% if results | list | length > 0 %}
+    <h2>Results for {{ request.args.get('prefix') }}-{{ request.args.get('number') }}</h2>
+    <div style="margin-left:25px;">
+      <table id="table" style="width:100%;" class="table table-striped table-bordered table-sm" cellspacing="0">
+        <thead>
+          <tr style="text-align:center;">
+            <th>Instructor</th>
+            <th>Course</th>
+            <th>Term</th>
+            <th>Syllabus</th>
+            <th>Last Modified By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for uc in results %}
+          <tr>
+            <td>{{ uc.username.firstName }} {{ uc.username.lastName }}</td>
+            <td>
+              {% if uc.CID.filePath %}
+                <a href="/download/{{ uc.CID.CID }}">
+                  {{ uc.CID.prefix }}-{{ uc.CID.number }}-{{ uc.CID.section }}
+                </a>
+              {% else %}
+                {{ uc.CID.prefix }}-{{ uc.CID.number }}-{{ uc.CID.section }}
+              {% endif %}
+            </td>
+            <td>{{ uc.CID.SEID.term }}-{{ uc.CID.SEID.year }}</td>
+            <td>
+              {% if uc.CID.filePath %}
+                <a href="/download/{{ uc.CID.CID }}" class="btn btn-sm btn-default">Download</a>
+              {% else %}
+                <em>Not uploaded</em>
+              {% endif %}
+            </td>
+            <td>
+              {% if uc.CID.lastModified %}
+                {{ uc.CID.lastModified }}
+              {% else %}
+                <em>Not yet modified.</em>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      No courses found for <strong>{{ request.args.get('prefix') }}-{{ request.args.get('number') }}</strong>. Please try a different prefix or number.
+    </div>
+  {% endif %}
 {% endif %}
+
+{% endblock %}
