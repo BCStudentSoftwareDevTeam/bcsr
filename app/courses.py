@@ -6,7 +6,7 @@ from app.logic.getCourses import GetCourses
 from app.logic.switch import switch
 from app.logic.getAll import GetAll
 
-from app.models import Courses, Semesters
+from app.models import Courses, Semesters, UsersCourses, Users
 from flask import request, render_template
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
@@ -87,19 +87,30 @@ def courses(term = 0):
 @app.route("/course-search", methods=["GET"])
 def course_search():
 
-    prefix = request.args.get("prefix")
-    number = request.args.get("number")
+  prefix  = request.args.get("prefix", "").strip()
+  number  = request.args.get("number", "").strip()
+  results = None
 
-    results = None
+  if prefix or number:
+      if not prefix:
+          flash("Please enter a course prefix (e.g. CSC).")
+      elif not number:
+          flash("Please enter a course number (e.g. 226).")
+      else:
+          results = (UsersCourses
+                      .select(UsersCourses, Courses, Semesters, Users)
+                      .join(Courses)
+                      .join(Semesters)
+                      .switch(UsersCourses)
+                      .join(Users)
+                      .where(
+                          (Courses.prefix == prefix) &
+                          (Courses.number == number)
+                      )
+                      .order_by(Semesters.SEID.desc()))
+          
+          if not results.exists():
+              flash("No courses found for {}-{}. Try a different prefix or number.".format(prefix, number))
+              results = None
 
-    if prefix and number:
-        results = (Courses
-                   .select(Courses, Semesters)
-                   .join(Semesters)
-                   .where(
-                       (Courses.prefix == prefix) &
-                       (Courses.number == number)
-                   )
-                   .order_by(Semesters.SEID.desc()))
-
-    return render_template("search.html", results=results)
+  return render_template("search.html", results=results, cfg=cfg)
