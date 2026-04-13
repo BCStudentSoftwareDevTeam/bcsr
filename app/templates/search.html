@@ -1,0 +1,60 @@
+{% extends "/snips/base.html" %}
+{% set currentPage = "no" %}
+{% set page = "Courses" %}
+{% block body %}
+{% include 'snips/messages.html' %}
+{% set q_prefix = request.args.get('prefix', '') %}
+{% set q_number = request.args.get('number', '') %}
+
+<h1>Course Search</h1>
+<form method="GET" action="/course-search">
+  <div class="row" style="margin-bottom: 15px;">
+    <div class="col-sm-3">
+      <label for="prefix">Prefix</label>
+      <input type="text" class="form-control" name="prefix" id="prefix" placeholder="e.g. CSC" value="{{ q_prefix }}">
+    </div>
+    <div class="col-sm-3">
+      <label for="number">Number</label>
+      <input type="text" class="form-control" name="number" id="number" placeholder="e.g. 226" value="{{ q_number }}">
+    </div>
+    <div class="col-sm-2" style="margin-top: 25px;">
+      <button type="submit" class="btn btn-default">Search</button>
+    </div>
+  </div>
+</form>
+
+{% if results is not none %}
+  {% if results | list | length > 0 %}
+    <h2>Results for {{ q_prefix }}-{{ q_number }}</h2>
+    <div style="margin-left:25px;">
+      <table id="table" style="width:100%;" class="table table-striped table-bordered table-sm" cellspacing="0">
+        <thead>
+          <tr style="text-align:center;">
+            <th>Instructor</th><th>Course</th><th>Term</th><th>Syllabus</th><th>Last Modified By</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for uc in results %}
+          {% set cid = uc.CID %}
+          <tr>
+            <td>{{ uc.username.firstName }} {{ uc.username.lastName }}</td>
+            <td>
+              {% set label = cid.prefix ~ '-' ~ cid.number ~ '-' ~ cid.section %}
+              {% if cid.filePath %}<a href="/download/{{ cid.CID }}">{{ label }}</a>{% else %}{{ label }}{% endif %}
+            </td>
+            <td>{{ cid.SEID.term }}-{{ cid.SEID.year }}</td>
+            <td>{% if cid.filePath %}<a href="/download/{{ cid.CID }}" class="btn btn-sm btn-default">Download</a>{% else %}<em>Not uploaded</em>{% endif %}</td>
+            <td>{{ cid.lastModified if cid.lastModified else '<em>Not yet modified.</em>' | safe }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-warning" role="alert">
+      No courses found for <strong>{{ q_prefix }}-{{ q_number }}</strong>. Please try a different prefix or number.
+    </div>
+  {% endif %}
+{% endif %}
+
+{% endblock %}
