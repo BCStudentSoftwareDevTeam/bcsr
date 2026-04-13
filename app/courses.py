@@ -110,8 +110,4 @@ def course_search():
                       )
                       .order_by(Semesters.SEID.desc()))
           
-          if not results.exists():
-              flash("No courses found for {}-{}. Try a different prefix or number.".format(prefix, number))
-              results = None
-
   return render_template("search.html", results=results, cfg=cfg)
