@@ -5,48 +5,34 @@
 * [Peewee](http://docs.peewee-orm.com/en/latest/index.html) - A small, expressive ORM used for database communications
 * [SQLite](https://sqlite.org/) - SQL database engine
 
-# Setting Up a Development Environment
-### Getting Started On Cloud9 ###
-[Cloud9](https://c9.io/?redirect=0) is the preferred tool for our software team while developing and debugging code. However, if you are new to cloud9, they did just recent start requiring a credit card to create an account. Therefore you may not want to use cloud9 as your development environment.  
+# Setting Up a Linux Development Environment on Windows
+### Getting Started With WSL ###
 
-### Create a Workspace with Bitbucket using SSH Protocol
+First check if WSL and Ubuntu are installed on your device by running these commands: ```wsl --status``` and (```wsl -l -v``` or ```wsl --list --verbose```) as administrator in Powershell. 
 
-When you first log into your cloud9 account, select the tab that says **workspaces**. After you open this tab you should see an option to create a new workspace, it should look like the image below.
+If WSL is not installed, in the same terminal run: ```wsl --install```. After it is completed run ```wsl -l -v``` to see if Ubuntu is installed.
+If you don't see Ubuntu installed run: ```wsl --install -d Ubuntu```, then restart your laptop afterwards.
 
-![creatework.PNG](https://bitbucket.org/repo/bEXb4L/images/4213557604-creatework.PNG) 
-
-After you click the button go ahead and input a name and description for this workspace.
-
-![description.PNG](https://bitbucket.org/repo/bEXb4L/images/2446581179-description.PNG)
-![public.PNG](https://bitbucket.org/repo/bEXb4L/images/69137571-public.PNG)
-
->***Note:*** 
-The default for the workspace is to be public, it's important to **NOT** change this default option. The way that our system works is that it creates a virtual environment for the application to run on. The virtual environment requires the use of ports in order to access the application. If you may the workspace private, it can block these ports so that they can not be accessed. There may be a way around this; however, we just find it easier if you let the workspace be public. 
-
-Next, you will want to make sure you choose to clone your repo from bitbucket. You do this by adding your git URL using the SSH.
-
-For Example:
-```git@bitbucket.org:<username>/<name_of_Repo>.git```
-
-If you are uncertain what your git ssh URL is you can find it at the top of the bitbucket page if you click the clone option. 
-
-![git clone.PNG](https://bitbucket.org/repo/bEXb4L/images/340042303-git%20clone.PNG)
-
->***Note***: If you copy and paste this line make sure to remove the ```git clone``` at the front in order to ensure you only get the URL.
-
-After you have entered in the URL, the last portion of the page asked you to choose a template. Please select the python option in order to have the workspace to run correctly. 
-
-![PYTHON.PNG](https://bitbucket.org/repo/bEXb4L/images/3923875225-PYTHON.PNG)
-
-All that is left is to hit the create workspace button and your workspace will be configured correctly.
+Then launch Ubuntu with: ```wsl``` then in a Ubuntu terminal you can run ```uname -a``` it will run Linux system info.
 
 ### Getting Your Development Environment Running
 
-After you have created your workspace, there are three additional steps that you will have to complete before your virtual environment will be completely operational. 
+After you have set up WSL and Ubuntu, there are three additional steps that you will have to complete before your virtual environment will be completely operational. 
 
-**Step One: Activate Your Virtual Environment**
+**Step One: Ensure you have MySQL installed**
 
-In order to do this, all you have to do is type: ```source setup.sh``` into the Linux terminal. You might have to wait a minute or two as the tools you need for our application are downloaded into your virtual environment. However, after the setup is completed you should see the words ```(venv)``` at the front of your terminal.
+First, check whether MySQL is already installed. From PowerShell, you can run: ```mysql --version ```. You can also check the MySQL installation directory: ```Get-ChildItem "C:\Program Files\MySQL" -ErrorAction SilentlyContinue ```. From WSL, you can check the Windows MySQL installation in bash with: ```ls "/mnt/c/Program Files/MySQL" ```.
+
+If MySQL GUI is not installed: 
+- Navigate to this website: https://dev.mysql.com/downloads/installer/ and download. You will see the prompt to log in or sign up instead choose “No thanks, just start my download.”
+- During the installation process, you will be given the option to select client, server or both and you should choose both.
+
+**Step Two: Activate Your Virtual Environment**
+
+In order to do this, first you need to be in Ubuntu so run in your terminal: ```wsl```. 
+Then all you have to do is type: ```source setup.sh``` into the Linux terminal. You might have to wait a minute or two as the tools you need for our application are downloaded into your virtual environment. However, after the setup is completed you should see the words ```(venv)``` at the front of your terminal.
+
+- If you have this error: `-bash: setup.sh: line <something>: syntax error: unexpected end of file from "if" command on line 19` go to the bottom of your IDE and find CRLF and click it to select  LF
 
 ![venv.PNG](https://bitbucket.org/repo/bEXb4L/images/2846617267-venv.PNG) 
 
@@ -57,17 +43,27 @@ In order for the application to work, you must activate the virtual environment.
 >Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal. 
 ![deactivate.PNG](https://bitbucket.org/repo/bEXb4L/images/2248015321-deactivate.PNG)
 
-**Step Two: Setup Your Database**
+**Step Three: Setup Your Database**
 
 A couple of elements are necessary in order to get your database established. The first step is creating the SQLite file, we can create the file in the desired location through the use of one of our scripts.
 
+You would need to add this in config.yaml: 
+```yaml
+databases:
+  dev: "data/bcsr.sqlite"
+  stage: ""
+  prod: "data/bcsr.sqlite"
+```
+
+Create the application's `data` directory if it does not already exist: ```mkdir -p data ``` Confirm that the directory exists: ```ls -la ```
+
 **Create Database**
 
-By typing the command ```python reset-db.py``` a database file containing the correct schemas will be created in the data directory with the name ```advancement.sqlite```.
+Enter into your mysql, either through the MySQL GUI or by typing ```mysql -u root -p```.
 
-**Populate Database**
+> **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
 
-The ```reset-db.py``` will only create empty tables for you, in order to populate the database you will need to execute the command: ```python add_dummy.py```. This file will add dummy data to the system so that you can gauge how the system is supposed to run.
+Then, by typing the command ```python create_db.py``` a database file containing the correct schemas will be created in the data directory for development setup.
 
 **How to View the Database** 
 
@@ -77,9 +73,9 @@ Now that you have the database created and populated with data, you are probably
 
 **Step Three: Running the Application**
 
-The only remaining step to getting your development environment deployed is running the actual application. This can be achieved through the command ```python run.py```, when you run this command you should see a URL created for you. 
+The only remaining step to getting your development environment deployed is running the actual application. This can be achieved through the command ```python app.py```, when you run this command you should see a URL created for you. 
 
-![run.PNG](https://bitbucket.org/repo/bEXb4L/images/1543001500-run.PNG)
+![alt text](image.png)
 
 The URL will take you to the application and allow you to see any changes you make to the system. That's all that has to be done in order to get the development environment created and ready for editing.
 
@@ -90,27 +86,6 @@ The URL will take you to the application and allow you to see any changes you ma
 * python 2.7
 * linux, unix, mac, windows(with attachments)
 * git
-
-## Creating Development Environment 
-
-1. ** Fork ** the repository from BitBucket and rename the project 
-
-2. If working on a **local machine**, then clone the repo from your terminal. 
-
-3. If you are working from cloud 9 follow [these steps](https://codymyers93.wordpress.com/2016/03/07/octoprint-working-in-cloud-9/) for directions on how to setup cloud 9 with git.
-
-4. After you have successfully clone the repo. Run:
-``` bash
-source setup.sh
-python app.py
-```
-
-If you are successful you will see something like:
-``` bash
-Starting application
-Running server at http://0.0.0.0:8080/ 
-```
-Click the link in your terminal to check if it deployed correctly.
 
 # Working with the flask template #
 - bcsr-flask
