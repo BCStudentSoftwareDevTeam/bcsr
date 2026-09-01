@@ -5,7 +5,7 @@
 * [Peewee](http://docs.peewee-orm.com/en/latest/index.html) - A small, expressive ORM used for database communications
 * [SQLite](https://sqlite.org/) - SQL database engine
 
-# Setting Up a Linux Development Environment on Windows
+## Setting Up a Linux Development Environment on Windows
 ### Getting Started With WSL ###
 
 First check if WSL and Ubuntu are installed on your device by running these commands: ```wsl --status``` and (```wsl -l -v``` or ```wsl --list --verbose```) as administrator in Powershell. 
@@ -27,51 +27,55 @@ If MySQL GUI is not installed:
 - Navigate to this website: https://dev.mysql.com/downloads/installer/ and download. You will see the prompt to log in or sign up instead choose “No thanks, just start my download.”
 - During the installation process, you will be given the option to select client, server or both and you should choose both.
 
-**Step Two: Activate Your Virtual Environment**
+**Step Two: Ensure you have Python installed**
+
+From WSL/Ubuntu, check whether Python is installed: ```python3 --version```
+
+You can also check pip: ```pip3 --version```
+
+If Python is not installed, install Python and the packages required to create virtual environments:
+``` bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+After installation, verify it again: ```python3 --version```
+
+**Step Three: Activate Your Virtual Environment**
 
 In order to do this, first you need to be in Ubuntu so run in your terminal: ```wsl```. 
 Then all you have to do is type: ```source setup.sh``` into the Linux terminal. You might have to wait a minute or two as the tools you need for our application are downloaded into your virtual environment. However, after the setup is completed you should see the words ```(venv)``` at the front of your terminal.
 
 - If you have this error: `-bash: setup.sh: line <something>: syntax error: unexpected end of file from "if" command on line 19` go to the bottom of your IDE and find CRLF and click it to select  LF
 
-![venv.PNG](https://bitbucket.org/repo/bEXb4L/images/2846617267-venv.PNG) 
+- ![venv.PNG](https://bitbucket.org/repo/bEXb4L/images/2846617267-venv.PNG) 
 
 >***Note:*** 
 In order for the application to work, you must activate the virtual environment. If you are not inside of the virtual environment you will see this error:
-![venvError.PNG](https://bitbucket.org/repo/bEXb4L/images/1415469357-venvError.PNG)Whenever you get this error just activate the virtual environment again by entering the command ```source setup.sh```
 
->Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal. 
+![venvError.PNG](https://bitbucket.org/repo/bEXb4L/images/1415469357-venvError.PNG)
+
+Whenever you get this error just activate the virtual environment again by entering the command ```source setup.sh```
+
+>***Note:***
+Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal:
+
 ![deactivate.PNG](https://bitbucket.org/repo/bEXb4L/images/2248015321-deactivate.PNG)
 
-**Step Three: Setup Your Database**
-
-A couple of elements are necessary in order to get your database established. The first step is creating the SQLite file, we can create the file in the desired location through the use of one of our scripts.
-
-You would need to add this in config.yaml: 
-```yaml
-databases:
-  dev: "data/bcsr.sqlite"
-  stage: ""
-  prod: "data/bcsr.sqlite"
-```
-
-Create the application's `data` directory if it does not already exist: ```mkdir -p data ``` Confirm that the directory exists: ```ls -la ```
+**Step Four: Setup Your Database**
 
 **Create Database**
-
-Enter into your mysql, either through the MySQL GUI or by typing ```mysql -u root -p```.
-
 > **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
 
-Then, by typing the command ```python create_db.py``` a database file containing the correct schemas will be created in the data directory for development setup.
+ By typing the command ```python create_db.py``` a database file containing the correct schemas will be created in the data directory for development setup.
 
 **How to View the Database** 
 
-Now that you have the database created and populated with data, you are probably asking yourself how do I see that? Our system development team likes to use a tool called [DB Browser](http://sqlitebrowser.org/). This tool is a visual way of viewing and editing SQLite database files. 
+To access MySQL from the terminal, run: ```mysql -u root -proot```
 
-![dbBrowser.PNG](https://bitbucket.org/repo/bEXb4L/images/3023751797-dbBrowser.PNG)
+Once connected, you should see the MySQL prompt: ```mysql> ```
 
-**Step Three: Running the Application**
+**Step Five: Running the Application**
 
 The only remaining step to getting your development environment deployed is running the actual application. This can be achieved through the command ```python app.py```, when you run this command you should see a URL created for you. 
 
@@ -83,11 +87,80 @@ The URL will take you to the application and allow you to see any changes you ma
 #Installation#
 
 ##Requirements##
-* python 2.7
+* python 3.11+
 * linux, unix, mac, windows(with attachments)
 * git
 
-# Working with the flask template #
+## Setting Up a Linux Development Environment on MacOS
+
+### Getting Started With MacOS ###
+
+Homebrew is a package manager for macOS and makes it easier to install development tools such as Python, Git, and MySQL.
+
+- First, check whether Homebrew is already installed: ```brew --version```
+- If you receive: ```command not found: brew```
+- Install Homebrew by running the following command in Terminal:  ```/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"```
+- Then verify that Homebrew is installed: ```brew --version```
+
+### Getting Your Development Environment Running
+
+After you have ensure homebrew is installed, there are additional steps that you will have to complete before your virtual environment will be completely operational. 
+
+**Step One: Ensure You Have MySQL Installed**
+
+- Check whether MySQL is installed: ```mysql --version```
+- You can also check whether MySQL was installed through Homebrew: ```brew list | grep mysql```
+- If MySQL is not installed, you can install it using the official MySQL graphical installer for macOS.
+- Go to the MySQL Community Server download page: https://dev.mysql.com/downloads/mysql/
+
+Select macOS as the operating system.
+Download the DMG Archive that matches your Mac.
+Apple Silicon Macs use ARM64.
+Intel Macs use x86_64.
+Open the downloaded .dmg file and run the MySQL installer.
+Follow the installation prompts.
+
+During setup, create a password for the MySQL root user.
+
+For the BCSR development environment, if the project configuration expects:
+
+Username: root
+Password: root
+
+you can set the root password to root, or update app/secret_config.yaml to match the password you choose.
+
+After installation, verify MySQL from Terminal:
+
+mysql --version
+
+You can also test the connection with:
+
+mysql -u root -p
+
+Enter the root password you created during installation.
+
+**Step Two: Ensure You Have Python Installed**
+
+Check your installed Python version:
+
+python3 --version
+
+BCSR should use Python 3.11 or newer.
+
+You can also check pip:
+
+pip3 --version
+
+If Python is not installed, you can install it using Homebrew:
+
+brew install python
+
+After installation, verify the version:
+
+python3 --version
+
+Step Three: Activate Your Virtual Environment
+## Working with the flask template ##
 - bcsr-flask
 	- App
 		-static
