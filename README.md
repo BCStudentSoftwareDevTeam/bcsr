@@ -125,6 +125,8 @@ Also, If you ever want to deactivate the virtual environment for any reason just
 ### 2. Create the Database
 > **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
 
+> **Warning** Make sure in your seceret_config.yaml the password and username under `db` match your mysql installation values.
+
 Run:
 ```bash
 python create_db.py
