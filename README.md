@@ -41,55 +41,7 @@ sudo apt install python3 python3-pip python3-venv
 
 After installation, verify it again: ```python3 --version```
 
-**Step Three: Activate Your Virtual Environment**
-
-In order to do this, first you need to be in Ubuntu so run in your terminal: ```wsl```. 
-Then all you have to do is type: ```source setup.sh``` into the Linux terminal. You might have to wait a minute or two as the tools you need for our application are downloaded into your virtual environment. However, after the setup is completed you should see the words ```(venv)``` at the front of your terminal.
-
-- If you have this error: `-bash: setup.sh: line <something>: syntax error: unexpected end of file from "if" command on line 19` go to the bottom of your IDE and find CRLF and click it to select  LF
-
-- ![venv.PNG](https://bitbucket.org/repo/bEXb4L/images/2846617267-venv.PNG) 
-
->***Note:*** 
-In order for the application to work, you must activate the virtual environment. If you are not inside of the virtual environment you will see this error:
-
-![venvError.PNG](https://bitbucket.org/repo/bEXb4L/images/1415469357-venvError.PNG)
-
-Whenever you get this error just activate the virtual environment again by entering the command ```source setup.sh```
-
->***Note:***
-Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal:
-
-![deactivate.PNG](https://bitbucket.org/repo/bEXb4L/images/2248015321-deactivate.PNG)
-
-**Step Four: Setup Your Database**
-
-**Create Database**
-> **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
-
- By typing the command ```python create_db.py``` a database file containing the correct schemas will be created in the data directory for development setup.
-
-**How to View the Database** 
-
-To access MySQL from the terminal, run: ```mysql -u root -proot```
-
-Once connected, you should see the MySQL prompt: ```mysql> ```
-
-**Step Five: Running the Application**
-
-The only remaining step to getting your development environment deployed is running the actual application. This can be achieved through the command ```python app.py```, when you run this command you should see a URL created for you. 
-
-![alt text](image.png)
-
-The URL will take you to the application and allow you to see any changes you make to the system. That's all that has to be done in order to get the development environment created and ready for editing.
-
-[TOC]
-#Installation#
-
-##Requirements##
-* python 3.11+
-* linux, unix, mac, windows(with attachments)
-* git
+>After the steps are complete, continue to running the application section
 
 ## Setting Up a Linux Development Environment on MacOS
 
@@ -115,51 +67,82 @@ After you have ensure homebrew is installed, there are additional steps that you
 
 Select macOS as the operating system.
 Download the DMG Archive that matches your Mac.
-Apple Silicon Macs use ARM64.
-Intel Macs use x86_64.
+- Apple Silicon Macs use ARM64.
+- Intel Macs use x86_64.
+
 Open the downloaded .dmg file and run the MySQL installer.
 Follow the installation prompts.
 
 During setup, create a password for the MySQL root user.
 
 For the BCSR development environment, if the project configuration expects:
-
-Username: root
-Password: root
+- Username: root
+- Password: root
 
 you can set the root password to root, or update app/secret_config.yaml to match the password you choose.
 
-After installation, verify MySQL from Terminal:
+After installation, verify MySQL from Terminal: ```mysql --version```
 
-mysql --version
-
-You can also test the connection with:
-
-mysql -u root -p
+You can also test the connection with: ```mysql -u root -p```
 
 Enter the root password you created during installation.
 
 **Step Two: Ensure You Have Python Installed**
 
-Check your installed Python version:
-
+Check your installed Python version and pip: 
+```bash
 python3 --version
-
-BCSR should use Python 3.11 or newer.
-
-You can also check pip:
-
 pip3 --version
+```
 
-If Python is not installed, you can install it using Homebrew:
+If Python is not installed, you can install it using Homebrew which is also installed pip: ```brew install python```
 
-brew install python
+After installation, verify the version: ```python3 --version```
 
-After installation, verify the version:
+## Steps to run the BCSR application
 
-python3 --version
+Navigate to your BCSR repository e.g.: ```cd ~/Desktop/SSDT/bcsr``
 
-Step Three: Activate Your Virtual Environment
+For Window: in order to do this, first you need to be in Ubuntu so run in your terminal: ```wsl```. Then run: ```source setup.sh```
+
+For MacOS, you just need to run: ```source setup.sh```
+
+After setup is complete, you should see:
+- If you have this error: `-bash: setup.sh: line <something>: syntax error: unexpected end of file from "if" command on line 19` go to the bottom of your IDE and find CRLF and click it to select  LF
+
+- ![venv.PNG](https://bitbucket.org/repo/bEXb4L/images/2846617267-venv.PNG) 
+
+>***Note:*** 
+In order for the application to work, you must activate the virtual environment. If you are not inside of the virtual environment you will see this error:
+
+![venvError.PNG](https://bitbucket.org/repo/bEXb4L/images/1415469357-venvError.PNG)
+
+Whenever you get this error just activate the virtual environment again by entering the command ```source setup.sh```
+
+>***Note:***
+Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal:
+
+![deactivate.PNG](https://bitbucket.org/repo/bEXb4L/images/2248015321-deactivate.PNG)
+
+**Step Four: Setup Your Database**
+
+**Create Database**
+> **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
+
+ By typing the command ```python create_db.py``` or ```python3 create_db.py``` a database file containing the correct schemas will be created in the data directory for development setup.
+
+**How to View the Database** 
+
+To access MySQL from the terminal, run: ```mysql -u root -proot```
+
+Once connected, you should see the MySQL prompt: ```mysql> ```
+
+**Step Five: Running the Application**
+
+The only remaining step to getting your development environment deployed is running the actual application. This can be achieved through the command ```python app.py``` or ```python3 create_db.py```, when you run this command you should see a URL created for you. 
+
+The URL will take you to the application and allow you to see any changes you make to the system. That's all that has to be done in order to get the development environment created and ready for editing.
+
 ## Working with the flask template ##
 - bcsr-flask
 	- App
@@ -177,3 +160,11 @@ Step Three: Activate Your Virtual Environment
 		- config.yaml
 		- models.py
 		- starty.py #This an example of where your controllers will go
+
+[TOC]
+#Installation#
+
+##Requirements##
+* python 3.11+
+* linux, unix, mac, windows(with attachments)
+* git
