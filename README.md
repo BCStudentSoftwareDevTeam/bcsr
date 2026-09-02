@@ -122,7 +122,93 @@ In order for the application to work, you must activate the virtual environment.
 >***Note:***
 Also, If you ever want to deactivate the virtual environment for any reason just type ```deactivate``` into the terminal.
 
-### 2. Create the Database
+### 2. Verify Database Connection
+#### 2.1 Check MySQL is Running
+
+For MacOS:
+- Check MySQL is running: ```brew services list```
+- If MySQL is stopped: ```brew services start mysql```
+
+For Windows PowerShell (Administrator):
+> **Note:** For window users `*mysql*` finds all mysql and you will see
+
+- Check MySQL is running: Get-Service *mysql*
+- Example:
+
+| Status  | Name    | Display Name |
+|---------|---------|--------------|
+| Running | MySQL80 | MySQL80      |
+| Stopped | MySQL84 | MySQL84      |
+
+- Start the required service with: ```Start-Service MySQL80``` (Replace MySQL80 with your service name).
+
+#### 2.2 Test the MySQL Login
+
+- Run: ```mysql -u root -p```
+- If your password is root: ```mysql -u root -proot```
+- A successful connection will show: ```mysql>```
+
+#### 2.3 Check the BCSR Database
+
+- Inside MySQL: ```SHOW DATABASES;```
+- If bcsr does not exist: 
+```mysql
+CREATE DATABASE bcsr; 
+USE bcsr;
+```
+
+#### 2.4 Check Permissions
+
+Run: 
+```mysql
+SELECT USER(), CURRENT_USER(); 
+SHOW GRANTS FOR CURRENT_USER;
+```
+If you see: 
+```mysql
+GRANT ALL PRIVILEGES ON `bcsr`.* TO `root`@`localhost`
+or
+GRANT ALL PRIVILEGES ON *.* TO `root`@`localhost`
+```
+then the user already has the required access.
+
+If the access is missing, grant it with:
+```mysql
+GRANT ALL PRIVILEGES ON bcsr.* TO 'root'@'localhost'; FLUSH PRIVILEGES;
+```
+
+#### 2.5 Verify MySQL Authentication Method
+
+Check which authentication plugin you are using:
+```mysql
+SELECT user, host, plugin
+FROM mysql.user
+WHERE user = 'root';
+```
+
+You may see something like: ```root | localhost | caching_sha2_password```
+
+Modern MySQL commonly uses: ```caching_sha2_password```.
+
+If the root account needs to be reset to use SHA authentication and the correct password, run:
+
+```mysql
+ALTER USER 'root'@'localhost'
+IDENTIFIED WITH caching_sha2_password BY 'root';
+```
+
+Then refresh the privileges: ```FLUSH PRIVILEGES;```
+
+Verify again:
+```mysql
+SELECT user, host, plugin FROM mysql.user WHERE user = 'root';
+```
+
+The result should show: ```root | localhost | caching_sha2_password```
+
+Then test the login again: ```mysql -u root -p```
+
+### 3. Create the Database
 > **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
 
 > **Warning** Make sure in your seceret_config.yaml the password and username under `db` match your mysql installation values.
@@ -134,7 +220,7 @@ or
 python3 create_db.py
 ``` 
 
-### 3. View the Database
+### 4. View the Database
 
 Connect to MySQL: 
 ```bash
@@ -146,7 +232,7 @@ Once connected, you should see the MySQL prompt:
 mysql> 
 ```
 
-### 4. Run the Application
+### 5. Run the Application
 
 Start BCSR with:
 ```bash
