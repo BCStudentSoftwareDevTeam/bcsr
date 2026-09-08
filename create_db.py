@@ -5,12 +5,23 @@ Update this file as you update your database.
 '''
 import os, sys
 import importlib
+import pymysql
+from app.models import * # Don't forget to import your own models!
 
-# Don't forget to import your own models!
-from app.models import *
+connection = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="root"
+)
 
+cursor = connection.cursor()
+cursor.execute("DROP DATABASE IF EXISTS bcsr")
+cursor.execute("CREATE DATABASE bcsr")
+cursor.close()
+connection.close()
 conf = load_config('app/config.yaml')
 
+os.makedirs("data", exist_ok=True)
 sqlite_dbs  = [ conf['databases']['dev']
                 # add more here if multiple DBs
               ]
