@@ -45,7 +45,7 @@ class GetUploads():
                                 + "/"
                                 + str(course_info.prefix)
                                 + "/"
-                              ).replace(" ","")
+                              )
     app.logger.info("Course file path: {0}".format(course_file_path))
     return course_file_path
 
@@ -75,6 +75,6 @@ class GetUploads():
                                 + user_name
                                 + "."
                                 + str(self.file.filename.split(".").pop())
-                              ).replace(" ","")
+                              )
     app.logger.info("Filename created: " + new_file_name)
     return new_file_name
