@@ -8,3 +8,19 @@
     padding-left:7px;
     padding-bottom:0px;
 }
+
+.semester-page-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.semester-section-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.semester-term {
+    font-size: 16px;
+    font-weight: 400;
+}
