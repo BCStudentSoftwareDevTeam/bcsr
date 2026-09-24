@@ -1,0 +1,5 @@
+# Code owners are requested for review automatically on every pull request.
+# Both maintainers need write access to this repository for these entries to
+# take effect. https://docs.github.com/articles/about-code-owners
+
+*       @sheggen @brianramsay

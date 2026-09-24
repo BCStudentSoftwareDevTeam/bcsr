@@ -27,7 +27,9 @@ and how to get your work reviewed and merged.
 We expect everyone involved in this project — contributors, reviewers, and maintainers — to
 be respectful, patient, and constructive. Many contributors are students writing their first
 production code; assume good faith, critique the code rather than the person, and ask
-questions before assuming a mistake. Report unacceptable behavior to a project maintainer.
+questions before assuming a mistake. Report unacceptable behavior to a maintainer:
+[@sheggen](https://github.com/sheggen) (heggens@berea.edu) or
+[@brianramsay](https://github.com/brianramsay) (ramsayb2@berea.edu).
 
 A formal `CODE_OF_CONDUCT.md` is being added separately; until it lands, the expectations
 above apply.
@@ -293,9 +295,11 @@ If you do add tests alongside your change, that is welcome — say so in the pul
 4. Respond to review feedback by pushing additional commits to the same branch. Do not force
    push after review has started — it makes the reviewer re-read everything.
 
-A maintainer will merge your pull request once it is approved. If you are a student
-contributor, add yourself to the `contributors` list in `app/config.yaml` with your name,
-username, and year as part of your first pull request.
+Both maintainers are requested for review automatically through
+[`.github/CODEOWNERS`](.github/CODEOWNERS), and one of them will merge your pull request
+once it is approved. If you are a student contributor, add yourself to the `contributors`
+list in `app/config.yaml` with your name, username, and year as part of your first pull
+request.
 
 ## Security and Secrets
 
@@ -303,8 +307,9 @@ username, and year as part of your first pull request.
 * Never commit real database credentials, secret keys, or student data in any file,
   including test fixtures, comments, and screenshots.
 * Uploaded syllabi under `app/static/files/` are untracked and must stay that way.
-* If you find a security vulnerability, do **not** open a public issue. Contact a project
-  maintainer directly so it can be fixed before it is disclosed.
+* If you find a security vulnerability, do **not** open a public issue. Follow
+  [`SECURITY.md`](SECURITY.md): email @sheggen (heggens@berea.edu) and @brianramsay
+  (ramsayb2@berea.edu) directly so it can be fixed before it is disclosed.
 
 ## Getting Help
 
@@ -313,5 +318,8 @@ username, and year as part of your first pull request.
   helps the next contributor who hits the same problem.
 * If your development environment will not start, include the full command you ran and the
   complete error output when you ask.
+* The maintainers are [@sheggen](https://github.com/sheggen) (heggens@berea.edu) and
+  [@brianramsay](https://github.com/brianramsay) (ramsayb2@berea.edu). Reach out directly if
+  you are blocked on something the issue thread cannot resolve.
 
 Thanks for contributing!
