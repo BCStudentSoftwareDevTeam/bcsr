@@ -59,15 +59,32 @@ people from writing the same patch.
 * Git
 * Linux, macOS, or WSL (`setup.sh` is a bash script and assumes a POSIX shell)
 
-### 1. Fork and clone
+### 1. Get the code
 
-Fork the repository on GitHub, then clone your fork:
+How you get the code depends on whether you have write access to
+`BCStudentSoftwareDevTeam/bcsr`. Student Software Development Team members usually do;
+outside contributors usually do not. **If you are not sure, fork.** Forking always works,
+and nothing is lost if it turns out you had write access after all.
+
+**With write access,** clone the repository directly:
+
+```bash
+git clone git@github.com:BCStudentSoftwareDevTeam/bcsr.git
+cd bcsr
+git remote add upstream git@github.com:BCStudentSoftwareDevTeam/bcsr.git
+```
+
+**Without write access,** fork the repository on GitHub, then clone your fork:
 
 ```bash
 git clone git@github.com:<your-username>/bcsr.git
 cd bcsr
 git remote add upstream git@github.com:BCStudentSoftwareDevTeam/bcsr.git
 ```
+
+Either way you end up with a remote named `upstream` pointing at the main repository, so
+every other command in this guide works the same for both. If you cloned directly, `origin`
+and `upstream` point at the same repository — that is intentional, not a mistake.
 
 ### 2. Create the virtual environment
 
@@ -255,7 +272,8 @@ If you do add tests alongside your change, that is welcome — say so in the pul
 
 ## Opening a Pull Request
 
-1. Push your branch to your fork:
+1. Push your branch to `origin` — your fork if you forked, the main repository if you
+   cloned directly:
 
    ```bash
    git push -u origin <your-branch-name>
