@@ -16,7 +16,7 @@ def deadlineCreate():
         # data contains
         # deadlineDescription
         data = request.form
-        date = datetime.datetime.strptime(data['deadlineDate'],"%m/%d/%Y").date()
+        date = datetime.datetime.strptime(data['deadlineDate'],"%Y-%m-%d").date()
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)
