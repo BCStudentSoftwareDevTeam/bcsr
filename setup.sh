@@ -16,7 +16,7 @@ python3 -m pip install -r requirements.txt
 # To generate a new requirements.txt file, run "pip freeze > requirements.txt"
 
 echo
-if [[ ! -e app/config/secret_config.yaml ]]; then
+if [[ ! -e app/secret_config.yaml ]]; then
 	cp app/config/example_secret_config.yaml app/config/secret_config.yaml
 	echo "Remember to edit your mail settings and MySQL connection information in 'app/secret_config.yaml'"
 	echo
