@@ -47,6 +47,19 @@ a {
     padding-bottom: 20px;
     width: 100%;
 }
+
+.deadlineDate {
+    white-space: nowrap;
+}
+
+.deadlineDisplay {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+.deadlineDelete {
+    color: #d9534f;
+}
 .footer {
     background-color: #DCDCDC;
     /* position:fixed; */
