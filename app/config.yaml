@@ -3,10 +3,6 @@ log:
 filename: "bcsr.log"
 
 # All the databases used by the system
-databases:
-  dev: "data/bcsr.sqlite"
-  stage: ""
-  prod: "data/bcsr.sqlite"
 
 databaseAdmin:
   user: 'heggens'
@@ -145,3 +141,6 @@ contributors:
   - name: "Luis Jesus Riera Soto"
     username: "rieral"
     year: 2022
+  - name: "Saratou Bako Bagassa"
+    username: "bakobagassas"
+    year: 2028
