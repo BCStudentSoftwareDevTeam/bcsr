@@ -308,7 +308,8 @@ request.
   including test fixtures, comments, and screenshots.
 * Uploaded syllabi under `app/static/files/` are untracked and must stay that way.
 * If you find a security vulnerability, do **not** open a public issue. Follow
-  [`SECURITY.md`](SECURITY.md): email @sheggen (heggens@berea.edu) and @brianramsay
+  [`SECURITY.md`](SECURITY.md): email [@sheggen](https://github.com/sheggen)
+  (heggens@berea.edu) and [@brianramsay](https://github.com/brianramsay)
   (ramsayb2@berea.edu) directly so it can be fixed before it is disclosed.
 
 ## Getting Help
