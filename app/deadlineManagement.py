@@ -1,6 +1,7 @@
 from app.allImports import *
 from app.logic.getAuthUser import AuthorizedUser
 from app.logic.redirectBack import redirect_url
+from app.models import Deadline
 import datetime
 
 
