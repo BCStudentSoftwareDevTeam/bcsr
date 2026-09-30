@@ -3,10 +3,6 @@ log:
 filename: "bcsr.log"
 
 # All the databases used by the system
-databases:
-  dev: "data/bcsr.sqlite"
-  stage: ""
-  prod: "data/bcsr.sqlite"
 
 databaseAdmin:
   user: 'heggens'
