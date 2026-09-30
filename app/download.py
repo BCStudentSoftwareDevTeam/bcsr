@@ -44,6 +44,7 @@ def downloadAll(SEID):
         parent_folder   = os.path.join(here, parent_folder)
         zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
         zip_path        = os.path.join(here, zip_path)
+        os.makedirs(os.path.dirname(zip_path), exist_ok=True)
         try:
           contents      = os.walk(parent_folder)
           zip_file      = zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED)
