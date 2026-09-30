@@ -14,30 +14,25 @@
   <thead>
     <tr>
       <td class='tableHead'>Date</td>
-      <td class='tableHead'>Deadline</td>
+      <td class='tableHead'>Deadline Description</td>
     </tr>
   </thead>
   {% for deadline in deadlines %}  
   {% if deadline.date >= today %} 
   <tr>
-     <td>
-       {% if deadline.date == today %} 
-       <p>today</p> 
+     <td data-order="{{deadline.date.isoformat()}}">
+       {% if deadline.date == today %}
+       <p>today</p>
       {% endif %}
-      <div>
-        <p class="day">{{deadline.date.strftime('%d')}}</p>
-      </div>
-      <div class="month">
-        <p>{{deadline.date.strftime('%b')}}</p>
-      </div>
-    </td> 
+      <span class="text-nowrap">{{deadline.date.strftime('%d %b %Y')}}</span>
+    </td>
     <td>
       <table class="table table-hover table-bordered">
         <tr>
           <td>
-            <div class='deadlineDisplay'>{{deadline.description}}</div>
+            <div class='deadlineDisplay pre-scrollable'>{{deadline.description}}</div>
             {% if isAdmin %}
-            <a href="" data-toggle="modal" data-id="{{deadline.id}}" data-target="#deleteDeadline"><span class="glyphicon glyphicon glyphicon glyphicon-trash pull-right" aria-hidden="true"></span></a>
+            <a href="" data-toggle="modal" data-id="{{deadline.id}}" data-target="#deleteDeadline"><span class="glyphicon glyphicon glyphicon glyphicon-trash pull-right text-danger" aria-hidden="true"></span></a>
             <a href="" data-toggle="modal" data-description="{{deadline.description}}" data-id="{{deadline.id}}" data-target="#editDeadline"><span  class="glyphicon glyphicon glyphicon-edit pull-right" aria-hidden="true"></span></a> {% endif %}
           </td>
         </tr>
