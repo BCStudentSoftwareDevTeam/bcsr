@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 # Create a virtual machine virtual environment
-if [ ! -d venv ]
-then
-  python3 -m venv venv
-fi
+. venv/bin/deactivate
+python3 -m venv venv
+
 
 . venv/bin/activate
 
