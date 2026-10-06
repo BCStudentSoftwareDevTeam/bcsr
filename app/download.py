@@ -45,6 +45,9 @@ def downloadAll(SEID):
         zip_path        = cfg['fileOperations']['dataPaths']['zips'] + '/' + SEID + '.zip'
         zip_path        = os.path.join(here, zip_path)
         os.makedirs(os.path.dirname(zip_path), exist_ok=True)
+        if not any(files for _, _, files in os.walk(parent_folder)):
+            flash('There are no syllabi available for this term.')
+            return redirect(request.referrer)
         try:
           contents      = os.walk(parent_folder)
           zip_file      = zipfile.ZipFile(zip_path,"w",zipfile.ZIP_DEFLATED)
