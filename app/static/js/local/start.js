@@ -26,7 +26,3 @@ $('.deadlineEditTextarea').on('change keyup keydown paste cut', function(e){
         });
     }
 });
-
-$( function() {
-    $( "#datepicker" ).datepicker();
-  } );
