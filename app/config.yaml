@@ -8,6 +8,9 @@ databases:
   stage: ""
   prod: "data/bcsr.sqlite"
 
+databases:
+  dev: "data/bcsr.sqlite"
+
 databaseAdmin:
   user: 'heggens'
 
