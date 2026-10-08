@@ -42,11 +42,13 @@
           </td>
         </tr>
       </table>
-      {% include "/admin/deleteDeadline.html" %} {% include "/admin/editDeadline.html" %}
     </td>
   </tr>
    {% endif %} {% endfor %}
 </table> 
+{% if isAdmin %}
+  {% include "/admin/deleteDeadline.html" %} {% include "/admin/editDeadline.html" %}
+{% endif %}
 {% else %}
 <h3>
   Upcoming deadlines will be posted here.
