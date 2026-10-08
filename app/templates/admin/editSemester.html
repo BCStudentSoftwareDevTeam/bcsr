@@ -5,31 +5,9 @@
 
 {# Download Syllabi #}
 {# Controller: download.py #}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Semester Management</h3>
-  </div>
-  <table class= "table table-hover">
-    <thead>
-      <tr>
-        <th>Download Semester Syllabi</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for semester in semesters %}
-        <tr>
-          <td>
-              {{semester.term}} {{semester.year}}
-          </td>
-          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
 {# Add a Semester #}
 {# Controller: semesterManagement.py #}
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add a Semester</h3>
@@ -70,6 +48,29 @@
           </td>
         </form>
       </div>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Semester Management</h3>
+  </div>
+  <table class= "table table-hover">
+    <thead>
+      <tr>
+        <th>Download Semester Syllabi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for semester in semesters %}
+        <tr>
+          <td>
+              {{semester.term}} {{semester.year}}
+          </td>
+          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
