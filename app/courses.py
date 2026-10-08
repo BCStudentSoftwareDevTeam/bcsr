@@ -91,7 +91,7 @@ def course_search():
   number  = request.args.get("number", "").strip()
   results = None
   if not prefix and not number:
-      flash("Please enter a course prefix and number (e.g. CSC 226).")
+      flash("Please enter a course prefix and number (e.g. CSC 226)", "error")
   elif prefix or number:
       if not prefix:
           flash("Please enter a course prefix (e.g. CSC).")
