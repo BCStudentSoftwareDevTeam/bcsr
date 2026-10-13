@@ -46,7 +46,7 @@ def grab_my_courses(username,SEID):
     return None
 
 def get_all_semesters():
-  semesters = Semesters.select()
+  semesters = Semesters.select().order_by(Semesters.SEID.desc())
   return semesters
 
 def get_division(DID):
