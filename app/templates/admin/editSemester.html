@@ -5,9 +5,34 @@
 
 {# Download Syllabi #}
 {# Controller: download.py #}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Semester Management</h3>
+  </div>
+  <table class= "table table-hover">
+    <thead>
+      <tr>
+        <th>Download Semester Syllabi</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for semester in semesters %}
+        <tr>
+          <td>
+              {{semester.term}} {{semester.year}}
+          </td>
+          <td>
+            <a href="download/SEID/{{semester.SEID}}" onclick="showDownloadMessage(this)">Download</a>
+            <span style="display:none;">Preparing your download. This notification will disappear shortly; your download may take longer to begin.</span>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
 {# Add a Semester #}
 {# Controller: semesterManagement.py #}
-
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add a Semester</h3>
@@ -52,29 +77,16 @@
   </table>
 </div>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Semester Management</h3>
-  </div>
-  <table class= "table table-hover">
-    <thead>
-      <tr>
-        <th class="semester-section-title" colspan="2">
-          Download Semester Syllabi
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for semester in semesters %}
-        <tr>
-          <td class="semester-term">
-              {{semester.term}} {{semester.year}}
-          </td>
-          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+<script>
+function showDownloadMessage(link) {
+    const message = link.nextElementSibling;
+
+    message.style.display = "inline";
+
+    setTimeout(function() {
+        message.style.display = "none";
+    }, 5000);
+}
+</script>
 
 {% endblock %}
