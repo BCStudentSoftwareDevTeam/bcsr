@@ -28,7 +28,7 @@ def semesterManagement():
   else:
     abort(403)
 
-@app.route("/admin/systemManagement/add", methods=["POST","GET"])
+@app.route("/admin/semesterManagement/add", methods=["POST","GET"])
 def addSemester():
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
