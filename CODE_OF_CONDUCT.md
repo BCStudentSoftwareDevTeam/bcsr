@@ -90,7 +90,7 @@ Conduct within this repository (issues, pull requests, code review, or any
 other project space), please report it privately rather than through a
 public GitHub issue or comment — standard GitHub issues are visible to all
 repository members, so they are not a confidential channel. Instead,
-contact Scott Heggen, faculty advisor for Berea College Student Software
+contact Dr. Scott Heggen, faculty advisor for Berea College Student Software
 Development, at heggens@berea.edu, or reach out to a repository maintainer
 directly through a private GitHub message.
 
