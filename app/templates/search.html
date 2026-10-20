@@ -5,6 +5,8 @@
 {% include 'snips/messages.html' %}
 {% set q_prefix = request.args.get('prefix', '') %}
 {% set q_number = request.args.get('number', '') %}
+{% set q_name   = request.args.get('name', '') %}
+{% set q_label  = [q_prefix, q_number, q_name] | select | join(' ') %}
 
 <h1>Course Search</h1>
 <form method="GET" action="/course-search">
@@ -17,9 +19,9 @@
       <label for="number">Number</label>
       <input type="text" class="form-control" name="number" id="number" placeholder="e.g. 226" value="{{ q_number }}">
     </div>
-    <div class="form-group">
+    <div class="col-sm-4">
       <label for="name">Course Name</label>
-      <input type="text" class="form-control" name="name" id="name" placeholder="e.g. Introduction to AI">
+      <input type="text" class="form-control" name="name" id="name" placeholder="e.g. Introduction to AI" value="{{ q_name }}">
     </div>
     <div class="col-sm-2" style="margin-top: 25px;">
       <button type="submit" class="btn btn-default">Search</button>
@@ -44,6 +46,7 @@
             <td>{{ uc.username.firstName }} {{ uc.username.lastName }}</td>
             <td>
               {% set label = cid.prefix ~ '-' ~ cid.number ~ '-' ~ cid.section %}
+              {% set q_label = [q_prefix, q_number, q_name] | select | join(' ') %}
               {% if cid.filePath %}<a href="/download/{{ cid.CID }}">{{ label }}</a>{% else %}{{ label }}{% endif %}
             </td>
             <td>{{ cid.SEID.term }}-{{ cid.SEID.year }}</td>
