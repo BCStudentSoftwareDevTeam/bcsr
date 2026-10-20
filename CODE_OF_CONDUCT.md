@@ -2,9 +2,9 @@
 
 This project follows the **Berea College Computer Science Department Code of
 Conduct**, adapted from the [ACM Code of Ethics and Professional
-Conduct](https://www.acm.org/code-of-ethics). All contributors to this
-repository — students, TAs, and faculty alike — are expected to uphold these
-principles.
+Conduct](https://www.acm.org/code-of-ethics). As an open-source project, all
+contributors to this repository — including students, staff, faculty, and
+external open-source contributors — are expected to uphold these principles.
 
 ## I will...
 
@@ -16,7 +16,8 @@ principles.
 3. Respect all people's work by crediting all sources and respecting all
    copyrights. I will not plagiarize.
 4. Respect others' privacy and confidentiality. I will protect information
-   and collect and share it only as necessary.
+   and collect and share it only as necessary, obtaining informed consent
+   for data collection where appropriate.
 5. Insist on and support high-quality work and transparent communication
    from myself and others.
 6. Maintain high standards of competence, conduct, ethical practice, and
@@ -47,13 +48,15 @@ Contributors to this project are expected to:
   professionalism, regardless of experience level, background, or
   identity.
 - Give proper credit for others' work, cite sources, and respect
-  copyrights and licenses (Principles 3).
+  copyrights and licenses (Principle 3).
 - Communicate honestly and transparently about the status, limitations,
-  and risks of their work (Principles 2.1, 5, 9).
+  and risks of their work (Principles 2, 5, 9).
 - Give and accept constructive, respectful code review and critique
   (Principle 8).
 - Protect the privacy and confidentiality of any data handled by the
-  project, collecting and sharing only what is necessary (Principle 4).
+  project, collecting and sharing only what is necessary, and obtaining
+  consent before collecting or sharing personal data where appropriate
+  (Principle 4).
 - Take security seriously: design features as robustly as reasonably
   possible and disclose known vulnerabilities rather than shipping them
   silently (Principle 12).
@@ -84,13 +87,15 @@ within the project.
 
 If you experience or witness behavior inconsistent with this Code of
 Conduct within this repository (issues, pull requests, code review, or any
-other project space), please report it to the project maintainers by
-opening a confidential issue or contacting a repository admin directly on
-GitHub.
+other project space), please report it privately rather than through a
+public GitHub issue or comment — standard GitHub issues are visible to all
+repository members, so they are not a confidential channel. Instead,
+contact a repository maintainer directly through a private GitHub message
+or email.
 
 Because this project is developed under the Berea College Computer Science
 Department, violations may also be reported to the department, consistent
-with Principle 15.2 of the Department Code of Conduct, and may be subject
+with Principle 15 of the Department Code of Conduct, and may be subject
 to remedial action as specified in the Berea College Student Handbook.
 
 ## Attribution
