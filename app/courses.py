@@ -111,5 +111,6 @@ def course_search():
                           (Courses.prefix == prefix) &
                           (Courses.number == number)
                       )
-          
+      else:
+          results = results.where(Courses.name ** ("%" + name + "%"))
   return render_template("search.html", results=results, cfg=cfg)
