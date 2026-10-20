@@ -123,6 +123,13 @@ function division_chairs_show_names(s) { //Called in html
 function fillAdmin(response){
    var adminselect = document.getElementById("RemoveDropdown")
        $("#RemoveDropdown").empty();
+       var option = document.createElement("option");
+       option.disabled = true;
+       option.selected = true;
+       option.text="---";
+       option.value = "---";
+       adminselect.appendChild(option);
+       
        var count = 0;
        for (var key in response){
            count = count + 1;
