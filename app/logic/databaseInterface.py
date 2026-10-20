@@ -112,12 +112,12 @@ def check_integers(integers):
       return False
   return True
 
-def insert_course(pre,num,sect,pid,seid):
+def insert_course(pre,num,sect,pid,seid,name=None):
   try:
     string_result  = check_strings([pre,num,sect])
     integer_result = check_integers([pid,seid])
     if string_result == True and integer_result == True:
-      new_course = Courses(prefix=pre,number=num,section=sect,PID=pid,SEID=seid)
+      new_course = Courses(prefix=pre,number=num,section=sect,PID=pid,SEID=seid,name=name)
       new_course.save()
     else:
       return False
