@@ -20,7 +20,7 @@
               <form action="/admin/courseManagement/missingSyllabi" method="POST">
                 <label for='semester' id="semester" style="padding-left: 10px;">Select A Semester</label>
                 <td>
-                  <select class="form-control" id='SEID' name='SEID'>
+                  <select class="form-control" id='SEID' name='SEID' required>
                     <option value>---</option>
                     {% for semester in semesters %}
                     <option value="{{semester.SEID}}">{{semester.term}} {{semester.year}}</option>
@@ -28,7 +28,7 @@
                   </select>
                 </td>
                 <td>
-                  <input type="submit" class="btn btn-default" value="Submit">
+                  <input type="submit" class="btn btn-default" value="Download">
                 </td>
               </form>
               </tr>
