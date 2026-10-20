@@ -38,7 +38,11 @@ external open-source contributors — are expected to uphold these principles.
     the infrastructure of society.
 14. Make people — including users, peers, and others affected directly or
     indirectly — a central concern in computing.
-15. Uphold, promote, and respect the principles of this Code.
+15. Uphold, promote, and respect the principles of this Code. To sign this
+    document, visit [Agreement with Code of
+    Conduct](https://docs.google.com/forms/d/e/1FAIpQLSdq4GeyorBqeOEuFT3WvbP8PMQUdtijxUd9ER7CAjW3nvyvYA/viewform).
+    **Note that this agreement is required for all CIS majors, CS minors,
+    and CS Labor Students.**
 
 ## Expected Behavior
 
