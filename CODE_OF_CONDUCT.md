@@ -90,8 +90,9 @@ Conduct within this repository (issues, pull requests, code review, or any
 other project space), please report it privately rather than through a
 public GitHub issue or comment — standard GitHub issues are visible to all
 repository members, so they are not a confidential channel. Instead,
-contact a repository maintainer directly through a private GitHub message
-or email.
+contact Scott Heggen, faculty advisor for Berea College Student Software
+Development, at heggens@berea.edu, or reach out to a repository maintainer
+directly through a private GitHub message.
 
 Because this project is developed under the Berea College Computer Science
 Department, violations may also be reported to the department, consistent
