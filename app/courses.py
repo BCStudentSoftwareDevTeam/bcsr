@@ -92,23 +92,24 @@ def course_search():
   name    = request.args.get("name", "").strip()
   results = None
   if not prefix and not number:
-      flash("Please enter a course prefix and number (e.g. CSC 226).")
-  elif prefix or number:
+      flash("Please enter a course prefix and number or name(e.g. CSC 226).")
+  elif not (prefix and number) and not name:
       if not prefix:
           flash("Please enter a course prefix (e.g. CSC).")
-      elif not number:
-          flash("Please enter a course number (e.g. 226).")
       else:
-          results = (UsersCourses
-                      .select(UsersCourses, Courses, Semesters, Users)
-                      .join(Courses)
-                      .join(Semesters)
-                      .switch(UsersCourses)
-                      .join(Users)
-                      .where(
+          flash("Please enter a course number (e.g. 226).")
+  else:
+      results = (UsersCourses
+                  .select(UsersCourses, Courses, Semesters, Users)
+                  .join(Courses)
+                  .join(Semesters)
+                  .switch(UsersCourses)
+                  .join(Users)
+                  .order_by(Semesters.SEID.desc()))
+      if prefix and number:
+          results = results.where(
                           (Courses.prefix == prefix) &
                           (Courses.number == number)
                       )
-                      .order_by(Semesters.SEID.desc()))
           
   return render_template("search.html", results=results, cfg=cfg)
