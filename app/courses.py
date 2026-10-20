@@ -113,4 +113,8 @@ def course_search():
                       )
       else:
           results = results.where(Courses.name ** ("%" + name + "%"))
+
+  if results is not None and name and not prefix and not results.count():
+      flash("Older courses may not have a name on record, try searching by prefix and number.")
+
   return render_template("search.html", results=results, cfg=cfg)
