@@ -52,6 +52,7 @@ function fillProgramChairs(response){
         programselect.appendChild(option); //adds the selected user to program chair list
     }
     $('.selectpicker').selectpicker('refresh');
+    updateRemoveButtonState();
 }
 
 function retrievePrograms(obj){
@@ -93,6 +94,7 @@ function fillDivisionChairs(response){
         divisionselect.appendChild(option); //adds the selected user to division chair
     }
     $('.selectpicker').selectpicker('refresh');
+    updateRemoveButtonState();
 }
 
 function retrieveDivisions(obj){
@@ -121,6 +123,13 @@ function division_chairs_show_names(s) { //Called in html
 function fillAdmin(response){
    var adminselect = document.getElementById("RemoveDropdown")
        $("#RemoveDropdown").empty();
+       var option = document.createElement("option");
+       option.disabled = true;
+       option.selected = true;
+       option.text="---";
+       option.value = "---";
+       adminselect.appendChild(option);
+       
        var count = 0;
        for (var key in response){
            count = count + 1;
@@ -136,6 +145,7 @@ function fillAdmin(response){
        }
 
    $('.selectpicker').selectpicker('refresh');
+   updateRemoveButtonState();
 }
 
 function retrieveAdmins(){
@@ -151,3 +161,24 @@ function retrieveAdmins(){
           }
        });
 }
+
+function updateAddButtonState(){
+    var dropdown = document.getElementById("AddDropdown");
+    var addBtn = document.getElementById("addButton");
+    addBtn.disabled = !dropdown.value;
+}
+
+function updateRemoveButtonState(){
+    var dropdown = document.getElementById("RemoveDropdown");
+    var removeBtn = document.getElementById("adminbtn");
+    var realOptions = dropdown.querySelectorAll("option:not([value='---']):not([value=''])");
+    var isLastAdmin = $("#accessType").val() === "administrator" && realOptions.length < 2;
+    removeBtn.disabled = !dropdown.value || dropdown.value === "---" || realOptions.length === 0 || isLastAdmin;
+}
+
+$('#RemoveDropdown').on('changed.bs.select', function(){
+    updateRemoveButtonState();
+});
+$('#AddDropdown').on('changed.bs.select', function(){
+    updateAddButtonState();
+});
