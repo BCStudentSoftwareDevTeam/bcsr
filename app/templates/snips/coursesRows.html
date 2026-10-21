@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/static/css/courses_form.css">
         {% if course.CID.filePath == None %}
-		 <tr style="height: 160px">
+		 <tr>
 	{% else %}
 		<tr>
 	{% endif %}
@@ -21,6 +21,7 @@
                 </td>
                 <td>
                   {% if course.CID.filePath == None %}
+                  {# No update on interaction until after submit. need to changing styling upon interaction #}
                     <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
                      </form>
                   {% else %}
