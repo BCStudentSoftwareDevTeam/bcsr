@@ -67,27 +67,12 @@
             {{semester.term}} {{semester.year}}
           </td>
           <td>
-            <a href="download/SEID/{{semester.SEID}}" onclick="showDownloadMessage(this)">Download</a>
-            <span style="display:none;">
-              Preparing your download. This notification will disappear shortly; your download may take longer to begin.
-            </span>
+            <a class="semester-download" href="download/SEID/{{semester.SEID}}">Download</a>
           </td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
 </div>
-
-<script>
-function showDownloadMessage(link) {
-    const message = link.nextElementSibling;
-
-    message.style.display = "inline";
-
-    setTimeout(function() {
-        message.style.display = "none";
-    }, 5000);
-}
-</script>
 
 {% endblock %}
