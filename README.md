@@ -82,6 +82,10 @@ During setup, configure the MySQL root account. BCSR commonly uses:
 - Username: root
 - Password: root
 
+Copy the placeholder credentials file and update it with your own values:
+```bash
+cp app/secret_config.yaml.example app/secret_config.yaml
+```
 If you use a different password, update app/secret_config.yaml.
 
 Test the connection: ```mysql -u root -p```
