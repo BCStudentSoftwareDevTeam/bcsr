@@ -14,26 +14,24 @@
           <div class="panel-heading">
             <h3 class="panel-title">Find Missing Syllabi</h3>
           </div>
-          <table class="table table-hover">
-            <tbody>
-              <tr>
+          <div class="panel-body">
+            <div class="row">
               <form action="/admin/courseManagement/missingSyllabi" method="POST">
-                <label for='semester' id="semester" style="padding-left: 10px;">Select A Semester</label>
-                <td>
-                  <select class="form-control" id='SEID' name='SEID' required>
+                <div class="col-md-4">
+                  <label for="SEID">Select A Semester</label>
+                  <select class="form-control" id="SEID" name="SEID" required>
                     <option value>---</option>
                     {% for semester in semesters %}
                     <option value="{{semester.SEID}}">{{semester.term}} {{semester.year}}</option>
                     {% endfor %}
                   </select>
-                </td>
-                <td>
-                  <input type="submit" class="btn btn-default" value="Download">
-                </td>
+                </div>
+                <div class="col-md-2">
+                  <input type="submit" class="btn btn-default inputPadding" value="Download">
+                </div>
               </form>
-              </tr>
-            </tbody>
-          </table>
+            </div>
+          </div>
         </div>
       </div>
 <!-- Close the div heads -->
