@@ -7,7 +7,8 @@ from app.logic.switch import switch
 from app.logic.getAll import GetAll
 
 from app.models import Courses, Semesters, UsersCourses, Users
-from flask import request, render_template
+from flask import request, render_template, session
+from secrets import token_hex
 
 @app.route("/courses", methods = ["GET"]) #SET A DEFAULT APP ROUTE
 @app.route("/courses/<term>", methods = ["GET"]) #SET A DEFAULT APP ROUTE
@@ -26,6 +27,11 @@ def courses(term = 0):
   auth       = AuthorizedUser()
   user       = auth.get_user()
   user_level = auth.user_level()
+  # Bind upload forms to the current authenticated session.
+  if (session.get('syllabus_upload_user') != auth.get_username() or
+      not session.get('syllabus_upload_token')):
+    session['syllabus_upload_user'] = auth.get_username()
+    session['syllabus_upload_token'] = token_hex(32)
   #CREATE TWO DEFAULT DICTIONARIES
 
 
