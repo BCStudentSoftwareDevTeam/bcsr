@@ -21,8 +21,12 @@
                 </td>
                 <td>
                   {% if course.CID.filePath == None %}
-                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
-                     </form>
+                    <div class="syllabus-upload-container">
+                      <form class="dropzone syllabus-upload" action="/uploads/{{course.CID.CID}}" method="post" enctype="multipart/form-data" style="min-height:150px" aria-label="Upload syllabus for {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}">
+                      </form>
+                      <p class="syllabus-upload-message help-block" role="status" aria-live="polite"></p>
+                      <button type="button" class="btn btn-default syllabus-upload-button" disabled>Upload syllabus</button>
+                    </div>
                   {% else %}
                     <!-- Buttons -->
 
