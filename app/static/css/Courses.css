@@ -39,3 +39,67 @@ div[id*='courses-'] {
 .dropzone{
   min-height: 0px
 }
+
+/* Filename length must not participate in the table's column sizing. */
+.syllabus-upload-cell {
+  width: 30%;
+  min-width: 10em;
+}
+
+.dropzone.syllabus-upload {
+  contain: inline-size;
+  width: 100%;
+}
+
+.syllabus-upload .dz-preview {
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.syllabus-upload .dz-preview .dz-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.syllabus-upload .dz-preview .dz-details .dz-filename {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.syllabus-upload .dz-preview .dz-details .dz-filename span {
+  padding: 0;
+}
+
+/* A focused filename can be scrolled with the keyboard without resizing. */
+.syllabus-upload .dz-preview .dz-details .dz-filename:focus {
+  overflow-x: auto;
+  text-overflow: clip;
+  outline: 2px solid #005a9c;
+  outline-offset: -2px;
+}
+
+.syllabus-upload .dz-filesize,
+.syllabus-upload .dz-preview .dz-remove {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-left: 0.5em;
+}
+
+@media (max-width: 767px) {
+  .syllabus-upload .dz-preview {
+    flex-wrap: wrap;
+  }
+
+  .syllabus-upload .dz-preview .dz-details {
+    flex-basis: 100%;
+  }
+
+  .syllabus-upload .dz-preview .dz-remove {
+    margin-left: auto;
+  }
+}
