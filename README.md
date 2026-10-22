@@ -3,11 +3,11 @@
 * [Flask](http://flask.pocoo.org/docs/0.11/)  - Python Based Web Framework Used
 * [Jinja2](http://jinja.pocoo.org/docs/dev/) - HTML Templating Language for Python
 * [Peewee](http://docs.peewee-orm.com/en/latest/index.html) - A small, expressive ORM used for database communications
-* [SQLite](https://sqlite.org/) - SQL database engine
+* [MySQL](https://www.mysql.com/) - SQL database engine
 
 ## Requirements
 * python 3.11+
-* linux, unix, mac, windows(with attachments)
+* linux, unix, mac, windows (with WSL)
 * git
 
 ## Setting Up a Linux Environment on Windows
@@ -95,6 +95,34 @@ pip3 --version
 ```
 
 If Python is not installed: ```brew install python```
+
+## Setting Up on Linux
+
+### 1. Install Python
+
+Check your Python version:
+```bash
+python3 --version
+pip3 --version
+```
+
+If Python is not installed (Debian/Ubuntu):
+```bash
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+### 2. Install MySQL
+
+- Check whether MySQL is already installed: ```mysql --version```
+- If it is not installed (Debian/Ubuntu):
+```bash
+sudo apt install mysql-server
+sudo service mysql start
+```
+- Test the connection: ```mysql -u root -p```
+
+>Afterwards, go to: Running BCSR after the setup section
 
 ## Running BCSR after the setup
 
@@ -208,19 +236,31 @@ The result should show: ```root | localhost | caching_sha2_password```
 
 Then test the login again: ```mysql -u root -p```
 
-### 3. Create the Database
-> **WARNING:** `create_db.py` is intended for development setup. Do not run this script against a production environment after real data exists.
+### 3. Create the Secret Config
 
-> **Warning** Make sure in your seceret_config.yaml the password and username under `db` match your mysql installation values.
+The application reads its database credentials and secret key from `app/secret_config.yaml`, which is not tracked in Git. Create it from the example:
 
-Run:
 ```bash
-python create_db.py
-or 
-python3 create_db.py
-``` 
+cp app/example_secret_config.yaml app/secret_config.yaml
+```
 
-### 4. View the Database
+Then edit `app/secret_config.yaml` and set `secret_key` to a value of your own, along with the MySQL `db_name`, `host`, `username`, and `password` for your local database.
+
+> **Note:** `setup.sh` tries to make this copy for you, but it looks for the example file in the wrong place, so copy it manually as shown above.
+
+### 4. Create the Database Tables
+> **Warning** Make sure in your secret_config.yaml the password and username under `db` match your MySQL installation values.
+
+Create the empty database first if it does not exist yet (see step 2.3), then build the tables:
+```bash
+python mysql_migration.py
+or
+python3 mysql_migration.py
+```
+
+> **Note:** Do not use `create_db.py` for this. It is left over from when this project used SQLite and does not work against the current MySQL configuration.
+
+### 5. View the Database
 
 Connect to MySQL: 
 ```bash
@@ -232,7 +272,7 @@ Once connected, you should see the MySQL prompt:
 mysql> 
 ```
 
-### 5. Run the Application
+### 6. Run the Application
 
 Start BCSR with:
 ```bash
@@ -242,24 +282,3 @@ python3 app.py
 ```
 
 The terminal will display a local URL. Open that URL in your browser to access the application.
-
-## Working with the flask template ##
-- bcsr-flask
-	- App
-		-static
-			- js
-			- css
-			- img
-		-templates
-			- snips # A directory for partial html files 
-			- start.html #This is an example of where your html files will go
-		-logic 
-			- files that manipulate the database
-		- __init__.py
-		- allImports.py
-		- config.yaml
-		- models.py
-		- starty.py #This an example of where your controllers will go
-
-[TOC]
-#Installation#
