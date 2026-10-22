@@ -145,8 +145,8 @@ Run from the repository root. Unit tests do not require a running database or
 tests/run_tests.sh unit
 ```
 
-Integration tests use real MySQL, including the row locking used by syllabus
-uploads. Use a local/development MySQL server and a dedicated test account. As a
+Integration tests use real MySQL to exercise the same database engine as the
+application. Use a local/development MySQL server and a dedicated test account. As a
 MySQL administrator, create the account once (choose your own password):
 
 ```sql
@@ -204,4 +204,4 @@ Add self-contained checks to `tests/unit/` with `pytest.mark.unit`, and database
 or Flask workflow checks to `tests/integration/` with `pytest.mark.integration`.
 Use `demo_data`, `client`, and `login` from `conftest.py` for shared setup. The
 initial suite covers academic-year term codes, role checks, course search,
-upload permissions/tokens, duplicate submission protection, and downloads.
+authenticated uploads, missing-file handling, and downloads.

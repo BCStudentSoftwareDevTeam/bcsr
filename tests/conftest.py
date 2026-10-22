@@ -112,11 +112,9 @@ def client(demo_data, monkeypatch, tmp_path):
 
 @pytest.fixture
 def login(client):
-    """Exercise actual request authentication and obtain the real upload token."""
+    """Exercise actual request authentication using a seeded user."""
     def authenticate(username='faculty'):
         client.environ_base['eppn'] = username + '@example.test'
         response = client.get('/courses')
         assert response.status_code == 200
-        with client.session_transaction() as session:
-            return session['syllabus_upload_token']
     return authenticate

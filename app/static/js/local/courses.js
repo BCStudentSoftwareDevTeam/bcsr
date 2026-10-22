@@ -1,61 +1,19 @@
 /* global Dropzone */
 /* global bootbox  */
-Dropzone.autoDiscover = false;
-
-$(function() {
-    $(".syllabus-upload").each(function() {
-        var form = this;
-        var container = $(form).parent();
-        var submitButton = container.find(".syllabus-submit");
-        var message = container.find(".syllabus-upload-message");
-        var uploader = new Dropzone(form, {
-            paramName: "file",
-            maxFilesize: 24, // MB
-            maxFiles: 1,
-            acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
-            dictDefaultMessage: "Upload your syllabus here",
-            uploadMultiple: false,
-            autoProcessQueue: false,
-            addRemoveLinks: true,
-            clickable: true,
-            init: function() {
-                var dropzone = this;
-
-                function updateSubmitButton() {
-                    submitButton.prop("disabled", dropzone.getQueuedFiles().length !== 1 ||
-                        dropzone.getUploadingFiles().length > 0);
-                }
-
-                dropzone.on("addedfiles", updateSubmitButton);
-                dropzone.on("removedfile", updateSubmitButton);
-                dropzone.on("processing", function() {
-                    submitButton.prop("disabled", true);
-                    message.text("Submitting syllabus...");
-                });
-                dropzone.on("error", function() {
-                    message.text("Submission failed. Remove the file and select it again to retry. Refresh the page if the syllabus was already submitted.");
-                    updateSubmitButton();
-                });
-                dropzone.on("success", function(file) {
-                    $(file.previewElement).find(".dz-remove").remove();
-                    dropzone.disable();
-                    submitButton.prop("disabled", true);
-                    message.text("Syllabus submitted. Refresh the page to view the updated course.");
-                });
-            }
-        });
-
-        submitButton.on("click", function() {
-            if (uploader.getQueuedFiles().length === 1 &&
-                    uploader.getUploadingFiles().length === 0) {
-                uploader.processQueue();
-            }
-        });
-        $(form).on("submit", function(event) {
-            event.preventDefault();
-        });
-    });
-});
+Dropzone.options.drop = {
+    paramName: "file", // The name that will be used to transfer the file
+    maxFilesize: 24, // MB
+    maxFiles: 1,
+    acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
+    dictDefaultMessage: "Upload your syllabus here",
+    uploadMultiple: false,
+    addRemoveLinks: true,
+    clickable: true,
+    accept: function(file, done) {
+        done();
+        console.log("File uploaded");
+    }
+};
 
 function delete_syllabus(form_id) {
     swal({

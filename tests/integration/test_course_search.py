@@ -20,7 +20,8 @@ def test_search_returns_matching_courses_newest_first(client, login):
     ({'number': '226'}, 'Please enter a course prefix'),
     ({'prefix': 'XYZ', 'number': '999'}, 'No courses found'),
 ])
-def test_search_feedback(client, query, message):
+def test_search_feedback(client, login, query, message):
+    login()
     response = client.get('/course-search', query_string=query)
     assert response.status_code == 200
     assert message in response.get_data(as_text=True)
