@@ -1,13 +1,15 @@
 from peewee import *
 import os
-from app.loadConfig import load_config
+from app.loadConfig import load_config, load_secret_config
 
 
-secret_cfg = load_config('app/secret_config.yaml')
+secret_cfg = load_secret_config()
 mainDB = MySQLDatabase(secret_cfg['db']['db_name'],
                        host = secret_cfg['db']['host'],
                        user = secret_cfg['db']['username'],
-                       passwd = secret_cfg['db']['password'])
+                       passwd = secret_cfg['db']['password'],
+                       **{key: secret_cfg['db'][key] for key in ('port', 'unix_socket')
+                          if key in secret_cfg['db']})
 
 # FOR USE IN MIGRATING FROM SQLITE TO SQL ONLY!
 #mainDB = SqliteDatabase("data/bcsr.sqlite", pragmas = (('busy_timeout', 100), ('journal_mode', 'WAL')))
