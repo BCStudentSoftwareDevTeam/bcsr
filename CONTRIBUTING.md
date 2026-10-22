@@ -5,15 +5,14 @@ Flask application maintained by the Berea College Student Software Development T
 lets faculty upload syllabi and lets division chairs, program chairs, and administrators
 track which syllabi are still missing each term.
 
-This document explains how to set up a development environment, the conventions we follow,
-and how to get your work reviewed and merged.
+This document explains the conventions we follow and how to get your work reviewed and
+merged. For setting up a development environment, follow the setup instructions in the
+[README](README.md).
 
 ## Table of Contents
 
 * [Code of Conduct](#code-of-conduct)
 * [Ways to Contribute](#ways-to-contribute)
-* [Setting Up a Development Environment](#setting-up-a-development-environment)
-* [Project Layout](#project-layout)
 * [Development Workflow](#development-workflow)
 * [Coding Conventions](#coding-conventions)
 * [Accessibility Requirements](#accessibility-requirements)
@@ -48,20 +47,16 @@ You do not have to write code to help:
 * **Fix an issue.** Browse the
   [open issues](https://github.com/BCStudentSoftwareDevTeam/bcsr/issues). Issues labeled
   `good first issue` are scoped to be approachable for newcomers.
+* **Review a pull request.** Read through someone else's open pull request, test their
+  changes, and leave a review. Student reviews are how pull requests get ready for a
+  maintainer, and reviewing is a good way to learn the codebase.
 
 Before starting work on an issue, comment on it so it can be assigned to you. This keeps two
 people from writing the same patch.
 
-## Setting Up a Development Environment
+## Development Workflow
 
-### Requirements
-
-* Python 3
-* A MySQL server you can connect to
-* Git
-* Linux, macOS, or WSL (`setup.sh` is a bash script and assumes a POSIX shell)
-
-### 1. Get the code
+### Get the code
 
 How you get the code depends on whether you have write access to
 `BCStudentSoftwareDevTeam/bcsr`. Student Software Development Team members usually do;
@@ -88,97 +83,9 @@ Either way you end up with a remote named `upstream` pointing at the main reposi
 every other command in this guide works the same for both. If you cloned directly, `origin`
 and `upstream` point at the same repository — that is intentional, not a mistake.
 
-### 2. Create the virtual environment
-
-```bash
-source setup.sh
-```
-
-This creates a `venv/` directory, installs everything in `requirements.txt`, and exports
-`FLASK_ENV=development` and `FLASK_RUN_PORT=8080`. When it finishes you should see `(venv)`
-at the front of your prompt.
-
-Run `source setup.sh` in every new terminal session before working on the app. To leave the
-virtual environment, run `deactivate`.
-
-### 3. Create your secret config
-
-The application reads database credentials and the Flask secret key from
-`app/secret_config.yaml`, which is not tracked in Git. Create it from the example:
-
-```bash
-cp app/example_secret_config.yaml app/secret_config.yaml
-```
-
-Then edit `app/secret_config.yaml` and set `secret_key` to a value of your own along with the
-MySQL `db_name`, `host`, `username`, and `password` for your local database.
-
-> **Note:** `setup.sh` attempts this copy itself, but it looks for the example file under
-> `app/config/`, which does not exist. Copy the file manually as shown above.
-
-### 4. Create the database tables
-
-Create an empty MySQL database matching the `db_name` in your secret config, then build the
-schema:
-
-```bash
-python mysql_migration.py
-```
-
-You can add a user to work with using `add_user.py` (edit the values in the file first) and
-add a term with `addNewTerm.py`.
-
-> **Note:** `create_db.py` is left over from when this project used SQLite and does not work
-> against the current MySQL configuration. Use `mysql_migration.py` instead.
-
-### 5. Run the application
-
-```bash
-python app.py
-```
-
-You should see:
-
-```
-Running server at http://0.0.0.0:8080/
-```
-
-Open that URL in your browser. In development, the logged-in user is faked by the `DEBUG.user`
-setting in `app/config.yaml` — change it to test the application as an administrator, a
-division chair, a program chair, or a regular faculty member.
-
-## Project Layout
-
-```
-bcsr
-├── app.py                  # Entry point; starts the Flask server
-├── setup.sh                # Creates the venv and installs dependencies
-├── mysql_migration.py      # Creates the MySQL schema
-├── requirements.txt
-└── app
-    ├── __init__.py         # Creates the Flask app; imports every page module
-    ├── allImports.py       # Shared imports used across page modules
-    ├── models.py           # Peewee models (the database schema)
-    ├── config.yaml         # Non-secret config: menus, headers, terms, contributors
-    ├── secret_config.yaml  # Untracked: secret key and DB credentials
-    ├── loadConfig.py
-    ├── <page>.py           # One module per page, holding that page's routes
-    ├── logic/              # Business logic and database access helpers
-    ├── templates/          # Jinja2 templates
-    │   └── snips/          # Reusable partial templates
-    └── static/             # css, js, img, and uploaded files
-```
-
-The important convention: **routes live in the page modules directly under `app/`, and the
-work those routes do lives in `app/logic/`.** Keep view functions thin.
-
-When you add a new page module, import it in `app/__init__.py` — it is not part of the
-application until you do.
-
-When you add a new table, add the model class to `app/models.py` *and* list it under
-`models.mainDB` in `app/config.yaml`.
-
-## Development Workflow
+Then follow the setup instructions in the [README](README.md) for your system (Windows
+through WSL, macOS, or Linux) and start the application once to make sure everything runs
+before you change anything.
 
 ### Branch from `development`
 
@@ -188,7 +95,7 @@ production branch; do not open pull requests against it.
 ```bash
 git checkout development
 git pull upstream development
-git checkout -b 109_contributing_guidelines
+git checkout -b <issue-number>_<short-description>
 ```
 
 Name your branch after the issue you are working on, followed by a short description —
@@ -217,18 +124,23 @@ git merge upstream/development
 
 ## Coding Conventions
 
-Match the surrounding code. The conventions already in use are:
+Match the surrounding code. Naming conventions are not uniform across this codebase —
+Python, JavaScript, and test files each follow their own — so the naming examples below
+describe what is already in use rather than strict rules. When you name a variable, look
+at the variables around it and use the same naming convention they use. When you name a
+function, make the name an abstract of what the function does, and again match the
+functions around it.
 
 **Python**
 
 * Two-space indentation.
-* `CapWords` for class names (`GetCourses`, `AuthorizedUser`).
-* `camelCase` for route functions and local variables (`semesterManagement`, `currentSEID`).
-* `snake_case` for logic and database helper methods (`get_all_semesters`,
-  `check_for_my_courses`).
 * A docstring at the top of each module and class explaining its purpose.
+* You will see `CapWords` class names (`GetCourses`, `AuthorizedUser`), `camelCase` route
+  functions and local variables (`semesterManagement`, `currentSEID`), and `snake_case`
+  logic and database helper methods (`get_all_semesters`, `check_for_my_courses`). Follow
+  whichever pattern the file you are editing already uses.
 
-**Database models** (documented in `app/models.py`)
+**Database models** (as documented in `app/models.py`)
 
 | Item | Style | Example |
 | --- | --- | --- |
