@@ -17,6 +17,7 @@ Dropzone.options.drop = {
     },
     init: function() {
         this.on("success", onSyllabusUploadSuccess)
+        this.on("error", onSyllabusUploadError)
     }
 };
 
@@ -66,4 +67,8 @@ function showCourses(program) {
 function onSyllabusUploadSuccess(file, response) {
     var course = $(file.previewElement).closest('tr').find('td').eq(1).text().trim();
     $('.container').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Successfully uploaded syllabus <strong>'+file.name+'</strong> for <strong>'+course+'</strong></div>');
+}
+
+function onSyllabusUploadError(file, response) {
+    $('.container').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Failed to upload file <strong>'+file.name+'</strong>, please try a different file type');
 }
