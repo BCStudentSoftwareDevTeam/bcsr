@@ -5,13 +5,18 @@ Dropzone.options.drop = {
     maxFilesize: 24, // MB
     maxFiles: 1,
     acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
-    dictDefaultMessage: "Upload your syllabus here",
+    dictDefaultMessage: 
+    'Click to Upload Syllabus<br>' +
+    '<span class="glyphicon glyphicon-upload"></span>',
     uploadMultiple: false,
     addRemoveLinks: true,
     clickable: true,
     accept: function(file, done) {
         done();
         console.log("File uploaded");
+    },
+    init: function() {
+        this.on("success", onSyllabusUploadSuccess)
     }
 };
 
@@ -56,4 +61,9 @@ function showCourses(program) {
 
     $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
     $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
+}
+
+function onSyllabusUploadSuccess(file, response) {
+    var course = $(file.previewElement).closest('tr').find('td').eq(1).text().trim();
+    $('.container').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Successfully uploaded syllabus <strong>'+file.name+'</strong> for <strong>'+course+'</strong></div>');
 }
