@@ -133,7 +133,7 @@ functions around it.
 
 **Python**
 
-* Two-space indentation.
+* Two-space indentation, as used in existing files.
 * A docstring at the top of each module and class explaining its purpose.
 * You will see `CapWords` class names (`GetCourses`, `AuthorizedUser`), `camelCase` route
   functions and local variables (`semesterManagement`, `currentSEID`), and `snake_case`
