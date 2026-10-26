@@ -10,6 +10,8 @@
 * linux, unix, mac, windows (with WSL)
 * git
 
+> **Note:** The setup steps below were written for the environment of the contributor who wrote them. If you are setting up on macOS, Windows, or Docker and run into OS-specific differences, please note them here.
+
 ## Setting Up a Linux Environment on Windows
 ### 1. Install WSL and Ubuntu
 
