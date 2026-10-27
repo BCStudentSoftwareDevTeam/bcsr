@@ -16,7 +16,12 @@ def deadlineCreate():
         # data contains
         # deadlineDescription
         data = request.form
-        date = datetime.datetime.strptime(data['deadlineDate'],"%Y-%m-%d").date()
+        try:
+            date = datetime.datetime.strptime(
+                data.get('deadlineDate', ''), "%Y-%m-%d").date()
+        except ValueError:
+            flash("Please select a valid deadline date.")
+            return redirect(redirect_url())
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)
