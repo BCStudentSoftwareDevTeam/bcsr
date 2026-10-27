@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/static/css/courses_form.css">
         {% if course.CID.filePath == None %}
-		 <tr style="height: 160px">
+		 <tr>
 	{% else %}
 		<tr>
 	{% endif %}
@@ -42,5 +42,11 @@
                   {% else %}
                     <p>{{course.CID.lastModified}}</p>
                   {% endif %}
+                </td>
+                <td>
+                  {{course.CID.PID.DID.name}}
+                </td>
+                <td>
+                  {{course.CID.PID.name}}
                 </td>
               </tr>
