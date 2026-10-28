@@ -65,7 +65,6 @@ a {
     margin: 0;
 }
 
-.deadlineDisplay {
-    max-height: 340px;
-    overflow-y: auto;
+.alert-warning {
+    border-radius: 0px;
 }
