@@ -5,31 +5,9 @@
 
 {# Download Syllabi #}
 {# Controller: download.py #}
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Semester Management</h3>
-  </div>
-  <table class= "table table-hover">
-    <thead>
-      <tr>
-        <th>Download Semester Syllabi</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for semester in semesters %}
-        <tr>
-          <td>
-              {{semester.term}} {{semester.year}}
-          </td>
-          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
-
 {# Add a Semester #}
 {# Controller: semesterManagement.py #}
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Add a Semester</h3>
@@ -37,9 +15,9 @@
   <table class = "table table-striped table-hover">
     <tbody>
       <tr>
-        <td class="alert alert-danger" colspan="3">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        The most recent term automatically becomes the active terms
+        <td class="alert alert-warning" colspan="3">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+        The most recent term automatically becomes the active term
         </td>
       </tr>
       <div class="form-group">
@@ -70,6 +48,31 @@
           </td>
         </form>
       </div>
+    </tbody>
+  </table>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Semester Management</h3>
+  </div>
+  <table class= "table table-hover">
+    <thead>
+      <tr>
+        <th class="semester-section-title" colspan="2">
+          Download Semester Syllabi
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for semester in semesters %}
+        <tr>
+          <td class="semester-term">
+              {{semester.term}} {{semester.year}}
+          </td>
+          <td><a href="download/SEID/{{semester.SEID}}">Download </a></td>
+        </tr>
+      {% endfor %}
     </tbody>
   </table>
 </div>
