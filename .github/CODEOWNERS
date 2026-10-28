@@ -1,0 +1,16 @@
+# Code owners for BCSR.
+#
+# Everyone listed below is requested for review automatically on every pull
+# request. Both accounts need write access to this repository for these entries
+# to take effect — GitHub silently ignores an owner who does not.
+# https://docs.github.com/articles/about-code-owners
+#
+# Maintainers:
+#   @sheggen      https://github.com/sheggen       heggens@berea.edu
+#   @brianramsay  https://github.com/brianramsay   ramsayb2@berea.edu
+#
+# Only the GitHub handles below are parsed as owners. The links and addresses
+# above are comments, for humans reading this file. For a security report, see
+# SECURITY.md rather than emailing about it in a pull request.
+
+*       @sheggen @brianramsay
