@@ -24,6 +24,10 @@
                   {# No update on interaction until after submit. need to changing styling upon interaction #}
                     <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
                      </form>
+                    {% if can_remind and reminder_links.get(course.UCID) %}
+                    <hr>
+                    <a class="btn btn-default btn-sm" href="{{ reminder_links[course.UCID] }}">Email Reminder</a>
+                    {% endif %}
                   {% else %}
                     <!-- Buttons -->
 
