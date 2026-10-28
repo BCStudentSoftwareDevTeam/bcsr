@@ -25,3 +25,126 @@
     font-size: 16px;
     font-weight: 400;
 }
+
+/* Add a Semester: the term that is about to be created */
+.creating-term {
+    border-left: 5px solid #5c8f3d;
+    background: #f1f6ec;
+    border-radius: 4px;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+}
+
+.creating-term-label,
+.summary-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #2f5b1a;
+}
+
+.creating-term-name {
+    display: block;
+    font-size: 26px;
+    font-weight: 600;
+    color: #1f2d3d;
+}
+
+.create-term-spacer {
+    display: block;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+/* Confirm Upload and Import Results */
+.import-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.import-intro {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.summary-value {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.term-block {
+    border-left: 5px solid #5c8f3d;
+    background: #f1f6ec;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+.term-block-name {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.import-table th {
+    white-space: nowrap;
+}
+
+.import-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.import-confirm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.import-note {
+    font-weight: 600;
+}
+
+.results-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.counter {
+    text-align: center;
+}
+
+.counter-number {
+    display: block;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.counter-label {
+    display: block;
+    color: #555;
+}
+
+/* Rows with issues: amber for duplicates, red for errors. The reason sits on a
+   line under the row, and the words Duplicate and Error say the same thing
+   as the color. */
+.import-table > tbody > tr.row-duplicate > td { background: #fcf3e1; color: #7a4a00; }
+.import-table > tbody > tr.row-error > td     { background: #fbe4e2; color: #8a1c14; }
+.import-table > tbody > tr.row-duplicate > td:first-child { box-shadow: inset 5px 0 0 #b26a00; }
+.import-table > tbody > tr.row-error > td:first-child     { box-shadow: inset 5px 0 0 #b3261e; }
+.import-table > tbody > tr.row-reason > td { border-top: 0; font-weight: 400; }
+.import-table > tbody > tr.row-note > td   { color: #7a4a00; background: transparent; }
+.import-alert { margin-bottom: 15px; }
+.term-block-note { display: block; text-align: right; font-size: 13px; color: #2f5b1a; }
+.text-warning-dark { color: #a04a00; }
+.summary-row > div { margin-bottom: 8px; }
