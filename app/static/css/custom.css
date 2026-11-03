@@ -68,3 +68,12 @@ a {
 .alert-warning {
     border-radius: 0px;
 }
+
+#exampleTextarea,
+.deadlineEditTextarea {
+    resize: none;
+    overflow-y: auto;
+    max-width: 100%;
+    max-height: 300px;
+    box-sizing: border-box;
+}
