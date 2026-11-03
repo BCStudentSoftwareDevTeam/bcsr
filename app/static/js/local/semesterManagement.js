@@ -1,4 +1,4 @@
-$(function () {
+document.addEventListener("DOMContentLoaded", function () {
     $(".semester-download").click(function () {
         const message = $("<span>Preparing your download...</span>");
 
