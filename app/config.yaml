@@ -79,6 +79,32 @@ fileOperations:
       tmp: "app/static/files/tmp"
       download: "static/files/uploads"
 
+# Used by app/logic/courseImport.py to read the course list spreadsheet an admin uploads.
+courseImport:
+  allowedExtension:
+      xlsx: "xlsx"
+      csv: "csv"
+  allowedSize:
+      size: 5000000
+  columns:
+      crn:       ['crn', 'crnkey']
+      prefix:    ['subject', 'subjcode']
+      number:    ['coursenumber', 'crsenumber']
+      section:   ['sequence', 'seqnumberkey']
+      title:     ['title']
+      crosslist: ['crosslistcourses']
+  # One entry per instructor slot on a course (up to three)
+  instructorColumns:
+    - last:     ['primaryinstructorlastname']
+      first:    ['primaryinstructorfirstname']
+      username: ['primaryinstructorusername']
+    - last:     ['instructor2lastname', 'instructorlastname2']
+      first:    ['instructor2firstname', 'instructorfirstname2']
+      username: ['instructor2username']
+    - last:     ['instructor3lastname', 'instructorlastname3']
+      first:    ['instructor3firstname', 'instructorfirstname3']
+      username: ['instructor3username']
+
 termInfo:
 #the keys correlate to the last two digits in the term code eg: Fall 2016 = 201611
     11: 'Fall'              # e.g. Fall 2016 = 201611

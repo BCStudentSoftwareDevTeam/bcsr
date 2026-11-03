@@ -37,6 +37,7 @@ from app import download
 from app import divisionManagement
 from app import programManagement
 from app import semesterManagement
+from app import courseListUpload
 from app import errorHandler
 from app import addCourse
 from app import missingSyllabi

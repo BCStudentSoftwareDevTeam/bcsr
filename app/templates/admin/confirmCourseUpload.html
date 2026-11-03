@@ -1,0 +1,145 @@
+{% set currentPage ="semesterManagement" %}
+{% extends "snips/base.html" %}
+{% block body %}
+{% include "snips/messages.html" %}
+
+{# Review the uploaded course list before the term is created #}
+{# Controller: courseListUpload.py #}
+
+<ol class="breadcrumb">
+  <li>Administration</li>
+  <li><a href="/admin/semesterManagement">Semester Management</a></li>
+  <li class="active" aria-current="page">Confirm Upload</li>
+</ol>
+
+<h1 class="import-heading">Confirm Course List Upload</h1>
+<p class="import-intro">Review the spreadsheet information before adding courses to the selected semester.
+  Nothing has been saved yet.</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Upload Summary</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row summary-row">
+      <div class="col-md-5 col-sm-12">
+        <span class="summary-label">File</span>
+        <span class="summary-value">{{pending.filename}}</span>
+      </div>
+      <div class="col-md-3 col-sm-6">
+        <div class="term-block">
+          <span class="summary-label">Semester</span>
+          <span class="term-block-name">{{pending.termName}} {{pending.year}}</span>
+          {% if becomesActive %}<span class="term-block-note">Becomes active term</span>{% endif %}
+        </div>
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+        <span class="summary-label">Courses detected</span>
+        <span class="summary-value text-warning-dark">{{summary.total}}</span>
+      </div>
+      <div class="col-md-2 col-sm-3 col-xs-6">
+        <span class="summary-label">Rows with issues</span>
+        <span class="summary-value {% if summary.issues %}text-danger{% endif %}">{{summary.issues}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Course List Preview</h2>
+  </div>
+  <div class="panel-body">
+    {% if summary.issues %}
+      <div class="alert alert-danger import-alert" role="alert">
+        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+        <strong>{{summary.issues}} {{'row has a problem and' if summary.issues == 1 else 'rows have problems and'}}
+          will be skipped unless you fix the file and upload it again.</strong>
+      </div>
+    {% endif %}
+    <div class="table-responsive">
+      <table class="table import-table">
+        <caption class="sr-only">Courses found in {{pending.filename}}</caption>
+        <thead>
+          <tr>
+            <th scope="col">Row</th>
+            <th scope="col">CRN</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Course Number</th>
+            <th scope="col">Sequence</th>
+            <th scope="col">Title</th>
+            <th scope="col">CrossList Courses</th>
+            <th scope="col">Instructor Last</th>
+            <th scope="col">Instructor First</th>
+            <th scope="col">Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in pending.courses %}
+            <tr class="{{'row-' ~ course.status if course.status != 'ok' else ''}}">
+              <td>{{course.row}}</td>
+              <td>{{course.crn or '—'}}</td>
+              <td>{{course.prefix or '—'}}</td>
+              <td>{{course.number or '—'}}</td>
+              <td>{{course.section or '—'}}</td>
+              <td>{{course.title or '—'}}</td>
+              <td>{{course.crosslist or '—'}}</td>
+              {% for field in ['last', 'first', 'username'] %}
+                <td>
+                  {% for instructor in course.listed %}
+                    <div>
+                      {% if field in instructor.missing %}
+                        <strong class="text-danger">Missing</strong>
+                      {% else %}
+                        {{instructor[field] or '—'}}
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </td>
+              {% endfor %}
+            </tr>
+            {% if course.status != 'ok' %}
+              <tr class="row-{{course.status}} row-reason">
+                <td colspan="10">
+                  {% if course.status == 'duplicate' %}
+                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+                    <strong>Duplicate:</strong> {{course.reason}}. This row will be skipped.
+                  {% else %}
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    <strong>Error:</strong> {{course.reason}}. This row will not be imported.
+                  {% endif %}
+                </td>
+              </tr>
+            {% endif %}
+            {% for warning in course.warnings %}
+              <tr class="row-reason row-note">
+                <td colspan="10"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Row {{course.row}}: {{warning}}.</td>
+              </tr>
+            {% endfor %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-body import-actions">
+    <a href="/admin/semesterManagement" class="btn btn-default btn-lg">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to Upload
+    </a>
+    <form action="/admin/semesterManagement/confirm" method="post" class="import-confirm">
+      {% if summary.importable %}
+        {% if summary.issues %}
+          <span class="import-note">{{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.</span>
+        {% endif %}
+        <button type="submit" class="btn btn-success btn-lg">Confirm &amp; Submit</button>
+      {% else %}
+        <span class="import-note text-danger">No courses can be imported from this file.</span>
+        <button type="submit" class="btn btn-success btn-lg" disabled>Confirm &amp; Submit</button>
+      {% endif %}
+    </form>
+  </div>
+</div>
+
+{% endblock %}
