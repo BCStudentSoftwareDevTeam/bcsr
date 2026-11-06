@@ -47,7 +47,11 @@ def user_insert():
 def add_program_chair(request):
     newChairs   = request.form.get("userToAdd")
     PID =request.form.get("program")
-    newChair  = Users.get(Users.username == newChairs)
+    try:
+        newChair = Users.get(Users.username == newChairs)
+    except Users.DoesNotExist:
+        flash("Please select a valid user to add.")
+        return
     newChair.PID = PID
     newChair.save()
     message = "USER: {0} has been added as a program chair for pid: {1}".format(newChairs,PID)
@@ -57,7 +61,11 @@ def add_program_chair(request):
 def add_division_chair(request):
     newChairs    = request.form.get("userToAdd")
     DID          = request.form.get("division")
-    newChair     = Users.get(Users.username == newChairs)
+    try:
+        newChair = Users.get(Users.username == newChairs)
+    except Users.DoesNotExist:
+        flash("Please select a valid user to add.")
+        return
     newChair.DID = DID
     newChair.save()
     message      = "USER: {0} has been added as a division chair for did: {1}".format(newChairs,DID)
@@ -66,7 +74,11 @@ def add_division_chair(request):
 
 def add_administrator(request):
     newAdmins   = request.form.get("userToAdd")
-    newAdmin    = Users.get(Users.username == newAdmins)
+    try:
+        newAdmin = Users.get(Users.username == newAdmins)
+    except Users.DoesNotExist:
+        flash("Please select a valid user to add.")
+        return
     newAdmin.isAdmin = 1
     newAdmin.save()
     message     = "USER: {0} has been added as an admin".format(newAdmins)
@@ -74,7 +86,11 @@ def add_administrator(request):
     flash("Admin successfully added.")
 
 def remove_administratorr(request):
-    user = Users.get(Users.username == request.form.get("userToRemove"))
+    try:
+        user = Users.get(Users.username == request.form.get("userToRemove"))
+    except Users.DoesNotExist:
+        flash("Please select a valid user to remove.")
+        return
     user.isAdmin = 0
     user.save()
     message = "USER: {0} has been removed as an administrator".format(user)
@@ -84,7 +100,11 @@ def remove_administratorr(request):
 def remove_program_chair(request):
     chair_to_remove  =  request.form.get("userToRemove")
     PID              =  request.form.get("program")
-    program_chair = Users.get(Users.username == chair_to_remove, Users.PID== PID)
+    try:
+        program_chair = Users.get(Users.username == chair_to_remove, Users.PID == PID)
+    except Users.DoesNotExist:
+        flash("Please select a valid user to remove.")
+        return
     program_chair.PID = None
     program_chair.save()
     message = "USER: {0} has been removed as a program chair for pid: {1}".format(chair_to_remove ,PID)
@@ -94,7 +114,11 @@ def remove_program_chair(request):
 def remove_division_chair(request):
     division_to_remove = request.form.get("userToRemove")
     DID                = request.form.get("division")
-    division_chair      = Users.get(Users.username == request.form.get("userToRemove"), Users.DID== request.form.get("division"))
+    try:
+        division_chair = Users.get(Users.username == request.form.get("userToRemove"), Users.DID == request.form.get("division"))
+    except Users.DoesNotExist:
+        flash("Please select a valid user to remove.")
+        return
     division_chair.DID = None
     division_chair.save()
     message = "USER: {0} has been removed as a division chair for did: {1}".format(division_to_remove ,DID)
