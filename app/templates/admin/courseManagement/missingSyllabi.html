@@ -38,6 +38,14 @@
       </div>
 <!-- Close the div heads -->
     </div>
+    <!--  Broadcast an e-message to faculty missing a syllabus for their course  -->
+      <p>Certain faculty members missing a syallabus for their course(s)? Click the below button to send an email to all applicable faculty members.</p>
+    {% if email_link %}
+    <a class="btn btn-default" href="{{ email_link }}">Email Faculty</a>
+    {% else %}
+    <button class="btn btn-default" type="button" disabled>Email Faculty</button>
+    <p>No faculty email addresses were found for courses missing a syllabus.</p>
+    {% endif %}
   </div>
 </div>
 {%endblock%}
