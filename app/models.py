@@ -1,9 +1,9 @@
 from peewee import *
 import os
-from app.loadConfig import load_config, load_secret_config
+from app.loadConfig import load_config
 
 
-secret_cfg = load_secret_config()
+secret_cfg = load_config('app/secret_config.yaml', env_var='BCSR_SECRET_CONFIG')
 mainDB = MySQLDatabase(secret_cfg['db']['db_name'],
                        host = secret_cfg['db']['host'],
                        user = secret_cfg['db']['username'],
