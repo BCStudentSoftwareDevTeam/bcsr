@@ -63,7 +63,8 @@ div[id*='courses-'] {
   min-width: 0;
 }
 
-.syllabus-upload .dz-preview .dz-details .dz-filename {
+.syllabus-upload .dz-preview .dz-details .dz-filename,
+.syllabus-upload .dz-preview .dz-details .dz-filename:not(:hover) {
   flex: 1;
   min-width: 0;
   overflow: hidden;
@@ -76,7 +77,8 @@ div[id*='courses-'] {
 }
 
 /* A focused filename can be scrolled with the keyboard without resizing. */
-.syllabus-upload .dz-preview .dz-details .dz-filename:focus {
+.syllabus-upload .dz-preview .dz-details .dz-filename:focus,
+.syllabus-upload .dz-preview .dz-details .dz-filename:focus:not(:hover) {
   overflow-x: auto;
   text-overflow: clip;
   outline: 2px solid #005a9c;
