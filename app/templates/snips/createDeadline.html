@@ -15,7 +15,8 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="newDeadlineDate">Deadline date (required)</label>
-                        <input type="date" id="newDeadlineDate" class="form-control" name="deadlineDate" required>
+                        <input type="date" id="newDeadlineDate" class="form-control" name="deadlineDate" min="0001-01-01" max="9999-12-31" aria-describedby="newDeadlineDateError" required>
+                        <p id="newDeadlineDateError" class="help-block text-danger" aria-live="polite" hidden></p>
                     </div>
                 </div>
             </div>
@@ -23,3 +24,33 @@
         </form>
     </div>
 </div>
+<script>
+    (function () {
+        var dateInput = document.getElementById('newDeadlineDate');
+        var dateError = document.getElementById('newDeadlineDateError');
+        var dateGroup = dateInput.parentElement;
+
+        function displayDateError() {
+            var invalid = !dateInput.validity.valid;
+            dateError.textContent = invalid
+                ? 'Please enter a valid date with a year between 0001 and 9999.'
+                : '';
+            dateError.hidden = !invalid;
+            dateInput.setAttribute('aria-invalid', invalid ? 'true' : 'false');
+            dateGroup.classList.toggle('has-error', invalid);
+        }
+
+        dateInput.addEventListener('invalid', function (event) {
+            event.preventDefault();
+            displayDateError();
+            dateInput.focus();
+        });
+        dateInput.addEventListener('blur', displayDateError);
+        dateInput.addEventListener('change', displayDateError);
+        dateInput.addEventListener('input', function () {
+            if (dateInput.getAttribute('aria-invalid') === 'true') {
+                displayDateError();
+            }
+        });
+    }());
+</script>
