@@ -87,6 +87,9 @@ def courses(term = 0):
 @app.route("/course-search", methods=["GET"])
 def course_search():
 
+
+  auth = AuthorizedUser()
+
   prefix  = request.args.get("prefix", "").strip()
   number  = request.args.get("number", "").strip()
   results = None
@@ -110,4 +113,8 @@ def course_search():
                       )
                       .order_by(Semesters.SEID.desc()))
           
-  return render_template("search.html", results=results, cfg=cfg)
+  return render_template("search.html",
+                          results     = results,
+                          cfg         = cfg,
+                          isAdmin     = auth.isAdmin
+                        )
