@@ -13,41 +13,66 @@ $(function() {
             maxFilesize: 24, // MB
             maxFiles: 1,
             acceptedFiles: ".doc,.docx,.pdf,.txt,.zip",
-            dictDefaultMessage: "Upload your syllabus here (one file)",
+            dictDefaultMessage: "Choose or drop one syllabus file here",
+            dictRemoveFile: "Remove selection",
             dictMaxFilesExceeded: "Only one syllabus file is allowed. Remove the selected file before choosing another.",
             uploadMultiple: false,
             autoProcessQueue: false,
             addRemoveLinks: true,
             clickable: true,
+            previewTemplate: '<div class="dz-preview dz-file-preview">' +
+                '<div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div>' +
+                '<div class="dz-size" data-dz-size></div></div>' +
+                '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+                '</div>',
             init: function() {
                 var uploader = this;
+                var selectionError = "";
 
                 function updateUploadButton() {
                     uploadButton.prop("disabled", uploader.getQueuedFiles().length !== 1 ||
                         uploader.getUploadingFiles().length > 0);
                 }
 
-                uploader.on("addedfile", function() {
-                    message.text("");
-                });
-                uploader.on("addedfiles", updateUploadButton);
-                uploader.on("removedfile", function() {
-                    message.text("");
+                function updateSelection() {
+                    var submitting = uploader.getUploadingFiles().length > 0;
+                    var guidance = submitting ? "Submitting syllabus..." : uploader.getQueuedFiles().length === 1
+                        ? "Selected — not submitted. You can remove or replace this file before submitting."
+                        : "Choose one file, then select Submit syllabus.";
+                    $(form).attr("aria-busy", submitting ? "true" : "false");
+                    uploadButton.text(submitting ? "Submitting..." : "Submit syllabus");
+                    message.text(selectionError ? selectionError + " " + guidance : guidance);
+                    message.toggleClass("text-danger", !!selectionError);
                     updateUploadButton();
+                }
+
+                uploader.on("addedfile", function() {
+                    selectionError = "";
+                });
+                uploader.on("addedfiles", updateSelection);
+                uploader.on("removedfile", function() {
+                    selectionError = "";
+                    updateSelection();
                 });
                 uploader.on("processing", function() {
                     uploadButton.prop("disabled", true);
-                    message.text("Uploading syllabus...");
+                    uploadButton.text("Submitting...");
+                    $(form).attr("aria-busy", "true");
+                    $(form).find(".dz-remove").hide();
+                    message.removeClass("text-danger").text("Submitting syllabus...");
                 });
                 uploader.on("error", function(file, error, xhr) {
                     uploader.removeFile(file);
-                    message.text(xhr ? "Upload failed. Please select the file and try again." : error);
+                    selectionError = xhr ? "Submission failed. Please select the file and try again." : error;
+                    updateSelection();
                 });
                 uploader.on("success", function(file) {
                     $(file.previewElement).find(".dz-remove").remove();
                     uploader.disable();
                     uploadButton.prop("disabled", true);
-                    message.text("Syllabus uploaded. Refresh the page to view the updated course.");
+                    uploadButton.text("Submitted");
+                    $(form).attr("aria-busy", "false");
+                    message.removeClass("text-danger").text("Syllabus submitted successfully. Refresh the page to view the updated course.");
                 });
             }
         });
