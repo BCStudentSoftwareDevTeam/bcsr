@@ -10,6 +10,8 @@ from app.models import *
 @app.route('/uploads/<CID>', methods=['POST'])
 def uploads(CID):
     auth       = AuthorizedUser()
+    if auth.isStudent:
+        abort(403)
     user_name  = auth.get_username()
     file = request.files['file']
     getUploads  = GetUploads(file)
@@ -29,7 +31,7 @@ def uploads(CID):
         if os.path.exists(complete_path):
         	#Now we need to course_path with its new file name to the database
         	database_path = (course_path+new_file_name).replace(" ","")
-        	update_course_path = Courses.update(filePath=database_path).where(Courses.CID==CID)
+        	update_course_path = Courses.update(filePath=database_path, isPrivate=bool(request.form.get('isPrivate'))).where(Courses.CID==CID)
         	update_course_path.execute()
         	#Now we need to log the changes
         	get_time = datetime.datetime.now()

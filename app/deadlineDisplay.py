@@ -11,6 +11,8 @@ from app.models import Deadline
 def deadlineDisplay():
     if (request.method == "GET"):
         authorizedUser = AuthorizedUser()
+        if authorizedUser.isStudent:
+            return redirect(url_for("archive"))
 
         # we don't want to show deadlines past today
         today = datetime.date.today()

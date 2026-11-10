@@ -76,6 +76,7 @@ class Courses (dbModel):
   SEID          = ForeignKeyField(Semesters)
   filePath      = TextField(null = True)
   lastModified  = TextField(null = True)
+  isPrivate     = BooleanField(default = False)   # students can't download private syllabi
 
   def __str__(self):
     return str(self.CID)

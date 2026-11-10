@@ -10,6 +10,8 @@ from app.models import Courses
 def delete(CID):
     page = r"/" + request.url.split("/")[-1]
     auth      = AuthorizedUser()
+    if auth.isStudent:
+        abort(403)
     user_name = auth.get_username()
     # if auth.user_level() == 'admin':
     try:

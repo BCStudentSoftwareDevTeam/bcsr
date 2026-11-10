@@ -22,6 +22,7 @@ def archive(SEID):
                         current_term = current_term,
                         SEID         = SEID,
                         isAdmin      = authorizedUser.isAdmin,
+                        isStudent    = authorizedUser.isStudent,
                         divisions_to_programs = two_dictionaries[0],
                         programs_to_courses   = two_dictionaries[1]
                         )

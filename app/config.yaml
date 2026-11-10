@@ -91,10 +91,12 @@ termInfo:
     #10: 'Berea Bridge Program'   # e.g. Berea Bridge Program 2016 = 201610
 
 DEBUG:
-  user: "HEGGENS@berea.edu" #Admin Access
+  # user: "HEGGENS@berea.edu" #Admin Access
   # user: "pearcej" #Division Chair Access
   # user: "jadudm"  #Professor Access
   # user: "nakazawam" #Program Access
+  user: "studentuser" #Student Access (any username not in Users)
+  description: "Student" # stands in for Shibboleth's description, only used for users not in Users
 
 contributors:
   - name: "Cody Myers"

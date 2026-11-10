@@ -24,8 +24,11 @@ def courses(term = 0):
 
   #Grab user information
   auth       = AuthorizedUser()
-  user       = auth.get_user()
   user_level = auth.user_level()
+  if user_level == 'student':
+    # students have no courses to manage, they browse syllabi in the archive
+    return redirect(url_for('archive'))
+  user       = auth.get_user()
   #CREATE TWO DEFAULT DICTIONARIES
 
 
@@ -116,5 +119,6 @@ def course_search():
   return render_template("search.html",
                           results     = results,
                           cfg         = cfg,
-                          isAdmin     = auth.isAdmin
+                          isAdmin     = auth.isAdmin,
+                          isStudent   = auth.isStudent
                         )
