@@ -19,6 +19,7 @@ from app.models import Courses
 def download(CID):
     page = r"/" + request.url.split("/")[-1]
     course = Courses.get_or_none(Courses.CID == CID)
+    # only private syllabi need a login check, public ones download for everyone like before
     if course and course.isPrivate and AuthorizedUser().isStudent:
         abort(403)
     try:

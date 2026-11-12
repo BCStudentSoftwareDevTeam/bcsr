@@ -14,6 +14,7 @@ def uploads(CID):
         abort(403)
     user_name  = auth.get_username()
     file = request.files['file']
+    is_private  = 'isPrivate' in request.form   # the checkbox is only sent when it is checked
     getUploads  = GetUploads(file)
     try:
         upload_path     = getUploads.get_upload_path()
@@ -31,7 +32,7 @@ def uploads(CID):
         if os.path.exists(complete_path):
         	#Now we need to course_path with its new file name to the database
         	database_path = (course_path+new_file_name).replace(" ","")
-        	update_course_path = Courses.update(filePath=database_path, isPrivate=bool(request.form.get('isPrivate'))).where(Courses.CID==CID)
+        	update_course_path = Courses.update(filePath=database_path, isPrivate=is_private).where(Courses.CID==CID)
         	update_course_path.execute()
         	#Now we need to log the changes
         	get_time = datetime.datetime.now()

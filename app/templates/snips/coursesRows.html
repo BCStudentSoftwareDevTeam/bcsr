@@ -23,7 +23,7 @@
                   {% if course.CID.filePath == None %}
                   {# No update on interaction until after submit. need to changing styling upon interaction #}
                     <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
-                      <label title="Students can't download a private syllabus. Check this before dropping the file."><input type="checkbox" name="isPrivate" value="1"> Private (check before uploading)</label>
+                      <label class="checkbox-inline" title="Students can't download a private syllabus. Check this before dropping the file."><input type="checkbox" name="isPrivate" value="1"> Private (check before uploading)</label>
                      </form>
                   {% else %}
                     <!-- Buttons -->

@@ -1,9 +1,3 @@
 .delete_button {
   width: 100%;
 }
-
-/* dropzone is capped at 50px tall, so the private checkbox gets one plain line */
-.dropzone label {
-  font-weight: normal;
-  margin: 0;
-}
