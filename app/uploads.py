@@ -11,7 +11,12 @@ from app.models import *
 def uploads(CID):
     auth       = AuthorizedUser()
     user_name  = auth.get_username()
-    file = request.files['file']
+    files = list(request.files.items(multi=True))
+    if len(files) != 1 or files[0][0] != 'file' or not files[0][1].filename:
+        return render_template("error.html",
+                               cfg=cfg,
+                               message="Select exactly one syllabus file to upload."), 400
+    file = files[0][1]
     getUploads  = GetUploads(file)
     try:
         upload_path     = getUploads.get_upload_path()
@@ -46,10 +51,10 @@ def uploads(CID):
         else:
             return render_template("error.html",
                                    cfg     = cfg,
-                                   message = "An error occured during the upload process.")
+                                   message = "An error occured during the upload process."), 500
     except Exception as e:
         app.logger.error("{0}".format(e))
         return render_template("error.html",
                               cfg                   = cfg,
                               message               = "An error occured during the upload process."
-                            )
+                            ), 500
