@@ -284,3 +284,85 @@ python3 app.py
 ```
 
 The terminal will display a local URL. Open that URL in your browser to access the application.
+
+## Testing
+
+Install the dependencies in your virtual environment:
+
+```bash
+source venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+Run from the repository root. Unit tests do not require a running database or
+`app/secret_config.yaml`:
+
+```bash
+tests/run_tests.sh unit
+```
+
+The current suite covers configuration loading and academic-year semester codes.
+It runs without a MySQL server. Application workflow tests will be added in
+separate issues under epic #108.
+
+### MySQL fixtures for future integration tests
+
+The reusable fixtures support real MySQL using a disposable database. To use them
+in a future integration test, use a local/development server and a dedicated test
+account. As a MySQL administrator, create the account once (choose your own password):
+
+```sql
+CREATE USER 'bcsr_test'@'localhost' IDENTIFIED BY 'choose-a-test-password';
+GRANT ALL PRIVILEGES ON `bcsr\_test\_%`.* TO 'bcsr_test'@'localhost';
+```
+
+The grant covers only databases beginning with the literal `bcsr_test_` prefix.
+Export the connection settings in your shell; do not put them in the normal
+secret configuration:
+
+```bash
+export BCSR_TEST_MYSQL_HOST=127.0.0.1
+export BCSR_TEST_MYSQL_PORT=3306
+export BCSR_TEST_MYSQL_USER=bcsr_test
+export BCSR_TEST_MYSQL_PASSWORD='choose-a-test-password'
+# Optional, for a local socket instead of TCP:
+# export BCSR_TEST_MYSQL_SOCKET=/path/to/mysql.sock
+
+tests/run_tests.sh all
+tests/run_tests.sh unit -k semester
+```
+
+The runner forwards pytest options and returns a nonzero exit status on failure.
+Direct `python -m pytest` uses the same fixtures. Missing MySQL access is an error
+for integration tests, not a silent skip.
+
+### Isolation and demo data
+
+`tests/conftest.py` supplies a temporary `BCSR_SECRET_CONFIG` before importing the
+application. Normal startup still defaults to `app/secret_config.yaml`; the test
+suite never reads or edits it. Tests requesting the MySQL fixtures create a
+uniquely named `bcsr_test_<uuid>` database and remove it at teardown. Tables and demo records
+are rebuilt for each database test, so tests do not depend on execution order.
+An interrupted/killed process may leave its uniquely named database behind;
+remove that specific database manually if needed.
+
+Uploads, download fixtures, generated files, and request logs use pytest's
+temporary directories. Tests authenticate through the existing `eppn` request
+environment and Flask test client, so no browser or login server is required.
+
+`database/demodata.py` provides `seed_demo_data(today=None)`. It creates fictional
+users for every role, two divisions/programs, two semesters, linked courses with
+and without a syllabus, and deadlines. It returns a dictionary of named model
+objects so tests need not assume generated IDs. Its default date is fixed for
+repeatability; callers can pass a date when testing deadline behavior. Importing
+it does not write data. Call it explicitly only after creating empty tables in
+the intended demo/test database. It creates database records; file fixtures are
+created separately by the test client fixture. Do not run `create_db.py` to
+prepare tests.
+
+Add self-contained checks to `tests/unit/` with `pytest.mark.unit`, and database
+or Flask workflow checks to `tests/integration/` with `pytest.mark.integration`.
+Use `demo_data`, `client`, and `login` from `conftest.py` for shared setup. The
+current suite covers configuration loading and academic-year term codes; role,
+search, and upload workflow tests are outside this PR. The integration category
+currently contains no tests; selecting it alone returns pytest's no-tests exit code.
