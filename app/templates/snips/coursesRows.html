@@ -19,10 +19,10 @@
                 <td>
                   {{course.CID.SEID.term}}-{{course.CID.SEID.year}}
                 </td>
-                <td>
+                <td class="syllabus-upload-cell">
                   {% if course.CID.filePath == None %}
                   {# No update on interaction until after submit. need to changing styling upon interaction #}
-                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
+                    <form class="dropzone syllabus-upload" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
                      </form>
                   {% else %}
                     <!-- Buttons -->
