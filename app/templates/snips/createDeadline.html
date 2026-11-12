@@ -24,33 +24,3 @@
         </form>
     </div>
 </div>
-<script>
-    (function () {
-        var dateInput = document.getElementById('newDeadlineDate');
-        var dateError = document.getElementById('newDeadlineDateError');
-        var dateGroup = dateInput.parentElement;
-
-        function displayDateError() {
-            var invalid = !dateInput.validity.valid;
-            dateError.textContent = invalid
-                ? 'Please enter a valid date with a year between 0001 and 9999.'
-                : '';
-            dateError.hidden = !invalid;
-            dateInput.setAttribute('aria-invalid', invalid ? 'true' : 'false');
-            dateGroup.classList.toggle('has-error', invalid);
-        }
-
-        dateInput.addEventListener('invalid', function (event) {
-            event.preventDefault();
-            displayDateError();
-            dateInput.focus();
-        });
-        dateInput.addEventListener('blur', displayDateError);
-        dateInput.addEventListener('change', displayDateError);
-        dateInput.addEventListener('input', function () {
-            if (dateInput.getAttribute('aria-invalid') === 'true') {
-                displayDateError();
-            }
-        });
-    }());
-</script>
