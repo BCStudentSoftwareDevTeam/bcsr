@@ -36,14 +36,15 @@
         <tbody>
           {% for uc in results %}
           {% set cid = uc.CID %}
+          {% set canDownload = cid.filePath and not (cid.isPrivate and isStudent) %}
           <tr>
             <td>{{ uc.username.firstName }} {{ uc.username.lastName }}</td>
             <td>
               {% set label = cid.prefix ~ '-' ~ cid.number ~ '-' ~ cid.section %}
-              {% if cid.filePath %}<a href="/download/{{ cid.CID }}">{{ label }}</a>{% else %}{{ label }}{% endif %}
+              {% if canDownload %}<a href="/download/{{ cid.CID }}">{{ label }}</a>{% else %}{{ label }}{% endif %}
             </td>
             <td>{{ cid.SEID.term }}-{{ cid.SEID.year }}</td>
-            <td>{% if cid.filePath %}<a href="/download/{{ cid.CID }}" class="btn btn-sm btn-default">Download</a>{% else %}<em>Not uploaded</em>{% endif %}</td>
+            <td>{% if canDownload %}<a href="/download/{{ cid.CID }}" class="btn btn-sm btn-default">Download</a>{% elif cid.filePath %}<em>Private</em>{% else %}<em>Not uploaded</em>{% endif %}</td>
             <td>{{ cid.lastModified if cid.lastModified else '<em>Not yet modified.</em>' | safe }}</td>
           </tr>
           {% endfor %}

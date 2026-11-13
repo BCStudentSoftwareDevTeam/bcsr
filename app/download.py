@@ -11,12 +11,17 @@ from flask import send_from_directory
 from app.logic.redirectBack import redirect_url
 from app.logic import databaseInterface
 from app.logic.getAuthUser import AuthorizedUser
+from app.models import Courses
 
 
 
 @app.route("/download/<CID>", methods = ["GET"])
 def download(CID):
     page = r"/" + request.url.split("/")[-1]
+    course = Courses.get_or_none(Courses.CID == CID)
+    # only private syllabi need a login check, public ones download for everyone like before
+    if course and course.isPrivate and AuthorizedUser().isStudent:
+        abort(403)
     try:
         file_path = databaseInterface.get_course_download_file_path(CID)        
         message = "Download: {} has been downloaded".format(file_path)

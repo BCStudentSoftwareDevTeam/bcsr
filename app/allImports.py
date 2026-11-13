@@ -31,6 +31,16 @@ def authUser(env):
     else:
         return None
 
+def authDescription(env):
+    '''Shibboleth puts the user's affiliation (Student, Faculty, Staff) in "description"'''
+    envK = "description"
+    if (envK in env):
+        return env[envK].lower()
+    elif ("DEBUG" in app.config) and app.config["DEBUG"]:
+        return cfg["DEBUG"].get("description", "").lower()
+    else:
+        return ""
+
 '''Creates the AbsolutePath based off of the relative path.
 Also creates the directories in path if they are not found.
 @param {string} relaitivePath - a string of directories found in config.yaml
@@ -63,7 +73,9 @@ returns a replacement function. See start.py for an example"
 @app.before_request
 def before_request():
     # g.dbMain =  mainDB.connect()
-    pass
+    # syllabi and zips are saved under static/, so force them through /download where private ones are checked
+    if request.path.startswith("/static/files/"):
+        abort(404)
 @app.teardown_request
 def teardown_request(exception):
     dbM = getattr(g, 'db', None)
