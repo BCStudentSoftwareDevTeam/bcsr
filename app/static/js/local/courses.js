@@ -46,6 +46,13 @@ $(function() {
                     updateUploadButton();
                 }
 
+                uploader.options.accept = function(file, done) {
+                    // Dropzone queues accepted files during done(). Drag-and-drop
+                    // fires addedfiles before that queue is populated.
+                    done();
+                    updateSelection();
+                };
+
                 uploader.on("addedfile", function() {
                     selectionError = "";
                 });
