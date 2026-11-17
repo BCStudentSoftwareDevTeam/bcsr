@@ -87,6 +87,9 @@ def courses(term = 0):
 @app.route("/course-search", methods=["GET"])
 def course_search():
 
+
+  auth = AuthorizedUser()
+
   prefix  = request.args.get("prefix", "").strip()
   number  = request.args.get("number", "").strip()
   name    = request.args.get("name", "").strip()
@@ -118,4 +121,5 @@ def course_search():
                     flash("No courses found. Older courses may not have a name on record, try searching by prefix and number.")
                 else:
                     flash("No courses found for that search. Please try a different prefix, number, or name.")
-  return render_template("search.html", results=results, cfg=cfg)
+  return render_template("search.html", results=results, cfg=cfg, isAdmin=auth.isAdmin)
+ 

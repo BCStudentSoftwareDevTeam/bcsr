@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/static/css/courses_form.css">
         {% if course.CID.filePath == None %}
-		 <tr style="height: 160px">
+		 <tr>
 	{% else %}
 		<tr>
 	{% endif %}
@@ -21,14 +21,16 @@
                 </td>
                 <td>
                   {% if course.CID.filePath == None %}
-                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}" style="height:150px">
-                     </form>
+                  {# No update on interaction until after submit. need to changing styling upon interaction #}
+                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}">
+                      
+                    </form>
                   {% else %}
                     <!-- Buttons -->
 
                     <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
                     <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
-                      <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
+                      <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(document.getElementById('form_delete_{{course.CID.CID}}'))" value="Delete">
                     </form>
                   {% endif %}
                 </td>
@@ -38,5 +40,11 @@
                   {% else %}
                     <p>{{course.CID.lastModified}}</p>
                   {% endif %}
+                </td>
+                <td>
+                  {{course.CID.PID.DID.name}}
+                </td>
+                <td>
+                  {{course.CID.PID.name}}
                 </td>
               </tr>
