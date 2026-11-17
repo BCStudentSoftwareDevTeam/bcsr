@@ -45,6 +45,10 @@
     color: #2f5b1a;
 }
 
+.summary-label {
+    color: #000;
+}
+
 .creating-term-name {
     display: block;
     font-size: 26px;

@@ -70,12 +70,11 @@
             <table class="table import-table">
               <caption class="sr-only">{{department.name}} courses found in {{pending.filename}}</caption>
               <colgroup>
-                <col style="width: 5%"><col style="width: 8%"><col style="width: 8%"><col style="width: 9%"><col style="width: 9%">
-                <col style="width: 22%"><col style="width: 14%"><col style="width: 15%"><col style="width: 10%">
+                <col style="width: 8%"><col style="width: 8%"><col style="width: 9%"><col style="width: 9%">
+                <col style="width: 25%"><col style="width: 16%"><col style="width: 15%"><col style="width: 10%">
               </colgroup>
               <thead>
                 <tr>
-                  <th scope="col">Row</th>
                   <th scope="col">CRN</th>
                   <th scope="col">Subject</th>
                   <th scope="col">Course Number</th>
@@ -89,7 +88,6 @@
               <tbody>
                 {% for course in department.courses %}
                   <tr class="{{'row-' ~ course.status if course.status != 'ok' else ''}}">
-                    <td>{{course.row}}</td>
                     <td>{{course.crn or '—'}}</td>
                     <td>{{course.prefix or '—'}}</td>
                     <td>{{course.number or '—'}}</td>
@@ -121,7 +119,7 @@
                   </tr>
                   {% if course.status != 'ok' %}
                     <tr class="row-{{course.status}} row-reason">
-                      <td colspan="9">
+                      <td colspan="8">
                         {% if course.status == 'duplicate' %}
                           <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
                           <strong>Duplicate:</strong> {{course.reason}}. This row will be skipped.
@@ -134,7 +132,7 @@
                   {% endif %}
                   {% for warning in course.warnings %}
                     <tr class="row-reason row-note">
-                      <td colspan="9"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Row {{course.row}}: {{warning}}.</td>
+                      <td colspan="8"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> {{warning}}.</td>
                     </tr>
                   {% endfor %}
                 {% endfor %}
