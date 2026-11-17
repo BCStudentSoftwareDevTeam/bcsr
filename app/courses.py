@@ -92,29 +92,29 @@ def course_search():
   name    = request.args.get("name", "").strip()
   results = None
   if not prefix and not number and not name:
-      flash("Please enter a course prefix and number or name(e.g. CSC 226).")
-  elif not (prefix and number) and not name:
-      if not prefix:
-          flash("Please enter a course prefix (e.g. CSC).")
-      else:
-          flash("Please enter a course number (e.g. 226).")
+      flash("Please enter a course prefix and number (e.g. CSC 226), or a course name.")
+  elif not name and not prefix:
+      flash("Please enter a course prefix (e.g. CSC).")
+  elif not name and not number:
+      flash("Please enter a course number (e.g. 226).")
   else:
-      results = (UsersCourses
-                  .select(UsersCourses, Courses, Semesters, Users)
-                  .join(Courses)
-                  .join(Semesters)
-                  .switch(UsersCourses)
-                  .join(Users)
-                  .order_by(Semesters.SEID.desc()))
-      if prefix and number:
-          results = results.where(
-                          (Courses.prefix == prefix) &
-                          (Courses.number == number)
-                      )
-      else:
-          results = results.where(Courses.name ** ("%" + name + "%"))
+      query = (UsersCourses
+               .select(UsersCourses, Courses, Semesters, Users)
+               .join(Courses)
+               .join(Semesters)
+               .switch(UsersCourses)
+               .join(Users)
+               .order_by(Semesters.SEID.desc()))
+      if prefix:
+          query = query.where(Courses.prefix == prefix)
+      if number:
+          query = query.where(Courses.number == number)
+      if name:
+          escaped = name.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+          query = query.where(Courses.name ** ("%" + escaped + "%"))
+      results = list(query)
 
-  if results is not None and name and not prefix and not results.count():
-      flash("Older courses may not have a name on record, try searching by prefix and number.")
+      if name and not results:
+          flash("Older courses may not have a name on record — try searching by prefix and number.")
 
   return render_template("search.html", results=results, cfg=cfg)
