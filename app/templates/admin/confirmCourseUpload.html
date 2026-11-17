@@ -16,6 +16,14 @@
 <p class="import-intro">Review the spreadsheet information before adding courses to the selected semester.
   Nothing has been saved yet.</p>
 
+{% if summary.issues %}
+  <div class="alert alert-warning import-alert" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <strong>{{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.</strong>
+    Fix {{'it' if summary.issues == 1 else 'them'}} in the file and upload it again to include {{'it' if summary.issues == 1 else 'them'}}.
+  </div>
+{% endif %}
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Upload Summary</h2>
@@ -47,13 +55,6 @@
     <h2 class="panel-title">Course List Preview</h2>
   </div>
   <div class="panel-body">
-    {% if summary.issues %}
-      <div class="alert alert-danger import-alert" role="alert">
-        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-        <strong>{{summary.issues}} {{'row has a problem and' if summary.issues == 1 else 'rows have problems and'}}
-          will be skipped unless you fix the file and upload it again.</strong>
-      </div>
-    {% endif %}
     <div class="panel-group" id="departments">
       {% for department in departments %}
         <div class="panel panel-default">
@@ -142,15 +143,33 @@
 
 <div class="panel panel-default">
   <div class="panel-body import-actions">
-    <a href="/admin/semesterManagement" class="btn btn-default">
-      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to Upload
-    </a>
-    <form action="/admin/semesterManagement/confirm" method="post" class="import-confirm">
+    <a href="/admin/semesterManagement" class="btn btn-default">Cancel</a>
+    {# Disabling the submit button stops a double click from importing twice #}
+    <form action="/admin/semesterManagement/confirm" method="post" class="import-confirm"
+          onsubmit="this.querySelector('button[type=submit]').disabled = true;">
       {% if summary.importable %}
         {% if summary.issues %}
-          <span class="import-note">{{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.</span>
+          <span class="import-note text-warning-dark"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> {{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.</span>
         {% endif %}
-        <button type="submit" class="btn btn-success">Confirm &amp; Submit</button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirmModal">Confirm &amp; Submit</button>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalTitle" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="confirmModalTitle">Create {{pending.termName}} {{pending.year}}?</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{summary.importable}} {{'course' if summary.importable == 1 else 'courses'}} will be imported.
+                  {% if summary.issues %}{{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.{% endif %}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Go back</button>
+                <button type="submit" class="btn btn-success">Yes, create term</button>
+              </div>
+            </div>
+          </div>
+        </div>
       {% else %}
         <span class="import-note text-danger">No courses can be imported from this file.</span>
         <button type="submit" class="btn btn-success" disabled>Confirm &amp; Submit</button>

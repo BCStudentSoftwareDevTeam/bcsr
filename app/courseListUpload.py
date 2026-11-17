@@ -108,7 +108,7 @@ def confirmCourseUpload():
       log.writer(result['logType'], page, result['message'])
       flash(result['message'])
       if summary['issues']:
-        flash("{0} {1} skipped. See Skipped & Failed Rows below.".format(summary['issues'], 'row was' if summary['issues'] == 1 else 'rows were'), "warning")
+        flash("Course list uploaded with issues: {0} {1} skipped. See Skipped & Failed Rows below.".format(summary['issues'], 'row was' if summary['issues'] == 1 else 'rows were'), "warning")
       return redirect(url_for("courseImportResults"))
 
     return render_template('admin/confirmCourseUpload.html',
