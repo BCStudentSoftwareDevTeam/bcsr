@@ -144,6 +144,9 @@ def courseImportResults():
                             pending = pending,
                             summary = summary,
                             issues  = issues,
+                            departments = courseImport.groupByDepartment(issues,
+                                                                         courseImport.getPrefixMap(),
+                                                                         courseImport.getProgramNames()),
                             )
   else:
     abort(403)

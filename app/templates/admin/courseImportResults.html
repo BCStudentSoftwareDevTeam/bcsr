@@ -78,40 +78,57 @@
       <h2 class="panel-title">Skipped &amp; Failed Rows</h2>
     </div>
     <div class="panel-body">
-      <div class="table-responsive">
-        <table class="table import-table">
-          <caption class="sr-only">Rows from {{pending.filename}} that were not imported</caption>
-          <thead>
-            <tr>
-              <th scope="col">Row</th>
-              <th scope="col">CRN</th>
-              <th scope="col">Subject</th>
-              <th scope="col">Course Number</th>
-              <th scope="col">Title</th>
-              <th scope="col">Result</th>
-              <th scope="col">Reason</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for course in issues %}
-              <tr class="row-{{course.status}}">
-                <td>{{course.row}}</td>
-                <td>{{course.crn or '—'}}</td>
-                <td>{{course.prefix or '—'}}</td>
-                <td>{{course.number or '—'}}</td>
-                <td>{{course.title or '—'}}</td>
-                <td>
-                  {% if course.status == 'duplicate' %}
-                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <strong>Skipped (duplicate)</strong>
-                  {% else %}
-                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Failed (error)</strong>
-                  {% endif %}
-                </td>
-                <td>{{course.reason}}.</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+      <div class="panel-group" id="departments">
+        {% for department in departments %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title department-title">
+                <a role="button" data-toggle="collapse" data-parent="#departments" href="#department{{loop.index}}"
+                   aria-expanded="false" aria-controls="department{{loop.index}}">{{department.name}}</a>
+                <span class="department-count">{{department.courses|length}} {{'row' if department.courses|length == 1 else 'rows'}} skipped</span>
+              </h3>
+            </div>
+            <div id="department{{loop.index}}" class="panel-collapse collapse">
+              <table class="table import-table">
+                <caption class="sr-only">{{department.name}} rows from {{pending.filename}} that were not imported</caption>
+                <colgroup>
+                  <col style="width: 6%"><col style="width: 9%"><col style="width: 9%"><col style="width: 10%">
+                  <col style="width: 24%"><col style="width: 14%"><col style="width: 28%">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">Row</th>
+                    <th scope="col">CRN</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Course Number</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Result</th>
+                    <th scope="col">Reason</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for course in department.courses %}
+                    <tr class="row-{{course.status}}">
+                      <td>{{course.row}}</td>
+                      <td>{{course.crn or '—'}}</td>
+                      <td>{{course.prefix or '—'}}</td>
+                      <td>{{course.number or '—'}}</td>
+                      <td>{{course.title or '—'}}</td>
+                      <td>
+                        {% if course.status == 'duplicate' %}
+                          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <strong>Skipped (duplicate)</strong>
+                        {% else %}
+                          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Failed (error)</strong>
+                        {% endif %}
+                      </td>
+                      <td>{{course.reason}}.</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
