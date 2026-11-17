@@ -113,8 +113,9 @@ def course_search():
           escaped = name.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
           query = query.where(Courses.name ** ("%" + escaped + "%"))
       results = list(query)
-
-      if name and not results:
-          flash("Older courses may not have a name on record — try searching by prefix and number.")
-
+      if not results:
+                if name and not prefix and not number:
+                    flash("No courses found. Older courses may not have a name on record — try searching by prefix and number.")
+                else:
+                    flash("No courses found for that search. Please try a different prefix, number, or name.")
   return render_template("search.html", results=results, cfg=cfg)
