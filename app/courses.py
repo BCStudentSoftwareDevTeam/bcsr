@@ -115,7 +115,7 @@ def course_search():
       results = list(query)
       if not results:
                 if name and not prefix and not number:
-                    flash("No courses found. Older courses may not have a name on record — try searching by prefix and number.")
+                    flash("No courses found. Older courses may not have a name on record, try searching by prefix and number.")
                 else:
                     flash("No courses found for that search. Please try a different prefix, number, or name.")
   return render_template("search.html", results=results, cfg=cfg)
