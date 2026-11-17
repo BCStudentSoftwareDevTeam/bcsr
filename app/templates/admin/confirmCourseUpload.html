@@ -88,7 +88,15 @@
               <tbody>
                 {% for course in department.courses %}
                   <tr class="{{'row-' ~ course.status if course.status != 'ok' else ''}}">
-                    <td>{{course.crn or '—'}}</td>
+                    <td>
+                      {% if course.status != 'ok' %}
+                        {% set reasonText = (course.reason ~ '. This row will be skipped.') if course.status == 'duplicate' else (course.reason ~ '. This row will not be imported.') %}
+                        <span class="reason-icon glyphicon {{'glyphicon-warning-sign' if course.status == 'duplicate' else 'glyphicon-remove-sign'}}"
+                              tabindex="0" data-toggle="tooltip" data-placement="right" title="{{reasonText}}"></span>
+                        <span class="sr-only">{{'Duplicate' if course.status == 'duplicate' else 'Error'}}: {{reasonText}}</span>
+                      {% endif %}
+                      {{course.crn or '—'}}
+                    </td>
                     <td>{{course.prefix or '—'}}</td>
                     <td>{{course.number or '—'}}</td>
                     <td>{{course.section or '—'}}</td>
@@ -117,19 +125,6 @@
                       {% endfor %}
                     </td>
                   </tr>
-                  {% if course.status != 'ok' %}
-                    <tr class="row-{{course.status}} row-reason">
-                      <td colspan="8">
-                        {% if course.status == 'duplicate' %}
-                          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-                          <strong>Duplicate:</strong> {{course.reason}}. This row will be skipped.
-                        {% else %}
-                          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                          <strong>Error:</strong> {{course.reason}}. This row will not be imported.
-                        {% endif %}
-                      </td>
-                    </tr>
-                  {% endif %}
                   {% for warning in course.warnings %}
                     <tr class="row-reason row-note">
                       <td colspan="8"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> {{warning}}.</td>

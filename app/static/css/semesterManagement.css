@@ -112,6 +112,11 @@
     word-wrap: break-word;
 }
 
+.reason-icon {
+    margin-right: 6px;
+    cursor: help;
+}
+
 /* Headers wrap between words, never inside one */
 .import-table th {
     word-wrap: normal;

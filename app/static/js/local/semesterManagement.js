@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+// Reasons for skipped rows show when the icon is hovered or focused
+$(function() {
+  $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+});
+
 // Shows the admin which term they are about to create
 $(function() {
   var banner = $('#creatingTermName');
