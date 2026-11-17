@@ -142,7 +142,7 @@
 
 <div class="panel panel-default">
   <div class="panel-body import-actions">
-    <a href="/admin/semesterManagement" class="btn btn-default btn-lg">
+    <a href="/admin/semesterManagement" class="btn btn-default">
       <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back to Upload
     </a>
     <form action="/admin/semesterManagement/confirm" method="post" class="import-confirm">
@@ -150,10 +150,10 @@
         {% if summary.issues %}
           <span class="import-note">{{summary.issues}} {{'row' if summary.issues == 1 else 'rows'}} will be skipped.</span>
         {% endif %}
-        <button type="submit" class="btn btn-success btn-lg">Confirm &amp; Submit</button>
+        <button type="submit" class="btn btn-success">Confirm &amp; Submit</button>
       {% else %}
         <span class="import-note text-danger">No courses can be imported from this file.</span>
-        <button type="submit" class="btn btn-success btn-lg" disabled>Confirm &amp; Submit</button>
+        <button type="submit" class="btn btn-success" disabled>Confirm &amp; Submit</button>
       {% endif %}
     </form>
   </div>
