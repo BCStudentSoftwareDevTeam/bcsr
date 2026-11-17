@@ -17,9 +17,7 @@
 
 <div class="panel panel-default">
   <div class="panel-body" role="status">
-    <h2 class="results-title">
-      {% if summary.issues %}Course List Uploaded With Issues{% else %}Course List Uploaded Successfully!{% endif %}
-    </h2>
+    {% if not summary.issues %}<h2 class="results-title">Course List Uploaded Successfully!</h2>{% endif %}
     <p>{{summary.imported}} {{'course was' if summary.imported == 1 else 'courses were'}} imported into {{pending.termName}} {{pending.year}}.</p>
     <p class="text-muted">File: {{pending.filename}}</p>
   </div>

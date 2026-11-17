@@ -107,6 +107,8 @@ def confirmCourseUpload():
       #The same log entry and message the Add Semester route has always produced
       log.writer(result['logType'], page, result['message'])
       flash(result['message'])
+      if summary['issues']:
+        flash("{0} {1} skipped. See Skipped & Failed Rows below.".format(summary['issues'], 'row was' if summary['issues'] == 1 else 'rows were'), "warning")
       return redirect(url_for("courseImportResults"))
 
     return render_template('admin/confirmCourseUpload.html',
