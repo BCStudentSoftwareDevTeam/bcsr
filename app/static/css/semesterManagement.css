@@ -112,6 +112,11 @@
     word-wrap: break-word;
 }
 
+/* Headers wrap between words, never inside one */
+.import-table th {
+    word-wrap: normal;
+}
+
 .import-actions {
     display: flex;
     flex-wrap: wrap;
