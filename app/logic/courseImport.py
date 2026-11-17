@@ -37,14 +37,14 @@ class CourseImportError(Exception):
   shown as is.'''
   pass
 
-def normalize_header(header):
+def normalizeHeader(header):
   '''Purpose: Lowercases a column header and keeps only letters and numbers,
   so 'Course Number' and 'CRSE_NUMBER' can be compared.
   @param {string} header
   @return {string}'''
   return re.sub(r'[^a-z0-9]', '', str(header).lower())
 
-def clean_cell(value):
+def cleanCell(value):
   '''Purpose: Turns any cell value into a stripped string. Excel stores
   numbers as floats, so 101.0 becomes '101' and not '101.0'.
   @param value - a cell value of any type
@@ -55,7 +55,7 @@ def clean_cell(value):
     return str(int(value))
   return str(value).strip()
 
-def build_column_map(headers):
+def buildColumnMap(headers):
   '''Purpose: Finds which column of the file holds each field, using the names
   listed in config.yaml. Fields the file does not have are left out.
   @param {list} headers - the header row
@@ -63,7 +63,7 @@ def build_column_map(headers):
           {last, first, username} column indexes (None when missing)'''
   index = {}
   for position, header in enumerate(headers):
-    index.setdefault(normalize_header(header), position)
+    index.setdefault(normalizeHeader(header), position)
 
   def find(names):
     for name in names:
@@ -81,11 +81,11 @@ def build_column_map(headers):
     columns['instructors'].append({key: find(names) for key, names in slot.items()})
   return columns
 
-def check_required_columns(columns):
+def checkRequiredColumns(columns):
   '''Purpose: Stops the upload when the file is missing columns we cannot
   import without. The raw Banner export only has instructor IDs and no
   usernames, so a missing username column gets its own message.
-  @param {dict} columns - from build_column_map
+  @param {dict} columns - from buildColumnMap
   @raise CourseImportError'''
   missing = [name for field, name in REQUIRED_COLUMNS.items() if field not in columns]
   if missing:
@@ -94,10 +94,10 @@ def check_required_columns(columns):
     raise CourseImportError("The file has no 'Primary Instructor Username' column. "
                             "Instructor usernames are needed to link courses to instructors.")
 
-def read_csv_rows(file_obj):
+def readCsvRows(fileObj):
   '''Purpose: Reads every row of a csv file as a list of cells. Files saved
   by Excel are not always utf-8, so latin-1 is the fallback.'''
-  data = file_obj.read()
+  data = fileObj.read()
   if isinstance(data, bytes):
     try:
       data = data.decode('utf-8-sig')
@@ -105,21 +105,21 @@ def read_csv_rows(file_obj):
       data = data.decode('latin-1')
   return [row for row in csv.reader(io.StringIO(data))]
 
-def read_xlsx_rows(file_obj):
+def readXlsxRows(fileObj):
   '''Purpose: Reads every row of the first sheet of an Excel workbook as a
   list of cells. Formulas are read as their last saved value.'''
   from openpyxl import load_workbook
   try:
-    workbook = load_workbook(file_obj, read_only=True, data_only=True)
+    workbook = load_workbook(fileObj, read_only=True, data_only=True)
   except Exception:
     raise CourseImportError("The file could not be read as an Excel workbook.")
   rows = [list(row) for row in workbook.worksheets[0].iter_rows(values_only=True)]
   workbook.close()
   return rows
 
-def parse_course_file(file_obj, filename):
+def parseCourseFile(fileObj, filename):
   '''Purpose: Reads a .xlsx or .csv file into a list of courses.
-  @param file_obj - a file-like object (an upload or an open file)
+  @param fileObj - a file-like object (an upload or an open file)
   @param {string} filename - used to tell the file type
   @return {list} of {row: spreadsheet row number, crn, prefix, number, section,
           title, crosslist, instructors: [{username, first, last}, ...]}.
@@ -131,23 +131,23 @@ def parse_course_file(file_obj, filename):
                             extension or filename,
                             " or ".join("." + ext for ext in cfg['courseImport']['allowedExtension'])))
 
-  raw = read_xlsx_rows(file_obj) if extension == 'xlsx' else read_csv_rows(file_obj)
+  raw = readXlsxRows(fileObj) if extension == 'xlsx' else readCsvRows(fileObj)
   # The header is the first row that has anything in it
-  start = next((i for i, row in enumerate(raw) if any(clean_cell(c) for c in row)), None)
+  start = next((i for i, row in enumerate(raw) if any(cleanCell(c) for c in row)), None)
   if start is None:
     raise CourseImportError("The file is empty.")
 
-  columns = build_column_map(raw[start])
-  check_required_columns(columns)
+  columns = buildColumnMap(raw[start])
+  checkRequiredColumns(columns)
 
   def cell(row, position):
     if position is None or position >= len(row):
       return ''
-    return clean_cell(row[position])
+    return cleanCell(row[position])
 
   courses = []
   for rowNumber, row in enumerate(raw[start + 1:], start=start + 2):
-    if not any(clean_cell(c) for c in row):
+    if not any(cleanCell(c) for c in row):
       continue
     instructors = []
     for slot in columns['instructors']:
@@ -166,12 +166,12 @@ def parse_course_file(file_obj, filename):
     raise CourseImportError("The file has a header row but no courses.")
   return courses
 
-def course_key(course):
+def courseKey(course):
   '''Purpose: What makes a course unique within a term.
   @return {tuple} (prefix, number, section)'''
   return (course['prefix'], course['number'], course['section'])
 
-def validate_rows(courses, prefix_map, existing_keys=()):
+def validateRows(courses, prefixMap, existingKeys=()):
   '''Purpose: Checks every course and sets its status and reason. Only the
   rows with the status OK should be imported. A row is skipped when
     - Subject, Course Number or Sequence is blank (error)
@@ -182,14 +182,14 @@ def validate_rows(courses, prefix_map, existing_keys=()):
     - the course is already in the term (duplicate)
     - no program is known for its subject (error)
     - the primary instructor is missing a last name, first name or username (error)
-  @param {list} courses - from parse_course_file
-  @param {dict} prefix_map - prefix => PID for the programs that exist
-  @param existing_keys - course_key of the courses already in the term
+  @param {list} courses - from parseCourseFile
+  @param {dict} prefixMap - prefix => PID for the programs that exist
+  @param existingKeys - courseKey of the courses already in the term
   @return {list} the same courses, each now with status, reason, warnings,
           missing (the primary instructor fields that are blank) and listed
           (the instructors to show in the preview)'''
-  existing = set(existing_keys)
-  seen     = {}   # course_key => the first row that had it
+  existing = set(existingKeys)
+  seen     = {}   # courseKey => the first row that had it
   seenCrn  = {}   # crn => (row, prefix, number) of the first row that had it
   for course in courses:
     course['status']   = OK
@@ -210,7 +210,7 @@ def validate_rows(courses, prefix_map, existing_keys=()):
     course['instructors'] = [i for i in course['instructors'] if i['username']]
 
     blank = [name for field, name in REQUIRED_COLUMNS.items() if not course[field]]
-    key   = course_key(course)
+    key   = courseKey(course)
     if blank:
       course['status'], course['reason'] = ERROR, "Missing {0}".format(", ".join(blank))
     elif key in existing:
@@ -221,7 +221,7 @@ def validate_rows(courses, prefix_map, existing_keys=()):
                                                        course['crn'], prefix, number, row)
     elif not course['crn'] and key in seen:
       course['status'], course['reason'] = DUPLICATE, "{0} {1} {2} is already listed in row {3}".format(*key, seen[key])
-    elif course['prefix'] not in prefix_map:
+    elif course['prefix'] not in prefixMap:
       course['status'], course['reason'] = ERROR, "No program found for subject {0}".format(course['prefix'])
     elif course['missing']:
       names = {'last': 'Instructor Last', 'first': 'Instructor First', 'username': 'Username'}
@@ -235,7 +235,7 @@ def validate_rows(courses, prefix_map, existing_keys=()):
 
 def summarize(courses):
   '''Purpose: Counts the rows for the confirm and results pages.
-  @param {list} courses - from validate_rows
+  @param {list} courses - from validateRows
   @return {dict} total, importable, duplicates, errors, issues'''
   counts = {OK: 0, DUPLICATE: 0, ERROR: 0}
   for course in courses:
@@ -254,57 +254,57 @@ def summarize(courses):
 # the random token that names the file.
 PENDING_MAX_AGE = 60 * 60 * 24   # seconds; older files are deleted
 
-def get_pending_folder():
+def getPendingFolder():
   folder = os.path.join(tempfile.gettempdir(), 'bcsr_course_import')
   os.makedirs(folder, exist_ok=True)
   return folder
 
-def delete_old_pending():
+def deleteOldPending():
   '''Purpose: Removes uploads that were never confirmed.'''
-  folder = get_pending_folder()
+  folder = getPendingFolder()
   for name in os.listdir(folder):
     path = os.path.join(folder, name)
     if time.time() - os.path.getmtime(path) > PENDING_MAX_AGE:
       os.remove(path)
 
-def get_pending_path(token):
+def getPendingPath(token):
   '''Purpose: Builds the path for a token. A token that is not 32 hex digits
   is refused, so a made up value can never point outside the folder.
   @return {string} path, or None'''
   if not isinstance(token, str) or not re.fullmatch(r'[0-9a-f]{32}', token):
     return None
-  return os.path.join(get_pending_folder(), token + '.json')
+  return os.path.join(getPendingFolder(), token + '.json')
 
-def save_pending(data, token=None):
+def savePending(data, token=None):
   '''Purpose: Saves the data for an upload and returns its token. Pass an
   existing token to replace what is stored under it.
   @param {dict} data - must be JSON safe
   @return {string} token'''
   if token is None:
-    delete_old_pending()
+    deleteOldPending()
     token = uuid.uuid4().hex
-  with open(get_pending_path(token), 'w') as pendingFile:
+  with open(getPendingPath(token), 'w') as pendingFile:
     json.dump(data, pendingFile)
   return token
 
-def load_pending(token):
-  '''Purpose: Gets what save_pending stored.
+def loadPending(token):
+  '''Purpose: Gets what savePending stored.
   @return {dict} the data, or None if the token is unknown or has expired'''
-  path = get_pending_path(token)
+  path = getPendingPath(token)
   if path is None or not os.path.exists(path):
     return None
   with open(path) as pendingFile:
     return json.load(pendingFile)
 
-def discard_pending(token):
-  path = get_pending_path(token)
+def discardPending(token):
+  path = getPendingPath(token)
   if path is not None and os.path.exists(path):
     os.remove(path)
 
 # ------------------------------------------------------------------------------
 # Database
 # ------------------------------------------------------------------------------
-def get_prefix_map():
+def getPrefixMap():
   '''Purpose: Maps each course prefix (e.g. CSC) to the program that already
   teaches it, based on the courses in the database. A prefix that has never
   been used has no program, so its rows are reported as errors.
@@ -313,11 +313,11 @@ def get_prefix_map():
   pairs = Courses.select(Courses.prefix, Courses.PID).distinct().tuples()
   return {str(prefix).strip().upper(): pid for prefix, pid in pairs}
 
-def semester_exists(seid):
+def semesterExists(seid):
   from app.models import Semesters
   return Semesters.select().where(Semesters.SEID == int(seid)).exists()
 
-def import_term(term, year, courses, prefixMap):
+def importTerm(term, year, courses, prefixMap):
   '''Purpose: Creates the semester and imports every course whose status is
   OK. The semester is created with GetSemesterManagement.add_semester and the
   courses with databaseInterface.insert_course and insert_course_user, the
@@ -327,8 +327,8 @@ def import_term(term, year, courses, prefixMap):
   is rolled back on its own, marked as an error, and the rest continue.
   @param {string} term - the term key from config.yaml (11, 12, 13)
   @param {string} year
-  @param {list} courses - from validate_rows
-  @param {dict} prefixMap - from get_prefix_map
+  @param {list} courses - from validateRows
+  @param {dict} prefixMap - from getPrefixMap
   @return {dict} imported (count), courses (with their final status), and the
           logType and message add_semester produced
   @raise CourseImportError when the semester cannot be created'''

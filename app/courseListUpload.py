@@ -15,11 +15,11 @@ from app.logic import databaseInterface
 #The session only holds the token of the upload that is being reviewed
 SESSION_KEY = "courseImportToken"
 
-def get_pending():
+def getPending():
   '''Purpose: Gets the upload the admin is working on, or None if there is
   not one or it has expired.'''
   token   = session.get(SESSION_KEY)
-  pending = courseImport.load_pending(token)
+  pending = courseImport.loadPending(token)
   return token, pending
 
 @app.route("/admin/semesterManagement/upload", methods=["POST"])
@@ -41,7 +41,7 @@ def uploadCourseList():
 
     termName = cfg['termInfo'][int(term)]
     seid     = semester.create_seid({'year': year, 'term': term})
-    if courseImport.semester_exists(seid):
+    if courseImport.semesterExists(seid):
       flash("Semester: {0} {1} already exists in the database.".format(termName, year), "danger")
       return redirect(url_for("semesterManagement"))
 
@@ -53,16 +53,16 @@ def uploadCourseList():
       return redirect(url_for("semesterManagement"))
 
     try:
-      courses = courseImport.parse_course_file(file, file.filename)
+      courses = courseImport.parseCourseFile(file, file.filename)
     except courseImport.CourseImportError as e:
       log.writer("ERROR", page, "Course list rejected ({0}): {1}".format(file.filename, e))
       flash(str(e), "danger")
       return redirect(url_for("semesterManagement"))
 
-    courseImport.validate_rows(courses, courseImport.get_prefix_map())
+    courseImport.validateRows(courses, courseImport.getPrefixMap())
     #A new upload replaces the one that was being reviewed
-    courseImport.discard_pending(session.get(SESSION_KEY))
-    session[SESSION_KEY] = courseImport.save_pending({'stage':    'review',
+    courseImport.discardPending(session.get(SESSION_KEY))
+    session[SESSION_KEY] = courseImport.savePending({'stage':    'review',
                                                       'seid':     seid,
                                                       'term':     term,
                                                       'termName': termName,
@@ -78,7 +78,7 @@ def confirmCourseUpload():
   page = "/" + request.url.split("/")[-1]
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
-    token, pending = get_pending()
+    token, pending = getPending()
     if pending is None:
       flash("Your upload has expired. Please upload the course list again.", "danger")
       return redirect(url_for("semesterManagement"))
@@ -91,19 +91,19 @@ def confirmCourseUpload():
         flash("There are no courses that can be imported.", "danger")
         return redirect(url_for("confirmCourseUpload"))
       #Someone else may have created the term since the file was uploaded
-      if courseImport.semester_exists(pending['seid']):
+      if courseImport.semesterExists(pending['seid']):
         flash("Semester: {0} {1} already exists in the database.".format(pending['termName'], pending['year']), "danger")
         return redirect(url_for("semesterManagement"))
       try:
-        result = courseImport.import_term(pending['term'], pending['year'],
-                                          pending['courses'], courseImport.get_prefix_map())
+        result = courseImport.importTerm(pending['term'], pending['year'],
+                                          pending['courses'], courseImport.getPrefixMap())
       except Exception as e:
         log.writer("ERROR", page, "Creating {0} {1} failed: {2}".format(pending['termName'], pending['year'], e))
         flash("An error occurred while creating {0} {1}. Nothing was saved.".format(pending['termName'], pending['year']), "danger")
         return redirect(url_for("confirmCourseUpload"))
       pending['courses'] = result['courses']
       pending['stage']   = 'imported'
-      courseImport.save_pending(pending, token)
+      courseImport.savePending(pending, token)
       #The same log entry and message the Add Semester route has always produced
       log.writer(result['logType'], page, result['message'])
       flash(result['message'])
@@ -124,7 +124,7 @@ def confirmCourseUpload():
 def courseImportResults():
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
-    token, pending = get_pending()
+    token, pending = getPending()
     if pending is None:
       return redirect(url_for("semesterManagement"))
     if pending['stage'] != 'imported':
