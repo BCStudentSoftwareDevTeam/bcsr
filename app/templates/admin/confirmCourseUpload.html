@@ -22,20 +22,17 @@
   </div>
   <div class="panel-body">
     <div class="row summary-row">
-      <div class="col-md-5 col-sm-12">
-        <span class="summary-label">File</span>
+      <div class="col-md-4 col-sm-12">
+        <span class="summary-label">Uploaded File</span>
         <span class="summary-value">{{pending.filename}}</span>
       </div>
-      <div class="col-md-3 col-sm-6">
-        <div class="term-block">
-          <span class="summary-label">Semester</span>
-          <span class="term-block-name">{{pending.termName}} {{pending.year}}</span>
-          {% if becomesActive %}<span class="term-block-note">Becomes active term</span>{% endif %}
-        </div>
+      <div class="col-md-4 col-sm-6">
+        <span class="summary-label">Semester</span>
+        <span class="summary-value">{{pending.termName}} {{pending.year}}{% if becomesActive %} <span class="summary-aside">(Becomes active term)</span>{% endif %}</span>
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
-        <span class="summary-label">Courses detected</span>
-        <span class="summary-value text-warning-dark">{{summary.total}}</span>
+        <span class="summary-label">Total Courses</span>
+        <span class="summary-value text-success">{{summary.total}}</span>
       </div>
       <div class="col-md-2 col-sm-3 col-xs-6">
         <span class="summary-label">Rows with issues</span>

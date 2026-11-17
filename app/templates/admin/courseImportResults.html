@@ -19,7 +19,7 @@
   <div class="panel-body" role="status">
     {% if not summary.issues %}<h2 class="results-title">Course List Uploaded Successfully!</h2>{% endif %}
     <p>{{summary.imported}} {{'course was' if summary.imported == 1 else 'courses were'}} imported into {{pending.termName}} {{pending.year}}.</p>
-    <p class="text-muted">File: {{pending.filename}}</p>
+    <p class="text-muted">Uploaded File: {{pending.filename}}</p>
   </div>
 </div>
 
@@ -57,7 +57,7 @@
   <table class="table">
     <tbody>
       <tr><th scope="row">Semester</th><td>{{pending.termName}} {{pending.year}}</td></tr>
-      <tr><th scope="row">File Name</th><td>{{pending.filename}}</td></tr>
+      <tr><th scope="row">Uploaded File</th><td>{{pending.filename}}</td></tr>
       <tr>
         <th scope="row">Import Status</th>
         <td>
