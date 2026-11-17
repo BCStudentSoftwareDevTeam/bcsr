@@ -54,68 +54,95 @@
           will be skipped unless you fix the file and upload it again.</strong>
       </div>
     {% endif %}
-    <div class="table-responsive">
-      <table class="table import-table">
-        <caption class="sr-only">Courses found in {{pending.filename}}</caption>
-        <thead>
-          <tr>
-            <th scope="col">Row</th>
-            <th scope="col">CRN</th>
-            <th scope="col">Subject</th>
-            <th scope="col">Course Number</th>
-            <th scope="col">Sequence</th>
-            <th scope="col">Title</th>
-            <th scope="col">CrossList Courses</th>
-            <th scope="col">Instructor Last</th>
-            <th scope="col">Instructor First</th>
-            <th scope="col">Username</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for course in pending.courses %}
-            <tr class="{{'row-' ~ course.status if course.status != 'ok' else ''}}">
-              <td>{{course.row}}</td>
-              <td>{{course.crn or '—'}}</td>
-              <td>{{course.prefix or '—'}}</td>
-              <td>{{course.number or '—'}}</td>
-              <td>{{course.section or '—'}}</td>
-              <td>{{course.title or '—'}}</td>
-              <td>{{course.crosslist or '—'}}</td>
-              {% for field in ['last', 'first', 'username'] %}
-                <td>
-                  {% for instructor in course.listed %}
-                    <div>
-                      {% if field in instructor.missing %}
-                        <strong class="text-danger">Missing</strong>
-                      {% else %}
-                        {{instructor[field] or '—'}}
-                      {% endif %}
-                    </div>
-                  {% endfor %}
-                </td>
-              {% endfor %}
-            </tr>
-            {% if course.status != 'ok' %}
-              <tr class="row-{{course.status}} row-reason">
-                <td colspan="10">
-                  {% if course.status == 'duplicate' %}
-                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
-                    <strong>Duplicate:</strong> {{course.reason}}. This row will be skipped.
-                  {% else %}
-                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                    <strong>Error:</strong> {{course.reason}}. This row will not be imported.
+    <div class="panel-group" id="departments">
+      {% for department in departments %}
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title department-title">
+              <a role="button" data-toggle="collapse" data-parent="#departments" href="#department{{loop.index}}"
+                 aria-expanded="false" aria-controls="department{{loop.index}}">{{department.name}}</a>
+              <span class="department-count">
+                {{department.courses|length}} {{'row' if department.courses|length == 1 else 'rows'}}{% if department.issues %}, <span class="text-danger">{{department.issues}} will be skipped</span>{% endif %}
+              </span>
+            </h3>
+          </div>
+          <div id="department{{loop.index}}" class="panel-collapse collapse">
+            <table class="table import-table">
+              <caption class="sr-only">{{department.name}} courses found in {{pending.filename}}</caption>
+              <colgroup>
+                <col style="width: 5%"><col style="width: 8%"><col style="width: 8%"><col style="width: 9%"><col style="width: 9%">
+                <col style="width: 22%"><col style="width: 14%"><col style="width: 15%"><col style="width: 10%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">Row</th>
+                  <th scope="col">CRN</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Course Number</th>
+                  <th scope="col">Sequence</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">CrossList Courses</th>
+                  <th scope="col">Instructor</th>
+                  <th scope="col">Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in department.courses %}
+                  <tr class="{{'row-' ~ course.status if course.status != 'ok' else ''}}">
+                    <td>{{course.row}}</td>
+                    <td>{{course.crn or '—'}}</td>
+                    <td>{{course.prefix or '—'}}</td>
+                    <td>{{course.number or '—'}}</td>
+                    <td>{{course.section or '—'}}</td>
+                    <td>{{course.title or '—'}}</td>
+                    <td>{{course.crosslist or '—'}}</td>
+                    <td>
+                      {% for instructor in course.listed %}
+                        <div>
+                          {% if 'last' in instructor.missing or 'first' in instructor.missing %}
+                            <strong class="text-danger">Missing</strong>
+                          {% else %}
+                            {{instructor.last}}, {{instructor.first}}
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </td>
+                    <td>
+                      {% for instructor in course.listed %}
+                        <div>
+                          {% if 'username' in instructor.missing %}
+                            <strong class="text-danger">Missing</strong>
+                          {% else %}
+                            {{instructor.username or '—'}}
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+                    </td>
+                  </tr>
+                  {% if course.status != 'ok' %}
+                    <tr class="row-{{course.status}} row-reason">
+                      <td colspan="9">
+                        {% if course.status == 'duplicate' %}
+                          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+                          <strong>Duplicate:</strong> {{course.reason}}. This row will be skipped.
+                        {% else %}
+                          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                          <strong>Error:</strong> {{course.reason}}. This row will not be imported.
+                        {% endif %}
+                      </td>
+                    </tr>
                   {% endif %}
-                </td>
-              </tr>
-            {% endif %}
-            {% for warning in course.warnings %}
-              <tr class="row-reason row-note">
-                <td colspan="10"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Row {{course.row}}: {{warning}}.</td>
-              </tr>
-            {% endfor %}
-          {% endfor %}
-        </tbody>
-      </table>
+                  {% for warning in course.warnings %}
+                    <tr class="row-reason row-note">
+                      <td colspan="9"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Row {{course.row}}: {{warning}}.</td>
+                    </tr>
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </div>

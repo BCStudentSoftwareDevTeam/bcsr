@@ -154,6 +154,14 @@ class ValidateTests(unittest.TestCase):
     result = self.runValidate(course(1, 'CSC', '226', 'A'), course(1, 'CSC', '230', 'A'), course(3, 'XYZ', '1', 'A'))
     self.assertEqual(ci.summarize(result), {'total': 3, 'importable': 1, 'duplicates': 1, 'errors': 1, 'issues': 2})
 
+  def testGroupByDepartment(self):
+    result = self.runValidate(course(1, 'CSC', '226', 'A'), course(2, 'CSC', '230', 'A'), course(3, 'XYZ', '1', 'A'))
+    groups = ci.groupByDepartment(result, {'CSC': 7}, {7: 'Computer Science'})
+    self.assertEqual([group['name'] for group in groups], ['Computer Science', 'XYZ (no program found)'])
+    self.assertEqual([len(group['courses']) for group in groups], [2, 1])
+    self.assertEqual((groups[0]['importable'], groups[0]['issues']), (2, 0))
+    self.assertEqual((groups[1]['importable'], groups[1]['issues']), (0, 1))
+
 
 if __name__ == '__main__':
   unittest.main()

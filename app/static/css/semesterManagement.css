@@ -82,8 +82,30 @@
     font-weight: 400;
 }
 
-.import-table th {
-    white-space: nowrap;
+/* One accordion per department, with the table filling the page width */
+.department-title {
+    font-size: 16px;
+}
+
+.department-title a {
+    display: inline-block;
+    min-width: 40%;
+}
+
+.department-count {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+}
+
+.import-table {
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+
+.import-table th,
+.import-table td {
+    word-wrap: break-word;
 }
 
 .import-actions {

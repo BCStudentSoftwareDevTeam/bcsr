@@ -116,6 +116,9 @@ def confirmCourseUpload():
                             isAdmin       = authorizedUser.isAdmin,
                             pending       = pending,
                             summary       = summary,
+                            departments   = courseImport.groupByDepartment(pending['courses'],
+                                                                           courseImport.getPrefixMap(),
+                                                                           courseImport.getProgramNames()),
                             #The most recent term automatically becomes the active term
                             becomesActive = int(pending['seid']) > databaseInterface.grab_current_semester(),
                             )

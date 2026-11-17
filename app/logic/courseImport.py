@@ -246,6 +246,29 @@ def summarize(courses):
           'errors':     counts[ERROR],
           'issues':     counts[DUPLICATE] + counts[ERROR]}
 
+def groupByDepartment(courses, prefixMap, programNames):
+  '''Purpose: Groups the rows by the department (program) that teaches them so
+  the pages can show one accordion per department. A subject with no program
+  gets its own group named after the subject.
+  @param {list} courses - from validateRows
+  @param {dict} prefixMap - prefix => PID, from getPrefixMap
+  @param {dict} programNames - PID => program name
+  @return {list} dicts of name, courses, importable, issues, sorted by name'''
+  groups = {}
+  for course in courses:
+    pid  = prefixMap.get(course['prefix'].upper())
+    name = programNames[pid] if pid in programNames else "{0} (no program found)".format(course['prefix'] or 'No subject')
+    group = groups.setdefault(name, {'name': name, 'courses': [], 'importable': 0, 'issues': 0})
+    group['courses'].append(course)
+    group['importable' if course['status'] == OK else 'issues'] += 1
+  return sorted(groups.values(), key=lambda group: group['name'].lower())
+
+def getProgramNames():
+  '''Purpose: Gets the name of every program.
+  @return {dict} PID => program name'''
+  from app.models import Programs
+  return {program.PID: program.name for program in Programs.select()}
+
 # ------------------------------------------------------------------------------
 # Holding an upload between pages
 # ------------------------------------------------------------------------------
