@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", function () {
+    $(".semester-download").click(function () {
+        const message = $("<span>Preparing your download...</span>");
+
+        $(this).after(message);
+
+        setTimeout(function () {
+            message.remove();
+        }, 5000);
+    });
+});
+
 // Shows the admin which term they are about to create
 $(function() {
   var banner = $('#creatingTermName');
