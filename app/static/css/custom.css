@@ -77,3 +77,7 @@ a {
     max-height: 300px;
     box-sizing: border-box;
 }
+
+.deadlineDisplay {
+    overflow-wrap: anywhere;
+}
