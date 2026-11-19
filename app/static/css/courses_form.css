@@ -2,18 +2,49 @@
   width: 100%;
 }
 
-/* Keep filenames from widening the course table, including on hover. */
-.dropzone {
-  contain: inline-size;
-  overflow: auto;
-}
-
-.dropzone .dz-preview,
-.dropzone .dz-preview .dz-details {
+.syllabus-upload .dz-preview {
   display: block;
+  min-width: 0;
 }
 
-.dropzone .dz-preview .dz-details .dz-filename {
+.syllabus-upload .dz-preview .dz-details {
+  display: block;
+  text-align: left;
+}
+
+.syllabus-upload .dz-preview .dz-details .dz-filename,
+.syllabus-upload .dz-preview .dz-details .dz-filename:not(:hover) {
   white-space: normal;
   overflow-wrap: anywhere;
+  overflow: visible;
+}
+
+.syllabus-upload .dz-preview .dz-details .dz-filename span,
+.syllabus-upload .dz-preview .dz-details .dz-size span {
+  padding: 0;
+  background: transparent;
+}
+
+.syllabus-upload .dz-preview .dz-details .dz-size {
+  margin: 5px 0;
+}
+
+.syllabus-upload .dz-preview .dz-remove {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.syllabus-upload .dz-preview .dz-progress {
+  display: none;
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 100%;
+  margin: 10px 0;
+  animation: none;
+  background: #eee;
+}
+
+.syllabus-upload .dz-preview.dz-processing:not(.dz-complete) .dz-progress {
+  display: block;
 }

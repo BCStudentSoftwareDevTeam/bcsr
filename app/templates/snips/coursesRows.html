@@ -21,16 +21,18 @@
                 </td>
                 <td>
                   {% if course.CID.filePath == None %}
-                  {# No update on interaction until after submit. need to changing styling upon interaction #}
-                    <form class="dropzone" id="drop" action ="/uploads/{{course.CID.CID}}">
-                      
-                    </form>
+                    <div class="syllabus-upload-container">
+                      <form class="dropzone syllabus-upload" action="/uploads/{{course.CID.CID}}" method="post" enctype="multipart/form-data" style="min-height:150px" aria-label="Upload syllabus for {{course.CID.prefix}}-{{course.CID.number}}-{{course.CID.section}}">
+                      </form>
+                      <p class="syllabus-upload-message help-block" role="status" aria-live="polite">Choose one file, then select Submit syllabus.</p>
+                      <button type="button" class="btn btn-default syllabus-upload-button" disabled>Submit syllabus</button>
+                    </div>
                   {% else %}
                     <!-- Buttons -->
 
                     <!--<button class="delete btn btn-danger" onclick"delete_syllabus({{course}})">Delete</button>-->
                     <form method = "POST" name = "form_delete" id = "form_delete_{{course.CID.CID}}" action = "/delete/{{course.CID.CID}}">
-                      <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(document.getElementById('form_delete_{{course.CID.CID}}'))" value="Delete">
+                      <input id="form_btn" type="button" class="delete_button btn btn-danger" onclick="delete_syllabus(form_delete_{{course.CID.CID}})" value="Delete">
                     </form>
                   {% endif %}
                 </td>

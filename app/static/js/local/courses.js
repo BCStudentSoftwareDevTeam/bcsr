@@ -1,25 +1,100 @@
 /* global Dropzone */
 /* global bootbox  */
-Dropzone.options.drop = {
-    paramName: "file", // The name that will be used to transfer the file
-    maxFilesize: 24, // MB
-    maxFiles: 1,
-    acceptedFiles: ".doc,.docx,.pdf,.txt, .zip",
-    dictDefaultMessage: 
-    'Click to Upload Syllabus<br>' +
-    '<span class="glyphicon glyphicon-upload"></span>',
-    uploadMultiple: false,
-    addRemoveLinks: true,
-    clickable: true,
-    accept: function(file, done) {
-        done();
-        console.log("File uploaded");
-    },
-    init: function() {
-        this.on("success", onSyllabusUploadSuccess)
-        this.on("error", onSyllabusUploadError)
-    }
-};
+Dropzone.autoDiscover = false;
+
+$(function() {
+    $(".syllabus-upload").each(function() {
+        var form = this;
+        var container = $(form).parent();
+        var uploadButton = container.find(".syllabus-upload-button");
+        var message = container.find(".syllabus-upload-message");
+        var dropzone = new Dropzone(form, {
+            paramName: "file",
+            maxFilesize: 24, // MB
+            maxFiles: 1,
+            acceptedFiles: ".doc,.docx,.pdf,.txt,.zip",
+            dictDefaultMessage: "Choose or drop one syllabus file here",
+            dictRemoveFile: "Remove selection",
+            dictMaxFilesExceeded: "Only one syllabus file is allowed. Remove the selected file before choosing another.",
+            uploadMultiple: false,
+            autoProcessQueue: false,
+            addRemoveLinks: true,
+            clickable: true,
+            previewTemplate: '<div class="dz-preview dz-file-preview">' +
+                '<div class="dz-details"><div class="dz-filename"><span data-dz-name></span></div>' +
+                '<div class="dz-size" data-dz-size></div></div>' +
+                '<div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>' +
+                '</div>',
+            init: function() {
+                var uploader = this;
+                var selectionError = "";
+
+                function updateUploadButton() {
+                    uploadButton.prop("disabled", uploader.getQueuedFiles().length !== 1 ||
+                        uploader.getUploadingFiles().length > 0);
+                }
+
+                function updateSelection() {
+                    var submitting = uploader.getUploadingFiles().length > 0;
+                    var guidance = submitting ? "Submitting syllabus..." : uploader.getQueuedFiles().length === 1
+                        ? "Selected — not submitted. You can remove or replace this file before submitting."
+                        : "Choose one file, then select Submit syllabus.";
+                    $(form).attr("aria-busy", submitting ? "true" : "false");
+                    uploadButton.text(submitting ? "Submitting..." : "Submit syllabus");
+                    message.text(selectionError ? selectionError + " " + guidance : guidance);
+                    message.toggleClass("text-danger", !!selectionError);
+                    updateUploadButton();
+                }
+
+                uploader.options.accept = function(file, done) {
+                    // Dropzone queues accepted files during done(). Drag-and-drop
+                    // fires addedfiles before that queue is populated.
+                    done();
+                    updateSelection();
+                };
+
+                uploader.on("addedfile", function() {
+                    selectionError = "";
+                });
+                uploader.on("addedfiles", updateSelection);
+                uploader.on("removedfile", function() {
+                    selectionError = "";
+                    updateSelection();
+                });
+                uploader.on("processing", function() {
+                    uploadButton.prop("disabled", true);
+                    uploadButton.text("Submitting...");
+                    $(form).attr("aria-busy", "true");
+                    $(form).find(".dz-remove").hide();
+                    message.removeClass("text-danger").text("Submitting syllabus...");
+                });
+                uploader.on("error", function(file, error, xhr) {
+                    uploader.removeFile(file);
+                    selectionError = xhr ? "Submission failed. Please select the file and try again." : error;
+                    updateSelection();
+                });
+                uploader.on("success", function(file) {
+                    $(file.previewElement).find(".dz-remove").remove();
+                    uploader.disable();
+                    uploadButton.prop("disabled", true);
+                    uploadButton.text("Submitted");
+                    $(form).attr("aria-busy", "false");
+                    message.removeClass("text-danger").text("Syllabus submitted successfully. Refresh the page to view the updated course.");
+                });
+            }
+        });
+
+        uploadButton.on("click", function() {
+            if (dropzone.getQueuedFiles().length === 1 &&
+                    dropzone.getUploadingFiles().length === 0) {
+                dropzone.processQueue();
+            }
+        });
+        $(form).on("submit", function(event) {
+            event.preventDefault();
+        });
+    });
+});
 
 function delete_syllabus(form_id) {
     swal({
@@ -62,13 +137,4 @@ function showCourses(program) {
 
     $('#coursesIcon-'+ program).toggleClass('glyphicon-plus')
     $('#coursesIcon-'+ program).toggleClass('glyphicon-minus')
-}
-
-function onSyllabusUploadSuccess(file, response) {
-    var course = $(file.previewElement).closest('tr').find('td').eq(1).text().trim();
-    $('.container').prepend('<div class="alert alert-success alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Successfully uploaded syllabus <strong>'+file.name+'</strong> for <strong>'+course+'</strong></div>');
-}
-
-function onSyllabusUploadError(file, response) {
-    $('.container').prepend('<div class="alert alert-danger alert-dismissible fade in" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Failed to upload file <strong>'+file.name+'</strong>, please try a different file type');
 }
