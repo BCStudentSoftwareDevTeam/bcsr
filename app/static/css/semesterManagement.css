@@ -25,3 +25,132 @@
     font-size: 16px;
     font-weight: 400;
 }
+
+.summary-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.create-term-spacer {
+    display: block;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+/* Confirm Upload and Import Results */
+.import-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+.import-intro {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.summary-value {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.summary-aside {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* One accordion per department, with the table filling the page width */
+.department-title {
+    font-size: 16px;
+}
+
+.department-title a {
+    display: inline-block;
+    min-width: 40%;
+}
+
+.department-count {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+}
+
+.import-table {
+    table-layout: fixed;
+    margin-bottom: 0;
+}
+
+.import-table th,
+.import-table td {
+    word-wrap: break-word;
+}
+
+.reason-icon {
+    margin-right: 6px;
+    cursor: help;
+}
+
+/* Headers wrap between words, never inside one */
+.import-table th {
+    word-wrap: normal;
+}
+
+.import-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.import-confirm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.import-note {
+    font-weight: 600;
+}
+
+.results-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+.counter {
+    text-align: center;
+}
+
+.counter-number {
+    display: block;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.counter-label {
+    display: block;
+    color: #555;
+}
+
+/* Rows with issues: amber for duplicates, red for errors. The reason sits on a
+   line under the row, and the words Duplicate and Error say the same thing
+   as the color. */
+.import-table > tbody > tr.row-duplicate > td { background: #fcf3e1; color: #7a4a00; }
+.import-table > tbody > tr.row-error > td     { background: #fbe4e2; color: #8a1c14; }
+.import-table > tbody > tr.row-duplicate > td:first-child { box-shadow: inset 5px 0 0 #b26a00; }
+.import-table > tbody > tr.row-error > td:first-child     { box-shadow: inset 5px 0 0 #b3261e; }
+.import-table > tbody > tr.row-reason > td { border-top: 0; font-weight: 400; }
+.import-table > tbody > tr.row-note > td   { color: #7a4a00; background: transparent; }
+.import-alert { margin-bottom: 15px; }
+.text-warning-dark { color: #a04a00; }
+.summary-row > div { margin-bottom: 8px; }

@@ -1,0 +1,144 @@
+{% set currentPage ="semesterManagement" %}
+{% extends "snips/base.html" %}
+{% block body %}
+{% include "snips/messages.html" %}
+
+{# What happened when the term was created #}
+{# Controller: courseListUpload.py #}
+
+<ol class="breadcrumb">
+  <li>Administration</li>
+  <li><a href="/admin/semesterManagement">Semester Management</a></li>
+  <li class="active" aria-current="page">Import Results</li>
+</ol>
+
+<h1 class="import-heading">Imported Course List</h1>
+<p class="import-intro">Review the outcome of your course list upload.</p>
+
+<div class="panel panel-default">
+  <div class="panel-body" role="status">
+    {% if not summary.issues %}<h2 class="results-title">Course List Uploaded Successfully!</h2>{% endif %}
+    <p>{{summary.imported}} {{'course was' if summary.imported == 1 else 'courses were'}} imported into {{pending.termName}} {{pending.year}}.</p>
+    <span class="summary-label">Uploaded File</span>
+    <span class="summary-value">{{pending.filename}}</span>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="panel panel-default counter">
+      <div class="panel-body">
+        <span class="counter-number text-success">{{summary.imported}}</span>
+        <span class="counter-label">Courses Imported</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default counter">
+      <div class="panel-body">
+        <span class="counter-number">{{summary.duplicates}}</span>
+        <span class="counter-label">Duplicates Skipped</span>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default counter">
+      <div class="panel-body">
+        <span class="counter-number {% if summary.errors %}text-danger{% endif %}">{{summary.errors}}</span>
+        <span class="counter-label">Errors</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Import Summary</h2>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr><th scope="row">Semester</th><td>{{pending.termName}} {{pending.year}}</td></tr>
+      <tr>
+        <th scope="row">Import Status</th>
+        <td>
+          {% if summary.issues %}
+            <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span> Completed with issues
+          {% else %}
+            <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> Successful
+          {% endif %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+{% if issues %}
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Skipped &amp; Failed Rows</h2>
+    </div>
+    <div class="panel-body">
+      <div class="panel-group" id="departments">
+        {% for department in departments %}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title department-title">
+                <a role="button" data-toggle="collapse" data-parent="#departments" href="#department{{loop.index}}"
+                   aria-expanded="false" aria-controls="department{{loop.index}}">{{department.name}}</a>
+                <span class="department-count">{{department.courses|length}} {{'row' if department.courses|length == 1 else 'rows'}} skipped</span>
+              </h3>
+            </div>
+            <div id="department{{loop.index}}" class="panel-collapse collapse">
+              <table class="table import-table">
+                <caption class="sr-only">{{department.name}} rows from {{pending.filename}} that were not imported</caption>
+                <colgroup>
+                  <col style="width: 9%"><col style="width: 11%"><col style="width: 12%">
+                  <col style="width: 25%"><col style="width: 15%"><col style="width: 28%">
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">CRN</th>
+                    <th scope="col">Subject</th>
+                    <th scope="col">Course Number</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Result</th>
+                    <th scope="col">Reason</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for course in department.courses %}
+                    <tr class="row-{{course.status}}">
+                      <td>{{course.crn or '—'}}</td>
+                      <td>{{course.prefix or '—'}}</td>
+                      <td>{{course.number or '—'}}</td>
+                      <td>{{course.title or '—'}}</td>
+                      <td>
+                        {% if course.status == 'duplicate' %}
+                          <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span> <strong>Skipped (duplicate)</strong>
+                        {% else %}
+                          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span> <strong>Failed (error)</strong>
+                        {% endif %}
+                      </td>
+                      <td>{{course.reason}}.</td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="panel panel-default">
+  <div class="panel-body import-actions">
+    <a href="/admin/semesterManagement" class="btn btn-default">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Upload Another File
+    </a>
+    <a href="/courses" class="btn btn-success">View Semester Courses <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a>
+  </div>
+</div>
+
+{% endblock %}

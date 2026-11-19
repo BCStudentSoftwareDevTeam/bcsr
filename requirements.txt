@@ -9,3 +9,4 @@ itsdangerous
 click
 Flask-MySQL
 mysql-connector-python
+openpyxl

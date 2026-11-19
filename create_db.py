@@ -142,3 +142,63 @@ userscourses  = UsersCourses ( username = 'heggens',
 userscourses  = UsersCourses ( username = 'heggens',
                                CID      = 2
                               ).save()
+##############################
+#COURSE LIST UPLOAD TEST DATA#
+##############################
+# The course list upload maps each subject to a program through a course that
+# already uses that subject. These programs, each with one placeholder course
+# in Spring 2017, let Courses.for.BCSR.xlsx import on a fresh database.
+# LES is left out on purpose, so its one row fails and the error display can
+# still be seen.
+testPrograms = {
+  "AFR":  "African and African American Studies",
+  "ANR":  "Agriculture and Natural Resources",
+  "APS":  "Appalachian Studies",
+  "ARH":  "Art History",
+  "ART":  "Art",
+  "AST":  "Asian Studies",
+  "BUS":  "Business",
+  "CFS":  "Child and Family Studies",
+  "CHI":  "Chinese",
+  "CHM":  "Chemistry",
+  "CLS":  "Classics",
+  "COM":  "Communication",
+  "ECO":  "Economics",
+  "EDS":  "Education Studies",
+  "ENG":  "English",
+  "ETAD": "Engineering Technologies and Applied Design",
+  "FRN":  "French",
+  "GEO":  "Geology",
+  "GST":  "General Studies",
+  "GSTR": "General Studies Seminars",
+  "HHP":  "Health and Human Performance",
+  "HIS":  "History",
+  "HLT":  "Health",
+  "JPN":  "Japanese",
+  "L&I":  "Learning and Inquiry",
+  "LAT":  "Latin",
+  "MAT":  "Mathematics",
+  "MUA":  "Applied Music",
+  "MUS":  "Music",
+  "NUR":  "Nursing",
+  "PHI":  "Philosophy",
+  "PHY":  "Physics",
+  "PSC":  "Political Science",
+  "PSJ":  "Peace and Social Justice Studies",
+  "PSY":  "Psychology",
+  "REL":  "Religion",
+  "SENS": "Sustainability and Environmental Studies",
+  "SOC":  "Sociology",
+  "SPN":  "Spanish",
+  "THR":  "Theatre",
+  "WELL": "Wellness",
+  "WGS":  "Women's and Gender Studies",
+}
+for prefix, name in testPrograms.items():
+  program = Programs.create(name = name, DID = 1)
+  Courses.create( prefix  = prefix,
+                  number  = "000",
+                  section = "A1",
+                  PID     = program.PID,
+                  SEID    = 201612
+                )
