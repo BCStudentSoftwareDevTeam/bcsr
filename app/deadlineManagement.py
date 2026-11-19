@@ -16,7 +16,13 @@ def deadlineCreate():
         # data contains
         # deadlineDescription
         data = request.form
-        date = datetime.datetime.strptime(data['deadlineDate'],"%Y-%m-%d").date()
+        date = datetime.datetime.strptime(data['deadlineDate'], "%Y-%m-%d").date()
+        today = datetime.date.today()
+
+        if date <= today:
+            flash("Deadline could not be created. The date must be a future date.", "danger")
+            return redirect(redirect_url())
+
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)
@@ -24,7 +30,7 @@ def deadlineCreate():
         # log the messages
         message = "Deadline: {0} has been added".format(deadline.description)
         log.writer("INFO", page, message)
-        flash("Your Deadline has been created")
+        flash("Your Deadline has been created", "success")
         return redirect(redirect_url())
     else:
         abort(403)
