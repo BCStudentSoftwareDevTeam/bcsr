@@ -10,6 +10,14 @@ $('#editDeadline').on('show.bs.modal', function (event) {
   modal.find('#deadlineDescription').val(description) 
 });
 
+$('#editDeadline').on('shown.bs.modal', function() {
+    var textarea = $(this).find('.deadlineEditTextarea')[0];
+
+    if (textarea) {
+        autoResize(textarea);
+    }
+});
+
 $('#deleteDeadline').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('id') // Extract info from data-id
@@ -17,12 +25,11 @@ $('#deleteDeadline').on('show.bs.modal', function (event) {
   modal.find('#deadlineid').val(id)
 });
 
+function autoResize(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = Math.min(textarea.scrollHeight, 300) + 'px';
+}
 
-$('.deadlineEditTextarea').on('change keyup keydown paste cut', function(e){
-    var that = $(this);
-    while (that.scrollTop()) {
-        $(this).height(function(i,h){
-            return h + 20;
-        });
-    }
+$('#exampleTextarea, .deadlineEditTextarea').on('input', function() {
+    autoResize(this);
 });
