@@ -24,7 +24,7 @@ $(function() {
     if (term.val() && year) {
       banner.text(term.text() + ' ' + year);
     } else {
-      banner.text('Choose a term and year');
+      banner.text('No term selected');
     }
   }
   $('#term, #year').on('change', updateBanner);

@@ -12,14 +12,15 @@
   <li class="active" aria-current="page">Import Results</li>
 </ol>
 
-<h1 class="import-heading">Course Import Results</h1>
+<h1 class="import-heading">Imported Course List</h1>
 <p class="import-intro">Review the outcome of your course list upload.</p>
 
 <div class="panel panel-default">
   <div class="panel-body" role="status">
     {% if not summary.issues %}<h2 class="results-title">Course List Uploaded Successfully!</h2>{% endif %}
     <p>{{summary.imported}} {{'course was' if summary.imported == 1 else 'courses were'}} imported into {{pending.termName}} {{pending.year}}.</p>
-    <p class="text-muted">Uploaded File: {{pending.filename}}</p>
+    <span class="summary-label">Uploaded File</span>
+    <span class="summary-value">{{pending.filename}}</span>
   </div>
 </div>
 
@@ -57,7 +58,6 @@
   <table class="table">
     <tbody>
       <tr><th scope="row">Semester</th><td>{{pending.termName}} {{pending.year}}</td></tr>
-      <tr><th scope="row">Uploaded File</th><td>{{pending.filename}}</td></tr>
       <tr>
         <th scope="row">Import Status</th>
         <td>

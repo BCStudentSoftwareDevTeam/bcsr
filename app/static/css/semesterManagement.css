@@ -26,34 +26,13 @@
     font-weight: 400;
 }
 
-/* Add a Semester: the term that is about to be created */
-.creating-term {
-    border-left: 5px solid #5c8f3d;
-    background: #f1f6ec;
-    border-radius: 4px;
-    padding: 10px 16px;
-    margin-bottom: 20px;
-}
-
-.creating-term-label,
 .summary-label {
     display: block;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #2f5b1a;
-}
-
-.summary-label {
     color: #000;
-}
-
-.creating-term-name {
-    display: block;
-    font-size: 26px;
-    font-weight: 600;
-    color: #1f2d3d;
 }
 
 .create-term-spacer {
