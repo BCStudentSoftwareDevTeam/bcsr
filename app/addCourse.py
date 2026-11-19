@@ -32,6 +32,9 @@ def addCourse():
                     new_user_course = databaseInterface.insert_course_user(str(data['user']),int(new_course.CID))
                     if new_user_course:
                         flash('The course ({0} {1}) has been added'.format(data['prefix'],data['number']))
+                        log.writer("INFO", request.path,
+                                   "Course: {0} {1}-{2} has been added".format(
+                                       data['prefix'], data['number'], data['section']))
                     else:
                         flash('Course failed to be uploaded with instructor. Contact customer support')
                 else:

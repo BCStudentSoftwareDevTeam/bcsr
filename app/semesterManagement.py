@@ -6,7 +6,7 @@ from app.logic import databaseInterface
 
 @app.route("/admin/semesterManagement", methods=["GET", "POST"])
 def semesterManagement():
-  page = "/" + request.url.split("/")[-1] #We need page for logging purposes
+  page = request.path
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:              #Ensure that the user is an Admin
     #Class from logic folder
@@ -30,7 +30,7 @@ def semesterManagement():
 
 @app.route("/admin/semesterManagement/add", methods=["POST","GET"])
 def addSemester():
-  page = "/" + request.url.split("/")[-1]
+  page = request.path
   authorizedUser = AuthorizedUser()
   if authorizedUser.isAdmin:
     data        = request.form

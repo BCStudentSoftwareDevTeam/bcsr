@@ -16,7 +16,7 @@ from app.logic.getAuthUser import AuthorizedUser
 
 @app.route("/download/<CID>", methods = ["GET"])
 def download(CID):
-    page = r"/" + request.url.split("/")[-1]
+    page = request.path
     try:
         file_path = databaseInterface.get_course_download_file_path(CID)        
         message = "Download: {} has been downloaded".format(file_path)
@@ -32,7 +32,7 @@ def download(CID):
 
 @app.route("/admin/download/SEID/<SEID>", methods=["POST","GET"])
 def downloadAll(SEID):
-    page = r"/" + request.url.split("/")[-1]
+    page = request.path
     authorizedUser = AuthorizedUser()
     # we need the location so that we can use relative file paths
     here = os.path.dirname(__file__)

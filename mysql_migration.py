@@ -83,6 +83,11 @@ class Deadline(baseModel):
   description  = TextField()
   date         = DateField()
 
+class ActivityLog(baseModel):
+  timestamp    = DateTimeField(default=datetime.datetime.now)
+  actor        = CharField()
+  action       = TextField()
+
 # Enter all the tables here
 
-mainDB.create_tables([Semesters, Divisions, Programs, Users, Courses, UsersCourses, Deadline])
+mainDB.create_tables([Semesters, Divisions, Programs, Users, Courses, UsersCourses, Deadline, ActivityLog])

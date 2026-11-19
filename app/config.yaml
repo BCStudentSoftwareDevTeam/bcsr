@@ -24,6 +24,7 @@ models:
     - Courses
     - UsersCourses
     - Deadline
+    - ActivityLog
 # this makes the navigation bar
 mainMenu:
   - title: "Home"
@@ -45,6 +46,8 @@ adminMenu:
     link:  "/admin/userManagement"
   - title: "Course Management"
     link:  "/admin/courseManagement/missingSyllabi"
+  - title: "Activity Log"
+    link: "/admin/activityLog"
 
 courseManagementSidebar:
   - title: "Missing Syllabi"

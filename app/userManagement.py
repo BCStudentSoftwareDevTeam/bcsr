@@ -55,7 +55,7 @@ def add_program_chair(request):
     newChair.PID = PID
     newChair.save()
     message = "USER: {0} has been added as a program chair for pid: {1}".format(newChairs,PID)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Program chair successfully added.")
 
 def add_division_chair(request):
@@ -69,7 +69,7 @@ def add_division_chair(request):
     newChair.DID = DID
     newChair.save()
     message      = "USER: {0} has been added as a division chair for did: {1}".format(newChairs,DID)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Division chair successfully added.")
 
 def add_administrator(request):
@@ -82,7 +82,7 @@ def add_administrator(request):
     newAdmin.isAdmin = 1
     newAdmin.save()
     message     = "USER: {0} has been added as an admin".format(newAdmins)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Admin successfully added.")
 
 def remove_administratorr(request):
@@ -94,7 +94,7 @@ def remove_administratorr(request):
     user.isAdmin = 0
     user.save()
     message = "USER: {0} has been removed as an administrator".format(user)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Administrator successfully removed.")
 
 def remove_program_chair(request):
@@ -108,7 +108,7 @@ def remove_program_chair(request):
     program_chair.PID = None
     program_chair.save()
     message = "USER: {0} has been removed as a program chair for pid: {1}".format(chair_to_remove ,PID)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Program chair successfully removed.")
 
 def remove_division_chair(request):
@@ -122,7 +122,7 @@ def remove_division_chair(request):
     division_chair.DID = None
     division_chair.save()
     message = "USER: {0} has been removed as a division chair for did: {1}".format(division_to_remove ,DID)
-    app.logger.info(message)
+    log.writer("INFO", request.path, message)
     flash("Division chair successfully removed.")
 
 @app.route("/admin/userManagement/get_admin", methods = ["GET"])

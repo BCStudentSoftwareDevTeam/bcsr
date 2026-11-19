@@ -8,7 +8,7 @@ from app.models import Courses
 
 @app.route("/delete/<CID>", methods = ["POST"])
 def delete(CID):
-    page = r"/" + request.url.split("/")[-1]
+    page = request.path
     auth      = AuthorizedUser()
     user_name = auth.get_username()
     # if auth.user_level() == 'admin':
@@ -28,7 +28,7 @@ def delete(CID):
         get_time = datetime.datetime.now()
         time_stamp = get_time.strftime("%Y-%m-%d %H:%M")
         last_modified_message = "Deleted By {} On {}".format(user_name,str(time_stamp))
-        message = "Uploads: {0} has been {1}".format(file_path, last_modified_message)
+        message = "Uploads: {0} has been deleted".format(file_path)
         log.writer('INFO', page, message)
         update_last_modified  = Courses.update(lastModified=last_modified_message).where(Courses.CID==CID)
         update_last_modified.execute()

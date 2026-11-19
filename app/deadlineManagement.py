@@ -8,7 +8,7 @@ import datetime
 @app.route("/deadline/create", methods=["POST"])
 def deadlineCreate():
     # we need the page for loggin purposes
-    page = "/" + request.url.split("/")[-1]
+    page = request.path
 
     # we need the user to know if they are is admin
     authorizedUser = AuthorizedUser()
@@ -16,7 +16,13 @@ def deadlineCreate():
         # data contains
         # deadlineDescription
         data = request.form
-        date = datetime.datetime.strptime(data['deadlineDate'],"%Y-%m-%d").date()
+        date = datetime.datetime.strptime(data['deadlineDate'], "%Y-%m-%d").date()
+        today = datetime.date.today()
+
+        if date <= today:
+            flash("Deadline could not be created. The date must be a future date.", "danger")
+            return redirect(redirect_url())
+
         deadline = Deadline.create(
             description=data['deadlineDescription'],
             date=date)
@@ -24,7 +30,7 @@ def deadlineCreate():
         # log the messages
         message = "Deadline: {0} has been added".format(deadline.description)
         log.writer("INFO", page, message)
-        flash("Your Deadline has been created")
+        flash("Your Deadline has been created", "success")
         return redirect(redirect_url())
     else:
         abort(403)
@@ -33,7 +39,7 @@ def deadlineCreate():
 @app.route("/deadline/edit", methods=["POST"])
 def deadlineEdit():
     # we need the page for logging purpuses
-    page = "/" + request.url.split("/")[-1]
+    page = request.path
     authorizedUser = AuthorizedUser()
     if authorizedUser.isAdmin:
         data = request.form
@@ -53,7 +59,7 @@ def deadlineEdit():
 
 @app.route("/deleteDeadline", methods=["POST"])
 def deleteDeadline():
-    page = r"/" + request.url.split("/")[-1]
+    page = request.path
     authorizedUser = AuthorizedUser()
     if authorizedUser.isAdmin:
         data = request.form
