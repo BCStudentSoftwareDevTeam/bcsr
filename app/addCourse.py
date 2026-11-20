@@ -26,7 +26,8 @@ def addCourse():
                                                         str(data['number']),
                                                         str(data['section']).upper(),
                                                         int(data['PID']),
-                                                        int(data['SEID'])
+                                                        int(data['SEID']),
+                                                        str(data.get('name','')).strip() or None
                                                     )
                 if new_course:
                     new_user_course = databaseInterface.insert_course_user(str(data['user']),int(new_course.CID))

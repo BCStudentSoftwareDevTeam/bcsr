@@ -92,29 +92,34 @@ def course_search():
 
   prefix  = request.args.get("prefix", "").strip()
   number  = request.args.get("number", "").strip()
+  name    = request.args.get("name", "").strip()
   results = None
-  if not prefix and not number:
-      flash("Please enter a course prefix and number (e.g. CSC 226).")
-  elif prefix or number:
-      if not prefix:
-          flash("Please enter a course prefix (e.g. CSC).")
-      elif not number:
-          flash("Please enter a course number (e.g. 226).")
-      else:
-          results = (UsersCourses
-                      .select(UsersCourses, Courses, Semesters, Users)
-                      .join(Courses)
-                      .join(Semesters)
-                      .switch(UsersCourses)
-                      .join(Users)
-                      .where(
-                          (Courses.prefix == prefix) &
-                          (Courses.number == number)
-                      )
-                      .order_by(Semesters.SEID.desc()))
-          
-  return render_template("search.html",
-                          results     = results,
-                          cfg         = cfg,
-                          isAdmin     = auth.isAdmin
-                        )
+  if not prefix and not number and not name:
+      flash("Please enter a course prefix and number (e.g. CSC 226), or a course name.")
+  elif not name and not prefix:
+      flash("Please enter a course prefix (e.g. CSC).")
+  elif not name and not number:
+      flash("Please enter a course number (e.g. 226).")
+  else:
+      query = (UsersCourses
+               .select(UsersCourses, Courses, Semesters, Users)
+               .join(Courses)
+               .join(Semesters)
+               .switch(UsersCourses)
+               .join(Users)
+               .order_by(Semesters.SEID.desc()))
+      if prefix:
+          query = query.where(Courses.prefix == prefix)
+      if number:
+          query = query.where(Courses.number == number)
+      if name:
+          escaped = name.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
+          query = query.where(Courses.name ** ("%" + escaped + "%"))
+      results = list(query)
+      if not results:
+                if name and not prefix and not number:
+                    flash("No courses found. Older courses may not have a name on record, try searching by prefix and number.")
+                else:
+                    flash("No courses found for that search. Please try a different prefix, number, or name.")
+  return render_template("search.html", results=results, cfg=cfg, isAdmin=auth.isAdmin)
+ 
