@@ -1,3 +1,19 @@
 .delete_button {
   width: 100%;
 }
+
+/* Keep filenames from widening the course table, including on hover. */
+.dropzone {
+  contain: inline-size;
+  overflow: auto;
+}
+
+.dropzone .dz-preview,
+.dropzone .dz-preview .dz-details {
+  display: block;
+}
+
+.dropzone .dz-preview .dz-details .dz-filename {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
