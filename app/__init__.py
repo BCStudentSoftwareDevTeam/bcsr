@@ -21,7 +21,7 @@ app = Flask(__name__)
 from app import allImports
 from app.loadConfig import load_config
 
-secret_cfg = load_config("app/secret_config.yaml")
+secret_cfg = load_config('app/secret_config.yaml', env_var='BCSR_SECRET_CONFIG')
 app.secret_key = secret_cfg["secret_key"]
 
 # Include an import for every python file that is serving a webpage
